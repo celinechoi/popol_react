@@ -3,22 +3,32 @@ import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
     point: {
-			orange: string;
-			pink: string;
-			yellow: string;
-			lavender: string;
-			beige: string;
-			purple: string;
-			green: string;
+			red: string,
+			orange: string,
+			yellow: string,
+			lavender: string,
+			beige: string,
+			purple: string,
+			blue: string,
+			green: string
 		},
-    black: {
-      veryDark: string;
-      darker: string;
-      lighter: string;
-    };
-    white: {
-      darker: string;
-      lighter: string;
-    };
+		bgColor: {
+			gray: {
+				first: string,
+				second: string,
+				third: string,
+				fourth: string,
+				fixth: string
+			}
+		},
+		textColor: {
+			gray: {
+				first: string,
+				second: string,
+				third: string,
+				fourth: string,
+				fixth: string
+			}
+		}
   }
 }
