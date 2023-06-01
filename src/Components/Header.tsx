@@ -60,12 +60,17 @@ const ThemeBox = styled.div`
 		cursor: pointer;
 		>span {
 			position: absolute;
-			right: 4px;
+			right: 3px;
 			top: 2px;
 			height: 18px;
 			width: 18px;
-			background-color: ${(props) => props.theme.bgColor.gray.third};
+			background-color: ${(props) => props.theme.bgColor.gray.second};
 			border-radius: 50%;
+			transition: all .3s cubic-bezier(0.48, 0.35, 1, 1);
+			&.left {
+				right: auto;
+				left: 4px;
+			}
 		}
 	}
 `;
@@ -77,12 +82,12 @@ const Items = styled.ul`
 `;
 const Item = styled.li`
 	position: relative;
-	color: ${(props) => props.theme.point.lavender};
+	color: ${(props) => props.theme.textColor.gray.second};
 	font-size: 20px;
 	font-weight: 700;
 	line-height: 1.8;
 `;
-const Circle = styled(motion.span)`
+const Point = styled(motion.span)`
 	position: absolute;
   width: 5px;
   height: 5px;
@@ -91,13 +96,14 @@ const Circle = styled(motion.span)`
   left: 0;
   right: 0;
   margin: 0 auto;
-  background-color: ${props=>props.theme.point.beige};
+  background-color: ${props=>props.theme.point.yellow};
 `;
 
+
 function Header(){
+	// Theme 변경
 	const [theme, setTheme] = useRecoilState(booleanState);
 	const toggleTheme = () => {
-		console.log("click");
 		return (
 			setTheme((prev) => !prev)
 		);
@@ -114,7 +120,7 @@ function Header(){
 					<Em>Jinseul</Em>
 				</Logo>
 				<ThemeBox onClick={toggleTheme}>
-					<button><span></span></button>
+					<button><span className={`${theme ? "" : "left"}`}></span></button>
 				</ThemeBox>
 			</Row>
 			<Row>
@@ -122,19 +128,19 @@ function Header(){
 					<Item>
 						<Link to="/">
 						Intro
-						{homeMatch?.isExact === true && <Circle layoutId="circle"/>}
+						{homeMatch?.isExact === true && <Point layoutId="point"/>}
 						</Link>
 					</Item>
 					<Item>
 						<Link to="/works">
 						Works
-						{worksMatch && <Circle layoutId="circle"/>}
+						{worksMatch && <Point layoutId="point"/>}
 						</Link>
 					</Item>
 					<Item>
 						<Link to="/info">
 						Info
-						{infoMatch && <Circle layoutId="circle"/>}
+						{infoMatch && <Point layoutId="point"/>}
 						</Link>
 					</Item>
 				</Items>

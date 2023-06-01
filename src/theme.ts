@@ -35,9 +35,9 @@ export const lightTheme: DefaultTheme = {
 	point: {
 		red: "#d32f2f",
 		orange: "#ff543a",
-		yellow: "#f8d622",
+		yellow: "#FFC83D",
 		lavender: "#ac7aef",
-		beige: "#e5c34a",
+		beige: "#f9de7d",
 		purple: "#7217fb",
 		blue: "#0091ea",
 		green: "#14e090"
