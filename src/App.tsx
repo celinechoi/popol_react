@@ -56,6 +56,7 @@ table {
 }
 * {
   box-sizing: border-box;
+	transition: all 0.2s ease-in;
 }
 body {
   font-weight: 300;
