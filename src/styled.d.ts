@@ -9,7 +9,7 @@ declare module "styled-components" {
 			lavender: string,
 			beige: string,
 			purple: string,
-			blue: string,
+			blue: [string, string],
 			green: string
 		},
 		bgColor: {
@@ -29,6 +29,7 @@ declare module "styled-components" {
 				fourth: string,
 				fixth: string
 			}
-		}
+		},
+		shadow: string
   }
 }

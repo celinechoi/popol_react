@@ -7,10 +7,10 @@ import { booleanState } from "../atoms";
 const Inner = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 32px;
 	align-items: center;		
 	justify-content: center;
-	padding: 12px 0;
+	padding: 20px 0 28px;
 	border-bottom: 1px solid ${(props) => props.theme.bgColor.gray.fixth};
 `;
 const Row = styled.div`
@@ -18,14 +18,14 @@ const Row = styled.div`
 	width: 100%;
 `;
 const Logo = styled.div`
-	color: ${(props) =>props.theme.point.purple};
+	color: ${(props) =>props.theme.point.lavender};
 	font: 20px 'Righteous';
 	text-align: center;
 `;
 const Em = styled.span`
 	display: inline-block;
 	padding-left: 16px;
-	color: ${(props) => props.theme.point.beige};
+	color: ${(props) => props.theme.point.purple};
 	font-size: 38px;
 	text-align: center;
 `;
@@ -78,24 +78,29 @@ const Items = styled.ul`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 36px;
+	gap: 12px 38px;
 `;
 const Item = styled.li`
 	position: relative;
 	color: ${(props) => props.theme.textColor.gray.second};
-	font-size: 20px;
+	font-size: 28px;
 	font-weight: 700;
-	line-height: 1.8;
+	line-height: 31px;
+	a {
+		&.on {
+			color: ${props=>props.theme.point.yellow};
+		}
+	}
 `;
 const Point = styled(motion.span)`
 	position: absolute;
-  width: 5px;
+  width: 16px;
   height: 5px;
-  border-radius: 50%;
-  top: 0;
+  top: -8px;
   left: 0;
   right: 0;
   margin: 0 auto;
+	border-radius: 7px;
   background-color: ${props=>props.theme.point.yellow};
 `;
 
@@ -126,19 +131,19 @@ function Header(){
 			<Row>
 				<Items>
 					<Item>
-						<Link to="/">
+						<Link to="/" className={homeMatch?.isExact ? "on": ""}>
 						Intro
 						{homeMatch?.isExact === true && <Point layoutId="point"/>}
 						</Link>
 					</Item>
 					<Item>
-						<Link to="/works">
+						<Link to="/works" className={worksMatch? "on": ""}>
 						Works
 						{worksMatch && <Point layoutId="point"/>}
 						</Link>
 					</Item>
 					<Item>
-						<Link to="/info">
+						<Link to="/info" className={infoMatch? "on": ""}>
 						Info
 						{infoMatch && <Point layoutId="point"/>}
 						</Link>
