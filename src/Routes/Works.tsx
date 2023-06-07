@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { media } from "../style/media_query";
+import List from "../Components/List";
+import { WorkList } from "../api";
 
 const Title = styled.div`
 	height: 200px;
@@ -55,7 +57,7 @@ const Title = styled.div`
 `;
 
 function Works(){
-	console.log("Works page");
+	
 	return (
 		<>
 			<Title>
@@ -68,6 +70,7 @@ function Works(){
 					</ul>
 				</div>
 			</Title>
+			<List></List>
 		</>
 	);
 }
