@@ -1,40 +1,26 @@
-import { useState } from "react";
-import { WorkList } from "../api";
+import { ref, child, get } from "firebase/database";
+import { firebaseDB } from "../firebase";
+import { useEffect } from "react";
 
 function List(){
-	// Works List
-	let tabData:WorkList = {
-		SI : {
-			itemCompose: {
-				item: {
-					id: 1,
-					title: '한국아시아문화전당'
-				}
+	const readOne = () => {
+		const dbRef = ref(firebaseDB);
+		get(child(dbRef, "/WorkList"))
+			.then(snapshot => {
+			if (snapshot.exists()) {
+				console.log(snapshot.val());
+			} else {
+				console.log("No data available");
 			}
-		},
-		Solution : {
-			itemCompose: {
-				item: {
-					id: 1,
-					title: '아에듀'
-				}
-			}
-		}
-	}
-	const [state, setState] = useState(tabData);
-	console.log(state);
-	return(
-		<>
-			<ul>
-				<li>
-					{state.SI.itemCompose.item.title}
-				</li>
-				<li>
-					{state.Solution.itemCompose.item.title}
-				</li>
-			</ul>
-		</>
-	);
+		})
+			.catch(error => {
+			console.error(error);
+		});
+	};
+	useEffect(()=>{readOne()}, []);
+	return (
+		<>firebase</>
+	)
 }
 
 export default List;
