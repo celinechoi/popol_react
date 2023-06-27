@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useCountUp from "../CountUp"
+import useCountUp from "../function/CountUp"
 import {media} from '../style/media_query';
 import good_emoji from "../img/emoji/good.png";
 
