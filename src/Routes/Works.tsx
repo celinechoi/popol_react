@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { media } from "../style/media_query";
 import List from "../Components/List";
 import { WorkList } from "../api";
+import { Link } from "react-router-dom";
 
 const Title = styled.div`
 	height: 200px;
@@ -64,9 +65,15 @@ function Works(){
 				<div className="inner">
 					<p>Works</p>
 					<ul className="tab-list">
-						<li>SI (System Integration)</li>
-						<li className="on">Solution</li>
-						<li>SM (System Management)</li>
+						<li>
+              <Link to="SI">SI (System Integration)</Link>
+            </li>
+						<li>
+              <Link to="Solution">Solution</Link>
+            </li>
+						<li>
+              <Link to="SM">SM (System Management)</Link>
+            </li>
 					</ul>
 				</div>
 			</Title>
