@@ -1,5 +1,5 @@
 import { ref, child, get } from "firebase/database";
-import { firebaseDB } from "../firebase";
+import { firebaseDB } from "fbase";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

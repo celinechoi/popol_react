@@ -1,12 +1,11 @@
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom"; 
-import Info from "./Routes/Info";
-import Works from "./Routes/Works";
-import Header from "./Components/Header";
-import Intro from "./Routes/Intro";
-import { booleanState } from "./atoms";
+import { booleanState } from "../atoms";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useRecoilValue } from "recoil";
-import { darkTheme, lightTheme } from "./theme";
+import { darkTheme, lightTheme } from "../theme";
+import { useEffect, useState } from "react";
+import AppRouter from "components/Router";
+import { authService } from "fbase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -71,24 +70,26 @@ a {
 `;
 
 function App() {
+	const [init, setInit] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	useEffect(()=> {
+		authService.onAuthStateChanged((user) => {
+			if(user) {
+				setIsLoggedIn(true);
+			} else {
+				setIsLoggedIn(false);
+			}
+			setInit(true);
+		});
+	}, []);
 	const themeSate = useRecoilValue(booleanState);
 	return (
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 			<GlobalStyle />
-			<Router>
-				<Header />
-				<Switch>
-					<Route path="/works">
-						<Works />
-					</Route>
-					<Route path="/info">
-						<Info />
-					</Route>
-					<Route path="/">
-						<Intro />
-					</Route>
-				</Switch>
-			</Router>
+			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing ..."}
+			<footer>
+				&copy; Jinseul Choi {new Date().getFullYear()}
+			</footer>
 		</ThemeProvider>
 	);
 }

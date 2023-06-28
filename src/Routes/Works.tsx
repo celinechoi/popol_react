@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { media } from "../style/media_query";
-import List from "../Components/List";
+import List from "../components/List";
 import { WorkList } from "../api";
 import { Link } from "react-router-dom";
 
