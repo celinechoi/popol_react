@@ -4,8 +4,6 @@ import List from "../components/List";
 import { WorkList } from "../api";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { authService } from "fbase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Auth from "./Auth";
 
 const Title = styled.div`
@@ -61,19 +59,7 @@ const Title = styled.div`
 	}
 `;
 
-function Works(){
-	const [init, setInit] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	useEffect(() => {
-		authService.onAuthStateChanged((user) => {
-			if (user) {
-				setIsLoggedIn(true);
-			} else {
-				setIsLoggedIn(false);
-			}
-			setInit(true);
-		});
-	}, []);
+function Works({init, isLoggedIn}: {init: boolean, isLoggedIn: boolean}){
 	return (
 		<>
 			{

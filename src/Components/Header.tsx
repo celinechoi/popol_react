@@ -116,7 +116,7 @@ function Header(){
 	// Link
 	const homeMatch = useRouteMatch("/");
 	const worksMatch = useRouteMatch("/works");
-	const infoMatch = useRouteMatch("/info");
+	const aboutMatch = useRouteMatch("/about");
 	return (
 		<Inner>
 			<Row>
@@ -143,9 +143,9 @@ function Header(){
 						</Link>
 					</Item>
 					<Item>
-						<Link to="/info" className={infoMatch? "on": ""}>
-						Info
-						{infoMatch && <Point layoutId="point"/>}
+						<Link to="/about" className={aboutMatch? "on": ""}>
+						About
+						{aboutMatch && <Point layoutId="point"/>}
 						</Link>
 					</Item>
 				</Items>
