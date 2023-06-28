@@ -3,6 +3,10 @@ import { media } from "../style/media_query";
 import List from "../components/List";
 import { WorkList } from "../api";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { authService } from "fbase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Auth from "./Auth";
 
 const Title = styled.div`
 	height: 200px;
@@ -58,26 +62,51 @@ const Title = styled.div`
 `;
 
 function Works(){
-	
+	const [init, setInit] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	useEffect(() => {
+		authService.onAuthStateChanged((user) => {
+			if (user) {
+				setIsLoggedIn(true);
+			} else {
+				setIsLoggedIn(false);
+			}
+			setInit(true);
+		});
+	}, []);
 	return (
 		<>
-			<Title>
-				<div className="inner">
-					<p>Works</p>
-					<ul className="tab-list">
-						<li>
-              <Link to="SI">SI (System Integration)</Link>
-            </li>
-						<li>
-              <Link to="Solution">Solution</Link>
-            </li>
-						<li>
-              <Link to="SM">SM (System Management)</Link>
-            </li>
-					</ul>
-				</div>
-			</Title>
-			<List></List>
+			{
+				init ? 
+				(
+					isLoggedIn ?
+					(
+						<>
+							<Title>
+								<div className="inner">
+									<p>Works</p>
+									<ul className="tab-list">
+										<li>
+											<Link to="SI">SI (System Integration)</Link>
+										</li>
+										<li>
+											<Link to="Solution">Solution</Link>
+										</li>
+										<li>
+											<Link to="SM">SM (System Management)</Link>
+										</li>
+									</ul>
+								</div>
+							</Title>
+							<List></List>
+						</>
+					):(
+						<Auth />
+					)
+				):(
+					"Initializing ..."
+				)
+			}
 		</>
 	);
 }

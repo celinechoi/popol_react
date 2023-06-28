@@ -17,5 +17,6 @@ if (!firebase.apps.length) {
 	firebase.initializeApp(firebaseConfig);
 }
 
+export const firebaseInstance = firebase;
 export const authService = firebase.auth();
 export const firebaseDB = firebase.database();
