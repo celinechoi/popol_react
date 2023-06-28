@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { authService } from "fbase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Intro from "../routes/Home";
