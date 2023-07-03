@@ -1,21 +1,23 @@
-import { ref, child, get } from "firebase/database";
+import { ref, child, get, orderByChild } from "firebase/database";
 import { firebaseDB } from "fbase";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface workInterface {
 	customer:string,
-	endDate:string,
+	endYear:number | [],
+  endMonth:number | [],
 	id:string,
 	projectName:string,
-	startDate:string
+  startYear:number | [],
+  startMonth:number | []
 }
 
 function List(){
 	let [datas, setData] = useState<workInterface[]>([]);
 	const [loading, setLoading] = useState(true);
 	const readOne = async () => {
-		const snapshot = await get(ref(firebaseDB, '/WorkList/Solution'));
+    const snapshot = await get(ref(firebaseDB, orderByChild('startYear')));
   	const allDatas = await snapshot.val();
 		setData(allDatas);
 		setLoading(false);
@@ -30,7 +32,7 @@ function List(){
         <div>
           {datas.map((data) => (
             <div key={data.id}>
-              <Link to={`/${data.id}`}>{data.id} &rarr;</Link>
+              <Link to={`/${data.id}`}>{data.projectName} &rarr;</Link>
             </div>
           ))}
         </div>
