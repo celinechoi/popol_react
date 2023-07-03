@@ -1,8 +1,11 @@
+import { authService } from "fbase";
+import { User } from "firebase/auth";
 import { booleanState } from "../atoms";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { darkTheme, lightTheme } from "../theme";
 import AppRouter from "components/Router";
+import { useEffect, useState } from "react";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -68,11 +71,26 @@ a {
 `;
 
 function App() {
+	const [init, setInit] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [userObj, setUserObj] = useState({});
+	useEffect(() => {
+		authService.onAuthStateChanged((user) => {
+			if (user) {
+				setIsLoggedIn(true);
+				console.log(user);
+				setUserObj(user);
+			} else {
+				setIsLoggedIn(false);
+			}
+			setInit(true);
+		});
+	}, []);
 	const themeSate = useRecoilValue(booleanState);
 	return (
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 			<GlobalStyle />
-			<AppRouter />
+			{init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing ..."}
 			<footer>
 				&copy; Jinseul Choi {new Date().getFullYear()}
 			</footer>

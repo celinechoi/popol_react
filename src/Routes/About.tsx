@@ -10,22 +10,8 @@ function About({init, isLoggedIn}: {init: boolean, isLoggedIn: boolean}){
 	}
 	return (
 		<>
-			{
-				init ? 
-				(
-					isLoggedIn ?
-					(
-						<>
-							<p>About</p>
-							<button onClick={onLogOutClick}>Log Out</button>
-						</>
-					):(
-						<Auth />
-					)
-				):(
-					"Initializing ..."
-				)
-			}
+			<p>About</p>
+			<button onClick={onLogOutClick}>Log Out</button>
 		</>
 	);
 }

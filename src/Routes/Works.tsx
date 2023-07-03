@@ -59,40 +59,26 @@ const Title = styled.div`
 	}
 `;
 
-function Works({init, isLoggedIn}: {init: boolean, isLoggedIn: boolean}){
+function Works(){
 	return (
 		<>
-			{
-				init ? 
-				(
-					isLoggedIn ?
-					(
-						<>
-							<Title>
-								<div className="inner">
-									<p>Works</p>
-									<ul className="tab-list">
-										<li>
-											<Link to="SI">SI (System Integration)</Link>
-										</li>
-										<li>
-											<Link to="Solution">Solution</Link>
-										</li>
-										<li>
-											<Link to="SM">SM (System Management)</Link>
-										</li>
-									</ul>
-								</div>
-							</Title>
-							<List></List>
-						</>
-					):(
-						<Auth />
-					)
-				):(
-					"Initializing ..."
-				)
-			}
+			<Title>
+				<div className="inner">
+					<p>Works</p>
+					<ul className="tab-list">
+						<li>
+							<Link to="SI">SI (System Integration)</Link>
+						</li>
+						<li>
+							<Link to="Solution">Solution</Link>
+						</li>
+						<li>
+							<Link to="SM">SM (System Management)</Link>
+						</li>
+					</ul>
+				</div>
+			</Title>
+			<List></List>
 		</>
 	);
 }
