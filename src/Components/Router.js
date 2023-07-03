@@ -1,5 +1,4 @@
-import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Intro from "../routes/Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Works from "../routes/Works";
 import About from "../routes/About";
 import Auth from "../routes/Auth";
@@ -10,24 +9,26 @@ function AppRouter({ isLoggedIn, userObj }) {
 
 	return (
 		<Router>
-			<Header />
 			<Switch>
 				{
 					isLoggedIn ? (
 						<>
+							<Header />
 							<Route path="/works">
 								<Works />
 							</Route>
 							<Route path="/about">
 								<About />
 							</Route>
-							<Route path="/">
+							<Route exact path="/">
 								<Home userObj={userObj} />
 							</Route>
 						</>
 					) : (
 						<>
-							<Auth />
+							<Route exact path="/">
+								<Auth />
+							</Route>
 						</>
 					)
 				}

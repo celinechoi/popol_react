@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { booleanState } from "../atoms";
+import { authService } from "fbase";
 
 const Inner = styled.div`
 	display: flex;
@@ -117,6 +118,12 @@ function Header(){
 	const homeMatch = useRouteMatch("/");
 	const worksMatch = useRouteMatch("/works");
 	const aboutMatch = useRouteMatch("/about");
+	// Log Out
+	const history = useHistory();
+	const onLogOutClick = () => {
+		authService.signOut();
+		history.push("/");
+	}
 	return (
 		<Inner>
 			<Row>
@@ -132,7 +139,7 @@ function Header(){
 				<Items>
 					<Item>
 						<Link to="/" className={homeMatch?.isExact ? "on": ""}>
-						Intro
+						Home
 						{homeMatch?.isExact === true && <Point layoutId="point"/>}
 						</Link>
 					</Item>
@@ -150,6 +157,7 @@ function Header(){
 					</Item>
 				</Items>
 			</Row>
+			<button onClick={onLogOutClick}>Log Out</button>
 		</Inner>
 	);
 }

@@ -20,17 +20,6 @@ function List(){
 		setData(allDatas);
 		setLoading(false);
 		console.log(datas);
-		// get(ref(firebaseDB, "/WorkList"))
-		// 	.then(snapshot => {
-		// 	if (snapshot.exists()) {
-		// 		setData(snapshot.val())
-		// 	} else {
-		// 		console.log("No data available");
-		// 	}
-		// })
-		// 	.catch(error => {
-		// 	console.error(error);
-		// });
 	};
 	useEffect(()=>{readOne()}, []);
 	return (
