@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { media } from "../style/media_query";
 import List from "../components/List";
 import { WorkList } from "../api";
-import { Link } from "react-router-dom";
+import { Link, Route, Switch, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Auth from "./Auth";
+import Si from "components/Si";
+import Solution from "components/Solution";
+import Sm from "components/Sm";
 
 const Title = styled.div`
 	height: 200px;
@@ -59,7 +62,12 @@ const Title = styled.div`
 	}
 `;
 
+interface RouteParams {
+	workKinds: string
+}
+
 function Works(){
+	const { workKinds } = useParams<RouteParams>();
 	return (
 		<>
 			<Title>
@@ -67,18 +75,29 @@ function Works(){
 					<p>Works</p>
 					<ul className="tab-list">
 						<li>
-							<Link to="SI">SI (System Integration)</Link>
+							<Link to="/si">SI (System Integration)</Link>
 						</li>
 						<li>
-							<Link to="Solution">Solution</Link>
+							<Link to="/solution">Solution</Link>
 						</li>
 						<li>
-							<Link to="SM">SM (System Management)</Link>
+							<Link to="/sm">SM (System Management)</Link>
 						</li>
 					</ul>
+					<Switch>
+						<Route path="/si">
+							<Si />
+						</Route>
+						<Route path="/solution">
+							<Solution />
+						</Route>
+						<Route path="/sm">
+							<Sm />
+						</Route>
+					</Switch>
 				</div>
 			</Title>
-			<List></List>
+			{/* <List></List> */}
 		</>
 	);
 }

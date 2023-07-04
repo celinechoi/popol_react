@@ -1,40 +1,51 @@
 import { ref, child, get, orderByChild } from "firebase/database";
-import { firebaseDB } from "fbase";
+import { dbService } from "fbase";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface workInterface {
 	customer:string,
+	endMonth:number | [],
 	endYear:number | [],
-  endMonth:number | [],
-	id:string,
 	projectName:string,
+	startMonth:number | [],
   startYear:number | [],
-  startMonth:number | []
 }
 
 function List(){
-	let [datas, setData] = useState<workInterface[]>([]);
 	const [loading, setLoading] = useState(true);
-	const readOne = async () => {
-    const snapshot = await get(ref(firebaseDB, orderByChild('startYear')));
-  	const allDatas = await snapshot.val();
-		setData(allDatas);
-		setLoading(false);
-		console.log(datas);
-	};
-	useEffect(()=>{readOne()}, []);
+	const [list, setList] = useState<workInterface[]>([]);
+  useEffect(() => {
+    const collection = dbService.collection("si");
+		collection.onSnapshot((snapshot) => {
+			const itemArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+				customer: doc.data().customer,
+				endMonth: doc.data().endMonth,
+				endYear: doc.data().endYear,
+				projectName: doc.data().projectName,
+				startMonth: doc.data().startMonth,
+				startYear: doc.data().startYear,
+        ...doc.data(),
+      }));
+      setList(itemArr);
+			console.log(list);
+			setLoading(false);
+		})
+  }, []);
 	return (
 		<>
 		{loading ? (
         "Loading"
       ) : (
         <div>
-          {datas.map((data) => (
-            <div key={data.id}>
-              <Link to={`/${data.id}`}>{data.projectName} &rarr;</Link>
-            </div>
-          ))}
+          {
+						list.map((val) => (
+						<div key={val.customer}>
+							<h4>{val.projectName}</h4>
+						</div>
+						))
+					}
         </div>
       )}
 		</>
