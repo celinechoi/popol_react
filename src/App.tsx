@@ -1,10 +1,9 @@
 import { authService } from "fbase";
-import { User } from "firebase/auth";
-import { booleanState } from "../atoms";
+import { booleanState } from "./atoms";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useRecoilValue } from "recoil";
-import { darkTheme, lightTheme } from "../theme";
-import AppRouter from "components/Router";
+import { darkTheme, lightTheme } from "./theme";
+import AppRouter from "Router";
 import { useEffect, useState } from "react";
 
 

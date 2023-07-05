@@ -27,7 +27,7 @@ function Auth(){
 				// login
 				data = await signInWithEmailAndPassword(authService, email, password);
 			}
-			console.log(data);
+			// console.log(data);
 		} catch(error:any) {
 			setError(error.message);
 		}
@@ -42,7 +42,7 @@ function Auth(){
 			provider = new GithubAuthProvider();
 		}
 		const data = await signInWithPopup(authService, provider);
-		console.log(data);
+		// console.log(data);
 	};
 	return (
 		<>

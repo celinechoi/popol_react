@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import { media } from "../style/media_query";
-import List from "../components/List";
-import { WorkList } from "../api";
-import { Link, Route, Switch, useLocation, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Auth from "./Auth";
-import Si from "components/Si";
-import Solution from "components/Solution";
-import Sm from "components/Sm";
+import { Link, useLocation } from "react-router-dom";
 
 const Title = styled.div`
 	height: 200px;
@@ -73,19 +66,10 @@ const workType = [
 	}
 ]
 
-
-interface CoinInterface {
-  id: string;
-}
-
-interface RouteState {
-  name: string;
-}
-
 function Works(){
 
 	const pathSpoiler = useLocation().pathname.substring(7, useLocation().pathname.length)
-	console.log('pathSpoiler', pathSpoiler);
+	// console.log('pathSpoiler', pathSpoiler);
 	return (
 		<>
 			<Title>

@@ -1,7 +1,6 @@
-import { ref, child, get, orderByChild } from "firebase/database";
 import { dbService } from "fbase";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 interface workInterface {
 	customer:string,
@@ -16,13 +15,8 @@ interface RouteParams {
   typeId: string;
 }
 
-interface RouteState {
-  name: string;
-}
-
 function List(){
 	const {typeId} = useParams<RouteParams>();
-	const { state } = useLocation<RouteState>();
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<workInterface[]>([]);
   useEffect(() => {
@@ -45,7 +39,6 @@ function List(){
   }, [typeId]);
 	return (
 		<>
-		<h2>{state?.name || "Loading...?"}</h2>
 		{loading ? (
         "Loading"
       ) : (
