@@ -116,7 +116,7 @@ function Header(){
 	}
 	// Link
 	const homeMatch = useRouteMatch("/");
-	const worksMatch = useRouteMatch("/works");
+	const worksMatch = useRouteMatch("/works/solution");
 	const aboutMatch = useRouteMatch("/about");
 	// Log Out
 	const history = useHistory();
@@ -144,7 +144,7 @@ function Header(){
 						</Link>
 					</Item>
 					<Item>
-						<Link to="/works" className={worksMatch? "on": ""}>
+						<Link to="/works/solution" className={worksMatch? "on": ""}>
 						Works
 						{worksMatch && <Point layoutId="point"/>}
 						</Link>

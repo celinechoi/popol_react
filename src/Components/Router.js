@@ -6,7 +6,7 @@ import Header from "./Header";
 import Home from "../routes/Home";
 import List from "./List";
 
-function AppRouter({ isLoggedIn, userObj }) {
+function AppRouter({ isLoggedIn }) {
 
 	return (
 		<Router>
@@ -25,7 +25,7 @@ function AppRouter({ isLoggedIn, userObj }) {
 								<About />
 							</Route>
 							<Route exact path="/">
-								<Home userObj={userObj} />
+								<Home />
 							</Route>
 						</>
 					) : (

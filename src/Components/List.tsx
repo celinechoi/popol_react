@@ -26,9 +26,7 @@ function List(){
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<workInterface[]>([]);
   useEffect(() => {
-		(async () => {
-			let isComponentMounted = true;
-			const collection = await dbService.collection(`${typeId}`);
+		const collection = dbService.collection(`${typeId}`);
 			collection.onSnapshot((snapshot) => {
 				const itemArr = snapshot.docs.map((doc) => ({
 					id: doc.id,
@@ -44,11 +42,10 @@ function List(){
 				setLoading(false);
 			})
 			return () => setLoading(false);
-		})();
   }, [typeId]);
 	return (
 		<>
-		<h2>{state?.name || "Loading..."}</h2>
+		<h2>{state?.name || "Loading...?"}</h2>
 		{loading ? (
         "Loading"
       ) : (

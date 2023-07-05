@@ -90,7 +90,7 @@ function App() {
 	return (
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 			<GlobalStyle />
-			{init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing ..."}
+			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing ..."}
 			<footer>
 				&copy; Jinseul Choi {new Date().getFullYear()}
 			</footer>
