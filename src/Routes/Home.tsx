@@ -37,8 +37,8 @@ function Home(){
 		<>
 			<Visual>
 				<img src={good_emoji} alt="good_emoji" />
-				<p><span>{useCountUp(17)}</span>개의 프로젝트</p>
-				<p><span>{useCountUp(7)}</span>년차</p>
+				{/* <p><span>{useCountUp(17)}</span>개의 프로젝트</p>
+				<p><span>{useCountUp(7)}</span>년차</p> */}
 				<p>UI/UX 개발자 최진슬 입니다.</p>
 			</Visual>
 		</>
