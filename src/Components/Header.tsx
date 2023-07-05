@@ -116,7 +116,7 @@ function Header(){
 	}
 	// Link
 	const homeMatch = useRouteMatch("/");
-	const worksMatch = useRouteMatch("/works/solution");
+	const worksMatch = useRouteMatch("/works");
 	const aboutMatch = useRouteMatch("/about");
 	// Log Out
 	const history = useHistory();

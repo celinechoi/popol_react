@@ -39,12 +39,15 @@ const Tabs = styled.ul`
 	box-shadow: ${(props) => props.theme.shadow};
 `;
 
-const Tab = styled.li`
+const Tab = styled.li<{isActive: boolean}>`
 	float: left;
 	margin-left: 12px;
 	padding: 12px 28px;
+	background-color: ${(props) => 
+	props.isActive? props.theme.point.blue[0] : "transparent"};
 	border-radius: 26px;
-	color: ${(props) => props.theme.textColor.gray.fixth};
+	color: ${(props) => 
+	props.isActive? props.theme.textColor.gray.first : props.theme.textColor.gray.fixth};
 	font-size: 18px;
 	font-weight: 900;
 	text-align: center;
@@ -80,6 +83,9 @@ interface RouteState {
 }
 
 function Works(){
+
+	const pathSpoiler = useLocation().pathname.substring(7, useLocation().pathname.length)
+	console.log('pathSpoiler', pathSpoiler);
 	return (
 		<>
 			<Title>
@@ -88,7 +94,7 @@ function Works(){
 					<Tabs>
 						{
 							workType.map((val) => (
-								<Tab key={val.id}>
+								<Tab key={val.id} isActive={pathSpoiler === val.id ? true: false}>
 									<Link to={{
 										pathname: `/works/${val.id}`,
 										state: {name: val.id}
