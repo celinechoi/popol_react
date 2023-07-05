@@ -4,6 +4,7 @@ import About from "../routes/About";
 import Auth from "../routes/Auth";
 import Header from "./Header";
 import Home from "../routes/Home";
+import List from "./List";
 
 function AppRouter({ isLoggedIn, userObj }) {
 
@@ -16,6 +17,9 @@ function AppRouter({ isLoggedIn, userObj }) {
 							<Header />
 							<Route path="/works">
 								<Works />
+							</Route>
+							<Route path="/works/:typeId">
+								<List />
 							</Route>
 							<Route path="/about">
 								<About />

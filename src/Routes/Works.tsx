@@ -62,42 +62,43 @@ const Title = styled.div`
 	}
 `;
 
-interface RouteParams {
-	workKinds: string
+const workType = [
+	{
+		id: "si"
+	},
+	{
+		id: "solution"
+	},
+	{
+		id: "sm"
+	}
+]
+
+
+interface CoinInterface {
+  id: string;
 }
 
 function Works(){
-	const { workKinds } = useParams<RouteParams>();
 	return (
 		<>
 			<Title>
 				<div className="inner">
 					<p>Works</p>
 					<ul className="tab-list">
-						<li>
-							<Link to="/si">SI (System Integration)</Link>
-						</li>
-						<li>
-							<Link to="/solution">Solution</Link>
-						</li>
-						<li>
-							<Link to="/sm">SM (System Management)</Link>
-						</li>
+						{
+							workType.map((val) => (
+								<li key={val.id}>
+									<Link to={{
+										pathname: `/works/${val.id}`,
+										state: {name: val.id}
+									}}>{val.id}</Link>
+								</li>
+							))
+						}
 					</ul>
-					<Switch>
-						<Route path="/si">
-							<Si />
-						</Route>
-						<Route path="/solution">
-							<Solution />
-						</Route>
-						<Route path="/sm">
-							<Sm />
-						</Route>
-					</Switch>
 				</div>
 			</Title>
-			{/* <List></List> */}
 		</>
 	);
 }
