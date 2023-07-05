@@ -22,10 +22,17 @@ const Box = styled.li`
   background-color: ${(props) => props.theme.bgColor.gray.first};
 `;
 
+const ImgBox = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
 interface workInterface {
+  id: string,
 	customer:string,
 	endMonth:number | [],
 	endYear:number | [],
+  fileUrl:string,
 	projectName:string,
 	startMonth:number | [],
   startYear:number | [],
@@ -47,6 +54,7 @@ function List(){
 					customer: doc.data().customer,
 					endMonth: doc.data().endMonth,
 					endYear: doc.data().endYear,
+          fileUrl: doc.data().fileUrl,
 					projectName: doc.data().projectName,
 					startMonth: doc.data().startMonth,
 					startYear: doc.data().startYear,
@@ -68,7 +76,9 @@ function List(){
 						{
 							list.map((val) => (
 							<Box key={val.customer}>
+                <ImgBox src={val.fileUrl} />
 								<h4>{val.projectName}</h4>
+                {val.id}
 							</Box>
 							))
 						}
