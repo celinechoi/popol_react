@@ -5,18 +5,11 @@ import { Link, useLocation } from "react-router-dom";
 const Title = styled.div`
 	height: 200px;
 	background-color: ${(props) => props.theme.point.blue[1]};
-	.inner {
-		max-width: 1400px;
-		margin: 0 auto;
-		${media.large`
-			max-width: calc(100% - 40px);
-		`};
-		>p {
-			padding-top: 50px;
-			color: ${(props) => props.theme.textColor.gray.first};
-			font-size: 44px;
-			font-weight: 700;
-		}
+	h2 {
+		padding-top: 50px;
+		color: ${(props) => props.theme.textColor.gray.first};
+		font-size: 44px;
+		font-weight: 700;
 	}
 `;
 
@@ -74,7 +67,7 @@ function Works(){
 		<>
 			<Title>
 				<div className="inner">
-					<p>Works</p>
+					<h2>Works</h2>
 					<Tabs>
 						{
 							workType.map((val) => (

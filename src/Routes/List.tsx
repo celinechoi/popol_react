@@ -1,6 +1,26 @@
 import { dbService } from "fbase";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+
+const Container = styled.div`
+	padding: 110px 0 80px;
+`;
+
+const Boxes = styled.ul`
+	display: flex;
+	flex-wrap: wrap;
+	gap: 32px;
+`;
+
+const Box = styled.li`
+	flex: 0 0 calc(100%/3 - 32px/3*2);
+	padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px 0 ${(props) => props.theme.shadow};
+  border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
+  background-color: ${(props) => props.theme.bgColor.gray.first};
+`;
 
 interface workInterface {
 	customer:string,
@@ -39,19 +59,23 @@ function List(){
   }, [typeId]);
 	return (
 		<>
-		{loading ? (
-        "Loading"
-      ) : (
-        <div>
-          {
-						list.map((val) => (
-						<div key={val.customer}>
-							<h4>{val.projectName}</h4>
-						</div>
-						))
-					}
-        </div>
-      )}
+		<Container>
+			<div className="inner">
+				{loading ? (
+					"Loading"
+				) : (
+					<Boxes>
+						{
+							list.map((val) => (
+							<Box key={val.customer}>
+								<h4>{val.projectName}</h4>
+							</Box>
+							))
+						}
+					</Boxes>
+				)}
+			</div>
+		</Container>
 		</>
 	)
 }

@@ -103,6 +103,7 @@ const Point = styled(motion.span)`
   margin: 0 auto;
 	border-radius: 7px;
   background-color: ${props=>props.theme.point.yellow};
+	transition: all .3s cubic-bezier(0.48, 0.35, 1, 1);
 `;
 
 

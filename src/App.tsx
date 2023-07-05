@@ -5,7 +5,8 @@ import { useRecoilValue } from "recoil";
 import { darkTheme, lightTheme } from "./theme";
 import AppRouter from "Router";
 import { useEffect, useState } from "react";
-
+import { media } from "style/media_query";
+import Footer from "components/Footer";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -24,6 +25,7 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
+	box-sizing: border-box;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -54,7 +56,7 @@ table {
 }
 * {
   box-sizing: border-box;
-	transition: all 0.2s ease-in;
+	transition: all .1s ease;
 }
 body {
   font-weight: 300;
@@ -66,6 +68,13 @@ body {
 a {
   text-decoration:none;
   color:inherit;
+}
+.inner {
+	max-width: 1400px;
+	margin: 0 auto;
+	${media.large`
+		max-width: calc(100% - 40px);
+	`};
 }
 `;
 
@@ -90,9 +99,7 @@ function App() {
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 			<GlobalStyle />
 			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing ..."}
-			<footer>
-				&copy; Jinseul Choi {new Date().getFullYear()}
-			</footer>
+			<Footer />
 		</ThemeProvider>
 	);
 }
