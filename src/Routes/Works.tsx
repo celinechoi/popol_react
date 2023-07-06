@@ -2,17 +2,6 @@ import styled from "styled-components";
 import { media } from "../style/media_query";
 import { Link, useLocation } from "react-router-dom";
 
-const Title = styled.div`
-	height: 200px;
-	background-color: ${(props) => props.theme.point.blue[1]};
-	h2 {
-		padding-top: 50px;
-		color: ${(props) => props.theme.textColor.gray.first};
-		font-size: 44px;
-		font-weight: 700;
-	}
-`;
-
 const Tabs = styled.ul`
 	display: inline-block;
 	clear: both;
@@ -65,7 +54,7 @@ function Works(){
 	// console.log('pathSpoiler', pathSpoiler);
 	return (
 		<>
-			<Title>
+			<div className="title">
 				<div className="inner">
 					<h2>Works</h2>
 					<Tabs>
@@ -81,7 +70,7 @@ function Works(){
 						}
 					</Tabs>
 				</div>
-			</Title>
+			</div>
 		</>
 	);
 }

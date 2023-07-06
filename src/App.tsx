@@ -76,6 +76,16 @@ a {
 		max-width: calc(100% - 40px);
 	`};
 }
+.title {
+	height: 200px;
+	background-color: ${(props) => props.theme.point.blue[1]};
+	h2 {
+		padding-top: 50px;
+		color: ${(props) => props.theme.textColor.gray.first};
+		font-size: 44px;
+		font-weight: 700;
+	}
+}
 `;
 
 function App() {

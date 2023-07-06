@@ -5,6 +5,7 @@ import Auth from "./routes/Auth";
 import Header from "./components/Header";
 import Home from "./routes/Home";
 import List from "./routes/List";
+import Sub from "sub_pages/Sub";
 
 function AppRouter({ isLoggedIn }) {
 
@@ -20,6 +21,9 @@ function AppRouter({ isLoggedIn }) {
 							</Route>
 							<Route path="/works/:typeId">
 								<List />
+							</Route>
+							<Route path="/sub/:itemId">
+								<Sub />
 							</Route>
 							<Route path="/about">
 								<About />

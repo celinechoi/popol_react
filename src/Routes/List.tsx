@@ -1,6 +1,6 @@
 import { dbService } from "fbase";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const Box = styled.li`
 	flex: 0 0 calc(100%/3 - 32px/3*2);
 	padding: 24px;
   border-radius: 20px;
-  box-shadow: 0 2px 10px 0 ${(props) => props.theme.shadow};
+  box-shadow: ${(props) => props.theme.shadow};
   border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
   background-color: ${(props) => props.theme.bgColor.gray.first};
 `;
@@ -44,6 +44,7 @@ interface RouteParams {
 
 function List(){
 	const {typeId} = useParams<RouteParams>();
+	console.log(useParams(), 'params');
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<workInterface[]>([]);
   useEffect(() => {
@@ -65,6 +66,10 @@ function List(){
 			})
 			return () => setLoading(false);
   }, [typeId]);
+	const nowMatch = useRouteMatch("/works/:typeId")
+	// console.log(nowMatch, 'nowMatch');
+	const location = useLocation();
+	//console.log(location, 'location');
 	return (
 		<>
 		<Container>
@@ -72,17 +77,21 @@ function List(){
 				{loading ? (
 					"Loading"
 				) : (
-					<Boxes>
-						{
-							list.map((val) => (
-							<Box key={val.customer}>
-                <ImgBox src={val.fileUrl} />
-								<h4>{val.projectName}</h4>
-                {val.id}
-							</Box>
-							))
-						}
-					</Boxes>
+					<>
+						<Boxes>
+							{
+								list.map((val) => (
+								<Box key={val.customer}>
+									<Link to={{pathname: `/sub/${val.id}`}}>
+										<ImgBox src={val.fileUrl} />
+										<h4>{val.projectName}</h4>
+										{val.id}
+									</Link>
+								</Box>
+								))
+							}
+						</Boxes>
+					</>
 				)}
 			</div>
 		</Container>
