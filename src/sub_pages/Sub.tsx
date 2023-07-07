@@ -1,112 +1,89 @@
-import { QueryDocumentSnapshot } from "firebase/firestore";
-import { useCollection } from "react-query-firestore";
-import { Optional } from "react-query-firestore/lib/typescript/types";
-import { useLocation, useParams, useRouteMatch } from "react-router-dom";
-import { typesParams, workInterface } from "../routes/List";
+import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import { workInterface } from "../routes/List";
 import { useEffect, useState } from "react";
 import { dbService } from "fbase";
+import styled from "styled-components";
+import Ailemp from "./Ailemp";
 
-interface subPageParams {
-  itemId: string;
+const SubPage = styled.div`
+	position: relative;
+`;
+
+interface interParams {
+	typeId: string;
+	itemId: string;
 }
 
-function Sub(){
-	const { itemId } = useParams<subPageParams>();
-	//console.log(itemId, 'itemId');
-	const match = useRouteMatch<typesParams>('/:typeId/:itemId');
+function Sub() {
+	// 현재 페이지 파악
+	const match = useRouteMatch<interParams>('/:typeId/:itemId');
+	//console.log(match, 'match');
 	const typeName = match?.params.typeId;
+	const itemName = match?.params.itemId;
 
-	// const location = useLocation();
-	// console.log(location, 'location');
-
-	// console.log('itemId',typeId);
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<workInterface[]>([]);
-	// useEffect(() => {
 
-	// })
-
-	/**
-	 * 
-	 * useCollection(
-  query(
-    collection(getFirestore(app), "channels", channelId, "messages"),
-    orderBy("timestamp", "asc")
-  )
-);
-	 */
-
-	const { data } = useCollection<workInterface[]>(`${typeName}`);
+	// typeName이 바뀔때만 데이터 호출.(중복 실행 막기)
 	useEffect(() => {
-	const collection = dbService.collection(`${typeName}`);
-	collection.onSnapshot((snapshot:any) => {
-		console.log('snapshot', snapshot);
-		const itemArr = snapshot.docs.map((doc:any) => ({
-			id: doc.id,
-			customer: doc.data().customer,
-			endMonth: doc.data().endMonth,
-			endYear: doc.data().endYear,
-			fileUrl: doc.data().fileUrl,
-			projectName: doc.data().projectName,
-			startMonth: doc.data().startMonth,
-			startYear: doc.data().startYear,
-			...doc.data(),
-		}));
-		setList(itemArr);
-		setLoading(false);
-	})
-	return () => setLoading(false);
-  }, [typeName]);
+		const collection = dbService.collection(`${typeName}`);
+		collection.onSnapshot((snapshot: any) => {
+			const itemArr = snapshot.docs.map((doc: any) => ({
+				id: doc.id,
+				customer: doc.data().customer,
+				endMonth: doc.data().endMonth,
+				endYear: doc.data().endYear,
+				fileUrl: doc.data().fileUrl,
+				projectName: doc.data().projectName,
+				startMonth: doc.data().startMonth,
+				startYear: doc.data().startYear,
+				...doc.data(),
+			}));
+			setList(itemArr);
+			// 현재 페이지 해당되는 데이터만 추출
+			function currName(el: any) {
+				console.log("right?", itemName);
+				console.log("el.id", el.id);
+				if (el.id === `${itemName}`) {
+					return true
+				}
+			}
+			const nowObj = list.find(currName);
+			console.log(nowObj, 'nowObj');
+			setLoading(false);
+		})
+		return () => setLoading(false);
+	}, [typeName]);
+	// console.log(Object.keys(list));
 
-	// console.log("data:", data[0].projectName);
-
-	// function extract(el:any) {
-	// 	if(el.id === `${itemId}`) {
-	// 		return true;
-	// 	}
-	// }
-
-	// const itemObj = data?.find(extract);
-	// console.log(itemObj?.exists);
-
-
-	// const itemArr = data?.map((val)=>({
-	// 	...val
-	// }));
-	// const res = [];
-	// const itemObj = data?.forEach(({id}) => {
-	// 	res.push({
-	// 		id: id,
-	// 	});
-	// })
-	
-	//setList(itemObj);
-	//console.log(list);
-	// const res:any[] = [];
-	// const itemObj = data?.map((val) => {
-	// 	console.log(val);
-  // })
-	//console.log(res);
 
 	return (
 		<>
-			<div className="title">
-				<div className="inner">
-					<h2>{itemId}</h2>
-					{
-						list.map((val) => (
-						<div key={val.id}>
-							<div>
-								<img src={val.fileUrl} />
-								<h4>{val.projectName}</h4>
-								{val.id}
+			{
+				loading ? (
+					"Loading"
+				) : (
+					<>
+
+						{/* <SubPage key={nowObj.id}>
+							<div className="title">
+								<div className="inner">
+									<ul>
+										<li>Works</li>
+										<li>{typeName}</li>
+									</ul>
+									<h2>{nowObj.projectName}</h2>
+								</div>
 							</div>
-						</div>
-						))
-					}
-				</div>
-			</div>
-			<p>Sub</p>
+						</SubPage> */}
+
+						{/* <Switch>
+							<Route path="/:typeId/:itemId" render={() => (`${typeName}` === "ailemp" ? <Ailemp /> : "")} />
+						</Switch> */}
+					</>
+				)
+			}
+
 		</>
 	);
 }

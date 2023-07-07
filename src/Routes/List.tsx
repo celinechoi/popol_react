@@ -28,29 +28,29 @@ const ImgBox = styled.img`
 `;
 
 export interface workInterface {
-  id: string,
-	customer:string,
-	endMonth:number | [],
-	endYear:number | [],
-  fileUrl:string,
-	projectName:string,
-	startMonth:number | [],
-  startYear:number | [],
+	id: string,
+	customer: string,
+	endMonth: number | [],
+	endYear: number | [],
+	fileUrl: string,
+	projectName: string,
+	startMonth: number | [],
+	startYear: number | [],
 }
 
 export interface typesParams {
-  typeId: string;
+	typeId: string;
 }
 
-function List(){
-	const {typeId} = useParams<typesParams>();
-	console.log(useParams(), 'params');
+function List() {
+	const { typeId } = useParams<typesParams>();
+	// console.log(useParams(), 'params');
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<workInterface[]>([]);
-  useEffect(() => {
+	useEffect(() => {
 		const collection = dbService.collection(`${typeId}`);
-		collection.onSnapshot((snapshot:any) => {
-			const itemArr = snapshot.docs.map((doc:any) => ({
+		collection.onSnapshot((snapshot: any) => {
+			const itemArr = snapshot.docs.map((doc: any) => ({
 				id: doc.id,
 				customer: doc.data().customer,
 				endMonth: doc.data().endMonth,
@@ -65,36 +65,36 @@ function List(){
 			setLoading(false);
 		})
 		return () => setLoading(false);
-  }, [typeId]);
+	}, [typeId]);
 	const nowMatch = useRouteMatch("/works/:typeId")
-	console.log(typeId, 'typeId');
+	//console.log(typeId, 'typeId');
 	const location = useLocation();
 	//console.log(location, 'location');
 	return (
 		<>
-		<Container>
-			<div className="inner">
-				{loading ? (
-					"Loading"
-				) : (
-					<>
-						<Boxes>
-							{
-								list.map((val) => (
-								<Box key={val.customer}>
-									<Link to={{pathname: `/${typeId}/${val.id}`}}>
-										<ImgBox src={val.fileUrl} />
-										<h4>{val.projectName}</h4>
-										{val.id}
-									</Link>
-								</Box>
-								))
-							}
-						</Boxes>
-					</>
-				)}
-			</div>
-		</Container>
+			<Container>
+				<div className="inner">
+					{loading ? (
+						"Loading"
+					) : (
+						<>
+							<Boxes>
+								{
+									list.map((val) => (
+										<Box key={val.customer}>
+											<Link to={{ pathname: `/${typeId}/${val.id}` }}>
+												<ImgBox src={val.fileUrl} />
+												<h4>{val.projectName}</h4>
+												{val.id}
+											</Link>
+										</Box>
+									))
+								}
+							</Boxes>
+						</>
+					)}
+				</div>
+			</Container>
 		</>
 	)
 }
