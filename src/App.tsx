@@ -1,4 +1,7 @@
-import { authService } from "fbase";
+import * as firebase from 'firebase/compat/app';
+import 'firebase/firestore';
+import { ReactQueryFirestoreProvider } from 'react-query-firestore';
+import { authService, dbService } from "fbase";
 import { booleanState } from "./atoms";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useRecoilValue } from "recoil";
@@ -88,12 +91,19 @@ a {
 }
 `;
 
+// react-query-firestore
+const reactQueryConfig = {
+  queries: {
+    retry: false
+  }
+}
+
 function App() {
 	const [init, setInit] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [userObj, setUserObj] = useState({});
 	useEffect(() => {
-		authService.onAuthStateChanged((user) => {
+		authService.onAuthStateChanged((user:any) => {
 			if (user) {
 				setIsLoggedIn(true);
 				console.log(user);
@@ -106,11 +116,13 @@ function App() {
 	}, []);
 	const themeSate = useRecoilValue(booleanState);
 	return (
-		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
-			<GlobalStyle />
-			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing ..."}
-			<Footer />
-		</ThemeProvider>
+		<ReactQueryFirestoreProvider firestore={dbService} reactQueryConfig={reactQueryConfig}>
+			<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
+				<GlobalStyle />
+				{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing ..."}
+				<Footer />
+			</ThemeProvider>
+		</ReactQueryFirestoreProvider>
 	);
 }
 

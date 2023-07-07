@@ -22,7 +22,7 @@ function AppRouter({ isLoggedIn }) {
 							<Route path="/works/:typeId">
 								<List />
 							</Route>
-							<Route path="/sub/:itemId">
+							<Route path="/:typeId/:itemId">
 								<Sub />
 							</Route>
 							<Route path="/about">

@@ -27,7 +27,7 @@ const ImgBox = styled.img`
   height: auto;
 `;
 
-interface workInterface {
+export interface workInterface {
   id: string,
 	customer:string,
 	endMonth:number | [],
@@ -38,36 +38,36 @@ interface workInterface {
   startYear:number | [],
 }
 
-interface RouteParams {
+export interface typesParams {
   typeId: string;
 }
 
 function List(){
-	const {typeId} = useParams<RouteParams>();
+	const {typeId} = useParams<typesParams>();
 	console.log(useParams(), 'params');
 	const [loading, setLoading] = useState(true);
 	const [list, setList] = useState<workInterface[]>([]);
   useEffect(() => {
 		const collection = dbService.collection(`${typeId}`);
-			collection.onSnapshot((snapshot) => {
-				const itemArr = snapshot.docs.map((doc) => ({
-					id: doc.id,
-					customer: doc.data().customer,
-					endMonth: doc.data().endMonth,
-					endYear: doc.data().endYear,
-          fileUrl: doc.data().fileUrl,
-					projectName: doc.data().projectName,
-					startMonth: doc.data().startMonth,
-					startYear: doc.data().startYear,
-					...doc.data(),
-				}));
-				setList(itemArr);
-				setLoading(false);
-			})
-			return () => setLoading(false);
+		collection.onSnapshot((snapshot:any) => {
+			const itemArr = snapshot.docs.map((doc:any) => ({
+				id: doc.id,
+				customer: doc.data().customer,
+				endMonth: doc.data().endMonth,
+				endYear: doc.data().endYear,
+				fileUrl: doc.data().fileUrl,
+				projectName: doc.data().projectName,
+				startMonth: doc.data().startMonth,
+				startYear: doc.data().startYear,
+				...doc.data(),
+			}));
+			setList(itemArr);
+			setLoading(false);
+		})
+		return () => setLoading(false);
   }, [typeId]);
 	const nowMatch = useRouteMatch("/works/:typeId")
-	// console.log(nowMatch, 'nowMatch');
+	console.log(typeId, 'typeId');
 	const location = useLocation();
 	//console.log(location, 'location');
 	return (
@@ -82,7 +82,7 @@ function List(){
 							{
 								list.map((val) => (
 								<Box key={val.customer}>
-									<Link to={{pathname: `/sub/${val.id}`}}>
+									<Link to={{pathname: `/${typeId}/${val.id}`}}>
 										<ImgBox src={val.fileUrl} />
 										<h4>{val.projectName}</h4>
 										{val.id}
