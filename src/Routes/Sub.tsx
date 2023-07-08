@@ -1,4 +1,4 @@
-import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation, useParams, useRouteMatch, } from "react-router-dom";
 import { TypesParams, WorkInterface } from "Routes/List";
 import { useEffect, useState } from "react";
 import { dbService } from "fbase";
@@ -7,64 +7,106 @@ import styled from "styled-components";
 
 const SubPage = styled.div`
 	position: relative;
+  padding: 80px 0;
 `;
 
-interface ItemParams {
-	itemId: string;
+const FrointInfo = styled.div`
+  padding: 20px 30px;
+  border: 1px solid ${(props) => props.theme.bgColor.gray.third};
+  border-radius: 20px;
+`;
+
+const Indexs = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-bottom: 20px;
+`;
+
+const Index = styled.li`
+  font-size: 13px;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+`;
+
+const Infos = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 20px;
+`;
+
+const Info = styled.li`
+  dl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    dt {
+      color: ${(props) => props.theme.textColor.gray.fourth};
+    }
+  }
+`;
+
+const PWiselinc = styled.div`
+  padding-top: 30px;
+`;
+
+interface RouteState {
+  parentPath: string;
+  id: string;
+  customer: string;
+  projectName: string;
+  fileUrl: string;
+  startYear: number;
+  startMonth: number;
+  endYear: number;
+  endMonth: number;
 }
 
 function Sub() {
-	// 현재 페이지 파악
-	// const match = useRouteMatch<interParams>('/:typeId/:itemId');
-	// const typeName = match?.params.typeId;
-	// const itemName = match?.params.itemId;
-  //const { typeId } = useParams<TypesParams>();
-  // const { itemId } = useParams<ItemParams>();
-  // console.log(useParams());
-  // console.log("subpage");
-	// const [loading, setLoading] = useState(true);
-	// const [list, setList] = useState<WorkInterface[]>([]);
+  // 현재 페이지 파악
+  const { state } = useLocation<RouteState>();
+  console.log(state);
 
-	// typeName이 바뀔때만 데이터 호출.(중복 실행 막기)
-	// useEffect(() => {
-  //   const collection = dbService.collection(`${typeId}`);
-	// 	collection.onSnapshot((snapshot: any) => {
-	// 		const itemArr = snapshot.docs.map((doc: any) => ({
-	// 			id: doc.id,
-	// 			customer: doc.data().customer,
-	// 			endMonth: doc.data().endMonth,
-	// 			endYear: doc.data().endYear,
-	// 			fileUrl: doc.data().fileUrl,
-	// 			projectName: doc.data().projectName,
-	// 			startMonth: doc.data().startMonth,
-	// 			startYear: doc.data().startYear,
-	// 			...doc.data(),
-	// 		}));
-	// 		setList(itemArr);
-
-	// 		// 현재 페이지 해당되는 데이터만 추출
-	// 		function currName(el: any) {
-	// 			// console.log("right?", itemName);
-	// 			// console.log("el.id", el.id);
-  //       if (el.id === `${typeId}`) {
-	// 				return true
-	// 			}
-	// 		}
-  //     // console.log(list,'list');
-	// 		const nowObj = list.find(currName);
-	// 		// console.log(nowObj, 'nowObj');
-	// 		setLoading(false);
-	// 	})
-	// 	return () => setLoading(false);
-  // }, [typeId]);
-	// console.log(Object.keys(list));
-
+  // 뒤로가기 구현
+  let history = useHistory();
+  const backFunc = () => {
+    history.goBack();
+  }
 
 	return (
-		<>
-			<p>subPAge!!!!!!</p>
-
-		</>
+    <SubPage>
+      <div className="inner">
+        <Indexs>
+          <Index onClick={backFunc}>Works</Index>
+          <Index>{state.parentPath}</Index>
+        </Indexs>
+        <FrointInfo>
+          <Title>[{state.customer}] {state.projectName}</Title>
+          <Infos>
+            <Info>
+              <dl>
+                <dt>프로젝트 기간</dt>
+                <dd>{state.startYear}.{state.startMonth} ~ {state.endYear}.{state.endMonth}</dd>
+              </dl>
+            </Info>
+          </Infos>
+          <div>프로젝트 설명 데이터 넣기</div>
+        </FrointInfo>
+        {
+          state.id === "wiselinc" ?
+          (
+            <PWiselinc>
+              <p>경남대입니다.</p>
+            </PWiselinc>
+          ) : ("")
+        }
+      </div>
+    </SubPage>
 	);
 }
 export default Sub;

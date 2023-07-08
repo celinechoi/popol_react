@@ -43,12 +43,12 @@ const ImgBox = styled.img`
 export interface WorkInterface {
 	id: string,
 	customer: string,
-	endMonth: number | [],
-	endYear: number | [],
-	fileUrl: string,
-	projectName: string,
-	startMonth: number | [],
-	startYear: number | [],
+  endMonth: number | [] | undefined,
+  endYear: number | [] | undefined,
+	fileUrl: string | undefined,
+  projectName: string | undefined,
+  startMonth: number | [] | undefined,
+  startYear: number | [] | undefined,
 }
 
 export interface TypesParams {
@@ -74,12 +74,12 @@ function List() {
 			const itemArr = snapshot.docs.map((doc: any) => ({
 				id: doc.id,
 				customer: doc.data().customer,
-				endMonth: doc.data().endMonth,
-				endYear: doc.data().endYear,
-				fileUrl: doc.data().fileUrl,
 				projectName: doc.data().projectName,
-				startMonth: doc.data().startMonth,
-				startYear: doc.data().startYear,
+        fileUrl: doc.data().fileUrl,
+        startYear: doc.data().startYear,
+        startMonth: doc.data().startMonth,
+        endYear: doc.data().endYear,
+        endMonth: doc.data().endMonth,
 				...doc.data(),
 			}));
 			setList(itemArr);
@@ -112,8 +112,15 @@ function List() {
 											<Link to={{ 
                         pathname: `/works/${typeId}/${val.id}`,
                         state: { 
-                          type: typeId,
-                          name: val.id
+                          parentPath: typeId,
+                          id: val.id,
+                          customer: val.customer,
+                          projectName: val.projectName,
+                          fileUrl: val.fileUrl,
+                          startYear: val.startYear,
+                          startMonth: val.startMonth,
+                          endYear: val.endYear,
+                          endMonth: val.endMonth,
                         } }}>
 												<ImgBox src={val.fileUrl} />
 												<h4>{val.projectName}</h4>
