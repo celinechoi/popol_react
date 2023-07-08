@@ -42,13 +42,15 @@ const ImgBox = styled.img`
 
 export interface WorkInterface {
 	id: string,
-	customer: string,
-  endMonth: number | [] | undefined,
-  endYear: number | [] | undefined,
-	fileUrl: string | undefined,
   projectName: string | undefined,
-  startMonth: number | [] | undefined,
-  startYear: number | [] | undefined,
+	customer: string,
+  fileUrl: string | undefined,
+  description: string | undefined,
+  did: [] | undefined,
+  startYear: number | undefined,
+  startMonth: number | undefined,
+  endMonth: number | undefined,
+  endYear: number | undefined,
 }
 
 export interface TypesParams {
@@ -73,9 +75,11 @@ function List() {
 		collection.onSnapshot((snapshot: any) => {
 			const itemArr = snapshot.docs.map((doc: any) => ({
 				id: doc.id,
-				customer: doc.data().customer,
 				projectName: doc.data().projectName,
+        customer: doc.data().customer,
         fileUrl: doc.data().fileUrl,
+        description: doc.data().description,
+        did: doc.data().did,
         startYear: doc.data().startYear,
         startMonth: doc.data().startMonth,
         endYear: doc.data().endYear,
@@ -116,6 +120,8 @@ function List() {
                           id: val.id,
                           customer: val.customer,
                           projectName: val.projectName,
+                          description: val.description,
+                          did: val.did,
                           fileUrl: val.fileUrl,
                           startYear: val.startYear,
                           startMonth: val.startMonth,

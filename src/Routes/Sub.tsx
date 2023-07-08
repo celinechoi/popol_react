@@ -58,8 +58,10 @@ const PWiselinc = styled.div`
 interface RouteState {
   parentPath: string;
   id: string;
-  customer: string;
   projectName: string;
+  customer: string;
+  description: string;
+  did: [];
   fileUrl: string;
   startYear: number;
   startMonth: number;
