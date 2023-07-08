@@ -2,6 +2,19 @@ import { dbService } from "fbase";
 import { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
+import Sub from "Routes/Sub";
+import Tabs from "./Tabs";
+
+const Title = styled.div`
+  height: 200px;
+	background-color: ${(props) => props.theme.point.blue[1]};
+	h2 {
+		padding-top: 50px;
+		color: ${(props) => props.theme.textColor.gray.first};
+		font-size: 44px;
+		font-weight: 700;
+	}
+`;
 
 const Container = styled.div`
 	padding: 110px 0 80px;
@@ -27,7 +40,7 @@ const ImgBox = styled.img`
   height: auto;
 `;
 
-export interface workInterface {
+export interface WorkInterface {
 	id: string,
 	customer: string,
 	endMonth: number | [],
@@ -38,15 +51,23 @@ export interface workInterface {
 	startYear: number | [],
 }
 
-export interface typesParams {
+export interface TypesParams {
 	typeId: string;
 }
 
+interface RouteState {
+  name: string;
+}
+
+interface P {
+  pathType: string;
+}
+
 function List() {
-	const { typeId } = useParams<typesParams>();
+	const { typeId } = useParams<TypesParams>();
 	// console.log(useParams(), 'params');
 	const [loading, setLoading] = useState(true);
-	const [list, setList] = useState<workInterface[]>([]);
+	const [list, setList] = useState<WorkInterface[]>([]);
 	useEffect(() => {
 		const collection = dbService.collection(`${typeId}`);
 		collection.onSnapshot((snapshot: any) => {
@@ -66,12 +87,18 @@ function List() {
 		})
 		return () => setLoading(false);
 	}, [typeId]);
-	const nowMatch = useRouteMatch("/works/:typeId")
-	//console.log(typeId, 'typeId');
-	const location = useLocation();
-	//console.log(location, 'location');
+  interface RouteParams {
+    typeId: string;
+  }
+  //console.log(useParams());
 	return (
 		<>
+      <Title>
+        <div className="inner">
+          <h2>Works</h2>
+          <Tabs typePath={typeId} />
+        </div>
+      </Title>
 			<Container>
 				<div className="inner">
 					{loading ? (
@@ -82,7 +109,12 @@ function List() {
 								{
 									list.map((val) => (
 										<Box key={val.customer}>
-											<Link to={{ pathname: `/${typeId}/${val.id}` }}>
+											<Link to={{ 
+                        pathname: `/works/${typeId}/${val.id}`,
+                        state: { 
+                          type: typeId,
+                          name: val.id
+                        } }}>
 												<ImgBox src={val.fileUrl} />
 												<h4>{val.projectName}</h4>
 												{val.id}

@@ -9,7 +9,7 @@ import { darkTheme, lightTheme } from "./theme";
 import AppRouter from "Router";
 import { useEffect, useState } from "react";
 import { media } from "style/media_query";
-import Footer from "components/Footer";
+import Footer from "Components/Footer";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -78,16 +78,6 @@ a {
 	${media.large`
 		max-width: calc(100% - 40px);
 	`};
-}
-.title {
-	height: 200px;
-	background-color: ${(props) => props.theme.point.blue[1]};
-	h2 {
-		padding-top: 50px;
-		color: ${(props) => props.theme.textColor.gray.first};
-		font-size: 44px;
-		font-weight: 700;
-	}
 }
 `;
 
