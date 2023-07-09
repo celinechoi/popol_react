@@ -16,6 +16,18 @@ const FrointInfo = styled.div`
   border-radius: 20px;
 `;
 
+const KeyWords = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+`;
+
+const Keyword = styled.li`
+  font-size: 14px;
+  font-weight: 500;
+`;
+
 const Indexs = styled.ul`
   display: flex;
   align-items: center;
@@ -61,7 +73,8 @@ interface RouteState {
   projectName: string;
   customer: string;
   description: string;
-  did: [];
+  did: [] | undefined;
+  keyWords: [] | undefined,
   fileUrl: string;
   startYear: number;
   startMonth: number;
@@ -72,7 +85,7 @@ interface RouteState {
 function Sub() {
   // 현재 페이지 파악
   const { state } = useLocation<RouteState>();
-  console.log(state);
+  // console.log(state);
 
   // 뒤로가기 구현
   let history = useHistory();
@@ -80,6 +93,13 @@ function Sub() {
     history.goBack();
   }
 
+  // 배열 타입 변수에 저장
+  // console.log(state.keyWords);
+  let keyWordsList = [];
+  if (state.keyWords) {
+    keyWordsList = state.keyWords;
+    // console.log(keyWordsList);
+  } 
 	return (
     <SubPage>
       <div className="inner">
@@ -88,6 +108,14 @@ function Sub() {
           <Index>{state.parentPath}</Index>
         </Indexs>
         <FrointInfo>
+          <KeyWords>
+            {
+              state?.keyWords
+              // keyWordsList.map((val) => {
+              //   <Keyword>{val}</Keyword>
+              // })
+            }
+          </KeyWords>
           <Title>[{state.customer}] {state.projectName}</Title>
           <Infos>
             <Info>
