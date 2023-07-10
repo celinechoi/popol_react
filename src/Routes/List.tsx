@@ -6,23 +6,24 @@ import Tabs from "routes/Tabs";
 
 const Title = styled.div`
   height: 200px;
-	background-color: ${(props) => props.theme.point.blue[1]};
+	/* background-color: ${(props) => props.theme.point.blue[1]}; */
 	h2 {
 		padding-top: 50px;
 		color: ${(props) => props.theme.textColor.gray.first};
 		font-size: 44px;
 		font-weight: 700;
+		text-align: center;
 	}
 `;
 
 const Container = styled.div`
-	padding: 110px 0 80px;
+	padding: 90px 0 80px;
 `;
 
 const Boxes = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
-	gap: 32px;
+	gap: 40px 32px;
 `;
 
 const Box = styled.li`
@@ -32,11 +33,35 @@ const Box = styled.li`
   box-shadow: ${(props) => props.theme.shadow.box};
   border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
   background-color: ${(props) => props.theme.bgColor.gray.first};
+	background-color: ${(props) => props.theme.bgColor.gray.third};
 `;
 
-const ImgBox = styled.img`
-  width: 100%;
-  height: auto;
+const BoxCon = styled.div`
+	padding-top: 20px;
+	p {
+		padding-bottom: 8px;
+		font-size: 14px;
+		font-weight: 500;
+		color: ${(props) => props.theme.textColor.gray.fourth};
+	}
+	h4 {
+		font-size: 20px;
+		text-align: center;
+	}
+`;
+
+const ImgBox = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  height: 165px;
+	padding: 28px;
+	background-color: #ededed;
+	border-radius: 20px;
+	>img {
+		width: 60%;
+  	height: auto;
+	}
 `;
 
 export interface WorkInterface {
@@ -131,9 +156,13 @@ function List() {
 													endMonth: val.endMonth,
 												}
 											}}>
-												<ImgBox src={val.fileUrl} />
-												<h4>{val.projectName}</h4>
-												{val.id}
+												<ImgBox>
+													<img src={val.fileUrl} alt={val.projectName} />
+												</ImgBox>
+												<BoxCon>
+													<p>{val.customer}</p>
+													<h4>{val.projectName} 페이지</h4>
+												</BoxCon>
 											</Link>
 										</Box>
 									))

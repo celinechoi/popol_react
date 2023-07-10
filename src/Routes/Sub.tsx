@@ -56,7 +56,7 @@ const FrontInfo = styled.div`
   padding: 32px 32px 40px;
   border: 1px solid ${(props) => props.theme.bgColor.gray.second};
   border-radius: 20px;
-	box-shadow: ${(props) => props.theme.shadow.box};
+	box-shadow: ${(props) => props.theme.shadow.under};
 `;
 
 const Tags = styled.ul`
@@ -69,21 +69,25 @@ const Tags = styled.ul`
 
 const Tag = styled.li`
 	min-width: 54px;
-  padding: 0 8px;
-	background-color: ${(props) => props.theme.bgColor.gray.fifth};
+  padding: 0 12px;
+	background-color: ${(props) => props.theme.bgColor.gray.first};
   border-radius: 18px;
 	font-size: 13px;
 	line-height: 32px;
 	text-align: center;
 	cursor: default;
+	&.scss {
+		background-color: #C66394;
+		color: #fff;
+	}
 `;
 
 const Img = styled.img`
 	display: block;
-	min-width: 230px;
+	max-width: 200px;
 	margin: 0 auto 12px;
-	background-color: ${(props) => props.theme.textColor.gray.fourth};
-	padding: 8px;
+	background-color: #eee;
+	padding: 8px 16px;
 	border-radius: 6px;
 `;
 
@@ -96,6 +100,8 @@ const Title = styled.h2`
 `;
 
 const Description = styled.p`
+	width: 70%;
+	margin: 0 auto;
 	font-size: 20px;
 	font-weight: 500;
 	text-align: center;
@@ -134,6 +140,9 @@ const Button = styled.button`
 	padding: 12px 20px;
 	background-color: ${(props) => props.theme.point.blue[0]};
 	color: #fff;
+	&:hover {
+		box-shadow: ${(props) => props.theme.shadow.button};
+	}
 `;
 
 const Effects = styled.ul`
@@ -211,7 +220,7 @@ function Sub() {
 					<Tags>
 						{
 							keyWordsList.map((val: any) => (
-								<Tag key={val}>
+								<Tag key={val} className={val === "SCSS" ? "scss" : ""}>
 									{val}
 								</Tag>
 							))

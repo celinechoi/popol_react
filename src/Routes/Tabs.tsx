@@ -2,19 +2,19 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const TabMenu = styled.ul`
-	display: inline-block;
-	clear: both;
-	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
 	position: relative;
 	top: 40px;
 	padding: 12px;
 	border-radius: 38px;
-	background-color: ${(props) => props.theme.bgColor.gray.first};
+	background-color: ${(props) => props.theme.bgColor.gray.second};
 	box-shadow: ${(props) => props.theme.shadow.under};
 `;
 
 const Tab = styled.li<{ isActive: boolean }>`
-	float: left;
 	margin-left: 12px;
 	padding: 12px 28px;
 	background-color: ${(props) =>

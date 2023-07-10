@@ -32,7 +32,8 @@ declare module "styled-components" {
 		},
 		shadow: {
 			under: string,
-			box: string
+			box: string,
+			button: string
 		}
   }
 }
