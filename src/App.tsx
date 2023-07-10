@@ -9,7 +9,7 @@ import { darkTheme, lightTheme } from "./theme";
 import AppRouter from "Router";
 import { useEffect, useState } from "react";
 import { media } from "style/media_query";
-import Footer from "Components/Footer";
+import Footer from "components/Footer";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -83,9 +83,9 @@ a {
 
 // react-query-firestore
 const reactQueryConfig = {
-  queries: {
-    retry: false
-  }
+	queries: {
+		retry: false
+	}
 }
 
 function App() {
@@ -93,7 +93,7 @@ function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [userObj, setUserObj] = useState({});
 	useEffect(() => {
-		authService.onAuthStateChanged((user:any) => {
+		authService.onAuthStateChanged((user: any) => {
 			if (user) {
 				setIsLoggedIn(true);
 				console.log(user);

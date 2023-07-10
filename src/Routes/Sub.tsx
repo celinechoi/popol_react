@@ -1,5 +1,4 @@
 import { Route, Switch, useHistory, useLocation, useParams, useRouteMatch, } from "react-router-dom";
-import { TypesParams, WorkInterface } from "Routes/List";
 import { useEffect, useState } from "react";
 import { dbService } from "fbase";
 import styled from "styled-components";
@@ -68,75 +67,75 @@ const PWiselinc = styled.div`
 `;
 
 interface RouteState {
-  parentPath: string;
-  id: string;
-  projectName: string;
-  customer: string;
-  description: string;
-  did: [] | undefined;
-  keyWords: [] | undefined,
-  fileUrl: string;
-  startYear: number;
-  startMonth: number;
-  endYear: number;
-  endMonth: number;
+	parentPath: string;
+	id: string;
+	projectName: string;
+	customer: string;
+	description: string;
+	did: [] | undefined;
+	keyWords: [] | undefined,
+	fileUrl: string;
+	startYear: number;
+	startMonth: number;
+	endYear: number;
+	endMonth: number;
 }
 
 function Sub() {
-  // 현재 페이지 파악
-  const { state } = useLocation<RouteState>();
-  // console.log(state);
+	// 현재 페이지 파악
+	const { state } = useLocation<RouteState>();
+	// console.log(state);
 
-  // 뒤로가기 구현
-  let history = useHistory();
-  const backFunc = () => {
-    history.goBack();
-  }
+	// 뒤로가기 구현
+	let history = useHistory();
+	const backFunc = () => {
+		history.goBack();
+	}
 
-  // 배열 타입 변수에 저장
-  // console.log(state.keyWords);
-  let keyWordsList = [];
-  if (state.keyWords) {
-    keyWordsList = state.keyWords;
-    // console.log(keyWordsList);
-  } 
+	// 배열 타입 변수에 저장
+	// console.log(state.keyWords);
+	let keyWordsList = [];
+	if (state.keyWords) {
+		keyWordsList = state.keyWords;
+		// console.log(keyWordsList);
+	}
 	return (
-    <SubPage>
-      <div className="inner">
-        <Indexs>
-          <Index onClick={backFunc}>Works</Index>
-          <Index>{state.parentPath}</Index>
-        </Indexs>
-        <FrointInfo>
-          <KeyWords>
-            {
-              state?.keyWords
-              // keyWordsList.map((val) => {
-              //   <Keyword>{val}</Keyword>
-              // })
-            }
-          </KeyWords>
-          <Title>[{state.customer}] {state.projectName}</Title>
-          <Infos>
-            <Info>
-              <dl>
-                <dt>프로젝트 기간</dt>
-                <dd>{state.startYear}.{state.startMonth} ~ {state.endYear}.{state.endMonth}</dd>
-              </dl>
-            </Info>
-          </Infos>
-          <div>프로젝트 설명 데이터 넣기</div>
-        </FrointInfo>
-        {
-          state.id === "wiselinc" ?
-          (
-            <PWiselinc>
-              <p>경남대입니다.</p>
-            </PWiselinc>
-          ) : ("")
-        }
-      </div>
-    </SubPage>
+		<SubPage>
+			<div className="inner">
+				<Indexs>
+					<Index onClick={backFunc}>Works</Index>
+					<Index>{state.parentPath}</Index>
+				</Indexs>
+				<FrointInfo>
+					<KeyWords>
+						{
+							state?.keyWords
+							// keyWordsList.map((val) => {
+							//   <Keyword>{val}</Keyword>
+							// })
+						}
+					</KeyWords>
+					<Title>[{state.customer}] {state.projectName}</Title>
+					<Infos>
+						<Info>
+							<dl>
+								<dt>프로젝트 기간</dt>
+								<dd>{state.startYear}.{state.startMonth} ~ {state.endYear}.{state.endMonth}</dd>
+							</dl>
+						</Info>
+					</Infos>
+					<div>프로젝트 설명 데이터 넣기</div>
+				</FrointInfo>
+				{
+					state.id === "wiselinc" ?
+						(
+							<PWiselinc>
+								<p>경남대입니다.</p>
+							</PWiselinc>
+						) : ("")
+				}
+			</div>
+		</SubPage>
 	);
 }
 export default Sub;

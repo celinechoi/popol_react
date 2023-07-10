@@ -2,8 +2,7 @@ import { dbService } from "fbase";
 import { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
-import Sub from "Routes/Sub";
-import Tabs from "./Tabs";
+import Tabs from "routes/Tabs";
 
 const Title = styled.div`
   height: 200px;
@@ -42,16 +41,16 @@ const ImgBox = styled.img`
 
 export interface WorkInterface {
 	id: string,
-  projectName: string | undefined,
+	projectName: string | undefined,
 	customer: string,
-  fileUrl: string | undefined,
-  description: string | undefined,
-  did: [] | undefined,
-  keyWords: [] | undefined,
-  startYear: number | undefined,
-  startMonth: number | undefined,
-  endMonth: number | undefined,
-  endYear: number | undefined,
+	fileUrl: string | undefined,
+	description: string | undefined,
+	did: [] | undefined,
+	keyWords: [] | undefined,
+	startYear: number | undefined,
+	startMonth: number | undefined,
+	endMonth: number | undefined,
+	endYear: number | undefined,
 }
 
 export interface TypesParams {
@@ -59,11 +58,11 @@ export interface TypesParams {
 }
 
 interface RouteState {
-  name: string;
+	name: string;
 }
 
 interface P {
-  pathType: string;
+	pathType: string;
 }
 
 function List() {
@@ -77,15 +76,15 @@ function List() {
 			const itemArr = snapshot.docs.map((doc: any) => ({
 				id: doc.id,
 				projectName: doc.data().projectName,
-        customer: doc.data().customer,
-        fileUrl: doc.data().fileUrl,
-        description: doc.data().description,
-        did: doc.data().did,
-        keyWords: doc.data().keywords,
-        startYear: doc.data().startYear,
-        startMonth: doc.data().startMonth,
-        endYear: doc.data().endYear,
-        endMonth: doc.data().endMonth,
+				customer: doc.data().customer,
+				fileUrl: doc.data().fileUrl,
+				description: doc.data().description,
+				did: doc.data().did,
+				keyWords: doc.data().keywords,
+				startYear: doc.data().startYear,
+				startMonth: doc.data().startMonth,
+				endYear: doc.data().endYear,
+				endMonth: doc.data().endMonth,
 				...doc.data(),
 			}));
 			setList(itemArr);
@@ -93,18 +92,18 @@ function List() {
 		})
 		return () => setLoading(false);
 	}, [typeId]);
-  interface RouteParams {
-    typeId: string;
-  }
-  //console.log(useParams());
+	interface RouteParams {
+		typeId: string;
+	}
+	//console.log(useParams());
 	return (
 		<>
-      <Title>
-        <div className="inner">
-          <h2>Works</h2>
-          <Tabs typePath={typeId} />
-        </div>
-      </Title>
+			<Title>
+				<div className="inner">
+					<h2>Works</h2>
+					<Tabs typePath={typeId} />
+				</div>
+			</Title>
 			<Container>
 				<div className="inner">
 					{loading ? (
@@ -115,22 +114,23 @@ function List() {
 								{
 									list.map((val) => (
 										<Box key={val.customer}>
-											<Link to={{ 
-                        pathname: `/works/${typeId}/${val.id}`,
-                        state: { 
-                          parentPath: typeId,
-                          id: val.id,
-                          customer: val.customer,
-                          projectName: val.projectName,
-                          description: val.description,
-                          did: val.did,
-                          keyWords: val.keyWords,
-                          fileUrl: val.fileUrl,
-                          startYear: val.startYear,
-                          startMonth: val.startMonth,
-                          endYear: val.endYear,
-                          endMonth: val.endMonth,
-                        } }}>
+											<Link to={{
+												pathname: `/works/${typeId}/${val.id}`,
+												state: {
+													parentPath: typeId,
+													id: val.id,
+													customer: val.customer,
+													projectName: val.projectName,
+													description: val.description,
+													did: val.did,
+													keyWords: val.keyWords,
+													fileUrl: val.fileUrl,
+													startYear: val.startYear,
+													startMonth: val.startMonth,
+													endYear: val.endYear,
+													endMonth: val.endMonth,
+												}
+											}}>
 												<ImgBox src={val.fileUrl} />
 												<h4>{val.projectName}</h4>
 												{val.id}
