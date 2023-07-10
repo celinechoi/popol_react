@@ -29,7 +29,7 @@ const Box = styled.li`
 	flex: 0 0 calc(100%/3 - 32px/3*2);
 	padding: 24px;
   border-radius: 20px;
-  box-shadow: ${(props) => props.theme.shadow};
+  box-shadow: ${(props) => props.theme.shadow.box};
   border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
   background-color: ${(props) => props.theme.bgColor.gray.first};
 `;

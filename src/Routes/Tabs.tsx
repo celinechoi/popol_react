@@ -10,7 +10,7 @@ const TabMenu = styled.ul`
 	padding: 12px;
 	border-radius: 38px;
 	background-color: ${(props) => props.theme.bgColor.gray.first};
-	box-shadow: ${(props) => props.theme.shadow};
+	box-shadow: ${(props) => props.theme.shadow.under};
 `;
 
 const Tab = styled.li<{ isActive: boolean }>`
@@ -18,10 +18,10 @@ const Tab = styled.li<{ isActive: boolean }>`
 	margin-left: 12px;
 	padding: 12px 28px;
 	background-color: ${(props) =>
-    props.isActive ? props.theme.point.blue[0] : "transparent"};
+		props.isActive ? props.theme.point.blue[0] : "transparent"};
 	border-radius: 26px;
 	color: ${(props) =>
-    props.isActive ? props.theme.textColor.gray.first : props.theme.textColor.gray.fixth};
+		props.isActive ? props.theme.textColor.gray.first : props.theme.textColor.gray.fifth};
 	font-size: 18px;
 	font-weight: 900;
 	text-align: center;
@@ -35,33 +35,33 @@ const Tab = styled.li<{ isActive: boolean }>`
 	}
 `;
 const workType = [
-  {
-    id: "si"
-  },
-  {
-    id: "solution"
-  },
-  {
-    id: "sm"
-  }
+	{
+		id: "si"
+	},
+	{
+		id: "solution"
+	},
+	{
+		id: "sm"
+	}
 ]
-function Tabs({ typePath }: { typePath :string | object}) {
-  //console.log(typePath);
-  return (
-    <>
-      <TabMenu>
-        {
-          workType.map((val) => (
-            <Tab key={val.id} isActive={typePath === val.id ? true : false}>
-              <Link to={{
-                pathname: `/works/${val.id}`,
-                state: { name: val.id }
-              }}>{val.id}</Link>
-            </Tab>
-          ))
-        }
-      </TabMenu>
-    </>
-  );
+function Tabs({ typePath }: { typePath: string | object }) {
+	//console.log(typePath);
+	return (
+		<>
+			<TabMenu>
+				{
+					workType.map((val) => (
+						<Tab key={val.id} isActive={typePath === val.id ? true : false}>
+							<Link to={{
+								pathname: `/works/${val.id}`,
+								state: { name: val.id }
+							}}>{val.id}</Link>
+						</Tab>
+					))
+				}
+			</TabMenu>
+		</>
+	);
 }
 export default Tabs;

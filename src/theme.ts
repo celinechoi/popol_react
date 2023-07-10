@@ -17,7 +17,7 @@ export const darkTheme: DefaultTheme = {
 			second: "#424242",
 			third: "#616161",
 			fourth: "#757575",
-			fixth: "#9e9e9e"
+			fifth: "#9e9e9e"
 		}
 	},
 	textColor: {
@@ -26,10 +26,13 @@ export const darkTheme: DefaultTheme = {
 			second: "#fafafa",
 			third: "#f5f5f5",
 			fourth: "#eee",
-			fixth: "#e0e0e0"
+			fifth: "#e0e0e0"
 		}
 	},
-	shadow: "0 2px 10px 0 rgba(255,255,255,0.1)"
+	shadow: {
+		under: "0 2px 10px 0 rgba(255,255,255,0.25)",
+		box: "0 3px 7px 2px rgb(255, 255, 255, 0.11)"
+	}
 }
 
 export const lightTheme: DefaultTheme = {
@@ -49,7 +52,7 @@ export const lightTheme: DefaultTheme = {
 			second: "#fafafa",
 			third: "#f5f5f5",
 			fourth: "#eee",
-			fixth: "#e0e0e0"
+			fifth: "#e0e0e0"
 		}
 	},
 	textColor: {
@@ -58,8 +61,11 @@ export const lightTheme: DefaultTheme = {
 			second: "#424242",
 			third: "#616161",
 			fourth: "#757575",
-			fixth: "#9e9e9e"
+			fifth: "#9e9e9e"
 		}
 	},
-	shadow: "0 2px 10px 0 rgba(0,0,0,0.1)"
+	shadow: {
+		under: "0 2px 10px 0 rgba(0,0,0,0.1)",
+		box: "0 2px 5px 0 rgba(0, 0, 0, 0.08)"
+	}
 }

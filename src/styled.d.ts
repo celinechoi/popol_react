@@ -18,7 +18,7 @@ declare module "styled-components" {
 				second: string,
 				third: string,
 				fourth: string,
-				fixth: string
+				fifth: string
 			}
 		},
 		textColor: {
@@ -27,9 +27,12 @@ declare module "styled-components" {
 				second: string,
 				third: string,
 				fourth: string,
-				fixth: string
+				fifth: string
 			}
 		},
-		shadow: string
+		shadow: {
+			under: string,
+			box: string
+		}
   }
 }

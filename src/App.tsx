@@ -29,9 +29,6 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
 	box-sizing: border-box;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -62,22 +59,73 @@ table {
 	transition: all .1s ease;
 }
 body {
+	background-color: ${(props) => props.theme.bgColor.gray.second};
+	color:${(props) => props.theme.textColor.gray.second};
+	font: 14px 'Noto Sans KR', 'Righteous';
   font-weight: 300;
-  font-family: 'Noto Sans KR', 'Righteous';
-  color:${(props) => props.theme.textColor.gray.third};
   line-height: 1.5;
-  background-color: ${(props) => props.theme.bgColor.gray.second};
 }
 a {
   text-decoration:none;
   color:inherit;
 }
+button,
+input,
+textarea,
+select {
+	border: 0;
+	border-radius: 6px;
+	box-sizing: border-box;
+}
+input,
+textarea,
+select {
+	padding: 14px 20px;
+	border: ${(props) => props.theme.bgColor.gray.fifth};
+}
+button {
+	cursor: pointer;
+	font-weight: 700;
+}
 .inner {
 	max-width: 1400px;
 	margin: 0 auto;
 	${media.large`
+		max-width: calc(100% - 48px);
+	`};
+	${media.small`
 		max-width: calc(100% - 40px);
 	`};
+}
+.page {
+	&-title {
+		font-size: 32px;
+		font-weight: 700;
+		${media.medium`
+			font-size: 28px;
+		`};
+		${media.small`
+			font-size: 24px;
+		`};
+	}
+}
+.section {
+	padding-top: 80px;
+	${media.large`
+		padding-top: 60px;
+	`};
+	&-title {
+		padding-bottom: 48px;
+		font-size: 28px;
+		font-weight: 700;
+		${media.medium`
+			padding-bottom: 40px;
+			font-size: 24px;
+		`};
+		${media.small`
+			font-size: 20px;
+		`};
+	}
 }
 `;
 

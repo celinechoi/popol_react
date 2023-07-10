@@ -12,14 +12,14 @@ const Inner = styled.div`
 	align-items: center;		
 	justify-content: center;
 	padding: 20px 0 28px;
-	border-bottom: 1px solid ${(props) => props.theme.bgColor.gray.fixth};
+	border-bottom: 1px solid ${(props) => props.theme.bgColor.gray.fifth};
 `;
 const Row = styled.div`
 	position: relative;
 	width: 100%;
 `;
 const Logo = styled.div`
-	color: ${(props) =>props.theme.point.lavender};
+	color: ${(props) => props.theme.point.lavender};
 	font: 20px 'Righteous';
 	text-align: center;
 `;
@@ -54,7 +54,7 @@ const ThemeBox = styled.div`
 		display: block;
 		position: relative;
 		background-color: ${(props) => props.theme.textColor.gray.second};
-		border: 1px solid ${(props) => props.theme.textColor.gray.fixth};
+		border: 1px solid ${(props) => props.theme.textColor.gray.fifth};
 		border-radius: 20px;
 		width: 50px;
 		height: 25px;
@@ -89,7 +89,7 @@ const Item = styled.li`
 	line-height: 31px;
 	a {
 		&.on {
-			color: ${props=>props.theme.point.yellow};
+			color: ${props => props.theme.point.yellow};
 		}
 	}
 `;
@@ -102,12 +102,12 @@ const Point = styled(motion.span)`
   right: 0;
   margin: 0 auto;
 	border-radius: 7px;
-  background-color: ${props=>props.theme.point.yellow};
+  background-color: ${props => props.theme.point.yellow};
 	transition: all .3s cubic-bezier(0.48, 0.35, 1, 1);
 `;
 
 
-function Header(){
+function Header() {
 	// Theme 변경
 	const [theme, setTheme] = useRecoilState(booleanState);
 	const toggleTheme = () => {
@@ -140,21 +140,21 @@ function Header(){
 			<Row>
 				<Items>
 					<Item>
-						<Link to="/" className={homeMatch?.isExact ? "on": ""}>
-						Home
-						{homeMatch?.isExact === true && <Point layoutId="point"/>}
+						<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
+							Home
+							{homeMatch?.isExact === true && <Point layoutId="point" />}
 						</Link>
 					</Item>
 					<Item>
-						<Link to="/works/solution" className={worksMatch || subMatch? "on": ""}>
-						Works
-						{worksMatch || subMatch ? <Point layoutId="point"/> : ""}
+						<Link to="/works/solution" className={worksMatch || subMatch ? "on" : ""}>
+							Works
+							{worksMatch || subMatch ? <Point layoutId="point" /> : ""}
 						</Link>
 					</Item>
 					<Item>
-						<Link to="/about" className={aboutMatch? "on": ""}>
-						About
-						{aboutMatch && <Point layoutId="point"/>}
+						<Link to="/about" className={aboutMatch ? "on" : ""}>
+							About
+							{aboutMatch && <Point layoutId="point" />}
 						</Link>
 					</Item>
 				</Items>
