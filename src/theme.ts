@@ -32,7 +32,7 @@ export const darkTheme: DefaultTheme = {
 	shadow: {
 		under: "0 2px 10px 0 rgba(255,255,255,0.25)",
 		box: "0 3px 7px 2px rgb(255, 255, 255, 0.11)",
-		button: "rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) -3px 7px 16px"
+		button: "rgba(57, 57, 57, 0.17) 0px -23px 25px 0px inset, rgba(57, 57, 57, 0.15) 0px -36px 30px 0px inset, rgba(57, 57, 57, 0.1) 0px -79px 40px 0px inset, rgba(57, 57, 57, 0.06) 0px 2px 1px, rgba(57, 57, 57, 0.09) 0px 4px 2px, rgba(57, 57, 57, 0.09) 0px 8px 4px, rgba(57, 57, 57, 0.09) 0px 16px 8px, rgba(57, 57, 57, 0.09) -3px 7px 16px"
 	}
 }
 
@@ -68,6 +68,6 @@ export const lightTheme: DefaultTheme = {
 	shadow: {
 		under: "0 2px 10px 0 rgba(0,0,0,0.1)",
 		box: "0 2px 5px 0 rgba(0, 0, 0, 0.08)",
-		button: "rgba(57, 57, 57, 0.17) 0px -23px 25px 0px inset, rgba(57, 57, 57, 0.15) 0px -36px 30px 0px inset, rgba(57, 57, 57, 0.1) 0px -79px 40px 0px inset, rgba(57, 57, 57, 0.06) 0px 2px 1px, rgba(57, 57, 57, 0.09) 0px 4px 2px, rgba(57, 57, 57, 0.09) 0px 8px 4px, rgba(57, 57, 57, 0.09) 0px 16px 8px, rgba(57, 57, 57, 0.09) -3px 7px 16px"
+		button: "rgba(215, 215, 215, 0.17) 0px -23px 25px 0px inset, rgba(215, 215, 215, 0.15) 0px -36px 30px 0px inset, rgba(215, 215, 215, 0.1) 0px -79px 40px 0px inset, rgba(215, 215, 215, 0.06) 0px 2px 1px, rgba(215, 215, 215, 0.09) 0px 4px 2px, rgba(215, 215, 215, 0.09) 0px 8px 4px, rgba(215, 215, 215, 0.09) 0px 16px 8px, rgba(215, 215, 215, 0.09) -3px 7px 16px"
 	}
 }

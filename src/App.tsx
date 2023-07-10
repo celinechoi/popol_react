@@ -98,7 +98,18 @@ button {
 	`};
 }
 .page {
-	&-title {
+	&-h1 {
+		color: ${(props) => props.theme.textColor.gray.first};
+		font-size: 44px;
+		font-weight: 700;
+		${media.medium`
+			font-size: 34px;
+		`};
+		${media.small`
+			font-size: 30px;
+		`};
+	}
+	&-h2 {
 		font-size: 32px;
 		font-weight: 700;
 		${media.medium`

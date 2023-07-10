@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { media } from "style/media_query";
 
 const TabMenu = styled.ul`
 	display: flex;
@@ -12,6 +13,12 @@ const TabMenu = styled.ul`
 	border-radius: 38px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};
 	box-shadow: ${(props) => props.theme.shadow.under};
+	${media.medium`
+		gap: 14px;
+		top: 32px;
+		padding: 8px 12px;
+		border-radius: 24px;
+	`};
 `;
 
 const Tab = styled.li<{ isActive: boolean }>`
@@ -25,6 +32,7 @@ const Tab = styled.li<{ isActive: boolean }>`
 	font-size: 18px;
 	font-weight: 900;
 	text-align: center;
+	text-transform: uppercase;
 	cursor: pointer;
 	&:hover {
 		background-color: ${(props) => props.theme.point.blue[0]};
@@ -33,6 +41,14 @@ const Tab = styled.li<{ isActive: boolean }>`
 	&:first-child {
 		margin-left: 0;
 	}
+	${media.medium`
+		padding: 8px 28px;
+		border-radius: 20px;
+	`};
+	${media.small`
+		padding: 8px 16px;
+    font-size: 16px;
+	`};
 `;
 const workType = [
 	{

@@ -9,7 +9,7 @@ import { media } from "style/media_query";
 
 const SubPage = styled.div`
 	position: relative;
-  padding: 30px 0 80px;
+  padding: 190px 0 80px;
 `;
 
 const BackBox = styled.div`
@@ -57,6 +57,10 @@ const FrontInfo = styled.div`
   border: 1px solid ${(props) => props.theme.bgColor.gray.second};
   border-radius: 20px;
 	box-shadow: ${(props) => props.theme.shadow.under};
+	${media.medium`
+		padding: 24px 20px;
+		border-radius: 16px;
+	`};
 `;
 
 const Tags = styled.ul`
@@ -86,17 +90,18 @@ const Img = styled.img`
 	display: block;
 	max-width: 200px;
 	margin: 0 auto 12px;
-	background-color: #eee;
-	padding: 8px 16px;
+	background-color: rgba(255,255,255,0.7);
+	padding: 8px 16px 12px;
 	border-radius: 6px;
 `;
 
 const Title = styled.h2`
-	padding-bottom: 18px;
-	font-size: 44px;
-	font-weight: 900;
-  text-align: center;
-	color: ${(props) => props.theme.textColor.gray.first};
+	.page {
+		&-h1 {
+			padding-bottom: 18px;
+			text-align: center;
+		}
+	}
 `;
 
 const Description = styled.p`
@@ -105,6 +110,9 @@ const Description = styled.p`
 	font-size: 20px;
 	font-weight: 500;
 	text-align: center;
+	${media.medium`
+		font-size: 18px;
+	`};
 `;
 
 const Infos = styled.ul`
@@ -112,7 +120,10 @@ const Infos = styled.ul`
   align-items: center;
   justify-content: center;
   gap: 35px;
-	padding-top: 40px;
+	padding-top: 20px;
+	${media.medium`
+		gap: 28px;
+	`};
 `;
 
 const Info = styled.li`
@@ -120,9 +131,15 @@ const Info = styled.li`
     display: flex;
     align-items: center;
     gap: 28px;
+		${media.medium`
+			gap: 24px;
+		`};
 		dt,
 		dd {
 			font-size: 16px;
+			${media.medium`
+				font-size: 14px;
+			`};
 		}
     dt {
       color: ${(props) => props.theme.textColor.gray.fifth};
@@ -150,6 +167,12 @@ const Effects = styled.ul`
 	flex-wrap: wrap;
 	align-items: stretch;
 	gap: 24px 32px;
+	${media.medium`
+		gap: 24px;
+	`};
+	${media.small`
+		flex-direction: column;
+	`};
 `;
 
 const Effect = styled.li`
@@ -157,16 +180,23 @@ const Effect = styled.li`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 130px;
+	min-height: 110px;
 	border-radius: 12px;
 	border: 1px solid ${(props) => props.theme.bgColor.gray.fifth};
 	padding: 20px 38px;
 	background-color: ${(props) => props.theme.bgColor.gray.fourth};
-	color: ${(props) => props.theme.textColor.gray.first};
+	color: ${(props) => props.theme.point.beige};
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 1.7;
 	text-align: center;
+	${media.medium`
+		padding: 18px;
+	`};
+	${media.small`
+		flex-basis: 100%;
+		font-size: 16px;
+	`};
 `;
 
 const PWiselinc = styled.div`
@@ -214,7 +244,7 @@ function Sub() {
 				</Indexs>
 				<BackBox onClick={backFunc}>
 					<FontAwesomeIcon icon={faChevronLeft} size="lg" />
-					<p className="page-title">Works</p>
+					<p className="page-h2">Works</p>
 				</BackBox>
 				<FrontInfo>
 					<Tags>
@@ -226,8 +256,10 @@ function Sub() {
 							))
 						}
 					</Tags>
-					<Img src={state.fileUrl} alt="" />
-					<Title>{state.projectName}</Title>
+					<Img src={state.fileUrl} alt={state.projectName} />
+					<Title>
+						<div className="page-h1">{state.projectName}</div>
+					</Title>
 					<Description>{state.description}</Description>
 					<Infos>
 						<Info>

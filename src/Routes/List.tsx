@@ -3,27 +3,58 @@ import { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import Tabs from "routes/Tabs";
+import { media } from "style/media_query";
+
+const ListPage = styled.div`
+	padding: 160px 0 80px;
+	${media.medium`
+		padding-top: 140px;
+	`};
+	${media.small`
+		padding-top: 170px;
+	`};
+`;
 
 const Title = styled.div`
   height: 200px;
-	/* background-color: ${(props) => props.theme.point.blue[1]}; */
-	h2 {
-		padding-top: 50px;
-		color: ${(props) => props.theme.textColor.gray.first};
-		font-size: 44px;
-		font-weight: 700;
-		text-align: center;
+	${media.small`
+		height: auto;
+	`};
+	.page {
+		&-h1 {
+			padding-top: 50px;
+			text-align: center;
+			${media.medium`
+				padding-top: 40px;
+			`};
+			${media.small`
+				padding-top: 32px;
+			`};
+		}
 	}
 `;
 
 const Container = styled.div`
-	padding: 90px 0 80px;
+	padding: 90px 0 0;
+	${media.medium`
+		padding: 40px 0 0;
+	`};
+	${media.small`
+		padding: 68px 0 0;
+	`};
 `;
 
 const Boxes = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 40px 32px;
+	${media.medium`
+		gap: 32px 20px;
+	`};
+	${media.small`
+		flex-direction: column;
+		gap: 24px;
+	`}
 `;
 
 const Box = styled.li`
@@ -34,6 +65,16 @@ const Box = styled.li`
   border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
   background-color: ${(props) => props.theme.bgColor.gray.first};
 	background-color: ${(props) => props.theme.bgColor.gray.third};
+	${media.medium`
+		flex-basis: calc(100%/2 - 20px/2*1);
+		padding: 20px;
+		border-radius: 16px;
+	`};
+	${media.small`
+			flex-basis: 100%;
+			padding: 16px;
+			border-radius: 12px;
+	`}
 `;
 
 const BoxCon = styled.div`
@@ -47,6 +88,9 @@ const BoxCon = styled.div`
 	h4 {
 		font-size: 20px;
 		text-align: center;
+		${media.small`
+			font-size: 18px;
+		`};
 	}
 `;
 
@@ -58,9 +102,22 @@ const ImgBox = styled.div`
 	padding: 28px;
 	background-color: #ededed;
 	border-radius: 20px;
+	${media.medium`
+		height: 150px;
+		padding: 20px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		height: 130px;
+		padding: 16px;
+		border-radius: 12px;
+	`}
 	>img {
 		width: 60%;
   	height: auto;
+		${media.small`
+		width: 55%;
+		`}
 	}
 `;
 
@@ -123,55 +180,57 @@ function List() {
 	//console.log(useParams());
 	return (
 		<>
-			<Title>
-				<div className="inner">
-					<h2>Works</h2>
-					<Tabs typePath={typeId} />
-				</div>
-			</Title>
-			<Container>
-				<div className="inner">
-					{loading ? (
-						"Loading"
-					) : (
-						<>
-							<Boxes>
-								{
-									list.map((val) => (
-										<Box key={val.customer}>
-											<Link to={{
-												pathname: `/works/${typeId}/${val.id}`,
-												state: {
-													parentPath: typeId,
-													id: val.id,
-													customer: val.customer,
-													projectName: val.projectName,
-													description: val.description,
-													did: val.did,
-													keyWords: val.keyWords,
-													fileUrl: val.fileUrl,
-													startYear: val.startYear,
-													startMonth: val.startMonth,
-													endYear: val.endYear,
-													endMonth: val.endMonth,
-												}
-											}}>
-												<ImgBox>
-													<img src={val.fileUrl} alt={val.projectName} />
-												</ImgBox>
-												<BoxCon>
-													<p>{val.customer}</p>
-													<h4>{val.projectName} 페이지</h4>
-												</BoxCon>
-											</Link>
-										</Box>
-									))
-								}
-							</Boxes>
-						</>
-					)}
-				</div>
-			</Container>
+			<ListPage>
+				<Title>
+					<div className="inner">
+						<h2 className="page-h1">Works</h2>
+						<Tabs typePath={typeId} />
+					</div>
+				</Title>
+				<Container>
+					<div className="inner">
+						{loading ? (
+							"Loading"
+						) : (
+							<>
+								<Boxes>
+									{
+										list.map((val) => (
+											<Box key={val.customer}>
+												<Link to={{
+													pathname: `/works/${typeId}/${val.id}`,
+													state: {
+														parentPath: typeId,
+														id: val.id,
+														customer: val.customer,
+														projectName: val.projectName,
+														description: val.description,
+														did: val.did,
+														keyWords: val.keyWords,
+														fileUrl: val.fileUrl,
+														startYear: val.startYear,
+														startMonth: val.startMonth,
+														endYear: val.endYear,
+														endMonth: val.endMonth,
+													}
+												}}>
+													<ImgBox>
+														<img src={val.fileUrl} alt={val.projectName} />
+													</ImgBox>
+													<BoxCon>
+														<p>{val.customer}</p>
+														<h4>{val.projectName} 페이지</h4>
+													</BoxCon>
+												</Link>
+											</Box>
+										))
+									}
+								</Boxes>
+							</>
+						)}
+					</div>
+				</Container>
+			</ListPage>
 		</>
 	)
 }
