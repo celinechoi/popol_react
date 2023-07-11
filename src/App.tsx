@@ -128,6 +128,12 @@ button {
 	${media.large`
 		padding-top: 60px;
 	`};
+	&-v2 {
+		padding-top: 60px;
+		${media.large`
+			padding-top: 40px;
+		`};
+	}
 	&-title {
 		padding-bottom: 48px;
 		font-size: 28px;

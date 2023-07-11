@@ -1,11 +1,10 @@
-import { Route, Switch, useHistory, useLocation, useParams, useRouteMatch, } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { dbService } from "fbase";
+import { useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
-// import Ailemp from "./Ailemp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { media } from "style/media_query";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SubPage = styled.div`
 	position: relative;
@@ -262,8 +261,45 @@ const FocusArrow = styled.div`
 	}
 `;
 
-const PWiselinc = styled.div`
-  padding-top: 30px;
+const SliderTitle = styled.p`
+	padding: 40px 0;
+	color: ${(props) => props.theme.point.beige};
+	font-size: 32px;
+	font-weight: 500;
+	text-align: center;
+	${media.medium`
+		padding: 32px 0;
+		font-size: 28px;
+	`};
+	${media.small`
+		padding: 24px 0;
+		font-size: 24px;
+	`};
+	>p {
+		font-size: 22px;
+		font-weight: 700;
+		opacity: .6;
+	}
+`;
+
+const Slider = styled.div`
+	position: relative;
+	height: 200px;
+`;
+
+const Row = styled(motion.div)`
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 10px;
+	position: absolute;
+	width: 100%;
+`;
+
+const Box = styled(motion.div)`
+	background-color: #fff;
+	height: 200px;
+	font-size: 22px;
+	color: red;
 `;
 
 interface RouteState {
@@ -281,6 +317,21 @@ interface RouteState {
 	endMonth: number;
 }
 
+// framer-motion
+const rowVariants = {
+	hidden: {
+		x: window.outerWidth + 10,
+	},
+	visible: {
+		x: 0,
+	},
+	exit: {
+		x: -window.outerWidth - 10,
+	}
+}
+
+const offset = 6;
+
 function Sub() {
 	// 현재 페이지 파악
 	const { state } = useLocation<RouteState>();
@@ -297,6 +348,16 @@ function Sub() {
 	keyWordsList = state?.keyWords;
 	let didList: any = [];
 	didList = state?.did;
+
+	// Slider index
+	const [index, setIndex] = useState(0);
+	const [leaving, setLeaving] = useState(false);
+	const increaseIndex = () => {
+		if (leaving) return;
+		setLeaving(true);
+		setIndex((prev) => prev + 1);
+	}
+	const toggleLeaving = () => setLeaving((prev) => !prev)
 	return (
 		<SubPage>
 			<div className="inner">
@@ -357,18 +418,23 @@ function Sub() {
 							))
 						}
 					</Effects>
-					<FocusArrow>
-
-					</FocusArrow>
+					<FocusArrow />
 				</section>
-				{
-					state.id === "wiselinc" ?
-						(
-							<PWiselinc>
-								<p>경남대입니다.</p>
-							</PWiselinc>
-						) : ("")
-				}
+				<section onClick={increaseIndex}>
+					<SliderTitle>
+						<p>Preview</p>
+						Work Pages
+					</SliderTitle>
+					<Slider>
+						<AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+							<Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index}>
+								{
+									[1, 2, 3, 4, 5, 6].map(i => <Box key={i}>{i}</Box>)
+								}
+							</Row>
+						</AnimatePresence>
+					</Slider>
+				</section>
 			</div>
 		</SubPage>
 	);
