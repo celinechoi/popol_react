@@ -55,7 +55,7 @@ const Index = styled.li`
 
 const FrontInfo = styled.div`
 	overflow: hidden;
-  padding: 32px 32px 40px;
+  padding: 22px 22px 40px;
   border: 1px solid ${(props) => props.theme.bgColor.gray.second};
   border-radius: 20px;
 	box-shadow: ${(props) => props.theme.shadow.under};
@@ -65,12 +65,22 @@ const FrontInfo = styled.div`
 	`};
 `;
 
+const Flexbox = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 20px;
+	${media.smallToo`
+		flex-direction: column;
+		gap: 12px;
+	`};
+`;
+
 const Tags = styled.ul`
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	gap: 12px;
-	padding-bottom: 20px;
 	${media.smallToo`
 		flex-wrap: wrap;
 	`};
@@ -98,7 +108,6 @@ const Tag = styled.li`
 const Img = styled.img`
 	display: block;
 	max-width: 200px;
-	margin: 0 auto 12px;
 	background-color: rgba(78, 78, 78, 0.7);
 	padding: 8px 16px 12px;
 	border-radius: 6px;
@@ -261,7 +270,7 @@ const FocusArrow = styled.div`
 	}
 `;
 
-const SliderTitle = styled.p`
+const SliderTitle = styled.div`
 	padding: 40px 0;
 	color: ${(props) => props.theme.point.beige};
 	font-size: 32px;
@@ -371,16 +380,18 @@ function Sub() {
 					<p className="page-h2">Works</p>
 				</BackBox>
 				<FrontInfo>
-					<Tags>
-						{
-							keyWordsList.map((val: any) => (
-								<Tag key={val} className={val === "SCSS" ? "scss" : ""}>
-									{val}
-								</Tag>
-							))
-						}
-					</Tags>
-					<Img src={state.fileUrl} alt={state.projectName} />
+					<Flexbox>
+						<Img src={state.fileUrl} alt={state.projectName} />
+						<Tags>
+							{
+								keyWordsList.map((val: any) => (
+									<Tag key={val} className={val === "SCSS" ? "scss" : ""}>
+										{val}
+									</Tag>
+								))
+							}
+						</Tags>
+					</Flexbox>
 					<Title>
 						<div className="page-h1">{state.projectName}</div>
 					</Title>
