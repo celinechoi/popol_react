@@ -5,160 +5,133 @@ import styled from "styled-components";
 import { booleanState } from "../atoms";
 import { authService } from "fbase";
 import { media } from "style/media_query";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderBox = styled.div`
 	position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
-	z-index: 1;
+	z-index: 2;
 	width: 100%;
-	background-color: ${(props) => props.theme.bgColor.gray.third};
-	box-shadow: ${(props) => props.theme.shadow.under};
-`;
-
-const Inner = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 32px;
-	align-items: center;		
-	justify-content: center;
-	padding: 20px 0 28px;
-	${media.medium`
-		gap: 28px;
-		padding: 16px 0 24px;
-	`};
+	height: 86px;
+	background-color: ${(props) => props.theme.bgColor.gray.second};
+	box-shadow: 0 1px 0 0 rgba(0,0,0,.06);
 	${media.small`
-		gap: 24px;
-		padding: 16px 0;
+		height: auto;
 	`};
+	.inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;		
+		justify-content: center;
+		padding: 7px 0;
+		${media.small`
+			padding: 14px 0;
+		`};
+	}
 `;
 const Row = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 38px;
 	position: relative;
 	width: 100%;
+	${media.small`
+		flex-direction: column;
+    gap: 12px;
+	`};
 `;
 const Logo = styled.div`
-	color: ${(props) => props.theme.point.lavender};
-	font: 20px 'Righteous';
-	text-align: center;
-	${media.small`
-		padding-top: 7px;
-		font-size: 16px;
-	`};
+	a {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		color: ${(props) => props.theme.textColor.gray.third};
+		font: 20px 'Righteous';
+		text-align: center;
+		${media.small`
+			font-size: 16px;
+		`};
+	}
 `;
 const Em = styled.span`
 	display: inline-block;
-	padding-left: 16px;
-	color: ${(props) => props.theme.point.purple};
+	margin-left: 35px;
+	color: ${(props) => props.theme.textColor.gray.first};
 	font-size: 38px;
 	text-align: center;
 	${media.small`
+		margin-left: 0;
 		font-size: 34px;
 	`};
 `;
-const FlexBox = styled.div`
-	${media.small`
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0 20px;
-	`};
-`;
-const ThemeBox = styled.div`
-	position: absolute;
-	left: 48px;
-	top: 50%;
-	transform: translateY(-50%);
-	padding: 0 30px;
-	&::before,
-	&::after {
-		position: absolute;
-		top: -2px;
-		font-size: 18px;
-	}
-	&::before {
-		content: '🌞';
-		left: 0;
-	}
-	&::after {
-		content: '🌙';
-		right: 0;
-	}
-	${media.small`
-		position: initial;
-		left: auto;
-		top: auto;
-		transform: translateY(0);
-	`};
-	button {
-		display: block;
-		position: relative;
-		background-color: ${(props) => props.theme.textColor.gray.second};
-		border: 1px solid ${(props) => props.theme.textColor.gray.fifth};
-		border-radius: 20px;
-		width: 50px;
-		height: 25px;
-		cursor: pointer;
-		>span {
-			position: absolute;
-			right: 3px;
-			top: 2px;
-			height: 18px;
-			width: 18px;
-			background-color: ${(props) => props.theme.bgColor.gray.second};
-			border-radius: 50%;
-			transition: all .3s cubic-bezier(0.48, 0.35, 1, 1);
-			&.left {
-				right: auto;
-				left: 4px;
-			}
-		}
-	}
-`;
+
 const LogOut = styled.button`
-	position: absolute;
-	right: 48px;
-	top: 50%;
-	transform: translateY(-50%);
   height: 37px;
+	margin-left: auto;
   padding: 7px 20px;
   border-radius: 22px;
 	border: 1px solid ${(props) => props.theme.bgColor.gray.fifth};
   background-color: ${(props) => props.theme.bgColor.gray.third};
 	color: ${(props) => props.theme.textColor.gray.fifth};
+	font-size: 13px;
 	&:hover {
 		background-color: ${(props) => props.theme.bgColor.gray.fifth};
 	}
+	.icon {
+		&-out {
+			display: none;
+		}
+	}
 	${media.small`
-		position: initial;
-		right: auto;
-		top: auto;
-		transform: translateY(0);
+		position: absolute;
+    right: 0;
+    top: 0;
 		height: 30px;
-		padding: 2px 18px;
-		border-radius: 16px;
-		font-size: 12px;
+		padding: 0;
+		border-radius: 0;
+		border: 0;
+		background-color: transparent;
+		&:hover {
+			background-color: transparent;
+		}
+		span {
+			display: none;
+		}
+		.icon {
+			&-out {
+				display: block;
+				font-size: 20px;
+			}
+		}
 	`};
 `;
-const Items = styled.ul`
+const Menus = styled.ul`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 12px 38px;
+	gap: 24px;
 	${media.small`
 		gap: 12px 32px;
 	`};
 `;
-const Item = styled.li`
+const Menu = styled.li`
 	position: relative;
 	color: ${(props) => props.theme.textColor.gray.second};
-	font-size: 28px;
+	font-size: 18px;
 	font-weight: 700;
 	line-height: 31px;
 	${media.small`
-		font-size: 22px;
-		line-height: 28px;
+		font-size: 19px;
 	`};
+	&:hover {
+		a {
+			color: ${props => props.theme.point.yellow};
+		}
+	}
 	a {
 		&.on {
 			color: ${props => props.theme.point.yellow};
@@ -167,7 +140,7 @@ const Item = styled.li`
 `;
 const Point = styled(motion.span)`
 	position: absolute;
-  width: 16px;
+  width: 10px;
   height: 5px;
   top: -8px;
   left: 0;
@@ -176,17 +149,14 @@ const Point = styled(motion.span)`
 	border-radius: 7px;
   background-color: ${props => props.theme.point.yellow};
 	transition: all .3s cubic-bezier(0.48, 0.35, 1, 1);
+	${media.small`
+		width: 8px;
+		top: -4px;
+	`};
 `;
 
 
 function Header() {
-	// Theme 변경
-	const [theme, setTheme] = useRecoilState(booleanState);
-	const toggleTheme = () => {
-		return (
-			setTheme((prev) => !prev)
-		);
-	}
 	// Link
 	const homeMatch = useRouteMatch("/");
 	const worksMatch = useRouteMatch("/works");
@@ -200,42 +170,40 @@ function Header() {
 	}
 	return (
 		<HeaderBox>
-			<Inner>
+			<div className="inner">
 				<Row>
-					<FlexBox>
-						<ThemeBox onClick={toggleTheme}>
-							<button><span className={`${theme ? "" : "left"}`}></span></button>
-						</ThemeBox>
-						<LogOut onClick={onLogOutClick}>로그아웃</LogOut>
-					</FlexBox>
 					<Logo>
-						UI/UX Developer
-						<Em>Jinseul</Em>
+						<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
+							<p>UI/UX Developer</p>
+							<Em>Jinseul</Em>
+						</Link>
 					</Logo>
-				</Row>
-				<Row>
-					<Items>
-						<Item>
+					<Menus>
+						<Menu>
 							<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
 								Home
 								{homeMatch?.isExact === true && <Point layoutId="point" />}
 							</Link>
-						</Item>
-						<Item>
+						</Menu>
+						<Menu>
 							<Link to="/works/solution" className={worksMatch || subMatch ? "on" : ""}>
 								Works
 								{worksMatch || subMatch ? <Point layoutId="point" /> : ""}
 							</Link>
-						</Item>
-						<Item>
+						</Menu>
+						<Menu>
 							<Link to="/about" className={aboutMatch ? "on" : ""}>
 								About
 								{aboutMatch && <Point layoutId="point" />}
 							</Link>
-						</Item>
-					</Items>
+						</Menu>
+					</Menus>
+					<LogOut onClick={onLogOutClick}>
+						<span>로그아웃</span>
+						<FontAwesomeIcon icon={faArrowRightFromBracket} className="icon-out" />
+					</LogOut>
 				</Row>
-			</Inner>
+			</div>
 		</HeaderBox>
 	);
 }

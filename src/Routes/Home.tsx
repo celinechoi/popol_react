@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import useCountUp from "../function/CountUp"
-import {media} from '../style/media_query';
-import good_emoji from "../img/emoji/good.png";
+import useCountUp from "function/CountUp"
+import { media } from 'style/media_query';
+import good_emoji from "img/emoji/good.png";
 
 const Visual = styled.div`
 	display: flex;
@@ -32,7 +32,7 @@ const Visual = styled.div`
 	}
 `;
 
-function Home(){
+function Home() {
 	return (
 		<>
 			<Visual>

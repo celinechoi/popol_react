@@ -9,6 +9,8 @@ const TabMenu = styled.ul`
 	gap: 20px;
 	position: relative;
 	top: 40px;
+	width: fit-content;
+	margin: 0 auto;
 	padding: 12px;
 	border-radius: 38px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};
@@ -23,7 +25,6 @@ const TabMenu = styled.ul`
 
 const Tab = styled.li<{ isActive: boolean }>`
 	margin-left: 12px;
-	padding: 12px 28px;
 	background-color: ${(props) =>
 		props.isActive ? props.theme.point.blue[0] : "transparent"};
 	border-radius: 26px;
@@ -42,13 +43,21 @@ const Tab = styled.li<{ isActive: boolean }>`
 		margin-left: 0;
 	}
 	${media.medium`
-		padding: 8px 28px;
 		border-radius: 20px;
 	`};
 	${media.small`
-		padding: 8px 16px;
     font-size: 16px;
 	`};
+	>a {
+		display: block;
+		padding: 12px 28px;
+		${media.medium`
+			padding: 8px 28px;
+		`};
+		${media.small`
+			padding: 8px 16px;
+		`};
+	}
 `;
 const workType = [
 	{

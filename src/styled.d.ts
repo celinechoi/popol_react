@@ -21,6 +21,11 @@ declare module "styled-components" {
 				fifth: string
 			}
 		},
+		borColor: {
+			gray: {
+				first: string,
+			}
+		}
 		textColor: {
 			gray: {
 				first: string,

@@ -10,6 +10,8 @@ import AppRouter from "Router";
 import { useEffect, useState } from "react";
 import { media } from "style/media_query";
 import Footer from "components/Footer";
+import Initializing from 'components/Initializing';
+import Top from 'components/Top';
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -76,6 +78,7 @@ select {
 	border: 0;
 	border-radius: 6px;
 	box-sizing: border-box;
+	font: 14px 'Noto Sans KR', 'Righteous';
 }
 input,
 textarea,
@@ -168,7 +171,8 @@ function App() {
 		<ReactQueryFirestoreProvider firestore={dbService} reactQueryConfig={reactQueryConfig}>
 			<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 				<GlobalStyle />
-				{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing ..."}
+				{init ? <AppRouter isLoggedIn={isLoggedIn} /> : <Initializing />}
+				<Top />
 				<Footer />
 			</ThemeProvider>
 		</ReactQueryFirestoreProvider>

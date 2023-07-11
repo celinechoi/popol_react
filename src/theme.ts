@@ -20,6 +20,11 @@ export const darkTheme: DefaultTheme = {
 			fifth: "#9e9e9e"
 		}
 	},
+	borColor: {
+		gray: {
+			first: "#4c4c4c"
+		}
+	},
 	textColor: {
 		gray: {
 			first: "#fff",
@@ -54,6 +59,11 @@ export const lightTheme: DefaultTheme = {
 			third: "#f5f5f5",
 			fourth: "#eee",
 			fifth: "#e0e0e0"
+		}
+	},
+	borColor: {
+		gray: {
+			first: "#f0f0f0"
 		}
 	},
 	textColor: {

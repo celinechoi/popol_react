@@ -9,7 +9,10 @@ import { media } from "style/media_query";
 
 const SubPage = styled.div`
 	position: relative;
-  padding: 190px 0 80px;
+  padding: 125px 0 80px;
+	${media.small`
+		padding-top: 155px;
+	`};
 `;
 
 const BackBox = styled.div`
@@ -69,6 +72,9 @@ const Tags = styled.ul`
 	justify-content: flex-end;
 	gap: 12px;
 	padding-bottom: 20px;
+	${media.smallToo`
+		flex-wrap: wrap;
+	`};
 `;
 
 const Tag = styled.li`
@@ -80,6 +86,10 @@ const Tag = styled.li`
 	line-height: 32px;
 	text-align: center;
 	cursor: default;
+	${media.smallToo`
+		padding: 0 8px;
+    font-size: 12px;
+	`};
 	&.scss {
 		background-color: #C66394;
 		color: #fff;
@@ -90,7 +100,7 @@ const Img = styled.img`
 	display: block;
 	max-width: 200px;
 	margin: 0 auto 12px;
-	background-color: rgba(255,255,255,0.7);
+	background-color: rgba(78, 78, 78, 0.7);
 	padding: 8px 16px 12px;
 	border-radius: 6px;
 `;
@@ -113,6 +123,9 @@ const Description = styled.p`
 	${media.medium`
 		font-size: 18px;
 	`};
+	${media.small`
+		width: 100%;
+	`};
 `;
 
 const Infos = styled.ul`
@@ -123,6 +136,10 @@ const Infos = styled.ul`
 	padding-top: 20px;
 	${media.medium`
 		gap: 28px;
+	`};
+	${media.smallToo`
+		flex-direction: column;
+		gap: 4px 8px;
 	`};
 `;
 
@@ -160,6 +177,10 @@ const Button = styled.button`
 	&:hover {
 		box-shadow: ${(props) => props.theme.shadow.button};
 	}
+	${media.small`
+		float: none;
+		width: 100%;
+	`};
 `;
 
 const Effects = styled.ul`
@@ -167,11 +188,19 @@ const Effects = styled.ul`
 	flex-wrap: wrap;
 	align-items: stretch;
 	gap: 24px 32px;
+	padding: 24px;
+	border-radius: 20px;
+	background-color: ${(props) => props.theme.point.beige};
 	${media.medium`
-		gap: 24px;
+		gap: 20px;
+		padding: 20px;
+		border-radius: 16px;
 	`};
 	${media.small`
 		flex-direction: column;
+		gap: 16px;
+		padding: 16px;
+		border-radius: 12px;
 	`};
 `;
 
@@ -180,23 +209,57 @@ const Effect = styled.li`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 110px;
-	border-radius: 12px;
-	border: 1px solid ${(props) => props.theme.bgColor.gray.fifth};
-	padding: 20px 38px;
-	background-color: ${(props) => props.theme.bgColor.gray.fourth};
-	color: ${(props) => props.theme.point.beige};
+	min-height: 80px;
+	border-radius: 20px;
+	padding: 16px 32px;
+	background-color: rgba(250, 250, 250, 0.6);
+	color: #000;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 1.7;
 	text-align: center;
 	${media.medium`
+		min-height: 60px;
 		padding: 18px;
-	`};
-	${media.small`
-		flex-basis: 100%;
+		border-radius: 16px;
 		font-size: 16px;
 	`};
+	${media.small`
+		border-radius: 12px;
+		flex-basis: 100%;
+	`};
+`;
+
+const FocusArrow = styled.div`
+	position: relative;
+	width: 1rem;
+	height: 5rem;
+	margin: 0 auto;
+	background-color: ${(props) => props.theme.point.beige};;
+	border-radius: 0.5rem;
+	transform: rotate(90deg);
+	${media.small`
+		width: 1rem;
+    height: 3.8rem;
+	`};
+	&::after {
+		content: '';
+		top: 0.6rem;
+		left: -1.2rem;
+		width: 3.725rem;
+		height: 3.725rem;
+		background-color: ${(props) => props.theme.point.beige};
+		border-radius: 0.6rem;
+		clip-path: polygon(0% 0%, 100% 100%, 100% 0%);
+		position: absolute;
+		transform: rotate(45deg);
+		${media.small`
+			top: 0.44rem;
+			left: -1rem;
+			width: 3.13rem;
+			height: 2.9rem;
+		`};
+	}
 `;
 
 const PWiselinc = styled.div`
@@ -294,6 +357,9 @@ function Sub() {
 							))
 						}
 					</Effects>
+					<FocusArrow>
+
+					</FocusArrow>
 				</section>
 				{
 					state.id === "wiselinc" ?

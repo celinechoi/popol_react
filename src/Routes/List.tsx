@@ -1,17 +1,16 @@
 import { dbService } from "fbase";
 import { useEffect, useState } from "react";
-import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Tabs from "routes/Tabs";
 import { media } from "style/media_query";
+import Loading from "components/Loading";
 
 const ListPage = styled.div`
-	padding: 160px 0 80px;
-	${media.medium`
-		padding-top: 140px;
-	`};
+	min-height: 1080px;
+	padding: 90px 0 80px;
 	${media.small`
-		padding-top: 170px;
+		padding-top: 135px;
 	`};
 `;
 
@@ -84,6 +83,9 @@ const BoxCon = styled.div`
 		font-size: 14px;
 		font-weight: 500;
 		color: ${(props) => props.theme.textColor.gray.fourth};
+		${media.small`
+			padding-bottom: 0;
+		`};
 	}
 	h4 {
 		font-size: 20px;
@@ -98,10 +100,14 @@ const ImgBox = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
   height: 165px;
 	padding: 28px;
 	background-color: #ededed;
 	border-radius: 20px;
+	${media.large`
+		height: 145px;
+	`};
 	${media.medium`
 		height: 150px;
 		padding: 20px;
@@ -113,11 +119,22 @@ const ImgBox = styled.div`
 		border-radius: 12px;
 	`}
 	>img {
-		width: 60%;
+		display: block;
+		position: relative;
+		z-index: 1;
+		width: 70%;
   	height: auto;
+		padding: 20px;
+		background-color: #ededed;
+		${media.large`
+			padding: 0;
+		`};
 		${media.small`
-		width: 55%;
+			width: 35%;
 		`}
+		${media.smallToo`
+			width: 55%;
+		`};
 	}
 `;
 
@@ -139,18 +156,11 @@ export interface TypesParams {
 	typeId: string;
 }
 
-interface RouteState {
-	name: string;
-}
-
-interface P {
-	pathType: string;
-}
-
 function List() {
 	const { typeId } = useParams<TypesParams>();
 	// console.log(useParams(), 'params');
 	const [loading, setLoading] = useState(true);
+	const [ImgLoading, setImgLoading] = useState(true);
 	const [list, setList] = useState<WorkInterface[]>([]);
 	useEffect(() => {
 		const collection = dbService.collection(`${typeId}`);
@@ -171,13 +181,19 @@ function List() {
 			}));
 			setList(itemArr);
 			setLoading(false);
+			timeReturn();
+			return () => {
+				setLoading(false)
+			};
 		})
-		return () => setLoading(false);
 	}, [typeId]);
-	interface RouteParams {
-		typeId: string;
+	let timer = setTimeout(() => { setImgLoading(false) }, 1000);
+	let timeReturn = () => {
+		return () => {
+			clearTimeout(timer);
+		};
 	}
-	//console.log(useParams());
+
 	return (
 		<>
 			<ListPage>
@@ -190,7 +206,7 @@ function List() {
 				<Container>
 					<div className="inner">
 						{loading ? (
-							"Loading"
+							<Loading name="List" />
 						) : (
 							<>
 								<Boxes>
@@ -215,7 +231,14 @@ function List() {
 													}
 												}}>
 													<ImgBox>
-														<img src={val.fileUrl} alt={val.projectName} />
+														{
+															ImgLoading ?
+																(
+																	<Loading name="Image" />
+																) : (
+																	<img src={val.fileUrl} alt={val.projectName} />
+																)
+														}
 													</ImgBox>
 													<BoxCon>
 														<p>{val.customer}</p>
