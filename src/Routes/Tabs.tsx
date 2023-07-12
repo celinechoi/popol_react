@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { media } from "style/media_query";
+import { useEffect, useState } from "react";
 
 const TabMenu = styled.ul`
 	display: flex;
@@ -59,30 +60,29 @@ const Tab = styled.li<{ isActive: boolean }>`
 		`};
 	}
 `;
-const workType = [
-	{
-		id: "si"
-	},
-	{
-		id: "solution"
-	},
-	{
-		id: "sm"
-	}
-]
 function Tabs({ typePath }: { typePath: string | object }) {
-	//console.log(typePath);
+  const [data, setData] = useState<any[]>();
+  const workType = [{id: "si"}, {id: "solution"}, {id: "sm"} ];
+  useEffect(() => {
+    let isMount = true;
+    if (isMount) {
+      setData(workType);
+    }
+    return () => {
+      isMount = false;
+    };
+  }, []);
 	return (
 		<>
 			<TabMenu>
 				{
-					workType.map((val) => (
-						<Tab key={val.id} isActive={typePath === val.id ? true : false}>
-							<Link to={{
-								pathname: `/works/${val.id}`,
-								state: { name: val.id }
-							}}>{val.id}</Link>
-						</Tab>
+          data?.map((val: any) => (
+            <Tab key={val.id} isActive={typePath === val.id ? true : false}>
+              <Link to={{
+                pathname: `/works/${val.id}`,
+                state: { name: val.id }
+              }}>{val.id}</Link>
+            </Tab>
 					))
 				}
 			</TabMenu>

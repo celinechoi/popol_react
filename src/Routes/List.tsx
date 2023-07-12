@@ -166,35 +166,41 @@ function List() {
 	const [ImgLoading, setImgLoading] = useState(true);
 	const [list, setList] = useState<WorkInterface[]>([]);
 	useEffect(() => {
-		const collection = dbService.collection(`${typeId}`);
-		collection
-			.orderBy("code", "desc") // desc
-      // .orderBy("endMonth", "desc")
-			.onSnapshot((snapshot: any) => {
-				const itemArr = snapshot.docs.map((doc: any) => ({
-					id: doc.id,
-					projectName: doc.data().projectName,
-					customer: doc.data().customer,
-					fileUrl: doc.data().fileUrl,
-					pageImgs: doc.data().pageImgs,
-					pagesMap: doc.data().pagesMap,
-					description: doc.data().description,
-					did: doc.data().did,
-					keyWords: doc.data().keywords,
-					startYear: doc.data().startYear,
-					startMonth: doc.data().startMonth,
-					endYear: doc.data().endYear,
-					endMonth: doc.data().endMonth,
-          code: doc.data().code,
-					...doc.data(),
-				}));
-				setList(itemArr);
-				setLoading(false);
-				timeReturn();
-				return () => {
-					setLoading(false)
-				};
-			})
+    let isMount = true;
+    if (isMount) {
+      const collection = dbService.collection(`${typeId}`);
+      collection
+        .orderBy("code", "desc") // desc
+        // .orderBy("endMonth", "desc")
+        .onSnapshot((snapshot: any) => {
+          const itemArr = snapshot.docs.map((doc: any) => ({
+            id: doc.id,
+            projectName: doc.data().projectName,
+            customer: doc.data().customer,
+            fileUrl: doc.data().fileUrl,
+            pageImgs: doc.data().pageImgs,
+            pagesMap: doc.data().pagesMap,
+            description: doc.data().description,
+            did: doc.data().did,
+            keyWords: doc.data().keywords,
+            startYear: doc.data().startYear,
+            startMonth: doc.data().startMonth,
+            endYear: doc.data().endYear,
+            endMonth: doc.data().endMonth,
+            code: doc.data().code,
+            ...doc.data(),
+          }));
+          setList(itemArr);
+          setLoading(false);
+          timeReturn();
+          return () => {
+            setLoading(false)
+          };
+        })
+    }
+    return () => {
+      isMount = false;
+    };
 	}, [typeId]);
 	let timer = setTimeout(() => { setImgLoading(false) }, 1000);
 	let timeReturn = () => {
@@ -202,8 +208,6 @@ function List() {
 			clearTimeout(timer);
 		};
 	}
-	console.log(list);
-
 	return (
 		<>
 			<ListPage>
