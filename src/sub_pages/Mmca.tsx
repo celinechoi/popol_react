@@ -4,21 +4,14 @@ import { media } from "style/media_query";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import cms_main from "img/sub_pages/radiation/cms/cms_main.jpg";
-import cms_sub1 from "img/sub_pages/radiation/cms/cms_sub1.jpg";
-import cms_sub2 from "img/sub_pages/radiation/cms/cms_sub2.jpg";
-import cms_sub3 from "img/sub_pages/radiation/cms/cms_sub3.jpg";
-import cms_sub4 from "img/sub_pages/radiation/cms/cms_sub4.jpg";
-import cms_sub5 from "img/sub_pages/radiation/cms/cms_sub5.jpg";
-import cms_sub6 from "img/sub_pages/radiation/cms/cms_sub6.jpg";
-import pms_login from "img/sub_pages/radiation/pms/pms_login.jpg";
-import pms_main from "img/sub_pages/radiation/pms/pms_main.jpg";
-import pms_sub1 from "img/sub_pages/radiation/pms/pms_sub1.jpg";
-import pms_sub2 from "img/sub_pages/radiation/pms/pms_sub2.jpg";
-import pms_sub3 from "img/sub_pages/radiation/pms/pms_sub3.jpg";
-import pms_sub4 from "img/sub_pages/radiation/pms/pms_sub4.jpg";
-import pms_sub5 from "img/sub_pages/radiation/pms/pms_sub5.jpg";
-import pms_sub6 from "img/sub_pages/radiation/pms/pms_sub6.jpg";
+import login from "img/sub_pages/mmca/login.jpg";
+import main from "img/sub_pages/mmca/main.jpg";
+import sub1 from "img/sub_pages/mmca/sub1-2.jpg";
+import sub2 from "img/sub_pages/mmca/sub2-1.jpg";
+import sub3 from "img/sub_pages/mmca/sub2-3.jpg";
+import sub4 from "img/sub_pages/mmca/sub3-1.jpg";
+import sub5 from "img/sub_pages/mmca/sub4-2.jpg";
+import sub6 from "img/sub_pages/mmca/sub5-3.jpg";
 
 const Grid = styled(motion.div)`
 	display: flex;
@@ -83,15 +76,12 @@ const overlay = {
 
 function Radiation() {
 	const [data, setData] = useState<any[]>();
-	const [data2, setData2] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
-	const cmsArr = [cms_main, cms_sub1, cms_sub2, cms_sub3, cms_sub4, cms_sub5, cms_sub6];
-	const pmsArr = [pms_login, pms_main, pms_sub1, pms_sub2, pms_sub3, pms_sub4, pms_sub5, pms_sub6];
+	const cmsArr = [login, main, sub1, sub2, sub3, sub4, sub5, sub6];
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
 			setData(cmsArr);
-			setData2(pmsArr);
 		}
 		return () => {
 			isMount = false;
@@ -109,39 +99,6 @@ function Radiation() {
 				<div className="grids">
 					{
 						data?.map((val: any, i: any) => (
-							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
-								<img src={val} alt="작업물 이미지" />
-							</Grid>
-						))
-					}
-				</div>
-				<AnimatePresence>
-					{id ? (
-						<Overlay
-							variants={overlay}
-							onClick={() => setId(null)}
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-						>
-							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} />
-								<img src={id} alt="작업물 이미지" />
-							</GridWhole>
-						</Overlay>
-					) : null}
-				</AnimatePresence>
-			</div>
-			<div className="section-v2">
-				<div className="sub-view">
-					<div className="sub-view-title">
-						<h3 className="page-h3">PMS</h3>
-						<p className="txt-default">파트너를 위한 관리자 페이지</p>
-					</div>
-				</div>
-				<div className="grids">
-					{
-						data2?.map((val: any, i: any) => (
 							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
 								<img src={val} alt="작업물 이미지" />
 							</Grid>

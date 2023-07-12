@@ -133,18 +133,20 @@ const Menu = styled.li`
 		}
 	}
 	a {
+    display: block;
 		&.on {
 			color: ${props => props.theme.point.yellow};
 		}
 	}
 `;
 const Point = styled(motion.span)`
-	position: absolute;
+	/* position: absolute; */
+  display: block;
   width: 10px;
   height: 5px;
-  top: -8px;
+  /* top: -8px;
   left: 0;
-  right: 0;
+  right: 0; */
   margin: 0 auto;
 	border-radius: 7px;
   background-color: ${props => props.theme.point.yellow};
@@ -181,20 +183,20 @@ function Header() {
 					<Menus>
 						<Menu>
 							<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
+                {homeMatch?.isExact === true && <Point layoutId="point" />}
 								Home
-								{homeMatch?.isExact === true && <Point layoutId="point" />}
 							</Link>
 						</Menu>
 						<Menu>
 							<Link to="/works/solution" className={worksMatch || subMatch ? "on" : ""}>
+                {worksMatch || subMatch ? <Point layoutId="point" /> : ""}
 								Works
-								{worksMatch || subMatch ? <Point layoutId="point" /> : ""}
 							</Link>
 						</Menu>
 						<Menu>
 							<Link to="/about" className={aboutMatch ? "on" : ""}>
+                {aboutMatch && <Point layoutId="point" />}
 								About
-								{aboutMatch && <Point layoutId="point" />}
 							</Link>
 						</Menu>
 					</Menus>

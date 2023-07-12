@@ -4,13 +4,13 @@ import { media } from "style/media_query";
 import styled from "styled-components";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import main from "img/sub_pages/acc/asia_admin_main.jpg";
-import sub1 from "img/sub_pages/acc/asia_admin_sub1-2.jpg";
-import sub2 from "img/sub_pages/acc/asia_admin_sub2-2.jpg";
-import sub3 from "img/sub_pages/acc/asia_admin_sub3-3.jpg";
-import sub4 from "img/sub_pages/acc/asia_admin_sub4-2.jpg";
-import sub5 from "img/sub_pages/acc/asia_admin_sub5-9.jpg";
-import sub6 from "img/sub_pages/acc/asia_admin_sub6-6.jpg";
+import main from "img/sub_pages/acc/main.jpg";
+import sub1 from "img/sub_pages/acc/sub1-2.jpg";
+import sub2 from "img/sub_pages/acc/sub2-2.jpg";
+import sub3 from "img/sub_pages/acc/sub3-3.jpg";
+import sub4 from "img/sub_pages/acc/sub4-2.jpg";
+import sub5 from "img/sub_pages/acc/sub5-9.jpg";
+import sub6 from "img/sub_pages/acc/sub6-6.jpg";
 import ticket from "img/sub_pages/acc/ticketing_main.jpg";
 import ticketArabic from "img/sub_pages/acc/ticketing_main_arabic.jpg";
 // import ticketMo from "img/sub_pages/acc/ticketing_main_mo.jpg";
@@ -20,8 +20,8 @@ const Grid = styled(motion.div)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex: 0 0 calc(100%/2 - 12px/2*1);
-	min-height: 250px;
+	flex: 0 0 calc(100%/3 - 12px/3*2);
+	min-height: 100px;
 	overflow: hidden;
   background-color: rgba(251, 234, 173, 0.7);
   border-radius: 20px;
@@ -29,9 +29,6 @@ const Grid = styled(motion.div)`
 	cursor: pointer;
 	>img {
 		width: 100%;
-		&.small {
-			width: 30%;
-		}
 	}
 `;
 
@@ -41,16 +38,17 @@ const Overlay = styled(motion.div)`
   position: fixed;
 	left: 0;
 	top: 0;
-	z-index: 1;
+	z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const GridWhole = styled(motion.div)`
+  position: relative;
 	width: 70%;
 	${media.large`
-		width: 95%;
+		width: 58%;
 	`};
 	border-radius: 20px;
 	>img {
@@ -61,6 +59,9 @@ const GridWhole = styled(motion.div)`
 		`};
 	}
 	>svg {
+    position: absolute;
+    right: -50px;
+    top: -5px;
 		float: right;
     margin-bottom: 8px;
 		color: #fff;

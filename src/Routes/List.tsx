@@ -152,6 +152,7 @@ export interface WorkInterface {
 	startMonth: number | undefined,
 	endMonth: number | undefined,
 	endYear: number | undefined,
+  code: number | undefined,
 }
 
 export interface TypesParams {
@@ -167,7 +168,8 @@ function List() {
 	useEffect(() => {
 		const collection = dbService.collection(`${typeId}`);
 		collection
-			.orderBy("endYear", "desc")
+			.orderBy("code", "desc") // desc
+      // .orderBy("endMonth", "desc")
 			.onSnapshot((snapshot: any) => {
 				const itemArr = snapshot.docs.map((doc: any) => ({
 					id: doc.id,
@@ -183,6 +185,7 @@ function List() {
 					startMonth: doc.data().startMonth,
 					endYear: doc.data().endYear,
 					endMonth: doc.data().endMonth,
+          code: doc.data().code,
 					...doc.data(),
 				}));
 				setList(itemArr);

@@ -4,9 +4,10 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { media } from "style/media_query";
-import { motion, AnimatePresence } from "framer-motion";
 import Radiation from "sub_pages/Radiation";
 import Acc from "sub_pages/Acc";
+import Mmca from "sub_pages/Mmca";
+import Bdna from "sub_pages/Bdna";
 
 const SubPage = styled.div`
 	position: relative;
@@ -72,7 +73,7 @@ const Flexbox = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding-bottom: 20px;
-	${media.smallToo`
+	${media.medium`
 		flex-direction: column;
 		gap: 12px;
 	`};
@@ -83,8 +84,9 @@ const Tags = styled.ul`
 	align-items: center;
 	justify-content: flex-end;
 	gap: 12px;
-	${media.smallToo`
+	${media.medium`
 		flex-wrap: wrap;
+    gap: 16px 12px;
 	`};
 `;
 
@@ -97,7 +99,7 @@ const Tag = styled.li`
 	line-height: 32px;
 	text-align: center;
 	cursor: default;
-	${media.smallToo`
+	${media.medium`
 		padding: 0 8px;
     font-size: 12px;
 	`};
@@ -291,18 +293,18 @@ const WorkPages = styled.div`
 	}
 `;
 
-const Slider = styled.div`
-	position: relative;
-	height: 200px;
-`;
+// const Slider = styled.div`
+// 	position: relative;
+// 	height: 200px;
+// `;
 
-const Row = styled(motion.div)`
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	gap: 10px;
-	position: absolute;
-	width: 100%;
-`;
+// const Row = styled(motion.div)`
+// 	display: grid;
+// 	grid-template-columns: repeat(6, 1fr);
+// 	gap: 10px;
+// 	position: absolute;
+// 	width: 100%;
+// `;
 
 // const Box = styled(motion.div)`
 // 	background-color: #fff;
@@ -451,7 +453,7 @@ function Sub() {
 				<section>
 					{
 						{
-							"radiation": <Radiation />, "acc": <Acc />
+							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />
 						}[state.id]
 					}
 				</section>
