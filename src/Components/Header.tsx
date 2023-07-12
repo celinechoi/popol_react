@@ -17,7 +17,7 @@ const HeaderBox = styled.div`
 	width: 100%;
 	height: 86px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};
-	box-shadow: 0 1px 0 0 rgba(0,0,0,.06);
+	box-shadow: ${(props) => props.theme.shadow.under};
 	${media.small`
 		height: auto;
 	`};

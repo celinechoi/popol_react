@@ -14,10 +14,10 @@ const TopBox = styled.div`
 	z-index: 10;
 	width: 50px;
 	height: 50px;
+	background-color: ${(props) => props.theme.bgColor.gray.second};
 	box-shadow: ${(props) => props.theme.shadow.under};
 	border: solid 1px #fafafa;
 	border-radius: 50%;
-	background-color: rgba(223, 223, 223, 0.1);
 	text-align: center;
 	cursor: pointer;
 	&:hover,

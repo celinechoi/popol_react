@@ -2,30 +2,26 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { media } from "style/media_query";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import cms_main from "img/sub_pages/radiation/cms/cms_main.jpg";
-import cms_sub1 from "img/sub_pages/radiation/cms/cms_sub1.jpg";
-import cms_sub2 from "img/sub_pages/radiation/cms/cms_sub2.jpg";
-import cms_sub3 from "img/sub_pages/radiation/cms/cms_sub3.jpg";
-import cms_sub4 from "img/sub_pages/radiation/cms/cms_sub4.jpg";
-import cms_sub5 from "img/sub_pages/radiation/cms/cms_sub5.jpg";
-import cms_sub6 from "img/sub_pages/radiation/cms/cms_sub6.jpg";
-import pms_login from "img/sub_pages/radiation/pms/pms_login.jpg";
-import pms_main from "img/sub_pages/radiation/pms/pms_main.jpg";
-import pms_sub1 from "img/sub_pages/radiation/pms/pms_sub1.jpg";
-import pms_sub2 from "img/sub_pages/radiation/pms/pms_sub2.jpg";
-import pms_sub3 from "img/sub_pages/radiation/pms/pms_sub3.jpg";
-import pms_sub4 from "img/sub_pages/radiation/pms/pms_sub4.jpg";
-import pms_sub5 from "img/sub_pages/radiation/pms/pms_sub5.jpg";
-import pms_sub6 from "img/sub_pages/radiation/pms/pms_sub6.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import main from "img/sub_pages/acc/asia_admin_main.jpg";
+import sub1 from "img/sub_pages/acc/asia_admin_sub1-2.jpg";
+import sub2 from "img/sub_pages/acc/asia_admin_sub2-2.jpg";
+import sub3 from "img/sub_pages/acc/asia_admin_sub3-3.jpg";
+import sub4 from "img/sub_pages/acc/asia_admin_sub4-2.jpg";
+import sub5 from "img/sub_pages/acc/asia_admin_sub5-9.jpg";
+import sub6 from "img/sub_pages/acc/asia_admin_sub6-6.jpg";
+import ticket from "img/sub_pages/acc/ticketing_main.jpg";
+import ticketArabic from "img/sub_pages/acc/ticketing_main_arabic.jpg";
+// import ticketMo from "img/sub_pages/acc/ticketing_main_mo.jpg";
+// import ticketArabicMo from "img/sub_pages/acc/ticketing_main_arabic_mo.jpg";
 
 const Grid = styled(motion.div)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex: 0 0 calc(100%/3 - 12px/3*2);
-	min-height: 100px;
+	flex: 0 0 calc(100%/2 - 12px/2*1);
+	min-height: 250px;
 	overflow: hidden;
   background-color: rgba(251, 234, 173, 0.7);
   border-radius: 20px;
@@ -33,6 +29,9 @@ const Grid = styled(motion.div)`
 	cursor: pointer;
 	>img {
 		width: 100%;
+		&.small {
+			width: 30%;
+		}
 	}
 `;
 
@@ -76,18 +75,17 @@ const overlay = {
 	exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
 };
 
-
-function Radiation() {
+function Acc() {
 	const [data, setData] = useState<any[]>();
 	const [data2, setData2] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
-	const cmsArr = [cms_main, cms_sub1, cms_sub2, cms_sub3, cms_sub4, cms_sub5, cms_sub6];
-	const pmsArr = [pms_login, pms_main, pms_sub1, pms_sub2, pms_sub3, pms_sub4, pms_sub5, pms_sub6];
+	const accArr = [main, sub1, sub2, sub3, sub4, sub5, sub6];
+	const ticketArr = [ticket, ticketArabic];
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
-			setData(cmsArr);
-			setData2(pmsArr);
+			setData(accArr);
+			setData2(ticketArr);
 		}
 		return () => {
 			isMount = false;
@@ -98,8 +96,7 @@ function Radiation() {
 			<div>
 				<div className="sub-view">
 					<div className="sub-view-title">
-						<h3 className="page-h3">CMS</h3>
-						<p className="txt-default">고객관리를 위한 관리자 페이지</p>
+						<h3 className="page-h3">관리자</h3>
 					</div>
 				</div>
 				<div className="grids">
@@ -131,15 +128,14 @@ function Radiation() {
 			<div className="section-v2">
 				<div className="sub-view">
 					<div className="sub-view-title">
-						<h3 className="page-h3">PMS</h3>
-						<p className="txt-default">파트너를 위한 관리자 페이지</p>
+						<h3 className="page-h3">티켓 페이지</h3>
 					</div>
 				</div>
 				<div className="grids">
 					{
 						data2?.map((val: any, i: any) => (
 							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
-								<img src={val} alt="작업물 이미지" />
+								<img src={val} alt="작업물 이미지" className={i === 2 || i === 3 ? "small" : ""} />
 							</Grid>
 						))
 					}
@@ -153,7 +149,7 @@ function Radiation() {
 							animate="visible"
 							exit="exit"
 						>
-							<GridWhole layoutId={id} >
+							<GridWhole layoutId={id}>
 								<FontAwesomeIcon icon={faXmark} />
 								<img src={id} alt="작업물 이미지" />
 							</GridWhole>
@@ -165,4 +161,4 @@ function Radiation() {
 	)
 }
 
-export default Radiation;
+export default Acc;

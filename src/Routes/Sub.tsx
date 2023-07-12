@@ -6,6 +6,7 @@ import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons
 import { media } from "style/media_query";
 import { motion, AnimatePresence } from "framer-motion";
 import Radiation from "sub_pages/Radiation";
+import Acc from "sub_pages/Acc";
 
 const SubPage = styled.div`
 	position: relative;
@@ -220,7 +221,7 @@ const Effect = styled.li`
 	justify-content: center;
 	min-height: 80px;
 	border-radius: 20px;
-	padding: 16px 32px;
+	padding: 16px 22px;
 	background-color: rgba(250, 250, 250, 0.6);
 	color: #000;
 	font-size: 18px;
@@ -234,6 +235,7 @@ const Effect = styled.li`
 		font-size: 16px;
 	`};
 	${media.small`
+		padding: 16px;
 		border-radius: 12px;
 		flex-basis: 100%;
 	`};
@@ -449,7 +451,7 @@ function Sub() {
 				<section>
 					{
 						{
-							"radiation": <Radiation />
+							"radiation": <Radiation />, "acc": <Acc />
 						}[state.id]
 					}
 				</section>

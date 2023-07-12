@@ -165,6 +165,38 @@ button {
 		`};
 	}
 }
+/* common sub style */
+.sub {
+	&-view {
+		.txt {
+			&-default {
+				padding-top: 16px;
+				${media.medium`
+					padding-top: 14px;
+				`};
+			}
+		}
+		&-title {
+			padding-bottom: 32px;
+			${media.medium`
+				padding-bottom: 28px;
+			`};
+			${media.small`
+				padding-bottom: 24px;
+			`};
+		}
+	}
+	.grids {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		gap: 12px;
+		.grid {
+			
+		}
+	}
+}
+
 `;
 
 // react-query-firestore
