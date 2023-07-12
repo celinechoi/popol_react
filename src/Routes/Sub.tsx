@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { media } from "style/media_query";
 import { motion, AnimatePresence } from "framer-motion";
+import Radiation from "sub_pages/Radiation";
 
 const SubPage = styled.div`
 	position: relative;
@@ -270,40 +271,16 @@ const FocusArrow = styled.div`
 	}
 `;
 
-const View = styled.div`
-	.txt {
-		&-default {
-			padding-top: 16px;
-			${media.medium`
-				padding-top: 14px;
-			`};
-		}
-	}
-`;
 
-const ViewTitle = styled.div`
-	padding-bottom: 32px;
-	${media.medium`
-		padding-bottom: 28px;
-	`};
-	${media.small`
-		padding-bottom: 24px;
-	`};
-`;
-
-const SliderTitle = styled.div`
-	padding: 40px 0;
+const WorkPages = styled.div`
+	padding: 40px 0 0;
 	color: ${(props) => props.theme.point.beige};
-	font-size: 32px;
-	font-weight: 500;
 	text-align: center;
 	${media.medium`
-		padding: 32px 0;
-		font-size: 28px;
+		padding: 32px 0 0;
 	`};
 	${media.small`
-		padding: 24px 0;
-		font-size: 24px;
+		padding: 24px 0 0;
 	`};
 	>p {
 		font-size: 22px;
@@ -333,65 +310,7 @@ const Row = styled(motion.div)`
 // `;
 
 // framer-motion
-const rowVariants = {
-	hidden: {
-		x: window.outerWidth + 10,
-	},
-	visible: {
-		x: 0,
-	},
-	exit: {
-		x: -window.outerWidth - 10,
-	}
-}
 
-const Grids = styled.div`
-  display: flex;
-	flex-wrap: wrap;
-  width: 100%;
-  gap: 12px;
-`;
-
-const Grid = styled(motion.div)`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex: 0 0 calc(100%/3 - 12px/3*2);
-	overflow: hidden;
-  background-color: rgba(251, 234, 173, 0.7);
-  border-radius: 20px;
-  box-shadow: ${(props) => props.theme.shadow.box};
-	cursor: pointer;
-	>img {
-		width: 100%;
-	}
-`;
-
-const ImgBox = styled(motion.div)`
-
-`;
-
-const Overlay = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-	left: 0;
-	top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const GridWhole = styled(motion.div)`
-	/* position: fixed; */
-	/* left: 50%;
-	top: 50%; */
-	/* transform: translate(-50%, -50%); */
-	width: 70%;
-	>img {
-		width: 100%;
-	}
-`;
 
 interface RouteState {
 	parentPath: string;
@@ -436,7 +355,17 @@ function Sub() {
 	// 	}
 	// }
 
-
+	const rowVariants = {
+		hidden: {
+			x: window.outerWidth + 10,
+		},
+		visible: {
+			x: 0,
+		},
+		exit: {
+			x: -window.outerWidth - 10,
+		}
+	}
 
 	// Slider index
 	const [index, setIndex] = useState(0);
@@ -448,13 +377,7 @@ function Sub() {
 	}
 	const toggleLeaving = () => setLeaving((prev) => !prev)
 
-	// grid motion
-	const overlay = {
-		hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
-		visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
-		exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
-	};
-	const [id, setId] = useState<null | string>(null);
+
 	return (
 		<SubPage>
 			<div className="inner">
@@ -507,7 +430,7 @@ function Sub() {
 					{state.id === "nsu_inno" ? <Button onClick={() => { window.open("https://inno.nsu.ac.kr") }}>사이트 바로가기</Button> : ""}
 				</FrontInfo>
 				<section className="section">
-					<h2 className="section-title">기여 및 효과</h2>
+					<h2 className="section-title">역할</h2>
 					<Effects>
 						{
 							didList.map((val: any) => (
@@ -518,95 +441,18 @@ function Sub() {
 						}
 					</Effects>
 					<FocusArrow />
+					<WorkPages>
+						<p>Preview</p>
+						<h3 className="page-h2">Work Pages</h3>
+					</WorkPages>
 				</section>
 				<section>
 					{
 						{
-							"radiation":
-								<>
-									<div className="section-v2">
-										<View>
-											<ViewTitle>
-												<h3 className="page-h3">CMS</h3>
-												<p className="txt-default">고객관리를 위한 관리자 페이지</p>
-											</ViewTitle>
-										</View>
-										<Grids>
-											{
-												pageImgs.slice(0, 7).map((val: any, index: any) => (
-													<Grid onClick={() => setId(val)} key={index} layoutId={index}>
-														<img src={val} />
-													</Grid>
-												))
-											}
-										</Grids>
-										<AnimatePresence>
-											{id ? (
-												<Overlay
-													variants={overlay}
-													onClick={() => setId(null)}
-													initial="hidden"
-													animate="visible"
-													exit="exit"
-												>
-													<GridWhole layoutId={id} >
-														<img src={id} />
-													</GridWhole>
-												</Overlay>
-											) : null}
-										</AnimatePresence>
-									</div>
-									<div className="section-v2">
-										<View>
-											<ViewTitle>
-												<h3 className="page-h3">PMS</h3>
-												<p className="txt-default">파트너를 위한 관리자 페이지</p>
-											</ViewTitle>
-										</View>
-										<Grids>
-											{
-												pageImgs.slice(7, pageImgs.length).map((val: any, index: any) => (
-													<Grid onClick={() => setId(val)} key={index} layoutId={index}>
-														<img src={val} />
-													</Grid>
-												))
-											}
-										</Grids>
-										<AnimatePresence>
-											{id ? (
-												<Overlay
-													variants={overlay}
-													onClick={() => setId(null)}
-													initial="hidden"
-													animate="visible"
-													exit="exit"
-												>
-													<GridWhole layoutId={id} >
-														<img src={id} />
-													</GridWhole>
-												</Overlay>
-											) : null}
-										</AnimatePresence>
-									</div>
-								</>
+							"radiation": <Radiation />
 						}[state.id]
 					}
 				</section>
-				{/* <section onClick={increaseIndex}>
-					<SliderTitle>
-						<p>Preview</p>
-						Work Pages
-					</SliderTitle>
-					<Slider>
-						<AnimatePresence initial={false} onExitComplete={toggleLeaving}>
-							<Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{ type: "tween", duration: 1 }} key={index}>
-								{
-									[1, 2, 3, 4, 5, 6].map(i => <Box key={i}>{i}</Box>)
-								}
-							</Row>
-						</AnimatePresence>
-					</Slider>
-				</section> */}
 			</div>
 		</SubPage>
 	);
