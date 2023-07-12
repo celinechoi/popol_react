@@ -122,6 +122,16 @@ button {
 			font-size: 24px;
 		`};
 	}
+	&-h3 {
+		font-size: 24px;
+		font-weight: 700;
+		${media.medium`
+			font-size: 20px;
+		`};
+		${media.small`
+			font-size: 18px;
+		`};
+	}
 }
 .section {
 	padding-top: 80px;
@@ -144,6 +154,14 @@ button {
 		`};
 		${media.small`
 			font-size: 20px;
+		`};
+	}
+}
+.txt {
+	&-default {
+		font-size: 16px;
+		${media.medium`
+			font-size: 14px;
 		`};
 	}
 }

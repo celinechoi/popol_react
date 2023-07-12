@@ -143,6 +143,8 @@ export interface WorkInterface {
 	projectName: string | undefined,
 	customer: string,
 	fileUrl: string | undefined,
+	pageImgs: [] | undefined,
+	pagesMap: [] | undefined,
 	description: string | undefined,
 	did: [] | undefined,
 	keyWords: [] | undefined,
@@ -164,28 +166,32 @@ function List() {
 	const [list, setList] = useState<WorkInterface[]>([]);
 	useEffect(() => {
 		const collection = dbService.collection(`${typeId}`);
-		collection.onSnapshot((snapshot: any) => {
-			const itemArr = snapshot.docs.map((doc: any) => ({
-				id: doc.id,
-				projectName: doc.data().projectName,
-				customer: doc.data().customer,
-				fileUrl: doc.data().fileUrl,
-				description: doc.data().description,
-				did: doc.data().did,
-				keyWords: doc.data().keywords,
-				startYear: doc.data().startYear,
-				startMonth: doc.data().startMonth,
-				endYear: doc.data().endYear,
-				endMonth: doc.data().endMonth,
-				...doc.data(),
-			}));
-			setList(itemArr);
-			setLoading(false);
-			timeReturn();
-			return () => {
-				setLoading(false)
-			};
-		})
+		collection
+			.orderBy("endYear", "desc")
+			.onSnapshot((snapshot: any) => {
+				const itemArr = snapshot.docs.map((doc: any) => ({
+					id: doc.id,
+					projectName: doc.data().projectName,
+					customer: doc.data().customer,
+					fileUrl: doc.data().fileUrl,
+					pageImgs: doc.data().pageImgs,
+					pagesMap: doc.data().pagesMap,
+					description: doc.data().description,
+					did: doc.data().did,
+					keyWords: doc.data().keywords,
+					startYear: doc.data().startYear,
+					startMonth: doc.data().startMonth,
+					endYear: doc.data().endYear,
+					endMonth: doc.data().endMonth,
+					...doc.data(),
+				}));
+				setList(itemArr);
+				setLoading(false);
+				timeReturn();
+				return () => {
+					setLoading(false)
+				};
+			})
 	}, [typeId]);
 	let timer = setTimeout(() => { setImgLoading(false) }, 1000);
 	let timeReturn = () => {
@@ -193,6 +199,7 @@ function List() {
 			clearTimeout(timer);
 		};
 	}
+	console.log(list);
 
 	return (
 		<>
@@ -224,6 +231,8 @@ function List() {
 														did: val.did,
 														keyWords: val.keyWords,
 														fileUrl: val.fileUrl,
+														pageImgs: val.pageImgs,
+														pagesMap: val.pagesMap,
 														startYear: val.startYear,
 														startMonth: val.startMonth,
 														endYear: val.endYear,

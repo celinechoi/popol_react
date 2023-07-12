@@ -270,6 +270,27 @@ const FocusArrow = styled.div`
 	}
 `;
 
+const View = styled.div`
+	.txt {
+		&-default {
+			padding-top: 16px;
+			${media.medium`
+				padding-top: 14px;
+			`};
+		}
+	}
+`;
+
+const ViewTitle = styled.div`
+	padding-bottom: 32px;
+	${media.medium`
+		padding-bottom: 28px;
+	`};
+	${media.small`
+		padding-bottom: 24px;
+	`};
+`;
+
 const SliderTitle = styled.div`
 	padding: 40px 0;
 	color: ${(props) => props.theme.point.beige};
@@ -304,27 +325,12 @@ const Row = styled(motion.div)`
 	width: 100%;
 `;
 
-const Box = styled(motion.div)`
-	background-color: #fff;
-	height: 200px;
-	font-size: 22px;
-	color: red;
-`;
-
-interface RouteState {
-	parentPath: string;
-	id: string;
-	projectName: string;
-	customer: string;
-	description: string;
-	did: [] | undefined;
-	keyWords: [] | undefined,
-	fileUrl: string;
-	startYear: number;
-	startMonth: number;
-	endYear: number;
-	endMonth: number;
-}
+// const Box = styled(motion.div)`
+// 	background-color: #fff;
+// 	height: 200px;
+// 	font-size: 22px;
+// 	color: red;
+// `;
 
 // framer-motion
 const rowVariants = {
@@ -337,6 +343,71 @@ const rowVariants = {
 	exit: {
 		x: -window.outerWidth - 10,
 	}
+}
+
+const Grids = styled.div`
+  display: flex;
+	flex-wrap: wrap;
+  width: 100%;
+  gap: 12px;
+`;
+
+const Grid = styled(motion.div)`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 calc(100%/3 - 12px/3*2);
+	overflow: hidden;
+  background-color: rgba(251, 234, 173, 0.7);
+  border-radius: 20px;
+  box-shadow: ${(props) => props.theme.shadow.box};
+	cursor: pointer;
+	>img {
+		width: 100%;
+	}
+`;
+
+const ImgBox = styled(motion.div)`
+
+`;
+
+const Overlay = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+	left: 0;
+	top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const GridWhole = styled(motion.div)`
+	/* position: fixed; */
+	/* left: 50%;
+	top: 50%; */
+	/* transform: translate(-50%, -50%); */
+	width: 70%;
+	>img {
+		width: 100%;
+	}
+`;
+
+interface RouteState {
+	parentPath: string;
+	id: string;
+	projectName: string;
+	customer: string,
+	fileUrl: string | undefined,
+	pageImgs: [] | undefined,
+	pagesMap: [] | undefined,
+	description: string | undefined,
+	did: [] | undefined,
+	keyWords: [] | undefined,
+	startYear: number | undefined,
+	startMonth: number | undefined,
+	endMonth: number | undefined,
+	endYear: number | undefined,
 }
 
 const offset = 6;
@@ -352,11 +423,20 @@ function Sub() {
 		history.goBack();
 	}
 
-	// 배열 타입 빈 배열 변수에 저장
-	let keyWordsList: any = [];
-	keyWordsList = state?.keyWords;
-	let didList: any = [];
-	didList = state?.did;
+	// 배열 타입 빈 변수에 저장
+	const keyWordsList: any = state?.keyWords;
+	const didList: any = state?.did;
+	const pageImgs: any = state?.pageImgs;
+	const pagesMap: any = state?.pagesMap;
+	// const pagesMapEn = Object.entries(pagesMap);
+
+	// const pageFor = () => {
+	// 	for (const [key, value] of Object.entries(pagesMap)) {
+	// 		console.log(`${key}: ${value}`);
+	// 	}
+	// }
+
+
 
 	// Slider index
 	const [index, setIndex] = useState(0);
@@ -367,6 +447,14 @@ function Sub() {
 		setIndex((prev) => prev + 1);
 	}
 	const toggleLeaving = () => setLeaving((prev) => !prev)
+
+	// grid motion
+	const overlay = {
+		hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
+		visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+		exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
+	};
+	const [id, setId] = useState<null | string>(null);
 	return (
 		<SubPage>
 			<div className="inner">
@@ -419,7 +507,7 @@ function Sub() {
 					{state.id === "nsu_inno" ? <Button onClick={() => { window.open("https://inno.nsu.ac.kr") }}>사이트 바로가기</Button> : ""}
 				</FrontInfo>
 				<section className="section">
-					<h2 className="section-title">기여한 역할</h2>
+					<h2 className="section-title">기여 및 효과</h2>
 					<Effects>
 						{
 							didList.map((val: any) => (
@@ -431,7 +519,80 @@ function Sub() {
 					</Effects>
 					<FocusArrow />
 				</section>
-				<section onClick={increaseIndex}>
+				<section>
+					{
+						{
+							"radiation":
+								<>
+									<div className="section-v2">
+										<View>
+											<ViewTitle>
+												<h3 className="page-h3">CMS</h3>
+												<p className="txt-default">고객관리를 위한 관리자 페이지</p>
+											</ViewTitle>
+										</View>
+										<Grids>
+											{
+												pageImgs.slice(0, 7).map((val: any, index: any) => (
+													<Grid onClick={() => setId(val)} key={index} layoutId={index}>
+														<img src={val} />
+													</Grid>
+												))
+											}
+										</Grids>
+										<AnimatePresence>
+											{id ? (
+												<Overlay
+													variants={overlay}
+													onClick={() => setId(null)}
+													initial="hidden"
+													animate="visible"
+													exit="exit"
+												>
+													<GridWhole layoutId={id} >
+														<img src={id} />
+													</GridWhole>
+												</Overlay>
+											) : null}
+										</AnimatePresence>
+									</div>
+									<div className="section-v2">
+										<View>
+											<ViewTitle>
+												<h3 className="page-h3">PMS</h3>
+												<p className="txt-default">파트너를 위한 관리자 페이지</p>
+											</ViewTitle>
+										</View>
+										<Grids>
+											{
+												pageImgs.slice(7, pageImgs.length).map((val: any, index: any) => (
+													<Grid onClick={() => setId(val)} key={index} layoutId={index}>
+														<img src={val} />
+													</Grid>
+												))
+											}
+										</Grids>
+										<AnimatePresence>
+											{id ? (
+												<Overlay
+													variants={overlay}
+													onClick={() => setId(null)}
+													initial="hidden"
+													animate="visible"
+													exit="exit"
+												>
+													<GridWhole layoutId={id} >
+														<img src={id} />
+													</GridWhole>
+												</Overlay>
+											) : null}
+										</AnimatePresence>
+									</div>
+								</>
+						}[state.id]
+					}
+				</section>
+				{/* <section onClick={increaseIndex}>
 					<SliderTitle>
 						<p>Preview</p>
 						Work Pages
@@ -445,7 +606,7 @@ function Sub() {
 							</Row>
 						</AnimatePresence>
 					</Slider>
-				</section>
+				</section> */}
 			</div>
 		</SubPage>
 	);
