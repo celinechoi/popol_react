@@ -24,6 +24,12 @@ const Grid = styled(motion.div)`
   border-radius: 20px;
   box-shadow: ${(props) => props.theme.shadow.box};
 	cursor: pointer;
+	${media.large`
+		flex-basis: calc(100%/2 - 12px/2*1);
+	`};
+	${media.small`
+		flex-basis: 100%;
+	`};
 	>img {
 		width: 100%;
 	}
@@ -60,6 +66,9 @@ const GridWhole = styled(motion.div)`
 	${media.large`
 		width: 58%;
 	`};
+	${media.small`
+		width: 100%;
+	`};
 	border-radius: 20px;
 	>img {
 		width: 100%;
@@ -77,6 +86,11 @@ const GridWhole = styled(motion.div)`
 		color: #fff;
 		font-size: 44px;
 		cursor: pointer;
+		${media.small`
+			right: 0;
+			top: -40px;
+			font-size: 38px;
+		`};
 	}
 `;
 // grid motion
@@ -93,7 +107,7 @@ function Lxproperty() {
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
 	// data
-	const imgArr = [login, gis, open, index, enrollment, modified, view];
+	const imgArr = [login, index, enrollment, modified, view, gis, open];
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
@@ -111,8 +125,7 @@ function Lxproperty() {
 			<div>
 				<div className="sub-view">
 					<div className="sub-view-title">
-						<h3 className="page-h3">CMS</h3>
-						<p className="txt-default">고객관리를 위한 관리자 페이지</p>
+						<h3 className="page-h3">관리자 & GIS(위치정보관리) 페이지</h3>
 					</div>
 				</div>
 				<div className="grids">
@@ -127,7 +140,7 @@ function Lxproperty() {
 				<AnimatePresence>
 					{id ? (
 						<Modal>
-							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
+							<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
 								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />

@@ -34,7 +34,7 @@ const Title = styled.div`
 `;
 
 const Container = styled.div`
-	padding: 90px 0 0;
+	padding: 80px 0 0;
 	${media.medium`
 		padding: 40px 0 0;
 	`};
@@ -259,7 +259,7 @@ function List() {
 													</ImgBox>
 													<BoxCon>
 														<p>{val.customer}</p>
-														<h4>{val.projectName} 페이지</h4>
+														<h4>{val.projectName} 홈페이지</h4>
 													</BoxCon>
 												</Link>
 											</Box>

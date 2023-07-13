@@ -14,8 +14,6 @@ import sub6 from "img/sub_pages/acc/sub6-6.jpg";
 import ticket from "img/sub_pages/acc/ticketing_main.jpg";
 import ticketArabic from "img/sub_pages/acc/ticketing_main_arabic.jpg";
 import { focusHandler, resetHandler } from "function/ModalScroll";
-// import ticketMo from "img/sub_pages/acc/ticketing_main_mo.jpg";
-// import ticketArabicMo from "img/sub_pages/acc/ticketing_main_arabic_mo.jpg";
 
 const Grid = styled(motion.div)`
 	display: flex;
@@ -28,6 +26,12 @@ const Grid = styled(motion.div)`
   border-radius: 20px;
   box-shadow: ${(props) => props.theme.shadow.box};
 	cursor: pointer;
+	${media.large`
+		flex-basis: calc(100%/2 - 12px/2*1);
+	`};
+	${media.small`
+		flex-basis: 100%;
+	`};
 	>img {
 		width: 100%;
 	}
@@ -64,6 +68,9 @@ const GridWhole = styled(motion.div)`
 	${media.large`
 		width: 58%;
 	`};
+	${media.small`
+		width: 100%;
+	`};
 	border-radius: 20px;
 	>img {
 		width: 100%;
@@ -81,6 +88,11 @@ const GridWhole = styled(motion.div)`
 		color: #fff;
 		font-size: 44px;
 		cursor: pointer;
+		${media.small`
+			right: 0;
+			top: -40px;
+			font-size: 38px;
+		`};
 	}
 `;
 // grid motion
@@ -160,7 +172,7 @@ function Acc() {
 				<AnimatePresence>
 					{id ? (
 						<Modal>
-							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
+							<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
 								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />

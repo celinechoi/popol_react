@@ -145,7 +145,7 @@ const Point = styled(motion.span)`
   display: block;
   width: 10px;
   height: 5px;
-  top: -4px;
+  bottom: 28px;
   left: 0;
   right: 0;
   margin: 0 auto;

@@ -119,6 +119,9 @@ button {
 		${media.small`
 			font-size: 30px;
 		`};
+		${media.micro`
+			font-size: 26px;
+		`};
 	}
 	&-h2 {
 		font-size: 32px;
@@ -129,6 +132,9 @@ button {
 		${media.small`
 			font-size: 24px;
 		`};
+		${media.micro`
+			font-size: 20px;
+		`};
 	}
 	&-h3 {
 		font-size: 24px;
@@ -138,6 +144,9 @@ button {
 		`};
 		${media.small`
 			font-size: 18px;
+		`};
+		${media.micro`
+			font-size: 16px;
 		`};
 	}
 }
@@ -175,6 +184,8 @@ button {
 }
 /* common sub style */
 .sub {
+	${media.large` padding-top: 32px; `};
+	${media.large` padding-top: 24px; `};
 	&-view {
 		.txt {
 			&-default {
@@ -199,9 +210,9 @@ button {
 		flex-wrap: wrap;
 		width: 100%;
 		gap: 12px;
-		.grid {
-			
-		}
+		${media.small`
+			flex-direction: column;
+		`};
 	}
 }
 

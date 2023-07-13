@@ -12,20 +12,18 @@ const TabMenu = styled.ul`
 	top: 40px;
 	width: fit-content;
 	margin: 0 auto;
-	padding: 12px;
+	padding: 8px 12px;
 	border-radius: 38px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};
 	box-shadow: ${(props) => props.theme.shadow.under};
 	${media.medium`
 		gap: 14px;
 		top: 32px;
-		padding: 8px 12px;
 		border-radius: 24px;
 	`};
 `;
 
 const Tab = styled.li<{ isActive: boolean }>`
-	margin-left: 12px;
 	background-color: ${(props) =>
 		props.isActive ? props.theme.point.blue[0] : "transparent"};
 	border-radius: 26px;
@@ -51,7 +49,7 @@ const Tab = styled.li<{ isActive: boolean }>`
 	`};
 	>a {
 		display: block;
-		padding: 12px 28px;
+		padding: 10px 28px;
 		${media.medium`
 			padding: 8px 28px;
 		`};
@@ -61,28 +59,28 @@ const Tab = styled.li<{ isActive: boolean }>`
 	}
 `;
 function Tabs({ typePath }: { typePath: string | object }) {
-  const [data, setData] = useState<any[]>();
-  const workType = [{id: "si"}, {id: "solution"}, {id: "sm"} ];
-  useEffect(() => {
-    let isMount = true;
-    if (isMount) {
-      setData(workType);
-    }
-    return () => {
-      isMount = false;
-    };
-  }, []);
+	const [data, setData] = useState<any[]>();
+	const workType = [{ id: "si" }, { id: "solution" }, { id: "sm" }];
+	useEffect(() => {
+		let isMount = true;
+		if (isMount) {
+			setData(workType);
+		}
+		return () => {
+			isMount = false;
+		};
+	}, []);
 	return (
 		<>
 			<TabMenu>
 				{
-          data?.map((val: any) => (
-            <Tab key={val.id} isActive={typePath === val.id ? true : false}>
-              <Link to={{
-                pathname: `/works/${val.id}`,
-                state: { name: val.id }
-              }}>{val.id}</Link>
-            </Tab>
+					data?.map((val: any) => (
+						<Tab key={val.id} isActive={typePath === val.id ? true : false}>
+							<Link to={{
+								pathname: `/works/${val.id}`,
+								state: { name: val.id }
+							}}>{val.id}</Link>
+						</Tab>
 					))
 				}
 			</TabMenu>

@@ -28,6 +28,12 @@ const Grid = styled(motion.div)`
   border-radius: 20px;
   box-shadow: ${(props) => props.theme.shadow.box};
 	cursor: pointer;
+	${media.large`
+		flex-basis: calc(100%/2 - 12px/2*1);
+	`};
+	${media.small`
+		flex-basis: 100%;
+	`};
 	>img {
 		width: 100%;
 	}
@@ -64,6 +70,9 @@ const GridWhole = styled(motion.div)`
 	${media.large`
 		width: 58%;
 	`};
+	${media.small`
+		width: 100%;
+	`};
 	border-radius: 20px;
 	>img {
 		width: 100%;
@@ -81,6 +90,11 @@ const GridWhole = styled(motion.div)`
 		color: #fff;
 		font-size: 44px;
 		cursor: pointer;
+		${media.small`
+			right: 0;
+			top: -40px;
+			font-size: 38px;
+		`};
 	}
 `;
 // grid motion
@@ -94,19 +108,23 @@ const overlay = {
 function Bdna() {
 	// state
 	const [data, setData] = useState<any[]>();
+	const [data2, setData2] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
 	// data
-	const imgArr = [login, main, dashboard, map, noticeEnrollment, noticeList, noticeView, enrollment2, outsourcingList, outsourcingList2, operationModified];
+	const imgArr = [login, main, dashboard, noticeEnrollment, noticeList, noticeView, enrollment2, outsourcingList, outsourcingList2, operationModified];
+	const imgGis = [map];
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
 			setData(imgArr);
+			setData2(imgGis);
 			setFunc({ on: focusHandler, off: resetHandler });
 		}
 		return () => {
 			isMount = false;
 			setData([]);
+			setData2([]);
 			setFunc({});
 		};
 	}, []);
@@ -115,8 +133,7 @@ function Bdna() {
 			<div>
 				<div className="sub-view">
 					<div className="sub-view-title">
-						<h3 className="page-h3">CMS</h3>
-						<p className="txt-default">고객관리를 위한 관리자 페이지</p>
+						<h3 className="page-h3">운영관리시스템</h3>
 					</div>
 				</div>
 				<div className="grids">
@@ -131,7 +148,35 @@ function Bdna() {
 				<AnimatePresence>
 					{id ? (
 						<Modal>
-							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
+							<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
+							<GridWhole layoutId={id} >
+								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
+								<img src={id} alt="작업물 이미지" />
+							</GridWhole>
+						</Modal>
+					) : null}
+				</AnimatePresence>
+			</div>
+			<div className="section-v2">
+				<div className="sub-view">
+					<div className="sub-view-title">
+						<h3 className="page-h3">GIS (위치정보관리)</h3>
+						<p className="txt-default">산림 생물 자원 관리시스템 페이지</p>
+					</div>
+				</div>
+				<div className="grids">
+					{
+						data2?.map((val: any, i: any) => (
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+								<img src={val} alt="작업물 이미지" />
+							</Grid>
+						))
+					}
+				</div>
+				<AnimatePresence>
+					{id ? (
+						<Modal>
+							<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
 								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />

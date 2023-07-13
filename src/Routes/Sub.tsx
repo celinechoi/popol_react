@@ -254,10 +254,11 @@ const FocusArrow = styled.div`
 	background-color: ${(props) => props.theme.point.beige};;
 	border-radius: 0.5rem;
 	transform: rotate(90deg);
-	${media.small`
+	${media.medium`
 		width: 1rem;
     height: 3.8rem;
 	`};
+	${media.small` display: none; `};
 	&::after {
 		content: '';
 		top: 0.6rem;
@@ -269,7 +270,7 @@ const FocusArrow = styled.div`
 		clip-path: polygon(0% 0%, 100% 100%, 100% 0%);
 		position: absolute;
 		transform: rotate(45deg);
-		${media.small`
+		${media.medium`
 			top: 0.44rem;
 			left: -1rem;
 			width: 3.13rem;
@@ -411,7 +412,7 @@ function Sub() {
 						</Tags>
 					</Flexbox>
 					<Title>
-						<div className="page-h1">{state.projectName}</div>
+						<div className="page-h1">{state.projectName} 홈페이지</div>
 					</Title>
 					<Description>{state.description}</Description>
 					<Infos>

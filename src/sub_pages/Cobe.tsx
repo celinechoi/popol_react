@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { media } from "style/media_query";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { focusHandler, resetHandler } from "function/ModalScroll";
 import main from "img/sub_pages/cobe/main.png";
 
@@ -18,59 +16,14 @@ const Grid = styled(motion.div)`
   border-radius: 20px;
   box-shadow: ${(props) => props.theme.shadow.box};
 	cursor: pointer;
-	>img {
-		width: 100%;
-	}
-`;
-
-const Modal = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-  height: 100%;
-  position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 2;
-	height: calc(var(--vh, 1vh)*100);
-`;
-
-const Overlay = styled(motion.div)`
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	background-color: #000;
-	opacity: .4;
-	z-index: -1;
-`;
-
-const GridWhole = styled(motion.div)`
-  position: relative;
-	z-index: 1;
-	width: 70%;
 	${media.large`
-		width: 58%;
+		flex-basis: calc(100%/2 - 12px/2*1);
 	`};
-	border-radius: 20px;
+	${media.small`
+		flex-basis: 100%;
+	`};
 	>img {
 		width: 100%;
-		border-radius: 20px;
-		${media.medium`
-			border-radius: 16px;
-		`};
-	}
-	>svg {
-    position: absolute;
-    right: -50px;
-    top: -5px;
-		float: right;
-    margin-bottom: 8px;
-		color: #fff;
-		font-size: 44px;
-		cursor: pointer;
 	}
 `;
 // grid motion
@@ -105,32 +58,21 @@ function Cobe() {
 			<div>
 				<div className="sub-view">
 					<div className="sub-view-title">
-						<h3 className="page-h3">CMS</h3>
-						<p className="txt-default">고객관리를 위한 관리자 페이지</p>
+						<h3 className="page-h3">COBE ONE Platform</h3>
+						<p className="txt-default">코베 전시 티켓 및 용품 구입을 위한 사용자 페이지</p>
 					</div>
 				</div>
 				<div className="grids">
 					{
 						data?.map((val: any, i: any) => (
-							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+							<Grid key={i} layoutId={i}>
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))
 					}
 				</div>
-				<AnimatePresence>
-					{id ? (
-						<Modal>
-							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
-							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
-								<img src={id} alt="작업물 이미지" />
-							</GridWhole>
-						</Modal>
-					) : null}
-				</AnimatePresence>
 			</div>
-		</div>
+		</div >
 	)
 }
 
