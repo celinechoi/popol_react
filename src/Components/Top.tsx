@@ -11,7 +11,7 @@ const TopBox = styled.div`
 	position: fixed;
 	right: 48px;
 	bottom: 70px;
-	z-index: 10;
+	z-index: 2;
 	width: 50px;
 	height: 50px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};

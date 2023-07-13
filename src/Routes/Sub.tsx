@@ -24,20 +24,28 @@ const SubPage = styled.div`
 const BackBox = styled.div`
 	display: flex;
 	align-items: center;
+  justify-content: flex-start;
 	gap: 8px;
 	clear: both;
-	width: fit-content;
+	width: 100%;
 	padding-bottom: 48px;
 	color: ${(props) => props.theme.textColor.gray.first};
-	cursor: pointer;
 	${media.medium`
 		padding-bottom: 40px;
 	`};
-	>svg {
-		width: 32px;
-		padding-top: 6px;
-		font-size: 24px;
-	}
+  .inner {
+    &-flex {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      >svg {
+        width: 32px;
+        padding-top: 6px;
+        font-size: 24px;
+      }
+    }
+  }
 `;
 
 const Indexs = styled.ul`
@@ -45,7 +53,7 @@ const Indexs = styled.ul`
   align-items: center;
   float: right;
 	width: fit-content;
-  padding-bottom: 20px;
+  margin-left: auto;
 	>svg {
 		width: 24px;
 		padding-top: 3px;
@@ -75,7 +83,7 @@ const FrontInfo = styled.div`
 const Flexbox = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 	padding-bottom: 20px;
 	${media.medium`
 		flex-direction: column;
@@ -87,7 +95,7 @@ const Tags = styled.ul`
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	gap: 12px;
+	gap: 8px;
 	${media.medium`
 		flex-wrap: wrap;
     gap: 16px 12px;
@@ -116,7 +124,7 @@ const Tag = styled.li`
 const Img = styled.img`
 	display: block;
 	max-width: 200px;
-	background-color: rgba(78, 78, 78, 0.7);
+	background-color: ${(props) => props.theme.bgColor.gray.fourth};
 	padding: 8px 16px 12px;
 	border-radius: 6px;
 `;
@@ -390,14 +398,16 @@ function Sub() {
 	return (
 		<SubPage>
 			<div className="inner">
-				<Indexs>
-					<Index onClick={backFunc}>Works</Index>
-					<FontAwesomeIcon icon={faChevronRight} />
-					<Index onClick={backFunc}>{state.parentPath}</Index>
-				</Indexs>
-				<BackBox onClick={backFunc}>
-					<FontAwesomeIcon icon={faChevronLeft} size="lg" />
-					<p className="page-h2">Works</p>
+				<BackBox>
+          <div className="inner-flex" onClick={backFunc}>
+            <FontAwesomeIcon icon={faChevronLeft} size="lg" />
+            <p className="page-h2">Works</p>
+          </div>
+          <Indexs>
+            <Index onClick={backFunc}>Works</Index>
+            <FontAwesomeIcon icon={faChevronRight} />
+            <Index onClick={backFunc}>{state.parentPath}</Index>
+          </Indexs>
 				</BackBox>
 				<FrontInfo>
 					<Flexbox>

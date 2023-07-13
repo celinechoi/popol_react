@@ -13,6 +13,15 @@ import testStep1 from "img/sub_pages/iedu/test_step1.png";
 import testStep2 from "img/sub_pages/iedu/test_step2.png";
 import testStep3 from "img/sub_pages/iedu/test_step3.png";
 import testResult from "img/sub_pages/iedu/test_result.png";
+import viralStart from "img/sub_pages/iedu/viral_test_start.png";
+import viralLoading from "img/sub_pages/iedu/viral_test_loading.png";
+import viralStep1 from "img/sub_pages/iedu/viral_test1.png";
+import viralStep5 from "img/sub_pages/iedu/viral_test5.png";
+import viralResult1 from "img/sub_pages/iedu/viral_result1.png";
+import viralResult2 from "img/sub_pages/iedu/viral_result2.png";
+import viralResult3 from "img/sub_pages/iedu/viral_result3.png";
+import viralResult4 from "img/sub_pages/iedu/viral_result4.png";
+
 import renewalMain from "img/sub_pages/iedu/renewal_main.png";
 import learnerInfo from "img/sub_pages/iedu/renewal_learner_info.png";
 
@@ -46,6 +55,33 @@ const Grid = styled(motion.div)`
 	}
 `;
 
+const GridZg = styled(motion.div)`
+  display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex: 0 0 calc(100%/4 - 12px/4*3);
+	min-height: 100px;
+	max-height: 300px;
+	overflow: hidden;
+  background-color: rgba(251, 234, 173, 0.7);
+  border-radius: 20px;
+  box-shadow: ${(props) => props.theme.shadow.box};
+	cursor: pointer;
+  &.fifth {
+    flex: 0 0 calc(100%/5 - 12px/5*4);
+  }
+  &:nth-child(even) {
+    position: relative;
+    top: 40px;
+  }
+	${media.small`
+		flex-basis: calc(100%/2 - 12px/2*1);
+	`};
+	>img {
+		width: 100%;
+	}
+`;
+
 const Modal = styled.div`
 	display: flex;
 	align-items: center;
@@ -55,7 +91,7 @@ const Modal = styled.div`
   position: fixed;
 	left: 0;
 	top: 0;
-	z-index: 2;
+	z-index: 3;
 	height: calc(var(--vh, 1vh)*100);
 `;
 
@@ -71,37 +107,32 @@ const Overlay = styled(motion.div)`
 `;
 
 const GridWhole = styled(motion.div)`
-  position: relative;
-	z-index: 1;
-	width: 70%;
-	${media.large`
-		width: 58%;
-	`};
-	${media.small`
-		width: 100%;
-	`};
+	width: 95%;
 	border-radius: 20px;
-	>img {
-		width: 100%;
-		border-radius: 20px;
-		${media.medium`
-			border-radius: 16px;
-		`};
-	}
-	>svg {
+  position: relative;
+  overflow: hidden;
+  >svg {
     position: absolute;
-    right: -50px;
-    top: -5px;
-		float: right;
-    margin-bottom: 8px;
+    right: 20px;
+    top: 16px;
+    width: 22px;
+    height: 22px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: rgba(66, 66, 66, .6);
 		color: #fff;
-		font-size: 44px;
 		cursor: pointer;
-		${media.small`
-			right: 0;
-			top: -40px;
-			font-size: 38px;
-		`};
+	}
+`;
+const GridBody = styled.div`
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  ${media.small`
+    max-height: 350px;
+  `};
+  >img {
+		width: 100%;
 	}
 `;
 // grid motion
@@ -114,27 +145,31 @@ const overlay = {
 function Iedu() {
 	// state
 	const [data, setData] = useState<any[]>([]);
+  const [test, setTest] = useState<any[]>([]);
+  const [test2, setTest2] = useState<any[]>([]);
 	const [data2, setData2] = useState<any[]>([]);
-	const [data3, setData3] = useState<any[]>([]);
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
 	// data
 	const imgArr = [tvcfInfo, tvcfInfo2, chance];
 	const imgArr2 = [testStart, testStep1, testStep2, testStep3, testResult];
+  const imgArr3 = [viralStart, viralLoading, viralStep1, viralStep5, viralResult1, viralResult2, viralResult3, viralResult4];
 	const renewalArr = [renewalMain, learnerInfo];
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
 			setData(imgArr);
-			setData2(imgArr2);
-			setData3(renewalArr);
+      setTest(imgArr2);
+      setTest2(imgArr3)
+			setData2(renewalArr);
 			setFunc({ on: focusHandler, off: resetHandler });
 		}
 		return () => {
 			isMount = false;
 			setData([]);
-			setData2([]);
-			setData3([]);
+			setTest([]);
+			setTest2([]);
+      setData2([]);
 			setFunc({});
 		};
 	}, []);
@@ -160,39 +195,66 @@ function Iedu() {
 						<Modal>
 							<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
-								<img src={id} alt="작업물 이미지" />
+                <FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
+                <GridBody><img src={id} alt="작업물 이미지" /></GridBody>
 							</GridWhole>
 						</Modal>
 					) : null}
 				</AnimatePresence>
-				<ChildSection>
-					<div className="sub-view">
-						<div className="sub-view-title">
-							<p className="txt-default">심리 테스트 페이지</p>
-						</div>
-					</div>
-					<div className="grids">
-						{
-							data2?.map((val: any, i: any) => (
-								<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
-									<img src={val} alt="작업물 이미지" />
-								</Grid>
-							))
-						}
-					</div>
-					<AnimatePresence>
-						{id ? (
-							<Modal>
-								<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
-								<GridWhole layoutId={id} >
-									<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
-									<img src={id} alt="작업물 이미지" />
-								</GridWhole>
-							</Modal>
-						) : null}
-					</AnimatePresence>
-				</ChildSection>
+        <ChildSection>
+          <div className="sub-view">
+            <div className="sub-view-title">
+              <p className="txt-default">학부모 유형 검사 페이지</p>
+            </div>
+          </div>
+          <div className="grids">
+            {
+              test2?.map((val: any, i: any) => (
+                <GridZg key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+                  <img src={val} alt="작업물 이미지" />
+                </GridZg>
+              ))
+            }
+          </div>
+          <AnimatePresence>
+            {id ? (
+              <Modal>
+                <Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
+                <GridWhole layoutId={id} >
+                  <FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
+                  <GridBody><img src={id} alt="작업물 이미지" /></GridBody>
+                </GridWhole>
+              </Modal>
+            ) : null}
+          </AnimatePresence>
+        </ChildSection>
+        <ChildSection>
+          <div className="sub-view">
+            <div className="sub-view-title">
+              <p className="txt-default">심리 테스트 페이지</p>
+            </div>
+          </div>
+          <div className="grids">
+            {
+              test?.map((val: any, i: any) => (
+                <GridZg className="fifth" key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+                  <img src={val} alt="작업물 이미지" />
+                </GridZg>
+              ))
+            }
+          </div>
+          <AnimatePresence>
+            {id ? (
+              <Modal>
+                <Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
+                <GridWhole layoutId={id} >
+                  <FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
+                  <GridBody><img src={id} alt="작업물 이미지" /></GridBody>
+                </GridWhole>
+              </Modal>
+            ) : null}
+          </AnimatePresence>
+        </ChildSection>
 			</section>
 			<section className="section-v2">
 				<div className="sub-view">
@@ -202,7 +264,7 @@ function Iedu() {
 				</div>
 				<div className="grids">
 					{
-						data3?.map((val: any, i: any) => (
+						data2?.map((val: any, i: any) => (
 							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
@@ -215,7 +277,7 @@ function Iedu() {
 							<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
 								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
-								<img src={id} alt="작업물 이미지" />
+                <GridBody><img src={id} alt="작업물 이미지" /></GridBody>
 							</GridWhole>
 						</Modal>
 					) : null}
