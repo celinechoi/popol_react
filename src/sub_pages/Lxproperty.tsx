@@ -122,33 +122,31 @@ function Lxproperty() {
 	}, []);
 	return (
 		<div className="sub">
-			<div>
-				<div className="sub-view">
-					<div className="sub-view-title">
-						<h3 className="page-h3">관리자 & GIS(위치정보관리) 페이지</h3>
-					</div>
+			<div className="sub-view">
+				<div className="sub-view-title">
+					<h3 className="page-h3">관리자 & GIS(위치정보관리) 페이지</h3>
 				</div>
-				<div className="grids">
-					{
-						data?.map((val: any, i: any) => (
-							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
-								<img src={val} alt="작업물 이미지" />
-							</Grid>
-						))
-					}
-				</div>
-				<AnimatePresence>
-					{id ? (
-						<Modal>
-							<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
-							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
-								<img src={id} alt="작업물 이미지" />
-							</GridWhole>
-						</Modal>
-					) : null}
-				</AnimatePresence>
 			</div>
+			<div className="grids">
+				{
+					data?.map((val: any, i: any) => (
+						<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+							<img src={val} alt="작업물 이미지" />
+						</Grid>
+					))
+				}
+			</div>
+			<AnimatePresence>
+				{id ? (
+					<Modal>
+						<Overlay variants={overlay} onClick={() => { setId(null); func.off(); }} initial="hidden" animate="visible" exit="exit" />
+						<GridWhole layoutId={id} >
+							<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
+							<img src={id} alt="작업물 이미지" />
+						</GridWhole>
+					</Modal>
+				) : null}
+			</AnimatePresence>
 		</div>
 	)
 }
