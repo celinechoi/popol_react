@@ -19,6 +19,7 @@ import pms_sub3 from "img/sub_pages/radiation/pms/sub3.jpg";
 import pms_sub4 from "img/sub_pages/radiation/pms/sub4.jpg";
 import pms_sub5 from "img/sub_pages/radiation/pms/sub5.jpg";
 import pms_sub6 from "img/sub_pages/radiation/pms/sub6.jpg";
+import { focusHandler, resetHandler } from "function/ModalScroll";
 
 const Grid = styled(motion.div)`
 	display: flex;
@@ -36,20 +37,33 @@ const Grid = styled(motion.div)`
 	}
 `;
 
-const Overlay = styled(motion.div)`
-  width: 100%;
+const Modal = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
   height: 100%;
   position: fixed;
 	left: 0;
 	top: 0;
 	z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	height: calc(var(--vh, 1vh)*100);
+`;
+
+const Overlay = styled(motion.div)`
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	opacity: .4;
+	z-index: -1;
 `;
 
 const GridWhole = styled(motion.div)`
   position: relative;
+	z-index: 1;
 	width: 70%;
 	${media.large`
 		width: 58%;
@@ -82,8 +96,11 @@ const overlay = {
 
 
 function Radiation() {
+	// state
 	const [data, setData] = useState<any[]>();
 	const [data2, setData2] = useState<any[]>();
+	const [func, setFunc] = useState<any>({ on: null, off: null });
+	// data
 	const [id, setId] = useState<null | string>(null);
 	const cmsArr = [cms_main, cms_sub1, cms_sub2, cms_sub3, cms_sub4, cms_sub5, cms_sub6];
 	const pmsArr = [pms_login, pms_main, pms_sub1, pms_sub2, pms_sub3, pms_sub4, pms_sub5, pms_sub6];
@@ -92,9 +109,13 @@ function Radiation() {
 		if (isMount) {
 			setData(cmsArr);
 			setData2(pmsArr);
+			setFunc({ on: focusHandler, off: resetHandler });
 		}
 		return () => {
 			isMount = false;
+			setData([]);
+			setData2([]);
+			setFunc({});
 		};
 	}, []);
 	return (
@@ -109,7 +130,7 @@ function Radiation() {
 				<div className="grids">
 					{
 						data?.map((val: any, i: any) => (
-							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))
@@ -117,18 +138,13 @@ function Radiation() {
 				</div>
 				<AnimatePresence>
 					{id ? (
-						<Overlay
-							variants={overlay}
-							onClick={() => setId(null)}
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-						>
+						<Modal>
+							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} />
+								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />
 							</GridWhole>
-						</Overlay>
+						</Modal>
 					) : null}
 				</AnimatePresence>
 			</div>
@@ -142,7 +158,7 @@ function Radiation() {
 				<div className="grids">
 					{
 						data2?.map((val: any, i: any) => (
-							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))
@@ -150,18 +166,13 @@ function Radiation() {
 				</div>
 				<AnimatePresence>
 					{id ? (
-						<Overlay
-							variants={overlay}
-							onClick={() => setId(null)}
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-						>
+						<Modal>
+							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} />
+								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />
 							</GridWhole>
-						</Overlay>
+						</Modal>
 					) : null}
 				</AnimatePresence>
 			</div>

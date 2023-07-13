@@ -66,6 +66,14 @@ body {
 	font: 14px 'Noto Sans KR', 'Righteous';
   font-weight: 300;
   line-height: 1.5;
+	&.no {
+		&-scroll {
+			overflow: hidden!important;
+			touch-action: none!important;
+			-webkit-overflow-scrolling: none!important;
+			overscroll-behavior: none!important
+		}
+	}
 }
 a {
   text-decoration:none;

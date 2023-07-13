@@ -4,18 +4,8 @@ import { media } from "style/media_query";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import login from "img/sub_pages/bdna/login.jpg";
-import main from "img/sub_pages/bdna/main.jpg";
-import dashboard from "img/sub_pages/bdna/dashboard.jpg";
-import map from "img/sub_pages/bdna/map.jpg";
-import noticeEnrollment from "img/sub_pages/bdna/notice_enrollment.jpg";
-import noticeList from "img/sub_pages/bdna/notice_list.jpg";
-import noticeView from "img/sub_pages/bdna/notice_view.jpg";
-import enrollment2 from "img/sub_pages/bdna/outsourcing_list2_enrollment.jpg";
-import outsourcingList from "img/sub_pages/bdna/outsourcing_list.jpg";
-import outsourcingList2 from "img/sub_pages/bdna/outsourcing_list2.jpg";
-import operationModified from "img/sub_pages/bdna/operation_modified.jpg";
 import { focusHandler, resetHandler } from "function/ModalScroll";
+import main from "img/sub_pages/cobe/main.png";
 
 const Grid = styled(motion.div)`
 	display: flex;
@@ -91,13 +81,13 @@ const overlay = {
 };
 
 
-function Bdna() {
+function Cobe() {
 	// state
 	const [data, setData] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
 	// data
-	const imgArr = [login, main, dashboard, map, noticeEnrollment, noticeList, noticeView, enrollment2, outsourcingList, outsourcingList2, operationModified];
+	const imgArr = [main];
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
@@ -144,4 +134,4 @@ function Bdna() {
 	)
 }
 
-export default Bdna;
+export default Cobe;

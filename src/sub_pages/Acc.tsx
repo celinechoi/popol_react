@@ -13,6 +13,7 @@ import sub5 from "img/sub_pages/acc/sub5-9.jpg";
 import sub6 from "img/sub_pages/acc/sub6-6.jpg";
 import ticket from "img/sub_pages/acc/ticketing_main.jpg";
 import ticketArabic from "img/sub_pages/acc/ticketing_main_arabic.jpg";
+import { focusHandler, resetHandler } from "function/ModalScroll";
 // import ticketMo from "img/sub_pages/acc/ticketing_main_mo.jpg";
 // import ticketArabicMo from "img/sub_pages/acc/ticketing_main_arabic_mo.jpg";
 
@@ -32,20 +33,33 @@ const Grid = styled(motion.div)`
 	}
 `;
 
-const Overlay = styled(motion.div)`
-  width: 100%;
+const Modal = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
   height: 100%;
   position: fixed;
 	left: 0;
 	top: 0;
 	z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	height: calc(var(--vh, 1vh)*100);
+`;
+
+const Overlay = styled(motion.div)`
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	opacity: .4;
+	z-index: -1;
 `;
 
 const GridWhole = styled(motion.div)`
   position: relative;
+	z-index: 1;
 	width: 70%;
 	${media.large`
 		width: 58%;
@@ -77,9 +91,12 @@ const overlay = {
 };
 
 function Acc() {
+	// state
 	const [data, setData] = useState<any[]>();
 	const [data2, setData2] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
+	const [func, setFunc] = useState<any>({ on: null, off: null });
+	// data
 	const accArr = [main, sub1, sub2, sub3, sub4, sub5, sub6];
 	const ticketArr = [ticket, ticketArabic];
 	useEffect(() => {
@@ -87,9 +104,13 @@ function Acc() {
 		if (isMount) {
 			setData(accArr);
 			setData2(ticketArr);
+			setFunc({ on: focusHandler, off: resetHandler });
 		}
 		return () => {
 			isMount = false;
+			setData([]);
+			setData2([]);
+			setFunc({});
 		};
 	}, []);
 	return (
@@ -103,7 +124,7 @@ function Acc() {
 				<div className="grids">
 					{
 						data?.map((val: any, i: any) => (
-							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))
@@ -111,18 +132,13 @@ function Acc() {
 				</div>
 				<AnimatePresence>
 					{id ? (
-						<Overlay
-							variants={overlay}
-							onClick={() => setId(null)}
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-						>
+						<Modal>
+							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} />
+								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />
 							</GridWhole>
-						</Overlay>
+						</Modal>
 					) : null}
 				</AnimatePresence>
 			</div>
@@ -135,26 +151,21 @@ function Acc() {
 				<div className="grids">
 					{
 						data2?.map((val: any, i: any) => (
-							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
-								<img src={val} alt="작업물 이미지" className={i === 2 || i === 3 ? "small" : ""} />
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))
 					}
 				</div>
 				<AnimatePresence>
 					{id ? (
-						<Overlay
-							variants={overlay}
-							onClick={() => setId(null)}
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-						>
-							<GridWhole layoutId={id}>
-								<FontAwesomeIcon icon={faXmark} />
+						<Modal>
+							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
+							<GridWhole layoutId={id} >
+								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />
 							</GridWhole>
-						</Overlay>
+						</Modal>
 					) : null}
 				</AnimatePresence>
 			</div>

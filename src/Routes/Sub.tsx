@@ -8,6 +8,9 @@ import Radiation from "sub_pages/Radiation";
 import Acc from "sub_pages/Acc";
 import Mmca from "sub_pages/Mmca";
 import Bdna from "sub_pages/Bdna";
+import Lxproperty from "sub_pages/Lxproperty";
+import Gaon from "sub_pages/Gaon";
+import Cobe from "sub_pages/Cobe";
 
 const SubPage = styled.div`
 	position: relative;
@@ -453,7 +456,8 @@ function Sub() {
 				<section>
 					{
 						{
-							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />
+							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />,
+							"cobe": <Cobe />
 						}[state.id]
 					}
 				</section>

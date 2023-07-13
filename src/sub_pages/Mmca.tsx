@@ -12,6 +12,7 @@ import sub3 from "img/sub_pages/mmca/sub2-3.jpg";
 import sub4 from "img/sub_pages/mmca/sub3-1.jpg";
 import sub5 from "img/sub_pages/mmca/sub4-2.jpg";
 import sub6 from "img/sub_pages/mmca/sub5-3.jpg";
+import { focusHandler, resetHandler } from "function/ModalScroll";
 
 const Grid = styled(motion.div)`
 	display: flex;
@@ -29,20 +30,33 @@ const Grid = styled(motion.div)`
 	}
 `;
 
-const Overlay = styled(motion.div)`
-  width: 100%;
+const Modal = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
   height: 100%;
   position: fixed;
 	left: 0;
 	top: 0;
 	z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	height: calc(var(--vh, 1vh)*100);
+`;
+
+const Overlay = styled(motion.div)`
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	opacity: .4;
+	z-index: -1;
 `;
 
 const GridWhole = styled(motion.div)`
   position: relative;
+	z-index: 1;
 	width: 70%;
 	${media.large`
 		width: 58%;
@@ -74,17 +88,23 @@ const overlay = {
 };
 
 
-function Radiation() {
+function Mmca() {
+	// state
 	const [data, setData] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
+	const [func, setFunc] = useState<any>({ on: null, off: null });
+	// data
 	const cmsArr = [login, main, sub1, sub2, sub3, sub4, sub5, sub6];
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
 			setData(cmsArr);
+			setFunc({ on: focusHandler, off: resetHandler });
 		}
 		return () => {
 			isMount = false;
+			setData([]);
+			setFunc({});
 		};
 	}, []);
 	return (
@@ -99,7 +119,7 @@ function Radiation() {
 				<div className="grids">
 					{
 						data?.map((val: any, i: any) => (
-							<Grid onClick={() => setId(val)} key={i} layoutId={i}>
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))
@@ -107,18 +127,13 @@ function Radiation() {
 				</div>
 				<AnimatePresence>
 					{id ? (
-						<Overlay
-							variants={overlay}
-							onClick={() => setId(null)}
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-						>
+						<Modal>
+							<Overlay variants={overlay} onClick={() => setId(null)} initial="hidden" animate="visible" exit="exit" />
 							<GridWhole layoutId={id} >
-								<FontAwesomeIcon icon={faXmark} />
+								<FontAwesomeIcon icon={faXmark} onClick={() => { setId(null); func.off(); }} />
 								<img src={id} alt="작업물 이미지" />
 							</GridWhole>
-						</Overlay>
+						</Modal>
 					) : null}
 				</AnimatePresence>
 			</div>
@@ -126,4 +141,4 @@ function Radiation() {
 	)
 }
 
-export default Radiation;
+export default Mmca;

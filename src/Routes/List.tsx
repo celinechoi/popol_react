@@ -152,7 +152,7 @@ export interface WorkInterface {
 	startMonth: number | undefined,
 	endMonth: number | undefined,
 	endYear: number | undefined,
-  code: number | undefined,
+	code: number | undefined,
 }
 
 export interface TypesParams {
@@ -161,46 +161,47 @@ export interface TypesParams {
 
 function List() {
 	const { typeId } = useParams<TypesParams>();
-	// console.log(useParams(), 'params');
+	// state
 	const [loading, setLoading] = useState(true);
 	const [ImgLoading, setImgLoading] = useState(true);
 	const [list, setList] = useState<WorkInterface[]>([]);
 	useEffect(() => {
-    let isMount = true;
-    if (isMount) {
-      const collection = dbService.collection(`${typeId}`);
-      collection
-        .orderBy("code", "desc") // desc
-        // .orderBy("endMonth", "desc")
-        .onSnapshot((snapshot: any) => {
-          const itemArr = snapshot.docs.map((doc: any) => ({
-            id: doc.id,
-            projectName: doc.data().projectName,
-            customer: doc.data().customer,
-            fileUrl: doc.data().fileUrl,
-            pageImgs: doc.data().pageImgs,
-            pagesMap: doc.data().pagesMap,
-            description: doc.data().description,
-            did: doc.data().did,
-            keyWords: doc.data().keywords,
-            startYear: doc.data().startYear,
-            startMonth: doc.data().startMonth,
-            endYear: doc.data().endYear,
-            endMonth: doc.data().endMonth,
-            code: doc.data().code,
-            ...doc.data(),
-          }));
-          setList(itemArr);
-          setLoading(false);
-          timeReturn();
-          return () => {
-            setLoading(false)
-          };
-        })
-    }
-    return () => {
-      isMount = false;
-    };
+		let isMount = true;
+		if (isMount) {
+			const collection = dbService.collection(`${typeId}`);
+			collection
+				.orderBy("code", "desc") // desc
+				// .orderBy("endMonth", "desc")
+				.onSnapshot((snapshot: any) => {
+					const itemArr = snapshot.docs.map((doc: any) => ({
+						id: doc.id,
+						projectName: doc.data().projectName,
+						customer: doc.data().customer,
+						fileUrl: doc.data().fileUrl,
+						pageImgs: doc.data().pageImgs,
+						pagesMap: doc.data().pagesMap,
+						description: doc.data().description,
+						did: doc.data().did,
+						keyWords: doc.data().keywords,
+						startYear: doc.data().startYear,
+						startMonth: doc.data().startMonth,
+						endYear: doc.data().endYear,
+						endMonth: doc.data().endMonth,
+						code: doc.data().code,
+						...doc.data(),
+					}));
+					setList(itemArr);
+					setLoading(false);
+					timeReturn();
+					// return () => {
+					// 	setLoading(false)
+					// };
+				})
+		}
+		return () => {
+			isMount = false;
+			setList([]);
+		};
 	}, [typeId]);
 	let timer = setTimeout(() => { setImgLoading(false) }, 1000);
 	let timeReturn = () => {
