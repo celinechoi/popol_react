@@ -13,6 +13,8 @@ import Gaon from "sub_pages/Gaon";
 import Cobe from "sub_pages/Cobe";
 import Iedu from "sub_pages/Iedu";
 import Hrdi from "sub_pages/Hrdi";
+import { motion } from "framer-motion";
+import Ailemp from "sub_pages/Ailemp";
 
 const SubPage = styled.div`
 	position: relative;
@@ -386,15 +388,32 @@ function Sub() {
 	}
 
 	// Slider index
-	const [index, setIndex] = useState(0);
-	const [leaving, setLeaving] = useState(false);
-	const increaseIndex = () => {
-		if (leaving) return;
-		setLeaving(true);
-		setIndex((prev) => prev + 1);
-	}
-	const toggleLeaving = () => setLeaving((prev) => !prev)
+	// const [index, setIndex] = useState(0);
+	// const [leaving, setLeaving] = useState(false);
+	// const increaseIndex = () => {
+	// 	if (leaving) return;
+	// 	setLeaving(true);
+	// 	setIndex((prev) => prev + 1);
+	// }
+	// const toggleLeaving = () => setLeaving((prev) => !prev)
 
+	// motion
+	// const arrowVariants = {
+	// 	start: {
+	// 		opacity: 0.5,
+	// 		top: 10
+	// 	},
+	// 	end: {
+	// 		opacity: 1,
+	// 		top: 0,
+	// 		transition: {
+	// 			type: "tween",
+	// 			// stiffness: 100,
+	// 			duration: 3,
+	// 			repeat: 5,
+	// 		}
+	// 	}
+	// }
 
 	return (
 		<SubPage>
@@ -469,7 +488,7 @@ function Sub() {
 				<section>
 					{
 						{
-							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "hrdi": <Hrdi />
+							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "ailemp": <Ailemp />, "hrdi": <Hrdi />
 						}[state.id]
 					}
 				</section>

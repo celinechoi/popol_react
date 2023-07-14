@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Tabs from "routes/Tabs";
 import { media } from "style/media_query";
 import Loading from "components/Loading";
+import { motion } from "framer-motion";
 
 const ListPage = styled.div`
 	min-height: 1080px;
@@ -43,10 +44,9 @@ const Container = styled.div`
 	`};
 `;
 
-const Boxes = styled.ul`
+const Boxes = styled(motion.ul)`
 	display: flex;
 	flex-wrap: wrap;
-	gap: 40px 32px;
 	${media.medium`
 		gap: 32px 20px;
 	`};
@@ -56,10 +56,9 @@ const Boxes = styled.ul`
 	`}
 `;
 
-const Box = styled.li`
+const Box = styled(motion.li)`
 	flex: 0 0 calc(100%/3 - 32px/3*2);
 	padding: 24px;
-  border-radius: 20px;
   box-shadow: ${(props) => props.theme.shadow.box};
   border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
   background-color: ${(props) => props.theme.bgColor.gray.first};
@@ -159,6 +158,38 @@ export interface TypesParams {
 	typeId: string;
 }
 
+// motion
+const boxesVariants = {
+	start: {
+		gap: 0
+	},
+	end: {
+		gap: '40px 32px',
+		transition: {
+			type: "spring",
+			duration: .2,
+			delayChildren: 0.5,
+			staggerChildren: 0.2,
+		}
+	}
+}
+
+const boxVariants = {
+	start: {
+		borderRadius: 0,
+		opacity: 0,
+		y: 10,
+	},
+	end: {
+		borderRadius: 20,
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: .5,
+		}
+	}
+}
+
 function List() {
 	const { typeId } = useParams<TypesParams>();
 	// state
@@ -203,7 +234,7 @@ function List() {
 			setList([]);
 		};
 	}, [typeId]);
-	let timer = setTimeout(() => { setImgLoading(false) }, 1000);
+	let timer = setTimeout(() => { setImgLoading(false) }, 700);
 	let timeReturn = () => {
 		return () => {
 			clearTimeout(timer);
@@ -224,10 +255,10 @@ function List() {
 							<Loading name="List" />
 						) : (
 							<>
-								<Boxes>
+								<Boxes variants={boxesVariants} initial="start" animate="end">
 									{
 										list.map((val) => (
-											<Box key={val.customer}>
+											<Box key={val.customer} variants={boxVariants}>
 												<Link to={{
 													pathname: `/works/${typeId}/${val.id}`,
 													state: {
@@ -269,8 +300,8 @@ function List() {
 							</>
 						)}
 					</div>
-				</Container>
-			</ListPage>
+				</Container >
+			</ListPage >
 		</>
 	)
 }

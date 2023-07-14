@@ -243,14 +243,12 @@ function App() {
 	}, []);
 	const themeSate = useRecoilValue(booleanState);
 	return (
-		<ReactQueryFirestoreProvider firestore={dbService} reactQueryConfig={reactQueryConfig}>
-			<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
-				<GlobalStyle />
-				{init ? <AppRouter isLoggedIn={isLoggedIn} /> : <Initializing />}
-				<Top />
-				<Footer />
-			</ThemeProvider>
-		</ReactQueryFirestoreProvider>
+		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
+			<GlobalStyle />
+			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : <Initializing />}
+			<Top />
+			<Footer />
+		</ThemeProvider>
 	);
 }
 
