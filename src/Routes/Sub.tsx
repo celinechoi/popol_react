@@ -12,6 +12,7 @@ import Lxproperty from "sub_pages/Lxproperty";
 import Gaon from "sub_pages/Gaon";
 import Cobe from "sub_pages/Cobe";
 import Iedu from "sub_pages/Iedu";
+import Hrdi from "sub_pages/Hrdi";
 
 const SubPage = styled.div`
 	position: relative;
@@ -399,15 +400,15 @@ function Sub() {
 		<SubPage>
 			<div className="inner">
 				<BackBox>
-          <div className="inner-flex" onClick={backFunc}>
-            <FontAwesomeIcon icon={faChevronLeft} size="lg" />
-            <p className="page-h2">Works</p>
-          </div>
-          <Indexs>
-            <Index onClick={backFunc}>Works</Index>
-            <FontAwesomeIcon icon={faChevronRight} />
-            <Index onClick={backFunc}>{state.parentPath}</Index>
-          </Indexs>
+					<div className="inner-flex" onClick={backFunc}>
+						<FontAwesomeIcon icon={faChevronLeft} size="lg" />
+						<p className="page-h2">Works</p>
+					</div>
+					<Indexs>
+						<Index onClick={backFunc}>Works</Index>
+						<FontAwesomeIcon icon={faChevronRight} />
+						<Index onClick={backFunc}>{state.parentPath}</Index>
+					</Indexs>
 				</BackBox>
 				<FrontInfo>
 					<Flexbox>
@@ -468,8 +469,7 @@ function Sub() {
 				<section>
 					{
 						{
-							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />,
-							"cobe": <Cobe />, "iedu": <Iedu />
+							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "hrdi": <Hrdi />
 						}[state.id]
 					}
 				</section>
