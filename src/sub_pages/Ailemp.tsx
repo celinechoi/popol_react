@@ -1,38 +1,53 @@
-import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
 import styled from "styled-components";
+import main from "img/sub_pages/ailemp/index.png";
+import { useEffect, useRef } from "react";
 
-const PageFrame = styled(motion.div)`
-	height: 200vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const PageFrame = styled.div`
+	background-color: linear-gradient(135deg, #00BD99, #00C3ED);
 `;
 
-const Page = styled(motion.div)`
- width: 200px;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 40px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+const Page = styled.div`
+  
+`;
+
+const ScrollWindow = styled.div`
+  width: 60%;
+  height: calc(56.25vw - 26px);
+  border: 1px solid ${(props) => props.theme.borColor.gray.first};
+  border-radius: 18px;
+`;
+
+const Img = styled.img`
+  display: block;
+  width: 100%;
+`;
+
+const ScrollWindowInner = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 `;
 
 function Ailemp() {
-	const x = useMotionValue(0);
-	const rotateZ = useTransform(x, [-800, 800], [-360, 360]);
-	const gradient = useTransform(
-		x, [-800, 800],
-		[
-			"linear-gradient(135deg, rgb(0, 210, 238), rgb(0, 83, 238))",
-			"linear-gradient(135deg, rgb(0, 238, 155), rgb(238, 178, 0))",
-		]
-	);
-	const { scrollYProgress } = useViewportScroll();
-	const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
+  const windowRef = useRef<HTMLDivElement>(null);
+  const widnwInnerRef = useRef<HTMLImageElement>(null);
+  useEffect(()=>{
+    console.log(windowRef.current?.offsetHeight || 0);
+    console.log(widnwInnerRef.current?.offsetHeight || 0);
+  }, []);
+  
 	return (
 		<div className="sub">
-			<PageFrame style={{ background: gradient }}>
-				<Page style={{ x, rotateZ, scale }} drag="x" dragSnapToOrigin />
+			<PageFrame>
+        <Page>
+          <h3># Main</h3>
+          <ScrollWindow ref={windowRef}>
+            <ScrollWindowInner>
+              <Img src={main} alt="메인페이지" ref={widnwInnerRef} />
+            </ScrollWindowInner>
+          </ScrollWindow>
+        </Page>
 			</PageFrame>
 		</div>
 	);

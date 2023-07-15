@@ -15,6 +15,7 @@ import Iedu from "sub_pages/Iedu";
 import Hrdi from "sub_pages/Hrdi";
 import { motion } from "framer-motion";
 import Ailemp from "sub_pages/Ailemp";
+import Hsjob from "sub_pages/Hsjob";
 
 const SubPage = styled.div`
 	position: relative;
@@ -488,7 +489,7 @@ function Sub() {
 				<section>
 					{
 						{
-							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "ailemp": <Ailemp />, "hrdi": <Hrdi />
+							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "ailemp": <Ailemp />, "hrdi": <Hrdi />, "hsjob": <Hsjob />
 						}[state.id]
 					}
 				</section>
