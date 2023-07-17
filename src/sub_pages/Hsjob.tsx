@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
 import main from "img/sub_pages/hsjob/index.png";
 import mainTm from "img/sub_pages/hsjob/index_tm.png";
+import mainTmTm from "img/sub_pages/hsjob/index_tm_tm.png";
 import worknet from "img/sub_pages/hsjob/worknet.png";
 import worknetTm from "img/sub_pages/hsjob/worknet_tm.png";
 import jrounge from "img/sub_pages/hsjob/jrounge.png";
 import jroungeV2 from "img/sub_pages/hsjob/jrounge_v2.png";
 import notice from "img/sub_pages/hsjob/apply_notice.png";
 import noticeTm from "img/sub_pages/hsjob/apply_notice_tm.png";
+import { media } from "style/media_query";
 
 const PageFrame = styled(motion.div)`
   margin-top: 48px;
@@ -20,6 +22,10 @@ const PageFrame = styled(motion.div)`
 `;
 
 const Page = styled.div`
+	padding-top: 60px;
+	${media.medium`
+		padding-top: 0;
+	`};
 	.section {
 		position: relative;
 	}
@@ -37,6 +43,11 @@ const Page = styled.div`
 			&:hover {
 				background-color: #000;
 			}
+			${media.small`
+				padding: 12px;
+				right: 12px;
+    		top: 12px;
+			`};
 		}
 	}
 `;
@@ -48,6 +59,12 @@ const Spacing = styled.div`
 const Title = styled.div`
 	overflow: hidden;
 	padding: 0 32px;
+	${media.medium`
+		padding: 0 24px;
+	`};
+	${media.small`
+		padding: 0 16px;
+	`};
 `;
 
 const TitleH1 = styled(motion.div)`
@@ -57,9 +74,32 @@ const TitleH1 = styled(motion.div)`
   color: rgba(255, 255, 255, 0.4);
 	font-size: 32px;
   font-weight: 700;
+	${media.large`
+		padding: 0 42px;
+	`};
+	${media.medium`
+		padding: 0;
+		font-size: 80px !important;
+	`};
+	${media.smallToo`
+		left: auto;
+		right: auto;
+		top: auto;
+		font-size: 64px !important;
+	`};
 	&.right {
 		left: auto;
 		right: 32px;
+		${media.medium`
+			right: auto;
+		`};
+		${media.smallToo`
+			font-size: 54px !important;
+			line-height: 1.3;
+		`};
+		${media.micro`
+			font-size: 46px !important;
+		`};
 	}
 `;
 
@@ -70,6 +110,17 @@ const Text = styled(motion.div)`
 	color: #fff;
   font-size: 18px;
   font-weight: 500;
+	&.worknet {
+		&-txt {
+			${media.medium`
+				margin-top: 200px;
+			`};
+			${media.micro`
+				margin-top: 160px;
+				font-size: 15px;
+			`};
+		}
+	}
 `;
 
 const Content = styled.div`
@@ -91,6 +142,14 @@ const ScrollWindow = styled.div`
   margin: 60px auto 0;
   border: 2px solid ${(props) => props.theme.bgColor.gray.first};
   border-radius: 18px;
+	background-color: ${(props) => props.theme.textColor.gray.fifth};
+	${media.medium`
+	width: 95%;
+    height: 300px;
+	`};
+	${media.small`
+		
+	`};
 `;
 
 const Info = styled(motion.div)`
@@ -134,6 +193,11 @@ const ImgBox = styled.div`
 				left: 32%;
 				top: auto;
 				bottom: 25%;
+				${media.medium`
+					top: 16%;
+					bottom: auto;
+					left: 12%;
+				`};
 			}
 		}
 	}
@@ -145,6 +209,9 @@ const ImgBox = styled.div`
 const ImgBoxSpacing = styled.div`
 	position: relative;
 	padding: 32px;
+	${media.medium`
+		padding: 32px 0 0;
+	`};
 	&.jobposting {
 		.icon {
 			&-shortcuts {
@@ -175,6 +242,14 @@ const ImgBoxSpacingL = styled.div`
 			&-shortcuts {
 				right: 14%;
 				top: 3%;
+			}
+		}
+		&-v2 {
+			.icon {
+				&-shortcuts {
+					right: 14%;
+					top: 3%;
+				}
 			}
 		}
 	}
@@ -214,15 +289,22 @@ const Circle = styled(motion.div)`
 
 const Boxes = styled(motion.ul)`
 	display: flex;
-	align-items: center;
+	flex-wrap: wrap;
+	align-items: flex-start;
 	justify-content: flex-start;
 	gap: 12px;
+	${media.smallToo`
+		gap: 12px 5px;
+	`};
 `;
 
 const Box = styled(motion.li)`
 	color: #333;
 	font-size: 13px;
 	font-weight: 500;
+	${media.smallToo`
+		flex: 0 0 calc(100%/2 - 5px/2*1);
+	`};
 	.color {
 		&-box {
 			flex: 0 0 auto;
@@ -400,18 +482,20 @@ function Hsjob() {
 						</ScrollWindow>
 						<Spacing>
 							<ImgBox>
-								<img src={mainTm} alt="작업 페이지 미리보기" />
+								<img src={mainTm} className="tm-hide" alt="작업 페이지 미리보기" />
+								<img src={mainTmTm} className="tm-show" alt="작업 페이지 미리보기" />
 							</ImgBox>
 						</Spacing>
 					</div>
 					<div className="section">
 						<Title>
-							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 직업심리검사 (워크넷)</TitleH1>
-							<Text>워크넷에서 시행하고있는 직업과 관련한 다양한 가치 중에서 어떤 가치를 주요하게 만족시키고 싶은지 알아볼 수 있는 직업 심리검사 서비스를 <br />한신 J-라운지에서도 이용할 수 있도록 홈페이지 컨셉에 맞게 제작하였습니다. <br />분류 선택시 자동으로 다음 분류 단계로 넘어가는 형태이며 마지막 직무를 선택하면 사용자가 선택한 직무에 관련된 정보가 나타나 정보를 습득할 수 있습니다.</Text>
+							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 직업심리검사 <br className="tm-show" />(워크넷)</TitleH1>
+							<Text className="worknet-txt">워크넷에서 시행하고있는 직업과 관련한 다양한 가치 중에서 어떤 가치를 주요하게 만족시키고 싶은지 알아볼 수 있는 직업 심리검사 서비스를 <br className="lp-hide" />한신 J-라운지에서도 이용할 수 있도록 홈페이지 컨셉에 맞게 제작하였습니다. <br />분류 선택시 자동으로 다음 분류 단계로 넘어가는 형태이며 마지막 직무를 선택하면 사용자가 선택한 직무에 관련된 정보가 나타나 정보를 습득할 수 있습니다.</Text>
 						</Title>
 						<ImgBox className="worknet">
 							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/c_info_job2.html") }} />
-							<img src={worknet} alt="작업 페이지 미리보기" />
+							<img src={worknet} className="tm-hide" alt="작업 페이지 미리보기" />
+							<img src={worknetTm} className="tm-show" alt="작업 페이지 미리보기" />
 						</ImgBox>
 					</div>
 					<div className="section">
@@ -426,7 +510,7 @@ function Hsjob() {
 								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts step2" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge.html") }} />
 								<img src={jrounge} alt="작업 페이지 미리보기" />
 							</ImgBoxSpacingR>
-							<ImgBoxSpacingL>
+							<ImgBoxSpacingL className="jrounge-v2">
 								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge_company.html") }} />
 								<img src={jroungeV2} alt="작업 페이지 미리보기" />
 							</ImgBoxSpacingL>
@@ -437,12 +521,13 @@ function Hsjob() {
 							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 채용공고</TitleH1>
 							<Text>
 								기업 회원의 경우, 직접 등록한 채용 공고의 현황과 공고에 지원한 지원자들을의 수를
-								파악할 수 있도록 설계하였습니다. <br />각각의 콘텐츠 클릭시 해당하는 마이페이지 메뉴로 넘어가 상세한 내용을 볼 수 있습니다.
+								파악할 수 있도록 설계하였습니다. <br className="tm-hide" />각각의 콘텐츠 클릭시 해당하는 마이페이지 메뉴로 넘어가 상세한 내용을 볼 수 있습니다.
 							</Text>
 						</Title>
 						<ImgBoxSpacing className="jobposting">
 							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_job_posting.html") }} />
-							<img src={notice} alt="작업 페이지 미리보기" />
+							<img src={notice} className="tm-hide" alt="작업 페이지 미리보기" />
+							<img src={noticeTm} className="tm-show" alt="작업 페이지 미리보기" />
 							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts step2" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_job_company.html") }} />
 						</ImgBoxSpacing>
 					</div>

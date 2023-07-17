@@ -155,6 +155,9 @@ button {
 	${media.large`
 		padding-top: 60px;
 	`};
+	${media.medium`
+		padding-top: 40px;
+	`};
 	&-v2 {
 		padding-top: 60px;
 		${media.large`
@@ -215,7 +218,33 @@ button {
 		`};
 	}
 }
-
+/* show OR hide */
+.lp {
+	&-show {
+		display: none;
+		${media.large`
+			display: block;
+		`};
+	}
+	&-hide {
+		${media.large`
+			display: none;
+		`};
+	}
+}
+.tm {
+	&-show {
+		display: none;
+		${media.medium`
+			display: block;
+		`};
+	}
+	&-hide {
+		${media.medium`
+			display: none;
+		`};
+	}
+}
 `;
 
 // react-query-firestore
