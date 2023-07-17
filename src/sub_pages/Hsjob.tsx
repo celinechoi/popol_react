@@ -2,25 +2,41 @@ import styled from "styled-components";
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
 import main from "img/sub_pages/hsjob/index.png";
 import mainTm from "img/sub_pages/hsjob/index_tm.png";
 import worknet from "img/sub_pages/hsjob/worknet.png";
 import worknetTm from "img/sub_pages/hsjob/worknet_tm.png";
 import jrounge from "img/sub_pages/hsjob/jrounge.png";
 import jroungeV2 from "img/sub_pages/hsjob/jrounge_v2.png";
+import notice from "img/sub_pages/hsjob/apply_notice.png";
+import noticeTm from "img/sub_pages/hsjob/apply_notice_tm.png";
 
 const PageFrame = styled(motion.div)`
   margin-top: 48px;
 	padding: 0 0 100px;
   border-radius: 20px;
-	background: linear-gradient(304deg, #3b1e87, #ffb72e);
+	background: linear-gradient(260deg, #3b1e87, #ffb72e);
 `;
 
 const Page = styled.div`
 	.section {
-		&-v2 {
-			position: relative;
+		position: relative;
+	}
+	.icon {
+		&-shortcuts {
+			position: absolute;
+			right: 24px;
+			top: 24px;
+			z-index: 1;
+			padding: 15px;
+			background-color: ${props => props.theme.point.green};
+			border-radius: 50%;
+			opacity: 0.6;
+			cursor: pointer;
+			&:hover {
+				background-color: #000;
+			}
 		}
 	}
 `;
@@ -110,8 +126,82 @@ const ScrollerMain = styled(motion.div)`
 `;
 
 const ImgBox = styled.div`
+	position: relative;
+	&.worknet {
+		.icon {
+			&-shortcuts {
+				right: auto;
+				left: 32%;
+				top: auto;
+				bottom: 25%;
+			}
+		}
+	}
 	>img {
 		width: 100%;
+	}
+`;
+
+const ImgBoxSpacing = styled.div`
+	position: relative;
+	padding: 32px;
+	&.jobposting {
+		.icon {
+			&-shortcuts {
+				right: auto;
+				left: 3.5%;
+				top: 3%;
+				&.step2 {
+					right: 4%;
+					left: auto;
+					top: auto;
+					bottom: 3.5%;
+				}
+			}
+		}
+	}
+	>img {
+		width: 100%;
+	}
+`;
+
+const ImgBoxSpacingL = styled.div`
+	position: relative;
+	width: 100%;
+	padding: 10px 32px 10px 0;
+	text-align: left;
+	&.jrounge {
+		.icon {
+			&-shortcuts {
+				right: 14%;
+				top: 3%;
+			}
+		}
+	}
+	>img {
+		width: 90%;
+	}
+`;
+
+const ImgBoxSpacingR = styled.div`
+	position: relative;
+	width: 100%;
+	padding: 10px 32px;
+	text-align: right;
+	&.jrounge {
+		.icon {
+			&-shortcuts {
+				right: 14%;
+				top: 3%;
+				&.step2 {
+					right: 4%;
+    			top: 34%;
+				}
+			}
+		}
+	}
+	>img {
+		width: 90%;
 	}
 `;
 
@@ -171,7 +261,7 @@ const imgVariants = {
 	}
 }
 
-const dragVariants = {
+const linkVariants = {
 	initial: {
 		opacity: 1
 	},
@@ -192,8 +282,8 @@ function Hsjob() {
 	// const SrcollerMainH = useRef<HTMLDivElement>(null).current?.offsetHeight;
 	const { scrollYProgress } = useViewportScroll();
 	const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-	const size = useTransform(scrollYProgress, [0, 0.2, 0.4], ["48px", "144px", "200px"]);
-	const size2 = useTransform(scrollYProgress, [0, 0.4, 0.6], ["48px", "144px", "200px"]);
+	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "144px", "200px", "245px"]);
+	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "130px", "144px", "204px"]);
 	useEffect(() => {
 		scrollYProgress.onChange(() => {
 			console.log(scrollYProgress.get());
@@ -205,10 +295,10 @@ function Hsjob() {
 		<div className="sub">
 			<PageFrame>
 				<Page>
-					<div className="section-v2">
+					<div className="section">
 						<Title>
 							<TitleH1 style={{ fontSize: size, color: "#3b1e87", opacity }}>Color</TitleH1>
-							<Text>
+							<Text style={{ color: "#e1d2f9" }}>
 								직접 제작한 VSQUARE의 System Kit 아래 var_function.scss 안 $primary, $secondary 변수에 <br />해당 프로젝트 단계별 Primary와 Secondary Color를 각 변수에 담아 체계적인 퍼블리싱 작업을 하였습니다.
 							</Text>
 						</Title>
@@ -295,13 +385,13 @@ function Hsjob() {
 							</Boxes>
 						</Content>
 					</div>
-					<div className="section-v2">
+					<div className="section">
 						<Title>
-							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># Main</TitleH1>
+							<TitleH1 style={{ fontSize: size, opacity }} className="right"># Main</TitleH1>
 							<Text>한신대학교 한신J-라운지는 ‘한신대학교 대학일자리사업단’의 기존 홈페이지의 콘텐츠를 바탕으로 <br />재학생,지역 청년, 기업에게 취업 관련 서비스를 보다 쉽고 간편하게 이용할 수 있도록 각각의 사용자 중심으로홈페이지 리뉴얼을 진행하였습니다. <br />기존 사이트에서 사용하던 푸른색은 제외하고 한신대학교의 아이덴티티 컬러인 보라색상을 중심으로 잡아 밝은 느낌의 색상들과 매치하여 트렌디한 느낌으로 탄생시켰습니다.</Text>
 						</Title>
 						<ScrollWindow ref={ScrollWindowInnerRef}>
-							{/* <Info variants={dragVariants} initial="initial" animate="animate"> */}
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/index.html") }} />
 							<Info style={{ opacity }}>
 								<FontAwesomeIcon icon={faArrowsUpDown} />
 								Drag
@@ -310,9 +400,51 @@ function Hsjob() {
 						</ScrollWindow>
 						<Spacing>
 							<ImgBox>
-								<img src={mainTm} alt="메인 테블릿 모바일" />
+								<img src={mainTm} alt="작업 페이지 미리보기" />
 							</ImgBox>
 						</Spacing>
+					</div>
+					<div className="section">
+						<Title>
+							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 직업심리검사 (워크넷)</TitleH1>
+							<Text>워크넷에서 시행하고있는 직업과 관련한 다양한 가치 중에서 어떤 가치를 주요하게 만족시키고 싶은지 알아볼 수 있는 직업 심리검사 서비스를 <br />한신 J-라운지에서도 이용할 수 있도록 홈페이지 컨셉에 맞게 제작하였습니다. <br />분류 선택시 자동으로 다음 분류 단계로 넘어가는 형태이며 마지막 직무를 선택하면 사용자가 선택한 직무에 관련된 정보가 나타나 정보를 습득할 수 있습니다.</Text>
+						</Title>
+						<ImgBox className="worknet">
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/c_info_job2.html") }} />
+							<img src={worknet} alt="작업 페이지 미리보기" />
+						</ImgBox>
+					</div>
+					<div className="section">
+						<Title>
+							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># J-라운지</TitleH1>
+							<Text>재학생, 지역청년, 기업 각각의 형태로 제작하여 사용자가 필요로 하는 콘텐츠로 구성하였습니다. <br />
+								재학생과 지역청년의 경우, 사용자가 얻고싶은 취업 정보에 관련된 정보를 스크랩하거나 상담을 신청하고 공고에 지원 내역을 한눈에 파악할 수 있도록 설계하였습니다.</Text>
+						</Title>
+						<Spacing>
+							<ImgBoxSpacingR className="jrounge">
+								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge_region.html") }} />
+								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts step2" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge.html") }} />
+								<img src={jrounge} alt="작업 페이지 미리보기" />
+							</ImgBoxSpacingR>
+							<ImgBoxSpacingL>
+								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge_company.html") }} />
+								<img src={jroungeV2} alt="작업 페이지 미리보기" />
+							</ImgBoxSpacingL>
+						</Spacing>
+					</div>
+					<div className="section">
+						<Title>
+							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 채용공고</TitleH1>
+							<Text>
+								기업 회원의 경우, 직접 등록한 채용 공고의 현황과 공고에 지원한 지원자들을의 수를
+								파악할 수 있도록 설계하였습니다. <br />각각의 콘텐츠 클릭시 해당하는 마이페이지 메뉴로 넘어가 상세한 내용을 볼 수 있습니다.
+							</Text>
+						</Title>
+						<ImgBoxSpacing className="jobposting">
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_job_posting.html") }} />
+							<img src={notice} alt="작업 페이지 미리보기" />
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts step2" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_job_company.html") }} />
+						</ImgBoxSpacing>
 					</div>
 				</Page>
 			</PageFrame>
