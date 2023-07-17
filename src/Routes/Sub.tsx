@@ -197,16 +197,22 @@ const Info = styled.li`
 `;
 
 const Button = styled.button`
-	float: right;
-	margin-top: 20px;
-	padding: 12px 20px;
+	display: block;
+	width: 50%;
+	margin: 28px auto 0;
+	padding: 18px 32px;
+	border-radius: 12px;
 	background-color: ${(props) => props.theme.point.blue[0]};
 	color: #fff;
+	font-size: 20px;
 	&:hover {
 		box-shadow: ${(props) => props.theme.shadow.button};
 	}
+	${media.medium`
+		padding: 16px 32px;
+		font-size: 18px;
+	`};
 	${media.small`
-		float: none;
 		width: 100%;
 	`};
 `;
