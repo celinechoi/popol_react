@@ -245,6 +245,35 @@ button {
 		`};
 	}
 }
+.ta {
+	&-show {
+		display: none;
+		${media.medium`
+			display: block;
+		`};
+		${media.small`
+			display: none;
+		`};
+	}
+	&-hide {
+		${media.medium`
+			display: none;
+		`};
+	}
+}
+.mo {
+	&-show {
+		display: none;
+		${media.small`
+			display: block;
+		`};
+	}
+	&-hide {
+		${media.small`
+			display: none;
+		`};
+	}
+}
 `;
 
 // react-query-firestore

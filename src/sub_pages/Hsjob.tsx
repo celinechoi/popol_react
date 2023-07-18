@@ -126,6 +126,9 @@ const Text = styled(motion.div)`
 const Content = styled.div`
 	clear: both;
 	padding: 20px 32px;
+	${media.small`
+		padding: 20px;
+	`};
 `;
 
 const ContentTitle = styled.div`
@@ -490,7 +493,7 @@ function Hsjob() {
 					<div className="section">
 						<Title>
 							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 직업심리검사 <br className="tm-show" />(워크넷)</TitleH1>
-							<Text className="worknet-txt">워크넷에서 시행하고있는 직업과 관련한 다양한 가치 중에서 어떤 가치를 주요하게 만족시키고 싶은지 알아볼 수 있는 직업 심리검사 서비스를 <br className="lp-hide" />한신 J-라운지에서도 이용할 수 있도록 홈페이지 컨셉에 맞게 제작하였습니다. <br />분류 선택시 자동으로 다음 분류 단계로 넘어가는 형태이며 마지막 직무를 선택하면 사용자가 선택한 직무에 관련된 정보가 나타나 정보를 습득할 수 있습니다.</Text>
+							<Text className="worknet-txt">워크넷에서 시행하고있는 직업과 관련한 다양한 가치 중에서 어떤 가치를 중요하게 만족시키고 싶은지 알아볼 수 있는 직업 심리검사 서비스를 <br className="lp-hide" />한신 J-라운지에서도 이용할 수 있도록 홈페이지 컨셉에 맞게 제작하였습니다. <br />분류 선택시 자동으로 다음 분류 단계로 넘어가는 형태이며 마지막 직무를 선택하면 사용자가 선택한 직무에 관련된 정보가 나타나 정보를 습득할 수 있습니다.</Text>
 						</Title>
 						<ImgBox className="worknet">
 							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/c_info_job2.html") }} />
