@@ -139,7 +139,7 @@ const GridWhole = styled(motion.div)`
 	}
 `;
 const GridBody = styled.div`
-	height: calc(var(--vh,1vh)*100);
+	height: calc(var(--vh,1vh)*80);
   overflow-x: hidden;
   overflow-y: auto;
 	&::-webkit-scrollbar {

@@ -32,11 +32,11 @@ const Page = styled.div`
 		position: relative;
 		&.main {
 			padding-top: 150px;
-			background: url(${mainTm}) no-repeat right 100px top 340px / 550px auto;
+			background: url(${mainTm}) no-repeat right 100px top 160px / 550px auto;
 			${media.small`
 				padding-top: 90px;
 				background-size: 70% auto;
-				background-position: center top 70%;
+				background-position: right top 3%;
 			`};
 			.right {
 				top: 80px;
@@ -49,11 +49,17 @@ const Page = styled.div`
 			}
 			.main {
 				&-txt {
+					background-color: rgba(255,255,255,0.6);
+					padding: 32px;
+					border-radius: 20px;
 					${media.medium`
 						margin-top: 80px;
+						padding: 28px;
+						border-radius: 16px;
 					`};
 					${media.small`
 						margin-top: 70px;
+						border-radius: 12px;
 					`};
 				}
 			}
@@ -279,12 +285,10 @@ const ScrollWindow = styled.div`
   border-radius: 18px;
 	background-color: ${(props) => props.theme.textColor.gray.fifth};
 	${media.large`
-		margin-top: 250px;
+		margin: 70px auto 0;
 	`};
 	${media.medium`
 		width: 95%;
-    height: 300px;
-		margin: 40% auto 0;
 	`};
 `;
 
@@ -698,8 +702,8 @@ function Itle() {
 						<Title>
 							<TitleH1 style={{ fontSize: size }} className="right"># Main</TitleH1>
 							<Text className="main-txt">
-								다양한 연령층이 사용하여 누구나 쉽게 원하는 정보를 바로 찾을 수 있게 접근성과 사용성의 무게를 두었습니다.<br className="tm-hide" />
-								사용자들이 가장 먼저 접하는 첫화면에서 자주 사용하는 서비스를 배치하였으며 이해를 돕기 위해 아이콘을 함께 사용하였습니다. <br className="tm-hide" />또한 브랜드 컬러에서 도출된 서브 컬러들을 이용하여 화사하고 친근한 느낌을 주고자 하였습니다.<br className="tm-hide" />
+								다양한 연령층이 사용하여 누구나 쉽게 원하는 정보를 바로 찾을 수 있게 접근성과 사용성의 무게를 두었습니다. <br className="ta-hide" />
+								사용자들이 가장 먼저 접하는 첫화면에서 자주 사용하는 서비스를 배치하였으며 이해를 돕기 위해 아이콘을 함께 사용하였습니다. <br className="ta-hide" />또한 브랜드 컬러에서 도출된 서브 컬러들을 이용하여 화사하고 친근한 느낌을 주고자 하였습니다. <br className="ta-hide" />
 								메인슬라이드 영역을 브랜드 로고 속 쉐입을 활용해 시각적 요소 또한 놓치지 않고 재미를 느낄 수 있게 디자인하였습니다.
 							</Text>
 						</Title>
@@ -718,8 +722,8 @@ function Itle() {
 						<Title>
 							<TitleH1 style={{ fontSize: size }} className="right"># Sub Page</TitleH1>
 							<Text className="sub-txt">
-								다소 지루할 수 있는 내용들에 일러스트와 다양한 컬러를 사용하여 쉽게 다가갈 수 있도록 하였습니다.<br className="tm-hide" />
-								기존 인천인재평생교육원 사용자들에게 익숙한 좌측메뉴 사용과 브랜드 로고 속 책을 형상화한 쉐입을 이용하여 사용성과 디자인, 둘 다 갖추었습니다.<br className="mo-hide" />
+								다소 지루할 수 있는 내용들에 일러스트와 다양한 컬러를 사용하여 쉽게 다가갈 수 있도록 하였습니다. <br className="ta-hide" />
+								기존 인천인재평생교육원 사용자들에게 익숙한 좌측메뉴 사용과 브랜드 로고 속 책을 형상화한 쉐입을 이용하여 사용성과 디자인, 둘 다 갖추었습니다. <br />
 								수강신청 시 사용자가 원하는 캠퍼스와 카테고리를 바로 검색할 수 있게 상단 필터를 배치하여 수강신청의 흐름을 유연하게 바꿔주었습니니다.
 							</Text>
 						</Title>

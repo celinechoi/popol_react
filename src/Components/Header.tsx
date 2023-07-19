@@ -14,7 +14,8 @@ const HeaderBox = styled.div`
 	left: 0;
 	right: 0;
 	top: 0;
-	z-index: 3;
+	z-index: 8;
+	overflow: hidden;
 	width: 100%;
 	height: 86px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};
@@ -142,16 +143,17 @@ const Menu = styled.li`
 `;
 const Point = styled(motion.span)`
 	position: absolute;
-  display: block;
-  width: 10px;
-  height: 5px;
-  bottom: 28px;
+  display: none;
+  width: 100%;
+  height: 2px;
+  bottom: -7px;
   left: 0;
   right: 0;
   margin: 0 auto;
 	border-radius: 7px;
   background-color: ${props => props.theme.point.yellow};
 	transition: all .3s cubic-bezier(0.48, 0.35, 1, 1);
+	opacity: 0;
 	${media.small`
 		width: 8px;
 	`};
@@ -160,13 +162,23 @@ const Point = styled(motion.span)`
 // motion
 const pointVariantes = {
 	start: {
+		display: "none",
+		width: "0",
 		opacity: 0
 	},
 	end: {
+		display: "block",
+		width: "100%",
 		opacity: 1,
 		transition: {
-			duration: 1,
+			type: "tween",
+			ease: [1, 1, 1, 1],
+			duration: 0.5,
 		}
+	},
+	exit: {
+		bottom: "-7px",
+		opacity: 1,
 	}
 }
 
@@ -199,19 +211,19 @@ function Header() {
 						<Menu>
 							<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
 								Home
-								{homeMatch?.isExact === true && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" />}
+								{homeMatch?.isExact === true && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" />}
 							</Link>
 						</Menu>
 						<Menu>
 							<Link to="/works/solution" className={worksMatch || subMatch ? "on" : ""}>
 								Works
-								{worksMatch || subMatch ? <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" /> : ""}
+								{worksMatch || subMatch ? <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" /> : ""}
 							</Link>
 						</Menu>
 						<Menu>
 							<Link to="/about" className={aboutMatch ? "on" : ""}>
 								About
-								{aboutMatch && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" />}
+								{aboutMatch && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" />}
 							</Link>
 						</Menu>
 					</Menus>

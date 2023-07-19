@@ -6,6 +6,7 @@ import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-soli
 import main from "img/sub_pages/hsjob/index.png";
 import mainTm from "img/sub_pages/hsjob/index_tm.png";
 import mainTmTm from "img/sub_pages/hsjob/index_tm_tm.png";
+import mainBg from "img/sub_pages/hsjob/content_bg.png";
 import worknet from "img/sub_pages/hsjob/worknet.png";
 import worknetTm from "img/sub_pages/hsjob/worknet_tm.png";
 import jrounge from "img/sub_pages/hsjob/jrounge.png";
@@ -28,6 +29,31 @@ const Page = styled.div`
 	`};
 	.section {
 		position: relative;
+		${media.medium`
+			padding-top: 100px;
+		`};
+		&.main {
+			padding: 170px 0;
+			${media.medium`
+				padding: 60px 0;
+			`};
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: url(${mainBg}) no-repeat center top / cover;
+				opacity: 0.5;
+			}
+			.right {
+				top: 65px;
+				${media.medium`
+					top: 25px;
+				`};
+			}
+		}
 	}
 	.icon {
 		&-shortcuts {
@@ -53,6 +79,8 @@ const Page = styled.div`
 `;
 
 const Spacing = styled.div`
+	position: relative;
+	z-index: 1;
 	padding-top: 60px;
 `;
 
@@ -71,6 +99,7 @@ const TitleH1 = styled(motion.div)`
 	position: absolute;
 	left: 32px;
 	top: 0;
+	z-index: 1;
   color: rgba(255, 255, 255, 0.4);
 	font-size: 32px;
   font-weight: 700;
@@ -91,6 +120,7 @@ const TitleH1 = styled(motion.div)`
 		left: auto;
 		right: 32px;
 		${media.medium`
+			top: 50px;
 			right: auto;
 		`};
 		${media.smallToo`
@@ -98,25 +128,28 @@ const TitleH1 = styled(motion.div)`
 			line-height: 1.3;
 		`};
 		${media.micro`
-			font-size: 46px !important;
+			font-size: 40px !important;
 		`};
 	}
 `;
 
 const Text = styled(motion.div)`
 	position: relative;
-	z-index: 0;
+	z-index: 1;
   margin-top: 120px;
 	color: #fff;
   font-size: 18px;
   font-weight: 500;
+	${media.medium`
+		margin-top: 100px;
+	`};
 	&.worknet {
 		&-txt {
 			${media.medium`
-				margin-top: 200px;
+				margin-top: 130px;
 			`};
 			${media.micro`
-				margin-top: 160px;
+				margin-top: 100px;
 				font-size: 15px;
 			`};
 		}
@@ -140,6 +173,7 @@ const ContentTitle = styled.div`
 const ScrollWindow = styled.div`
   overflow: hidden;
   position: relative;
+	z-index: 1;
   width: calc(100% - 200px);
   height: calc(56.25vw - 26px);
   margin: 60px auto 0;
@@ -162,7 +196,6 @@ const ScrollerMain = styled(motion.div)`
 		width: 100%;
 	}
 `;
-
 
 const Info = styled(motion.div)`
   position: absolute;
@@ -407,7 +440,7 @@ function Hsjob() {
 						<Title>
 							<TitleH1 style={{ fontSize: size, color: "#3b1e87", opacity }}>Color</TitleH1>
 							<Text style={{ color: "#e1d2f9" }}>
-								직접 제작한 VSQUARE의 System Kit 아래 var_function.scss 안 $primary, $secondary 변수에 <br />해당 프로젝트 단계별 Primary와 Secondary Color를 각 변수에 담아 체계적인 퍼블리싱 작업을 하였습니다.
+								직접 제작한 VSQUARE의 System Kit 아래 var_function.scss 안 $primary, $secondary 변수에 <br className="tm-hide" />해당 프로젝트 단계별 Primary와 Secondary Color를 각 변수에 담아 체계적인 퍼블리싱 작업을 하였습니다.
 							</Text>
 						</Title>
 						<Content>
@@ -493,10 +526,10 @@ function Hsjob() {
 							</Boxes>
 						</Content>
 					</div>
-					<div className="section">
+					<div className="section main">
 						<Title>
 							<TitleH1 style={{ fontSize: size, opacity }} className="right"># Main</TitleH1>
-							<Text>한신대학교 한신J-라운지는 ‘한신대학교 대학일자리사업단’의 기존 홈페이지의 콘텐츠를 바탕으로 <br />재학생,지역 청년, 기업에게 취업 관련 서비스를 보다 쉽고 간편하게 이용할 수 있도록 각각의 사용자 중심으로홈페이지 리뉴얼을 진행하였습니다. <br />기존 사이트에서 사용하던 푸른색은 제외하고 한신대학교의 아이덴티티 컬러인 보라색상을 중심으로 잡아 밝은 느낌의 색상들과 매치하여 트렌디한 느낌으로 탄생시켰습니다.</Text>
+							<Text>한신대학교 한신J-라운지는 ‘한신대학교 대학일자리사업단’의 기존 홈페이지의 콘텐츠를 바탕으로 <br className="tm-hide" />재학생,지역 청년, 기업에게 취업 관련 서비스를 보다 쉽고 간편하게 이용할 수 있도록 각각의 사용자 중심으로홈페이지 리뉴얼을 진행하였습니다. <br />기존 사이트에서 사용하던 푸른색은 제외하고 한신대학교의 아이덴티티 컬러인 보라색상을 중심으로 잡아 밝은 느낌의 색상들과 매치하여 트렌디한 느낌으로 탄생시켰습니다.</Text>
 						</Title>
 						<ScrollWindow ref={ScrollWindowInnerRef}>
 							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/index.html") }} />
@@ -517,7 +550,7 @@ function Hsjob() {
 					</div>
 					<div className="section">
 						<Title>
-							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 직업심리검사 <br className="ta-show" />(워크넷)</TitleH1>
+							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 직업심리검사</TitleH1>
 							<Text className="worknet-txt">워크넷에서 시행하고있는 직업과 관련한 다양한 가치 중에서 어떤 가치를 중요하게 만족시키고 싶은지 알아볼 수 있는 직업 심리검사 서비스를 <br className="lp-hide" />한신 J-라운지에서도 이용할 수 있도록 홈페이지 컨셉에 맞게 제작하였습니다. <br />분류 선택시 자동으로 다음 분류 단계로 넘어가는 형태이며 마지막 직무를 선택하면 사용자가 선택한 직무에 관련된 정보가 나타나 정보를 습득할 수 있습니다.</Text>
 						</Title>
 						<ImgBox className="worknet">

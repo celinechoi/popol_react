@@ -259,6 +259,9 @@ button {
 		${media.medium`
 			display: none;
 		`};
+		${media.small`
+			display: block;
+		`};
 	}
 }
 .mo {
