@@ -14,7 +14,7 @@ const HeaderBox = styled.div`
 	left: 0;
 	right: 0;
 	top: 0;
-	z-index: 2;
+	z-index: 3;
 	width: 100%;
 	height: 86px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};

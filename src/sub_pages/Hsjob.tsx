@@ -155,6 +155,15 @@ const ScrollWindow = styled.div`
 	`};
 `;
 
+const ScrollerMain = styled(motion.div)`
+  display: block;
+  width: 100%;
+  height: 770px;
+  background: rgba(255, 255, 255, 0.5);
+  background: url(${main}) no-repeat center top / contain;
+`;
+
+
 const Info = styled(motion.div)`
   position: absolute;
   left: 50%;
@@ -177,14 +186,6 @@ const Info = styled(motion.div)`
     height: 32px;
     margin: 0 auto 8px;
   }
-`;
-
-const ScrollerMain = styled(motion.div)`
-  display: block;
-  width: 100%;
-  height: 770px;
-  background: rgba(255, 255, 255, 0.5);
-  background: url(${main}) no-repeat center top / contain;
 `;
 
 const ImgBox = styled.div`
@@ -331,14 +332,14 @@ const imgVariants = {
 		y: 0,
 	},
 	end: {
-		y: -350,
+		y: -350, // (-[ScrollerMain heght - ScrollWindow height])
 		transition: {
 			type: "tween",
-			ease: [1, 1, 1, 1],
-			stiffness: 10,
-			delay: 0.5,
+			ease: [1, 0.4, 0.6, 1],
+			stiffness: 100,
+			delay: 1.5,
 			repeat: Infinity,
-			duration: 5,
+			duration: 7,
 		}
 	},
 	exit: {

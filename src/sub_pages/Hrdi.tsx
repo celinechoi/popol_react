@@ -1,10 +1,21 @@
 import styled from "styled-components";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
 import { media } from "style/media_query";
 import main from "img/sub_pages/hrdi/index.png";
+import headIcon from "img/sub_pages/hrdi/head_icon.svg";
+import headIconTa from "img/sub_pages/hrdi/head_icon_ta.svg";
+import headIconMo from "img/sub_pages/hrdi/head_icon_mo.svg";
+import koreatechBg from "img/sub_pages/hrdi/koreatech_bg.svg";
+import koreatechBgTa from "img/sub_pages/hrdi/koreatech_bg_ta.svg";
+import koreatechBgMo from "img/sub_pages/hrdi/koreatech_bg_mo.svg";
+import login from "img/sub_pages/hrdi/login.png";
+import loginTa from "img/sub_pages/hrdi/login_ta.png";
+import loginMo from "img/sub_pages/hrdi/login_mo.png";
+import loginMoV2 from "img/sub_pages/hrdi/login_mo_v2.png";
+import sub from "img/sub_pages/hrdi/sub.png";
 
 const PageFrame = styled(motion.div)`
 	overflow: hidden;
@@ -21,14 +32,56 @@ const Page = styled.div`
 	.section {
 		position: relative;
 		&.main {
-			padding-top: 110px;
+			position: relative;
+			margin-top: 110px;
+			padding: 110px 0 0;
+			${media.medium`
+				margin-top: 0;
+				padding: 0;
+			`};
 			${media.small`
 				padding-top: 90px;
 			`};
+			&::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: #8eafff url(${koreatechBg}) no-repeat center top / cover;
+				opacity: 0.7;
+				${media.medium`
+					background-image: url(${koreatechBgTa});
+				`};
+				${media.small`
+					background-image: url(${koreatechBgMo});
+				`};
+			}
+			&::after {
+				content: '';
+				position: absolute;
+				left: 50%;
+				top: 19.4%;
+				transform: translateX(-50%);
+				width: 74%;
+				height: 100%;
+				background: url(${headIcon}) no-repeat center top / contain;
+				${media.medium`
+					top: 15%;
+					width: 100%;
+    			height: 20%;
+					background-image: url(${headIconTa});
+				`};
+				${media.small`
+					top: 23%;
+					background-image: url(${headIconMo});
+				`};
+			}
 			.right {
 				top: 80px;
 				${media.medium`
-					top: 100px;
+					top: 70px;
 				`};
 				${media.small`
 					top: 80px;
@@ -36,22 +89,19 @@ const Page = styled.div`
 			}
 			.main {
 				&-txt {
+					margin-bottom: 100px;
 					${media.medium`
-						margin-top: 80px;
+						margin-top: 220px;
 					`};
 					${media.small`
-						margin-top: 70px;
+						margin: 80px 0 0;
 					`};
 				}
 			}
 		}
 		&.sub {
 			&-bg {
-				margin-top: 130px;
 				padding-top: 0;
-				${media.medium`
-					margin-top: 130px;
-				`};
 				${media.small`
 					background-size: auto 500px;
 				`};
@@ -69,6 +119,8 @@ const Page = styled.div`
 				.right {
 					top: 76px;
 					z-index: 1;
+					color: #333;
+					opacity: 0.4;
 					${media.medium`
 						top: 70px;
 					`};
@@ -76,6 +128,7 @@ const Page = styled.div`
 				.sub {
 					&-txt {
 						z-index: 1;
+						color: #333;
 						${media.medium`
 							margin-top: 220px;
 						`};
@@ -84,44 +137,10 @@ const Page = styled.div`
 						`};
 					}
 				}
+				img {
+					display: block;
+				}
 			}
-			&-campus {
-				position: relative;
-				padding: 180px 0;
-				${media.medium`
-					padding: 0 0 100px;
-				`};
-				${media.small`
-					padding: 100px 0;
-				`};
-				&::after {
-					content: '';
-					position: absolute;
-					left: 0;
-					top: 0;
-					bottom: 0;
-					z-index: 0;
-					width: 100%;
-					height: 100%;
-					opacity: 0.6;
-					${media.small`
-					`};
-				}
-				.right {
-					z-index: 1;
-					top: 140px;
-					${media.medium`
-						top: 70px;
-					`};
-				}
-				.sub {
-					&-campus {
-						&__txt {
-							z-index: 1;
-						}
-					}
-				}
-			} 
 		}
 		
 	}
@@ -144,6 +163,40 @@ const Page = styled.div`
 				right: 12px;
     		top: 12px;
 			`};
+		}
+	}
+`;
+
+const MainSection = styled.div`
+	position: relative;
+	z-index: 1;
+	margin-top: 110px;
+	padding-bottom: 110px;
+	${media.small`
+		margin-top: 80px;
+		padding-bottom: 80px;
+	`};
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: -1;
+		width: 100%;
+		height: 550px;
+		background-color: rgba(255, 255, 255, 0.3);
+		${media.medium`
+			height: 20%;
+		`};
+	}
+	.section {
+		&-title {
+			text-align: center;
+		}
+	}
+	.mainsection {
+		&-txt {
+			margin-top: 0;
 		}
 	}
 `;
@@ -218,6 +271,24 @@ const Text = styled(motion.div)`
 		margin-top: 60px;
 		font-size: 16px;
 	`};
+	&.mainsection {
+		&-txt {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			transform: translate(-50%, -50%);
+			${media.medium`
+				top: 60%;
+    		left: 64%;
+			`};
+			${media.small`
+				width: 90%;
+				top: 30%;
+				left: 50%;
+			`};
+		}
+	}
 	&.color {
 		&-txt {
 			${media.medium`
@@ -256,20 +327,28 @@ const ContentTitle = styled.div`
 const ScrollWindow = styled.div`
   overflow: hidden;
   position: relative;
-  width: 750px;
-  height: 500px;
+	z-index: 2;
+  width: calc(100% - 200px);
+  height: calc(56.25vw - 26px);
   margin: 50px auto 0;
   border: 2px solid ${(props) => props.theme.bgColor.gray.first};
   border-radius: 18px;
 	background-color: ${(props) => props.theme.textColor.gray.fifth};
-	${media.large`
-		margin-top: 250px;
-	`};
 	${media.medium`
 		width: 95%;
-    height: 300px;
-		margin: 40% auto 0;
 	`};
+`;
+
+const ScrollerMain = styled(motion.div)`
+  display: block;
+  width: 100%;
+  /* height: 2153px; */
+  background: rgba(255, 255, 255, 0.5);
+  background: url(${main}) no-repeat center top / contain;
+	>img {
+		display: block;
+		width: 100%;
+	}
 `;
 
 const Info = styled(motion.div)`
@@ -289,28 +368,40 @@ const Info = styled(motion.div)`
   font-size: 14px;
   font-weight: 700;
   text-align: center;
+	${media.small`
+		padding: 9px;
+		border-radius: 5px;
+		font-size: 0;
+	`};
   >svg {
     width: 32px;
     height: 32px;
     margin: 0 auto 8px;
+		${media.small`
+			width: 18px;
+			height: 18px;
+			margin: 0 auto;
+		`};
   }
-`;
-
-const ScrollerMain = styled(motion.div)`
-  display: block;
-  width: 100%;
-  height: 1340px;
-  background: rgba(255, 255, 255, 0.5);
-  background: url(${main}) no-repeat center top / contain;
 `;
 
 const ImgBox = styled.div`
 	position: relative;
+	&.mainsection {
+		&-map {
+			display: inline-block;
+			position: relative;
+			.mo {
+				&-img {
+					padding-top: 60%;
+				}
+			}
+		}
+	}
 	&.sub {
 		&-map {
 			position: relative;
 			z-index: 1;
-			display: inline-block;
 			width: 100%;
 			margin-top: 100px;
 			${media.medium`
@@ -324,159 +415,56 @@ const ImgBox = styled.div`
 					right: auto;
 					top: auto;
 					&.item1 {
-						left: 25%;
-    				top: 1.5%;
-						${media.medium`
-							left: 38%;
-    					top: 0.5%;
-						`};
-						${media.small`
-							left: 38%;
-    					top: 1%;
-						`};
-						${media.micro`
-							left: 30%;
-						`};
+						right: 28%;
+    				top: 1%;
 					}
 					&.item2 {
-						left: 57%;
-    				top: 6.4%;
-						${media.medium`
-							left: auto;
-							right: 12%;
-    					top: 3.1%;
-						`};
-						${media.small`
-							right: 9%;
-    					top: 4.5%;
-						`};
+						right: 9%;
+    				top: 1%;
 					}
 					&.item3 {
-						right: 7%;
-						top: 1.5%;
+						left: 18%;
+    				top: 32.5%;
 						${media.medium`
-							right: auto;
-							left: 38%;
-    					top: 28.7%;
+							left: 15%;
+							top: 34%;
 						`};
 						${media.small`
-							left: 38%;
-							top: 29.6%;
-						`};
-						${media.micro`
-							left: 30%;
+							left: 5%;
 						`};
 					}
 					&.item4 {
-						right: 8%;
-    				top: 21%;
+						right: 28%;
+    				top: 32.5%;
 						${media.medium`
-							right: 11.6%;
-							top: auto;
-							bottom: 25.5%;
+							top: 34%;
 						`};
 						${media.small`
-							right: auto;
-							left: 38%;
-							bottom: 21.2%;
-						`};
-						${media.micro`
-							left: 30%;
-							bottom: 20%;
+							right: 30%;
 						`};
 					}
 					&.item5 {
-						left: 25%;
-   					top: 44.2%;
+						right: 17.5%;
+    				top: 32.5%;
 						${media.medium`
-							left: auto;
-							right: 12%;
-							top: 31.7%;
+							right: 14%;
+							top: 34%;
 						`};
 						${media.small`
-							right: 9%;
-    					top: 33.6%;
+							bottom: 4%;
+							right: 4%;
 						`};
 					}
 					&.item6 {
-						left: 57%;
-    				top: 49.5%;
+						right: 18.6%;
+    				bottom: 20.2%;
 						${media.medium`
-							left: 38%;
-							top: 42.1%;							
+							bottom: 15%;
 						`};
 						${media.small`
-							left: 38%;
-    					top: 43.9%;
+							bottom: 4%;
+							right: 21.6%;
 						`};
-						${media.micro`
-							left: 30%;
-						`};
-					}
-					&.item7 {
-						right: 8%;
-    				top: 52.9%;
-						${media.medium`
-						 	right: auto;
-							left: 38%;
-							top: 75.6%;
-						`};
-						${media.small`
-							right: 9%;
-							top: 75.9%;
-							left: auto;
-						`};
-					}
-				}
-			}
-		}
-		&-campus {
-			&-map {
-				display: inline-block;
-				position: relative;
-				z-index: 1;
-				width: 100%;
-				.icon {
-					&-shortcuts {
-						&.step1 {
-							right: auto;
-							left: 30.5%;
-							top: 9.5%;
-							${media.medium`
-								left: 31.5%;
-							`};
-							${media.small`
-								left: 36.5%;
-							`};
-							${media.micro`
-								left: 29.5%;
-							`};
-						}
-						&.step2 {
-								right: auto;
-								left: 49.5%;
-								top: 37%;
-							${media.medium`
-								left: auto;
-								right: 32.5%;
-							`};
-							${media.small`
-								left: auto;
-								right: 18%;
-								top: 34.7%;
-							`};
-						}
-						&.step3 {
-							right: 29%;
-    					top: 37%;
-							${media.medium`
-								right: 5%;
-							`};
-							${media.small`
-								right: 0.2%;
-								top: 34.7%;
-							`};
-						}
 					}
 				}
 			}
@@ -528,14 +516,14 @@ const imgVariants = {
 		y: 0,
 	},
 	end: {
-		y: -350,
+		y: -1653, // (-[ScrollerMain heght - ScrollWindow height])
 		transition: {
 			type: "tween",
-			ease: [1, 1, 1, 1],
-			stiffness: 10,
-			delay: 0.5,
+			ease: [1, 0.4, 0.6, 1],
+			stiffness: 100,
+			delay: 1.5,
 			repeat: Infinity,
-			duration: 5,
+			duration: 7,
 		}
 	},
 	exit: {
@@ -561,18 +549,47 @@ function Hrdi() {
 	// // const transform = useTransform(y);
 	// drag control
 	const ScrollWindowInnerRef = useRef<HTMLDivElement>(null);
-	// const SrcollerMainH = useRef<HTMLDivElement>(null).current?.offsetHeight;
 	const { scrollYProgress } = useViewportScroll();
 	const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "144px", "155px", "160px"]);
-	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "80px", "100px", "140px"]);
-	useEffect(() => {
-		scrollYProgress.onChange(() => {
-			// console.log(scrollYProgress.get());
+
+	// 이미지 높이 담기
+	const [imgH, setImgH] = useState<number>(0);
+	const SrcollerMainRef = useRef<HTMLImageElement>(null);
+	const [isImageLoad, setIsImageLoad] = useState(false);
+	let imageHeight = () => {
+		const SrcollerMainH = SrcollerMainRef.current?.offsetHeight || 0;
+		const ScrollWindowH = ScrollWindowInnerRef.current?.offsetHeight || 0;
+		// console.log(SrcollerMainH);
+		return setImgH(SrcollerMainH - ScrollWindowH);
+	}
+	// resize
+	const [windowSize, setWindowSize] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight
+	})
+	const handleResize = () => {
+		setWindowSize({
+			width: window.innerWidth,
+			height: window.innerHeight
 		})
-	}, []);
-
-
+		setIsImageLoad(true);
+		if (isImageLoad) {
+			// console.log("resize");
+			imageHeight()
+		}
+	}
+	useEffect(() => {
+		if (isImageLoad) {
+			// console.log("load?");
+			imageHeight()
+			window.addEventListener('resize', handleResize);
+		}
+		return () => {
+			setIsImageLoad(false);
+			window.removeEventListener('resize', handleResize);
+		};
+	}, [isImageLoad]);
 	return (
 		<div className="sub">
 			<PageFrame>
@@ -671,9 +688,9 @@ function Hrdi() {
 						<Title>
 							<TitleH1 style={{ fontSize: size }} className="right"># Main</TitleH1>
 							<Text className="main-txt">
-								다양한 연령층이 사용하는 서비스를 보다 쉽고<br className="mo-show" /> 직관적으로 이해할 수 있도록 사용성을 높이는데 <br className="mo-show" />중점을 두었습니다.<br className="mobile_hide" />
-								사용자가 많이 찾는 로그인,<br className="mo-show" /> 자주찾는 서비스 퀵메뉴, 교육장소 찾기를 메인에 노출해<br className="mo-show" /> 자연스럽게 정보에<br className="mo-hide" />
-								접근할 수 있도록 유도하는 구조로<br className="mo-show" /> 개선하여 사용성을 높였습니다.
+								다양한 연령층이 사용하는 서비스를 보다 쉽고 직관적으로 이해할 수 있도록 사용성을 높이는데 중점을 두었습니다. <br className="tm-show" />
+								사용자가 많이 찾는 로그인, 자주찾는 서비스 퀵메뉴, 교육장소 찾기를 메인에 노출해 자연스럽게 정보에 <br className="tm-hide" />
+								접근할 수 있도록 유도하는 구조로 개선하여 사용성을 높였습니다.
 							</Text>
 						</Title>
 						<ScrollWindow ref={ScrollWindowInnerRef}>
@@ -682,55 +699,42 @@ function Hrdi() {
 								<FontAwesomeIcon icon={faArrowsUpDown} />
 								Drag
 							</Info>
-							<ScrollerMain variants={imgVariants} initial="start" animate="end" exit="exit" drag="y" dragConstraints={ScrollWindowInnerRef}></ScrollerMain>
+							<ScrollerMain initial={{ y: 0 }} animate={{ y: -`${Math.abs(imgH)}` }} transition={{ type: "tween", ease: [1, 1, 0.6, 1], delay: 1.5, repeat: Infinity, duration: 7 }} exit={{ y: 0 }} drag="y" dragConstraints={ScrollWindowInnerRef}>
+								<img src={main} ref={SrcollerMainRef} alt="작업 페이지 미리보기" onLoad={() => { setIsImageLoad(true) }} />
+							</ScrollerMain>
 						</ScrollWindow>
-						{/* <Spacing>
-							<ImgBox className="main-tm">
-								<img src={mainTm} className="tm-hide" alt="작업 페이지 미리보기" />
+						<MainSection>
+							<Title>
+								<p className="section-title">로그인 & 나의 학습활동</p>
+							</Title>
+							<ImgBox className="mainsection-map">
+								<img src={login} className="tm-hide" alt="작업 페이지 미리보기" />
+								<img src={loginTa} className="ta-show" alt="작업 페이지 미리보기" />
+								<img src={loginMo} className="mo-show" alt="작업 페이지 미리보기" />
+								<img src={loginMoV2} className="mo-show mo-img" alt="작업 페이지 미리보기" />
+								<Text className="mainsection-txt">
+									첫 화면에서 자주 사용하는 <br className="lp-show mo-hide" />로그인, 나의 학습활동, 내 정보 서비스를 <br className="tm-hide" />모아 편의성을 높였습니다. <br className="lp-show" />메인슬라이드에서 화살표를 클릭하면 <br className="tm-hide" />빠르게 서비스를 이용할 수 있습니다.
+								</Text>
 							</ImgBox>
-						</Spacing> */}
+						</MainSection>
 					</div>
 					<div className="section sub-bg">
 						<Title>
 							<TitleH1 style={{ fontSize: size }} className="right"># Sub Page</TitleH1>
 							<Text className="sub-txt">
-								다소 지루할 수 있는 내용들에 일러스트와 다양한 컬러를 사용하여 쉽게 다가갈 수 있도록 하였습니다.<br className="tm-hide" />
-								기존 인천인재평생교육원 사용자들에게 익숙한 좌측메뉴 사용과 브랜드 로고 속 책을 형상화한 쉐입을 이용하여 사용성과 디자인, 둘 다 갖추었습니다.<br className="mo-hide" />
-								수강신청 시 사용자가 원하는 캠퍼스와 카테고리를 바로 검색할 수 있게 상단 필터를 배치하여 수강신청의 흐름을 유연하게 바꿔주었습니니다.
+								다양한 연령층의 사용자들이 보기에 어렵지 않고 익숙한 좌측 메뉴 구조를 채택하였습니다. <br className="mo-hide" />
+								이미지와 텍스트를 전반적으로 키우고 여백을 활용하여 사용자로 하여금 시원한 느낌을 받을 수 있게 진행하였습니다. <br className="mo-hide" />브랜드 컬러가 들어간 일러스트 요소를 활용하여 정보 전달에도 정보전달도 보다 효과적으로 전달할 수 있게 디자인하였습니다.
 							</Text>
 						</Title>
 						<ImgBox className="sub-map">
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item1 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/info_hello.html") }} />
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item2 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/info_mission.html") }} />
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item3 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/error.html") }} />
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item4 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/member_login.html") }} />
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item5 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/enrollment.html") }} />
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item6 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/info_organization.html") }} />
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item7 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/headquarters_campus.html") }} />
-							{/* <img src={subTm} className="tm-hide" alt="작업 페이지 미리보기" />
-							<img src={subTmTa} className="ta-show" alt="작업 페이지 미리보기" />
-							<img src={subTmMo} className="mo-show" alt="작업 페이지 미리보기" /> */}
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item1 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/d_5_map.html") }} />
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item2 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/info.html") }} />
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item3 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/c_4_ui.html") }} />
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item4 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/d_4_4_clean_room.html") }} />
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item5 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/d_2_greetings.html") }} />
+							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="item6 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/member_sign_up2.html") }} />
+							<img src={sub} alt="작업 페이지 미리보기" />
 						</ImgBox>
-					</div>
-					<div className="section sub-campus">
-						<Title>
-							<TitleH1 style={{ fontSize: size2 }} className="right"># 캠퍼스 소개</TitleH1>
-							<Text className="sub-campus__txt">
-								시민라이프칼리지 인천시민대학 속 6개의 다양한 캠퍼스들을 소개합니다.<br className="mo-hide" />
-								본부캠퍼스를 중심으로 인천시에 소재한 대학교이 포함되어 있는 캠퍼스들의 정보와
-								교육과정, 혜택 등을 이미지와 아이콘을 활용하여 만나 볼 수 있게 디자인 하였습니다.
-							</Text>
-						</Title>
-						<Spacing>
-							<ImgBox className="sub-campus-map">
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="step1 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/headquarters_campus.html") }} />
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="step2 icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/sub_campus.html") }} />
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="step3 icon-shortcuts step3" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/sub_campus2.html") }} />
-								{/* <img src={campus} className="tm-hide" alt="작업 페이지 미리보기" />
-								<img src={campusTa} className="ta-show" alt="작업 페이지 미리보기" />
-								<img src={campusMo} className="mo-show" alt="작업 페이지 미리보기" /> */}
-							</ImgBox>
-						</Spacing>
 					</div>
 				</Page>
 			</PageFrame>

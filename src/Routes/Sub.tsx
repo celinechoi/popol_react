@@ -102,8 +102,13 @@ const Tags = styled.ul`
 	justify-content: flex-end;
 	gap: 8px;
 	${media.medium`
+		width: 100%;
 		flex-wrap: wrap;
     gap: 16px 12px;
+	`};
+	${media.small`
+		gap: 5px;
+		justify-content: center;
 	`};
 `;
 
@@ -132,6 +137,10 @@ const Img = styled.img`
 	background-color: ${(props) => props.theme.bgColor.gray.fourth};
 	padding: 8px 16px 12px;
 	border-radius: 6px;
+	${media.small`
+		max-width: 140px;
+		margin: 0 auto;
+	`};
 `;
 
 const Title = styled.h2`
