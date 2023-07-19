@@ -157,6 +157,18 @@ const Point = styled(motion.span)`
 	`};
 `;
 
+// motion
+const pointVariantes = {
+	start: {
+		opacity: 0
+	},
+	end: {
+		opacity: 1,
+		transition: {
+			duration: 1,
+		}
+	}
+}
 
 function Header() {
 	// Link
@@ -187,19 +199,19 @@ function Header() {
 						<Menu>
 							<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
 								Home
-								{homeMatch?.isExact === true && <Point layoutId="point" />}
+								{homeMatch?.isExact === true && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" />}
 							</Link>
 						</Menu>
 						<Menu>
 							<Link to="/works/solution" className={worksMatch || subMatch ? "on" : ""}>
 								Works
-								{worksMatch || subMatch ? <Point layoutId="point" /> : ""}
+								{worksMatch || subMatch ? <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" /> : ""}
 							</Link>
 						</Menu>
 						<Menu>
 							<Link to="/about" className={aboutMatch ? "on" : ""}>
 								About
-								{aboutMatch && <Point layoutId="point" />}
+								{aboutMatch && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" />}
 							</Link>
 						</Menu>
 					</Menus>
