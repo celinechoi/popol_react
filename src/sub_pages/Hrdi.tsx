@@ -510,43 +510,7 @@ const Box = styled(motion.li)`
 	}
 `;
 
-// motion
-const imgVariants = {
-	start: {
-		y: 0,
-	},
-	end: {
-		y: -1653, // (-[ScrollerMain heght - ScrollWindow height])
-		transition: {
-			type: "tween",
-			ease: [1, 0.4, 0.6, 1],
-			stiffness: 100,
-			delay: 1.5,
-			repeat: Infinity,
-			duration: 7,
-		}
-	},
-	exit: {
-		y: 0
-	}
-}
-
-const linkVariants = {
-	initial: {
-		opacity: 1
-	},
-	animate: {
-		opacity: 0,
-		transition: {
-			delay: 2,
-			duration: 5
-		}
-	}
-}
-
 function Hrdi() {
-	// const motionValue = useMotionValue(0);
-	// // const transform = useTransform(y);
 	// drag control
 	const ScrollWindowInnerRef = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useViewportScroll();

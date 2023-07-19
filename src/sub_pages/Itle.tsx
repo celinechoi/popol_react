@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
@@ -272,8 +272,8 @@ const ContentTitle = styled.div`
 const ScrollWindow = styled.div`
   overflow: hidden;
   position: relative;
-  width: 750px;
-  height: 420px;
+  width: calc(100% - 200px);
+  height: calc(56.25vw - 26px);
   margin: 130px 0 0 110px;
   border: 2px solid ${(props) => props.theme.bgColor.gray.first};
   border-radius: 18px;
@@ -291,9 +291,13 @@ const ScrollWindow = styled.div`
 const ScrollerMain = styled(motion.div)`
   display: block;
   width: 100%;
-  height: 860px;
+  /* height: 860px; */
   background: rgba(255, 255, 255, 0.5);
   background: url(${main}) no-repeat center top / contain;
+	>img {
+		display: block;
+		width: 100%;
+	}
 `;
 
 const Info = styled(motion.div)`
@@ -313,10 +317,20 @@ const Info = styled(motion.div)`
   font-size: 14px;
   font-weight: 700;
   text-align: center;
+  ${media.small`
+		padding: 9px;
+		border-radius: 5px;
+		font-size: 0;
+	`};
   >svg {
     width: 32px;
     height: 32px;
     margin: 0 auto 8px;
+		${media.small`
+			width: 18px;
+			height: 18px;
+			margin: 0 auto;
+		`};
   }
 `;
 
@@ -538,55 +552,53 @@ const Box = styled(motion.li)`
 	}
 `;
 
-// motion
-const imgVariants = {
-	start: {
-		y: 0,
-	},
-	end: {
-		y: -440, // (-[ScrollerMain heght - ScrollWindow height])
-		transition: {
-			type: "tween",
-			ease: [1, 0.4, 0.6, 1],
-			stiffness: 100,
-			delay: 1.5,
-			repeat: Infinity,
-			duration: 7,
-		}
-	},
-	exit: {
-		y: 0
-	}
-}
-
-const linkVariants = {
-	initial: {
-		opacity: 1
-	},
-	animate: {
-		opacity: 0,
-		transition: {
-			delay: 2,
-			duration: 5
-		}
-	}
-}
-
 function Itle() {
-	// const motionValue = useMotionValue(0);
-	// // const transform = useTransform(y);
 	// drag control
 	const ScrollWindowInnerRef = useRef<HTMLDivElement>(null);
-	// const SrcollerMainH = useRef<HTMLDivElement>(null).current?.offsetHeight;
 	const { scrollYProgress } = useViewportScroll();
 	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "144px", "155px", "160px"]);
 	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "80px", "100px", "140px"]);
-	useEffect(() => {
-		scrollYProgress.onChange(() => {
-			// console.log(scrollYProgress.get());
-		})
-	}, []);
 
+	// 이미지 높이 담기
+	const [imgH, setImgH] = useState<number>(0);
+	const SrcollerMainRef = useRef<HTMLImageElement>(null);
+	const [isImageLoad, setIsImageLoad] = useState(false);
+	let imageHeight = () => {
+		const SrcollerMainH = SrcollerMainRef.current?.offsetHeight || 0;
+		const ScrollWindowH = ScrollWindowInnerRef.current?.offsetHeight || 0;
+		// console.log(SrcollerMainH);
+		return setImgH(SrcollerMainH - ScrollWindowH);
+	}
+	// resize
+	const [windowSize, setWindowSize] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight
+	})
+	const handleResize = () => {
+		setWindowSize({
+			width: window.innerWidth,
+			height: window.innerHeight
+		})
+		setIsImageLoad(true);
+		if (isImageLoad) {
+			// console.log("resize");
+			imageHeight()
+		}
+	}
+	useEffect(() => {
+		// scrollYProgress.onChange(() => {
+		// 	console.log(scrollYProgress.get());
+		// })
+		if (isImageLoad) {
+			// console.log("load?");
+			imageHeight()
+			window.addEventListener('resize', handleResize);
+		}
+		return () => {
+			setIsImageLoad(false);
+			window.removeEventListener('resize', handleResize);
+		};
+	}, [isImageLoad]);
 
 	return (
 		<div className="sub">
@@ -697,13 +709,10 @@ function Itle() {
 								<FontAwesomeIcon icon={faArrowsUpDown} />
 								Drag
 							</Info>
-							<ScrollerMain variants={imgVariants} initial="start" animate="end" exit="exit" drag="y" dragConstraints={ScrollWindowInnerRef}></ScrollerMain>
+							<ScrollerMain initial={{ y: 0 }} animate={{ y: -`${Math.abs(imgH)}` }} transition={{ type: "tween", ease: [1, 1, 0.6, 1], delay: 1.5, repeat: Infinity, duration: 7 }} exit={{ y: 0 }} drag="y" dragConstraints={ScrollWindowInnerRef}>
+								<img src={main} ref={SrcollerMainRef} alt="작업 페이지 미리보기" onLoad={() => { setIsImageLoad(true) }} />
+							</ScrollerMain>
 						</ScrollWindow>
-						{/* <Spacing>
-							<ImgBox className="main-tm">
-								<img src={mainTm} className="tm-hide" alt="작업 페이지 미리보기" />
-							</ImgBox>
-						</Spacing> */}
 					</div>
 					<div className="section sub-bg">
 						<Title>
