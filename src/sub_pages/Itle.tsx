@@ -295,13 +295,13 @@ const ScrollWindow = styled.div`
 const ScrollerMain = styled(motion.div)`
   display: block;
   width: 100%;
-  /* height: 860px; */
   background: rgba(255, 255, 255, 0.5);
-  background: url(${main}) no-repeat center top / contain;
-	>img {
-		display: block;
-		width: 100%;
-	}
+`;
+
+const ScrollerImg = styled(motion.img)`
+  display: block;
+  width: 100%;
+  position: relative;
 `;
 
 const Info = styled(motion.div)`
@@ -564,29 +564,34 @@ function Itle() {
 	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "80px", "100px", "140px"]);
 
 	// 이미지 높이 담기
-	const [imgH, setImgH] = useState<number>(0);
-	const SrcollerMainRef = useRef<HTMLImageElement>(null);
+	const ScrollerMainRef = useRef<HTMLDivElement>(null);
+	const ScrollerMainImgRef = useRef<HTMLImageElement>(null);
 	const [isImageLoad, setIsImageLoad] = useState(false);
-	let imageHeight = () => {
-		const SrcollerMainH = SrcollerMainRef.current?.offsetHeight || 0;
-		const ScrollWindowH = ScrollWindowInnerRef.current?.offsetHeight || 0;
-		// console.log(SrcollerMainH);
-		return setImgH(SrcollerMainH - ScrollWindowH);
-	}
 	// resize
 	const [windowSize, setWindowSize] = useState({
 		width: window.innerWidth,
-		height: window.innerHeight
+		height: window.innerHeight,
+		flag: "off"
 	})
-	const handleResize = () => {
+	// height
+	const [itemH, setItemH] = useState({ ScrollerMainImgH: 0, ScrollWindowH: 0 });
+	const imageHeight = () => {
+		let ScrollerMainImgH = ScrollerMainImgRef.current?.offsetHeight || 0;
+		let ScrollWindowH = ScrollWindowInnerRef.current?.offsetHeight || 0;
+		// console.log(typeof ScrollerMainImgH, 'ScrollerMainImgH');
 		setWindowSize({
 			width: window.innerWidth,
-			height: window.innerHeight
+			height: window.innerHeight,
+			flag: "on"
 		})
+		return (
+			setItemH({ ScrollerMainImgH: ScrollerMainImgH, ScrollWindowH: ScrollWindowH })
+		)
+	}
+	const handleResize = () => {
 		setIsImageLoad(true);
 		if (isImageLoad) {
-			// console.log("resize");
-			imageHeight()
+			imageHeight();
 		}
 	}
 	useEffect(() => {
@@ -594,9 +599,10 @@ function Itle() {
 		// 	console.log(scrollYProgress.get());
 		// })
 		if (isImageLoad) {
-			// console.log("load?");
-			imageHeight()
+			// console.log("load?", ScrollerMainRef.current?.offsetHeight);
+			// imageHeight();
 			window.addEventListener('resize', handleResize);
+			handleResize();
 		}
 		return () => {
 			setIsImageLoad(false);
@@ -713,8 +719,8 @@ function Itle() {
 								<FontAwesomeIcon icon={faArrowsUpDown} />
 								Drag
 							</Info>
-							<ScrollerMain initial={{ y: 0 }} animate={{ y: -`${Math.abs(imgH)}` }} transition={{ type: "tween", ease: [1, 1, 0.6, 1], delay: 1.5, repeat: Infinity, duration: 7 }} exit={{ y: 0 }} drag="y" dragConstraints={ScrollWindowInnerRef}>
-								<img src={main} ref={SrcollerMainRef} alt="작업 페이지 미리보기" onLoad={() => { setIsImageLoad(true) }} />
+							<ScrollerMain ref={ScrollerMainRef}>
+								<ScrollerImg src={main} ref={ScrollerMainImgRef} alt="작업 페이지 미리보기" style={{ y: 0 }} drag="y" dragConstraints={ScrollWindowInnerRef} onLoad={() => { setIsImageLoad(true) }} initial={windowSize.flag === "on" && { y: 0 }} animate={windowSize.flag === "on" && { y: -`${Number((itemH.ScrollerMainImgH - itemH.ScrollWindowH))}` }} transition={{ type: "tween", ease: [1, 1, 0.6, 1], delay: 1.5, repeat: Infinity, duration: 7 }} exit={{ y: 0 }} />
 							</ScrollerMain>
 						</ScrollWindow>
 					</div>
