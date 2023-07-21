@@ -477,7 +477,7 @@ function Sub() {
 						</Info>
 					</Infos>
 					{state.id === "cobe" ? <Button onClick={() => { window.open("https://cobemall.com/") }}>사이트 바로가기</Button> : ""}
-					{state.id === "ailemp" ? <Button onClick={() => { window.open("https://ailemp.vsquare.cc/page/home") }}>사이트 바로가기</Button> : ""}
+					{state.id === "ailemp" ? <Button onClick={() => { window.open("https://iscreamedu.vsquare.cc/page/home") }}>사이트 바로가기</Button> : ""}
 					{state.id === "hrdi" ? <Button onClick={() => { window.open("https://hrdi.koreatech.ac.kr/") }}>사이트 바로가기</Button> : ""}
 					{state.id === "hsjob" ? <Button onClick={() => { window.open("https://job.hs.ac.kr/") }}>사이트 바로가기</Button> : ""}
 					{state.id === "itle" ? <Button onClick={() => { window.open("https://lms-itle.or.kr/") }}>사이트 바로가기</Button> : ""}

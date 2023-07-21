@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faArrowsUpDown, faStarOfLife } from "@fortawesome/free-solid-svg-icons";
 import { media } from "style/media_query";
 import main from "img/sub_pages/ailemp/index.png";
 import mainTa from "img/sub_pages/ailemp/index_ta.png";
@@ -14,14 +14,16 @@ import learnerSmartTa from "img/sub_pages/ailemp/learner_smart_ta.png";
 import learnerSmartMo from "img/sub_pages/ailemp/learner_smart_mo.png";
 import masterDashboard from "img/sub_pages/ailemp/master_dashboard.png";
 import masterDashboardMo from "img/sub_pages/ailemp/master_dashboard_mo.png";
+import masterDashboardBg from "img/sub_pages/ailemp/dashboard_bg.png";
+import learnerUntactTa from "img/sub_pages/ailemp/learner_untact_ta.png";
 import application from "img/sub_pages/ailemp/application.png";
-import faq from "img/sub_pages/ailemp/faq.png";
+import profile from "img/sub_pages/ailemp/profile.png";
+import learnerResult from "img/sub_pages/ailemp/learner_result.png";
 import join2 from "img/sub_pages/ailemp/join2.png";
-import join6 from "img/sub_pages/ailemp/join6.png";
+import map from "img/sub_pages/ailemp/map.png";
 
 const PageFrame = styled(motion.div)`
   margin-top: 48px;
-	padding: 0 0 100px;
   border-radius: 20px;
 	background: linear-gradient(90deg, #00495a, #5eebb5, #00c3ed);
 	.txt {
@@ -57,32 +59,45 @@ const Page = styled.div`
 	`};
 	.section {
 		position: relative;
+		margin-top: 110px;
+		padding-top: 200px;
 		${media.medium`
 			padding-top: 100px;
 		`};
+		&.color {
+			margin-top: 0;
+    	padding-top: 80px;
+		}
 		&.main {
-			margin-top: 150px;
-    	padding: 170px 0 350px;
+			padding-bottom: 350px;
 			background-color: rgba(255, 255, 255, 0.4);
 			${media.medium`
 				padding: 60px 0;
 			`};
-			/* &::after {
+			&::before {
 				content: '';
 				position: absolute;
 				left: 0;
 				top: 0;
 				width: 100%;
-				height: 100%;
-				background: url(${mainBg}) no-repeat center top / auto 500px;
-				opacity: 0.6;
-			} */
-			.right {
-				top: 35px;
-				${media.medium`
-					top: 25px;
-				`};
+				height: 440px;
+				background: url(${mainBg}) no-repeat left top -120px / auto 100%;
 			}
+		}
+		&.dashboard {
+			background-color: #ffe993;
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 500px;
+				background: url(${masterDashboardBg}) no-repeat center bottom / contain;
+			}
+		}
+		&.sub {
+			padding-top: 300px;
 		}
 	}
 	.icon {
@@ -177,26 +192,42 @@ const Spacing = styled.div`
 	&.master {
 		&-area {
 			display: flex;
+			flex-wrap: wrap;
 			gap: 48px;
 			justify-content: space-between;
-			padding-top: 100px;
+			position: relative;
+			padding: 100px 0 320px;
 		}
 	}
 `;
 
-const LearnerSmartDiv = styled(motion.div)`
-	overflow: hidden;
-	position: relative;
+const Device = styled.div`
 	width: 45%;
-	height: 812px;
-	border: 2px solid #000;
-	border-radius: 20px;
 	&.ta {
 		width: 30%;
 	}
 	&.mo {
 		width: 20%;
 	}
+	p {
+		color: #000;
+		font-size: 16px;
+    font-weight: 700;
+    text-align: right;
+    width: 100%;
+    padding: 0 12px 8px 0;
+    opacity: 0.7;
+	}
+`;
+
+const LearnerSmartDiv = styled(motion.div)`
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 812px;
+	border: 2px solid #000;
+	border-radius: 20px;
+	cursor: grab;
 `;
 
 const LearnerSmartImg = styled(motion.img)`
@@ -219,10 +250,22 @@ const MasterDashMo = styled.div`
 	overflow: hidden;
 	width: 360px;
 	height: 1120px;
-	margin: 112px 62px 0 0;
+	margin: 112px 32px 0 0;
 	border: 1px solid #000;
 	border-radius: 20px;
 	background: url(${masterDashboardMo}) no-repeat center top 62% / cover;
+`;
+
+const LearnerTa = styled.div`
+	overflow: hidden;
+	position: absolute;
+	bottom: 90px;
+	left: 190px;
+	width: 594px;
+	height: 630px;
+	border: 1px solid #000;
+	border-radius: 20px;
+	background: url(${learnerUntactTa}) no-repeat center bottom 66% / cover;
 `;
 
 const Title = styled.div`
@@ -234,6 +277,11 @@ const Title = styled.div`
 	${media.small`
 		padding: 0 16px;
 	`};
+	&.main {
+		&-title {
+			padding: 0;
+		} 
+	}
 `;
 
 const TitleH1 = styled(motion.div)`
@@ -241,7 +289,7 @@ const TitleH1 = styled(motion.div)`
 	left: 32px;
 	top: 0;
 	z-index: 1;
-  color: rgba(35, 35, 35, 0.9);
+  color: rgba(35, 35, 35, 0.7);
 	font-size: 32px;
   font-weight: 700;
 	${media.large`
@@ -260,6 +308,7 @@ const TitleH1 = styled(motion.div)`
 	&.right {
 		left: auto;
 		right: 32px;
+		top: 80px;
 		${media.medium`
 			top: 50px;
 			right: auto;
@@ -284,9 +333,27 @@ const Text = styled(motion.div)`
 	${media.medium`
 		margin-top: 100px;
 	`};
-	background-color: rgba(255,255,255,0.9);
+	background-color: rgba(255,255,255,0.7);
 	padding: 24px;
 	border-radius: 20px;
+	&.main {
+		&-txt {
+			border-radius: 0;
+		}
+	}
+	&.color {
+		&-txt {
+			width: 814px;
+			margin-top: 80px;
+			padding: 24px 0;			
+			span {
+				float: right;
+    		margin-top: 9px;
+				color: #003b71;
+				font-size: 14px;
+			}
+		}
+	}
 `;
 
 const Content = styled.div`
@@ -313,6 +380,7 @@ const ScrollWindow = styled.div`
   border: 2px solid ${(props) => props.theme.bgColor.gray.first};
   border-radius: 18px;
 	background-color: ${(props) => props.theme.textColor.gray.fifth};
+	cursor: grab;
 	${media.medium`
 		width: 95%;
 	`};
@@ -364,109 +432,6 @@ const Info = styled(motion.div)`
   }
 `;
 
-const ImgBox = styled.div`
-	position: relative;
-	>img {
-		width: 100%;
-	}
-`;
-
-const ImgBoxSpacing = styled.div`
-	position: relative;
-	padding: 32px;
-	${media.medium`
-		padding: 32px 0 0;
-	`};
-	&.jobposting {
-		.icon {
-			&-shortcuts {
-				right: auto;
-				left: 3.5%;
-				top: 3%;
-				${media.small`
-					top: 8%;
-				`};
-				&.step2 {
-					right: 4%;
-					left: auto;
-					top: auto;
-					bottom: 3.5%;
-				}
-			}
-		}
-	}
-	>img {
-		width: 100%;
-	}
-`;
-
-const ImgBoxSpacingL = styled.div`
-	position: relative;
-	width: 100%;
-	padding: 10px 32px 10px 0;
-	text-align: left;
-	&.jrounge {
-		.icon {
-			&-shortcuts {
-				right: 14%;
-				top: 3%;
-			}
-		}
-		&-v2 {
-			.icon {
-				&-shortcuts {
-					right: 14%;
-					top: 3%;
-					${media.small`
-						right: 25%;
-    				top: 13%;
-					`};
-				}
-			}
-		}
-	}
-	>img {
-		width: 90%;
-	}
-`;
-
-const ImgBoxSpacingR = styled.div`
-	position: relative;
-	width: 100%;
-	padding: 10px 32px;
-	text-align: right;
-	&.jrounge {
-		.icon {
-			&-shortcuts {
-				right: 14%;
-				top: 3%;
-				${media.small`
-					right: 24%;
-					top: 10%;
-				`};
-				&.step2 {
-					right: 4%;
-    			top: 34%;
-					${media.small`
-						right: 15%;
-    				top: 38%;
-					`};
-				}
-			}
-		}
-	}
-	>img {
-		width: 90%;
-	}
-`;
-
-const Circle = styled(motion.div)`
-	width: 300px;
-	height: 300px;
-	border-radius: 50%;
-	background-color: ${props => props.theme.bgColor.gray.fifth};
-`;
-
 const Boxes = styled(motion.ul)`
 	display: flex;
 	flex-wrap: wrap;
@@ -502,6 +467,95 @@ const Box = styled(motion.li)`
 	}
 `;
 
+const SubPagesDiv = styled(motion.div)`
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	padding: 0 0 90px;
+	background-color: rgba(255, 255, 255, 0.9);
+`;
+
+const SubItem = styled.div`
+	position: relative;
+	clear: both;
+	width: 100%;
+	>div {
+		height: 600px;
+		box-shadow: ${props => props.theme.shadow.box};
+		background: no-repeat center top / 100% auto;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	}
+	&.item1 {
+		padding-left: 120px;
+		>div {
+			width: 820px;
+			height: 360px;
+			background-image: url(${application});
+			background-position: center bottom -634px;
+			border-bottom-right-radius: 20px;
+			border-bottom-left-radius: 20px;
+		}
+	}
+	&.item2 {
+		>div {
+			width: 380px;
+			height: 410px;
+			background-image: url(${join2});
+			background-position: center top;
+			border-bottom-right-radius: 20px;
+			border-bottom-left-radius: 20px;
+		}
+		.icon {
+			&-shortcuts {
+				right: 74px;
+			}
+		}
+	}
+	&.item3 {
+		padding: 0 0 0 60px;
+		>div {
+			width: 480px;
+			height: 700px;
+			border-radius: 20px;
+			background-image: url(${profile});
+			background-position: center top;
+			background-size: cover;
+		}
+	}
+	&.item4 {
+		margin: 60px 40px 0 0;
+		>div {
+			width: 785px;
+			height: 490px;
+			margin-left: auto;
+			background-image: url(${learnerResult});
+			border-radius: 20px;
+		}
+	}
+	&.item5 {
+		>div {
+			width: 90%;
+			margin: 40px auto 0;
+			background-image: url(${map});
+			background-position: center top -310px;
+			border-radius: 20px;
+		}
+		.icon {
+			&-shortcuts {
+				right: 88px;
+    		top: 64px;
+			}
+		}
+	}
+`;
+
+const SubFlex = styled.div`
+	display: flex;
+	justify-content: space-between;
+	gap: 32px;
+	width: 100%;
+`;
+
 function AiLemp() {
 	// drag control
 	const ScrollWindowInnerRef = useRef<HTMLDivElement>(null);
@@ -510,7 +564,11 @@ function AiLemp() {
 	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "144px", "200px", "245px"]);
 	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "130px", "144px", "204px"]);
 
-	// 이미지 높이 담기
+	// sub drag
+	const LearnerSmartDivRef = useRef<HTMLDivElement>(null);
+	const LearnerSmartDivTaRef = useRef<HTMLDivElement>(null);
+	const LearnerSmartDivMoRef = useRef<HTMLDivElement>(null);
+	// 메인 이미지 모션
 	const ScrollerMainRef = useRef<HTMLDivElement>(null);
 	const ScrollerMainImgRef = useRef<HTMLImageElement>(null);
 	const [isImageLoad, setIsImageLoad] = useState(false);
@@ -560,11 +618,12 @@ function AiLemp() {
 		<div className="sub">
 			<PageFrame>
 				<Page>
-					<div className="section">
+					<div className="section color">
 						<Title>
-							<TitleH1 style={{ fontSize: size, color: "#003B71" }}>Color</TitleH1>
-							<Text style={{ color: "#C9FBDF", backgroundColor: "transparent" }}>
-								직접 제작한 VSQUARE의 System Kit 아래 var_function.scss 안 $primary, $secondary 변수에 <br className="tm-hide" />해당 프로젝트 단계별 Primary와 Secondary Color를 각 변수에 담아 체계적인 퍼블리싱 작업을 하였습니다.
+							<TitleH1 style={{ fontSize: size, color: "#00BD99" }}>Color</TitleH1>
+							<Text style={{ color: "#C9FBDF", backgroundColor: "transparent" }} className="color-txt">
+								직접 제작한 VSQUARE의 System Kit 아래 var_function.scss 안 $primary, $secondary 변수에 <br className="tm-hide" />해당 프로젝트 단계별 Primary와 Secondary Color를 각 변수에 담아 체계적인 퍼블리싱 작업을 하였습니다. <br />
+								<span><FontAwesomeIcon icon={faStarOfLife} /> 전남교육청의 Primary, Secondary Color 예시입니다.</span>
 							</Text>
 						</Title>
 						<Content>
@@ -651,7 +710,7 @@ function AiLemp() {
 						</Content>
 					</div>
 					<div className="section main">
-						<Title>
+						<Title className="main-title">
 							<TitleH1 style={{ fontSize: size, opacity }} className="right"># Main</TitleH1>
 							<Text className="main-txt">
 								아이스크림에듀사에서 주관하는 교육청 대상 교육 템플릿 사이트입니다. <br />
@@ -688,7 +747,7 @@ function AiLemp() {
 							</div>
 						</Spacing>
 					</div>
-					<div className="section">
+					<div className="section dashboard">
 						<Title>
 							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># Dashboard</TitleH1>
 							<Text>
@@ -698,67 +757,82 @@ function AiLemp() {
 							</Text>
 						</Title>
 						<Spacing className="learner-area">
-							<LearnerSmartDiv>
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/index_login_after.html") }} />
-								<Info>
-									<FontAwesomeIcon icon={faArrowsUpDown} />
-									Drag
-								</Info>
-								<LearnerSmartImg src={learnerSmart} />
-							</LearnerSmartDiv>
-							<LearnerSmartDiv className="ta">
-								<Info>
-									<FontAwesomeIcon icon={faArrowsUpDown} />
-									Drag
-								</Info>
-								<LearnerSmartImg src={learnerSmartTa} />
-							</LearnerSmartDiv>
-							<LearnerSmartDiv className="mo">
-								<Info>
-									<FontAwesomeIcon icon={faArrowsUpDown} />
-									Drag
-								</Info>
-								<LearnerSmartImg src={learnerSmartMo} />
-							</LearnerSmartDiv>
+							<Device>
+								<p>PC</p>
+								<LearnerSmartDiv ref={LearnerSmartDivRef}>
+									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/learner-report-smart.html") }} />
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={learnerSmart} drag="y" dragConstraints={LearnerSmartDivRef} />
+								</LearnerSmartDiv>
+							</Device>
+							<Device className="ta">
+								<p>Tablet</p>
+								<LearnerSmartDiv ref={LearnerSmartDivTaRef}>
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={learnerSmartTa} drag="y" dragConstraints={LearnerSmartDivRef} />
+								</LearnerSmartDiv>
+							</Device>
+							<Device className="mo">
+								<p>Mobile</p>
+								<LearnerSmartDiv ref={LearnerSmartDivMoRef}>
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={learnerSmartMo} drag="y" dragConstraints={LearnerSmartDivRef} />
+								</LearnerSmartDiv>
+							</Device>
 						</Spacing>
 						<Spacing className="master-area">
 							<MasterDashPc>
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/index_login_after.html") }} />
+								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/master-dashboard.html") }} />
 							</MasterDashPc>
 							<MasterDashMo></MasterDashMo>
+							<LearnerTa>
+								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/learner-report-untact.html") }} />
+							</LearnerTa>
 						</Spacing>
 					</div>
-					<div className="section">
+					<div className="section sub">
 						<Title>
 							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># Sub Pages</TitleH1>
-							<Text>학습과 사이트에 흥미를 유발하기위해 컬러풀한 색상 및 아이콘을 배치하여 좀 더 사이트에 오래 머물수 있도록 디자인 하였습니다.</Text>
+							{/* <Text>학습과 사이트에 흥미를 유발하기위해 컬러풀한 색상 및 아이콘을 배치하여 좀 더 사이트에 오래 머물수 있도록 디자인 하였습니다.</Text> */}
 						</Title>
 						<Spacing>
-							<ImgBoxSpacingR className="jrounge">
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge_region.html") }} />
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts step2" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge.html") }} />
-								{/* <img src={jrounge} alt="작업 페이지 미리보기" /> */}
-							</ImgBoxSpacingR>
-							<ImgBoxSpacingL className="jrounge-v2">
-								<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge_company.html") }} />
-								{/* <img src={jroungeV2} alt="작업 페이지 미리보기" /> */}
-							</ImgBoxSpacingL>
+							{/* <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_jlounge_region.html") }} /> */}
+							<SubPagesDiv>
+								<SubFlex>
+									<SubItem className="item1">
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/learner-application.html") }} />
+										<div></div>
+									</SubItem>
+									<SubItem className="item2">
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/join2.html") }} />
+										<div></div>
+									</SubItem>
+								</SubFlex>
+								<SubFlex>
+									<SubItem className="item3">
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/profile-select.html") }} />
+										<div></div>
+									</SubItem>
+									<SubItem className="item4">
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/learner-result.html") }} />
+										<div></div>
+									</SubItem>
+								</SubFlex>
+								<SubItem className="item5">
+									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/contact.html") }} />
+									<div></div>
+								</SubItem>
+							</SubPagesDiv>
 						</Spacing>
-					</div>
-					<div className="section">
-						<Title>
-							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># 채용공고</TitleH1>
-							<Text>
-								기업 회원의 경우, 직접 등록한 채용 공고의 현황과 공고에 지원한 지원자들을의 수를
-								파악할 수 있도록 설계하였습니다. <br className="tm-hide" />각각의 콘텐츠 클릭시 해당하는 마이페이지 메뉴로 넘어가 상세한 내용을 볼 수 있습니다.
-							</Text>
-						</Title>
-						<ImgBoxSpacing className="jobposting">
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_job_posting.html") }} />
-							{/* <img src={notice} className="tm-hide" alt="작업 페이지 미리보기" />
-							<img src={noticeTm} className="tm-show" alt="작업 페이지 미리보기" /> */}
-							<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts step2" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hsjob/i_mypage_job_company.html") }} />
-						</ImgBoxSpacing>
 					</div>
 				</Page>
 			</PageFrame>

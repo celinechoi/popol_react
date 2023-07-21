@@ -284,6 +284,7 @@ const ScrollWindow = styled.div`
   border: 2px solid ${(props) => props.theme.bgColor.gray.first};
   border-radius: 18px;
 	background-color: ${(props) => props.theme.textColor.gray.fifth};
+	cursor: grab;
 	${media.large`
 		margin: 70px auto 0;
 	`};
