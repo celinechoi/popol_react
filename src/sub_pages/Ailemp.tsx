@@ -45,9 +45,12 @@ const PageFrame = styled(motion.div)`
 			bottom: 0;
 			z-index: -1;
 			width: 100%;
-			height: 30px;
+			height: 100%;
 			background-color: rgba(255, 84, 58, 0.8);
 			transform: skewX(-22deg);
+			${media.smallToo`
+				transform: skewX(0);
+			`};
 		}
 	}
 `;
@@ -71,8 +74,14 @@ const Page = styled.div`
 		&.main {
 			padding-bottom: 350px;
 			background-color: rgba(255, 255, 255, 0.4);
+			${media.large`
+				padding-bottom: 250px;
+			`};
 			${media.medium`
-				padding: 60px 0;
+				padding: 110px 0 200px;
+			`};
+			${media.small`
+				padding: 110px 0;
 			`};
 			&::before {
 				content: '';
@@ -82,9 +91,18 @@ const Page = styled.div`
 				width: 100%;
 				height: 440px;
 				background: url(${mainBg}) no-repeat left top -120px / auto 100%;
+				${media.medium`
+					height: 210px;
+					background-position: left top 0;
+				`};
+			}
+			.right {
+				right: 32px;
 			}
 		}
 		&.dashboard {
+			margin-top: 0;
+			padding-top: 130px;
 			background-color: #ffe993;
 			&::after {
 				content: '';
@@ -95,9 +113,26 @@ const Page = styled.div`
 				height: 500px;
 				background: url(${masterDashboardBg}) no-repeat center bottom / contain;
 			}
+			.right {
+				${media.large`
+					top: 80px;
+				`};
+			}
 		}
 		&.sub {
 			padding-top: 300px;
+			${media.large`
+				padding-top: 200px;
+			`};
+			${media.medium`
+				margin-top: 0;
+				padding-top: 160px;
+			`};
+			.right {
+				${media.medium`
+					top: 80px;
+				`};
+			}
 		}
 	}
 	.icon {
@@ -127,14 +162,55 @@ const Spacing = styled.div`
 	position: relative;
 	z-index: 1;
 	padding-top: 60px;
+	${media.medium`
+		padding-top: 40px;
+	`};
 	.spacing {
 		&-explain {
 			display: flex;
 			align-items: center;
+			justify-content: space-between;
 			gap: 32px;
 			padding: 32px;
+			${media.large`
+				gap: 24px;
+				padding: 0 24px;
+			`};
+			${media.small`
+				flex-direction: column;
+				gap: 20px;
+				padding: 0 20px;
+			`};
+			&.reverse {
+				${media.small`
+					flex-direction: column-reverse;
+				`};
+			}
 			.area {
 				position: relative;
+				${media.large`
+					width: calc(100%/2 - 24px/2*1);
+				`};
+				${media.small`
+					width: 100%;
+				`};
+			}
+			.txt {
+				&-normal {
+					${media.large`
+						width: calc(100%/2 - 24px/2*1);
+					`};
+					${media.medium`
+						width: 48%;
+						font-size: 13px;
+						line-height: 2.2;
+					`};
+					${media.small`
+						width: 100%;
+						font-size: 16px;
+						line-height: 1.5;
+					`};
+				}
 			}
 		}
 	}
@@ -151,11 +227,24 @@ const Spacing = styled.div`
 				height: 60px;
 				background: url(${clipIcon}) no-repeat center / contain;
 				transform: rotate(180deg);
+				${media.small`
+					top: -15px;
+					width: 60px;
+					height: 50px;
+				`};
 			}
 			&.edit {
 				position: absolute;
 				right: 120px;
 				top: 220px;
+				${media.large`
+					right: 24px;
+					top: 110px;
+					width: 100%;
+				`};
+				${media.small`
+					right: 0;
+				`};
 			}
 		}
 		&-inner {
@@ -167,6 +256,19 @@ const Spacing = styled.div`
 			width: 628px;
 			height: 356px;
 			border: 3px solid #ffe993;
+			${media.large`
+				width: 100%;
+				height: 286px;
+			`};
+			${media.medium`
+				border-radius: 16px;
+			`};
+			${media.small`
+				border-radius: 12px;
+			`};
+			${media.micro`
+				height: 136px;
+			`};
 			&.part1 {
 				background-image: url(${mainTa});
 				background-position: center top 16%;
@@ -187,6 +289,17 @@ const Spacing = styled.div`
 			justify-content: space-between;
 			gap: 12px;
 			padding: 110px 32px 0;
+			${media.large`
+				padding-top: 70px;
+			`};
+			${media.medium`
+				gap: 24px 0;
+				padding: 70px 24px 0;
+			`};
+			${media.small`
+				gap: 20px 0;
+				padding: 40px 20px 0;
+			`};
 		}
 	}
 	&.master {
@@ -197,17 +310,41 @@ const Spacing = styled.div`
 			justify-content: space-between;
 			position: relative;
 			padding: 100px 0 320px;
+			${media.large`
+				gap: 32px;
+				padding: 70px 0 130px;
+			`};
+			${media.medium`
+				gap: 24px;
+				padding: 24px 0 100px;
+			`};
+			${media.small`
+				gap: 20px;
+				padding: 20px 0 100px;
+			`};
 		}
 	}
 `;
 
 const Device = styled.div`
 	width: 45%;
+	${media.medium`
+		width: 100%;
+	`};
 	&.ta {
 		width: 30%;
+		${media.medium`
+			width: 60%;
+		`};
 	}
 	&.mo {
 		width: 20%;
+		${media.medium`
+			width: 30%;
+		`};
+		${media.small`
+			width: 35%;
+		`};
 	}
 	p {
 		color: #000;
@@ -228,6 +365,20 @@ const LearnerSmartDiv = styled(motion.div)`
 	border: 2px solid #000;
 	border-radius: 20px;
 	cursor: grab;
+	${media.large`
+		height: 600px;
+	`};
+	${media.medium`
+		height: 450px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		height: 350px;
+		border-radius: 12px;
+	`};
+	${media.smallToo`
+		height: 170px;
+	`};
 `;
 
 const LearnerSmartImg = styled(motion.img)`
@@ -244,6 +395,15 @@ const MasterDashPc = styled.div`
 	border-top-right-radius: 20px;
 	border-bottom-right-radius: 20px;
 	background: url(${masterDashboard}) no-repeat left top / cover;
+	${media.large`
+		width: 90%;
+	`};
+	${media.small`
+		height: 440px;
+	`};
+	${media.smallToo`
+		height: 270px;
+	`};
 `;
 
 const MasterDashMo = styled.div`
@@ -254,6 +414,24 @@ const MasterDashMo = styled.div`
 	border: 1px solid #000;
 	border-radius: 20px;
 	background: url(${masterDashboardMo}) no-repeat center top 62% / cover;
+	${media.large`
+		width: 40%;
+		height: 680px;
+		margin: 38px 0 0 32px;
+	`};
+	${media.medium`
+		height: 490px;
+		margin: 0 0 0 24px;
+	`};
+	${media.small`
+		margin: 0 0 0 20px;
+	`};
+	${media.smallToo`
+		height: 410px;
+	`};
+	${media.micro`
+		height: 220px;
+	`};
 `;
 
 const LearnerTa = styled.div`
@@ -266,6 +444,24 @@ const LearnerTa = styled.div`
 	border: 1px solid #000;
 	border-radius: 20px;
 	background: url(${learnerUntactTa}) no-repeat center bottom 66% / cover;
+	${media.large`
+		left: auto;
+		right: 32px;
+		bottom: 12%;
+		width: 45%;
+	`};
+	${media.medium`
+		right: 24px;
+		bottom: 8%;
+		height: 440px;
+	`};
+	${media.small`
+		right: 20px;
+	`};
+	${media.micro`
+		width: 36%;
+		height: 270px;
+	`};
 `;
 
 const Title = styled.div`
@@ -305,10 +501,20 @@ const TitleH1 = styled(motion.div)`
 		top: auto;
 		font-size: 64px !important;
 	`};
+	&.color {
+		&-titleh1 {
+		${media.medium`
+			top: 40px;
+		`};
+	}
+	}
 	&.right {
 		left: auto;
 		right: 32px;
 		top: 80px;
+		${media.large`
+			top: 40px;
+		`};
 		${media.medium`
 			top: 50px;
 			right: auto;
@@ -330,12 +536,15 @@ const Text = styled(motion.div)`
 	color: #333;
   font-size: 18px;
   font-weight: 500;
-	${media.medium`
-		margin-top: 100px;
-	`};
 	background-color: rgba(255,255,255,0.7);
 	padding: 24px;
 	border-radius: 20px;
+	${media.medium`
+		margin-top: 100px;
+	`};
+	${media.small`
+		margin-top: 70px;
+	`};
 	&.main {
 		&-txt {
 			border-radius: 0;
@@ -345,7 +554,10 @@ const Text = styled(motion.div)`
 		&-txt {
 			width: 814px;
 			margin-top: 80px;
-			padding: 24px 0;			
+			padding: 24px 0;
+			${media.large`
+				width: 100%;
+			`};			
 			span {
 				float: right;
     		margin-top: 9px;
@@ -479,6 +691,11 @@ const SubItem = styled.div`
 	position: relative;
 	clear: both;
 	width: 100%;
+	${media.small`
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	`};
 	>div {
 		height: 600px;
 		box-shadow: ${props => props.theme.shadow.box};
@@ -487,6 +704,13 @@ const SubItem = styled.div`
 	}
 	&.item1 {
 		padding-left: 120px;
+		${media.large`
+			padding-left: 4%;
+			min-width: 60%;
+		`};
+		${media.small`
+			padding-left: 0;
+		`};
 		>div {
 			width: 820px;
 			height: 360px;
@@ -494,9 +718,29 @@ const SubItem = styled.div`
 			background-position: center bottom -634px;
 			border-bottom-right-radius: 20px;
 			border-bottom-left-radius: 20px;
+			${media.large`
+				width: 100%;
+				background-position: center top 29%;
+			`};
+			${media.medium`
+				border-radius: 16px;
+			`};
+			${media.small`
+				border-radius: 12px;
+			`};
+			${media.smallToo`
+				height: 180px;
+			`};
 		}
 	}
 	&.item2 {
+		${media.large`
+			min-width: 34%;
+			padding-right: 2%;
+		`};
+		${media.small`
+			padding-right: 0;
+		`};
 		>div {
 			width: 380px;
 			height: 410px;
@@ -504,15 +748,38 @@ const SubItem = styled.div`
 			background-position: center top;
 			border-bottom-right-radius: 20px;
 			border-bottom-left-radius: 20px;
+			${media.large`
+				width: 100%;
+			`};
+			${media.medium`
+				border-radius: 16px;
+			`};
+			${media.small`
+				height: 360px;
+				border-radius: 12px;
+			`};
+			${media.smallToo`
+				height: 130px;
+			`};
 		}
 		.icon {
 			&-shortcuts {
 				right: 74px;
+				${media.large`
+					right: 13%;
+				`};
 			}
 		}
 	}
 	&.item3 {
 		padding: 0 0 0 60px;
+		${media.large`
+			padding-left: 4%;
+    	min-width: 41%;
+		`};
+		${media.small`
+			padding-left: 0;
+		`};
 		>div {
 			width: 480px;
 			height: 700px;
@@ -520,30 +787,86 @@ const SubItem = styled.div`
 			background-image: url(${profile});
 			background-position: center top;
 			background-size: cover;
+			${media.large`
+				width: 100%;
+			`};
+			${media.medium`
+				height: 410px;
+				background-position: center;
+				border-radius: 16px;
+			`};
+			${media.small`
+				height: 320px;
+				border-radius: 12px;
+			`};
+			${media.smallToo`
+				height: 140px;
+				background-size: 100% auto;
+			`};
 		}
 	}
 	&.item4 {
 		margin: 60px 40px 0 0;
+		${media.large`
+			margin-right: 5%;
+			min-width: 40%;
+		`};
+		${media.small`
+			margin: 0;
+		`};
 		>div {
 			width: 785px;
 			height: 490px;
 			margin-left: auto;
 			background-image: url(${learnerResult});
 			border-radius: 20px;
+			${media.large`
+				width: 100%;
+			`};
+			${media.medium`
+				height: 460px;
+				border-radius: 16px;
+			`};
+			${media.small`
+				border-radius: 12px;
+			`};
+			${media.smallToo`
+				height: 150px;
+			`};
 		}
 	}
 	&.item5 {
+		${media.smallToo`
+			padding: 0 20px;	
+		`};
 		>div {
 			width: 90%;
 			margin: 40px auto 0;
 			background-image: url(${map});
 			background-position: center top -310px;
 			border-radius: 20px;
+			${media.medium`
+				height: 430px;
+				border-radius: 16px;
+			`};
+			${media.small`
+				width: 100%;
+				margin: 20px auto 0;
+				border-radius: 12px;
+			`};
+			${media.smallToo`
+				height: 250px;
+				background-position: center top;
+			`};
 		}
 		.icon {
 			&-shortcuts {
 				right: 88px;
     		top: 64px;
+				${media.large`
+					right: 8%;
+    			top: 14%;
+				`};
 			}
 		}
 	}
@@ -554,6 +877,10 @@ const SubFlex = styled.div`
 	justify-content: space-between;
 	gap: 32px;
 	width: 100%;
+	${media.small`
+		gap: 20px;
+		padding: 20px 20px 0;
+	`};
 `;
 
 function AiLemp() {
@@ -562,7 +889,7 @@ function AiLemp() {
 	const { scrollYProgress } = useViewportScroll();
 	const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "144px", "200px", "245px"]);
-	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "130px", "144px", "204px"]);
+	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "100px", "110px", "120px"]);
 
 	// sub drag
 	const LearnerSmartDivRef = useRef<HTMLDivElement>(null);
@@ -620,7 +947,7 @@ function AiLemp() {
 				<Page>
 					<div className="section color">
 						<Title>
-							<TitleH1 style={{ fontSize: size, color: "#00BD99" }}>Color</TitleH1>
+							<TitleH1 style={{ fontSize: size, color: "#00BD99" }} className="color-titleh1">Color</TitleH1>
 							<Text style={{ color: "#C9FBDF", backgroundColor: "transparent" }} className="color-txt">
 								직접 제작한 VSQUARE의 System Kit 아래 var_function.scss 안 $primary, $secondary 변수에 <br className="tm-hide" />해당 프로젝트 단계별 Primary와 Secondary Color를 각 변수에 담아 체계적인 퍼블리싱 작업을 하였습니다. <br />
 								<span><FontAwesomeIcon icon={faStarOfLife} /> 전남교육청의 Primary, Secondary Color 예시입니다.</span>
@@ -731,15 +1058,15 @@ function AiLemp() {
 						</ScrollWindow>
 						<Spacing>
 							<div className="spacing-explain">
-								<div>
+								<div className="area">
 									<div className="clip-frame"><div className="clip-inner part1"></div></div>
 								</div>
 								<p className="txt-normal">스크롤 하여 해당 영역에 도달할 경우 누적, 일일 학습 데이터 분석, AI-LEMP와 함께한 시간의 숫자가 카운트 되는 효과를 <span className="point">Javascript의 객체로 저장하여 jQuery의 animate로 구현</span>하였습니다.</p>
 							</div>
 						</Spacing>
 						<Spacing>
-							<div className="spacing-explain">
-								<p style={{ alignSelf: "flex-start", paddingTop: "110px" }} className="txt-normal"><span className="point">GSAP 자바스크립트 플러그인을 사용하여</span> 해당 영역에 도달할 경우 <br /> 첫번째 Row는 왼쪽으로, 두번째 Row는 오른쪽으로 <span className="point">흐르는 효과</span>를 구현하였습니다. <br /> 마우스 호버시, 멈추며 해당 아이템이 포커스되어 위로 올라가는 효과는 <span className="point">transform 스타일을 사용하여 on 클래스를 addClass</span> 하여 구현하였습니다.</p>
+							<div className="spacing-explain reverse">
+								<p style={{ alignSelf: "flex-start", paddingTop: "110px" }} className="txt-normal"><span className="point">GSAP 자바스크립트 플러그인을 사용하여</span> 해당 영역에 도달할 경우 <br className="lp-hide" /> 첫번째 Row는 왼쪽으로, 두번째 Row는 오른쪽으로 <span className="point">흐르는 효과</span>를 구현하였습니다. <br /> 마우스 호버시, 멈추며 해당 아이템이 포커스되어 위로 올라가는 효과는 <span className="point">transform 스타일을 사용</span>하여 on 클래스를 addClass 하여 구현하였습니다.</p>
 								<div className="area">
 									<div className="clip-frame"><div className="clip-inner part2"></div></div>
 									<div className="clip-frame edit"><div className="clip-inner part2-2"></div></div>
