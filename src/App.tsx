@@ -108,6 +108,13 @@ button {
 		max-width: calc(100% - 40px);
 	`};
 }
+.container {
+  min-height: 1080px;
+	padding: 140px 0 80px;
+	${media.small`
+		padding-top: 167px;
+	`};
+}
 .page {
 	&-h1 {
 		color: ${(props) => props.theme.textColor.gray.first};

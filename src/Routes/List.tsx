@@ -7,14 +7,6 @@ import { media } from "style/media_query";
 import Loading from "components/Loading";
 import { motion } from "framer-motion";
 
-const ListPage = styled.div`
-	min-height: 1080px;
-	padding: 90px 0 80px;
-	${media.small`
-		padding-top: 135px;
-	`};
-`;
-
 const Title = styled.div`
   height: 200px;
 	${media.small`
@@ -22,23 +14,13 @@ const Title = styled.div`
 	`};
 	.page {
 		&-h1 {
-			padding-top: 50px;
 			text-align: center;
-			${media.medium`
-				padding-top: 40px;
-			`};
-			${media.small`
-				padding-top: 32px;
-			`};
 		}
 	}
 `;
 
 const Container = styled.div`
-	padding: 80px 0 0;
-	${media.medium`
-		padding: 40px 0 0;
-	`};
+	padding: 40px 0 0;
 	${media.small`
 		padding: 68px 0 0;
 	`};
@@ -47,6 +29,7 @@ const Container = styled.div`
 const Boxes = styled(motion.ul)`
 	display: flex;
 	flex-wrap: wrap;
+  gap: 32px;
 	${media.medium`
 		gap: 32px 20px;
 	`};
@@ -161,10 +144,8 @@ export interface TypesParams {
 // motion
 const boxesVariants = {
 	start: {
-		gap: 0
 	},
 	end: {
-		gap: '40px 32px',
 		transition: {
 			type: "spring",
 			duration: .2,
@@ -230,8 +211,9 @@ function List() {
 				})
 		}
 		return () => {
+      setList([]);
 			isMount = false;
-			setList([]);
+			
 		};
 	}, [typeId]);
 	let timer = setTimeout(() => { setImgLoading(false) }, 700);
@@ -242,7 +224,7 @@ function List() {
 	}
 	return (
 		<>
-			<ListPage>
+			<div className="container">
 				<Title>
 					<div className="inner">
 						<h2 className="page-h1">Works</h2>
@@ -301,7 +283,7 @@ function List() {
 						)}
 					</div>
 				</Container >
-			</ListPage >
+			</div >
 		</>
 	)
 }
