@@ -3,6 +3,18 @@ import heart from "img/emoji/heart.png";
 import Chart from "react-apexcharts";
 import { useEffect, useState } from "react";
 import Loading from "components/Loading";
+import { media } from "style/media_query";
+import { motion } from "framer-motion";
+import coworkBg from "img/cowork_bg.png";
+import intellij from "img/logo/intellij_logo.png";
+import vscode from "img/logo/vscode_logo.png";
+import github from "img/logo/github_logo.png";
+import photoshop from "img/logo/photoshop_logo.svg";
+import zeplin from "img/logo/zeplin_logo.svg";
+import slack from "img/logo/slack_logo.svg";
+import notion from "img/logo/notion_logo.png";
+import asana from "img/logo/asana_logo.svg";
+import jira from "img/logo/jira_logo.svg";
 
 const Content = styled.div`
   padding-top: 40px;
@@ -77,187 +89,800 @@ const GridTop = styled.div`
 const Grids = styled.ul`
   display: flex;
   gap: 24px 32px;
+	${media.medium`
+		flex-direction: column;
+		gap: 22px;
+	`};
 `;
 
 const Grid = styled.li`
   flex: 1 1 calc(100%/2 - 32px/2*1);
-  height: 300px;
-  background-color: ${props => props.theme.bgColor.gray.first};
+  /* height: 428px; */
+	height: auto;
+	padding: 20px;
   border-radius: 20px;
+	&.chart {
+		&-area {
+			padding: 0;
+		}
+	}
   &.second {
-    background-color: ${props => props.theme.bgColor.gray.fourth};
+    background-color: ${props => props.theme.bgColor.gray.fifth};
   }
+	&.cowork {
+		position: relative;
+		z-index: 0;
+		overflow: hidden;
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			background: url(${coworkBg}) no-repeat center top / cover;
+			opacity: 0.7;
+		}
+	}
+	${media.medium`
+		flex-basis: 100%;
+	`};
+	${media.small`
+		min-height: 300px;
+	`};
+`;
+
+const Title = styled.p`
+	margin-bottom: 32px;
+	color: #5c5c5c;
+	font-size: 24px;
+	font-weight: 700;
+	text-align: left;
+	&.cowork {
+		color: #fff;
+	}
+`;
+
+const Plugins = styled(motion.ul)`
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+`;
+
+const Plugin = styled(motion.li)`
+	position: relative;
+	border-radius: 30px;
+`;
+
+const PluginTitle = styled.div`
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	border-radius: 50%;
+	border: 1px solid #FF8E22;
+	background-color: #FF8E22;
+	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+	color: #FFF9F1;
+	font-weight: 700;
+	font-size: 16px;
+	&.second {
+		background-color: #8CD558;
+		border-color: #8CD558;
+		color: #F5FBF1;
+	}
+	&.third {
+		background-color: #429EF0;
+		border-color: #429EF0;
+		color: #F0F8FE;
+	}
+	&.fourth {
+		background-color: #9059FF;
+		border-color: #9059FF;
+		color: #F6F2FF;
+	}
+`;
+
+const UnLists = styled(motion.ul)`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 24px;
+	overflow: hidden;
+	height: 80px;
+	padding: 12px 12px 12px 92px;
+	border: 1px solid #FF8E22;
+	background-color: #FFF9F1;
+	box-shadow: ${props => props.theme.shadow.under};
+	border-radius: 30px;
+	border-top-left-radius: 40px;
+	border-bottom-left-radius: 40px;
+	${media.small`
+		flex-wrap: wrap;
+		gap: 8px;
+		min-height: 80px;
+		height: auto;
+		padding: 10px 10px 10px 80px;
+	`};
+	${media.micro`
+		flex-direction: column;
+		align-items: flex-start;
+	`};
+	&.second {
+		background-color: #F5FBF1;
+		border-color: #8CD558;
+	}
+	&.third {
+		background-color: #F0F8FE;
+		border-color: #429EF0;
+	}
+	&.fourth {
+		background-color: #F6F2FF;
+		border-color: #9059FF;
+	}
+`;
+
+const List = styled(motion.li)`
+	flex: 1 1 calc(100%/3 - 24px/3*2);
+	/* color: ${props => props.theme.textColor.gray.first}; */
+	color: #000;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	${media.small`
+		flex-basis: calc(100%/2 - 8px/2*1);
+		font-size: 12px;
+		text-align: left;
+	`};
+`;
+
+const CoWorkTools = styled(motion.div)`
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	align-items: center;
+	justify-content: center;
+`;
+
+const Items = styled(motion.div)`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	width: 100%;
+`;
+
+const Item = styled(motion.div)`
+	flex: 1 1 calc(100%/3 - 8px/3*2);
+	>img {
+		display: block;
+		width: 80px;
+		margin: 0 auto;
+    /* background-color: #fff; */
+    border-radius: 50%;
+    height: 80px;
+    padding: 10px;
+		/* background: linear-gradient(145deg, #e6d3bf, #fffae3);
+		box-shadow:  20px 20px 60px #d9c7b4; */
+		background: #ad5389;
+  	background: linear-gradient(0deg, rgba(77,54,208,1) 0%, rgba(132,116,254,1) 100%);
+		box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
+		opacity: 0.8;
+	}
+`;
+
+const ToolTxt = styled.p`
+	padding-top: 8px;
+	font-size: 12px;
+	text-align: center;
 `;
 
 export interface chartInterface {
-  series: {
-    name: string,
-    data: number[],
-  }[],
-  options: {
-    colors: string[],
-    labels: string[],
-  }
+	series: {
+		name: string,
+		data: number[],
+	}[],
+	options: {
+		colors: string[],
+		labels: string[],
+	}
 }
 
-function About(){
-  const [loading, setLoading] = useState(true);
-  const [state, setState] = useState<chartInterface>();
-  const chartOption = {
-    series: [
-      {
-        name: "Tech Stack",
-        data: [100, 70, 50, 90, 95, 60] }
-    ],
-    options: {
-      colors: ['#14e090', '#f8d622', '#fbeaad', '#d7b81e', '#d32f2f', '#ff543a'],
-      labels: ['HTML', 'Javascript', 'React.js', 'JQuery', 'CSS', 'SCSS'],
-      chart: {
-        stacked: false,
-        toolbar: {
-          tools: {
-            download: false
-          }
-        },
-        height: '100%',
-        width: '100%',
-      },
-      plotOptions: {
-        bar: {
-          distributed: true,
-          columnWidth: '40px',
-          borderRadius: 7,
-          borderRadiusApplication: 'around',
-          dataLabels: {
-            position: 'top'
-          }
-        }
-      },
-      title: {
-        text: 'Tech Stack',
-        align: 'left',
-        margin: 0,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-          fontSize: '24px',
-          fontWeight: 'bold',
-          fontFamily: 'Noto Sans KR',
-          color: '#ddd'
-        },
-      },
-      dataLabels: {
-        offsetY: 10,
-        formatter: (val: any) => {
-          return val + "%";
-        },
-        dropShadow: {
-          enabled: false
-        }
-      },
-      xaxis: {
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        crosshairs: {
-          show: false
-        },
-      },
-      yaxis: {
-        labels: {
-          formatter: (val: any) => {
-            return val + "%";
-          }
-        }
-      },
-      tooltip: {
-        theme: 'dark',
-      },
-      grid: {
-        show: true,
-        row: {
-          // colors: "#ddd",
-          opacity: 0.3
-        },
-      },
-      legend: {
-        horizontalAlign: 'center', 
-        fontSize: '12px',
-        labels : {
-          useSeriesColors: true,
-        },
-        markers: {
-          width: 10,
-          height: 10,
-          radius: 3,
-        },
-        itemMargin: {
-          horizontal: 10,
-          vertical: 5
-        },
-      },
-      noData: {
-        text: '데이터가 없습니다.',
-        align: 'center',
-        verticalAlign: 'middle',
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#fff',
-          fontSize: '16px',
-          fontFamily: 'Righteous'
-        }
-      },
-    }
-  }
-  useEffect(()=>{
-    setLoading(false);
-    setState(chartOption);
-    return () => {
-      // setState();
-    }
-  }, []);
+// motion
+const pluginsVariants = {
+	hidden: {},
+	visible: {
+		transition: {
+			type: "spring",
+			duration: .2,
+			delayChildren: 0.5,
+			staggerChildren: 0.2,
+		}
+	}
+}
+
+const pluginVariants = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+	}
+}
+
+const unListsVariants = {
+	hidden: {
+		opacity: 0,
+		width: '80px',
+		padding: '12px',
+		borderRadius: '50%'
+	},
+	visible: {
+		opacity: 1,
+		width: '100%',
+		padding: '12px 12px 12px 92px',
+		borderTopLeftRadius: '40px',
+		borderTopRightRadius: '30px',
+		borderBottomLeftRadius: '40px',
+		borderBottomRightRadius: '30px',
+		transition: {
+			// delay: 0.5
+			ease: [1, 0.5, 1, 0.5],
+			delayChildren: 0.5,
+			staggerChildren: 0.2,
+		}
+	}
+}
+
+const listVariants = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+	}
+}
+
+function About() {
+	const [loading, setLoading] = useState(true);
+	const [state, setState] = useState<chartInterface>();
+	// resize
+	const [windowSize, setWindowSize] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+		flag: "off"
+	})
+	const handleResize = () => {
+		setWindowSize({
+			width: window.innerWidth,
+			height: window.innerHeight,
+			flag: "on"
+		})
+	}
+	const chartOption = {
+		series: [
+			{
+				name: "Tech Stack",
+				data: [100, 70, 50, 90, 95, 60]
+			}
+		],
+		options: {
+			colors: ['#14e090', '#f8d622', '#fbeaad', '#d7b81e', '#d32f2f', '#ff543a'],
+			labels: ['HTML', 'Javascript', 'React.js', 'JQuery', 'CSS', 'SCSS'],
+			chart: {
+				toolbar: {
+					tools: {
+						download: false
+					}
+				},
+				stacked: false,
+				height: '410px',
+				width: '100%',
+				offsetY: 0,
+				parentHeightOffset: 0
+			},
+			plotOptions: {
+				bar: {
+					distributed: true,
+					horizontal: false,
+					columnWidth: '40px',
+					borderRadius: 20,
+					borderRadiusApplication: 'around',
+					dataLabels: {
+						position: 'top'
+					}
+				}
+			},
+			// title: {
+			// 	text: 'Tech Stack',
+			// 	align: 'left',
+			// 	margin: 0,
+			// 	offsetX: 0,
+			// 	offsetY: 0,
+			// 	floating: false,
+			// 	style: {
+			// 		fontSize: '24px',
+			// 		fontWeight: 'bold',
+			// 		fontFamily: 'Noto Sans KR',
+			// 		color: '#5c5c5c'
+			// 	},
+			// },
+			dataLabels: {
+				offsetX: 0,
+				offsetY: 15,
+				formatter: (val: any) => {
+					return val + "%";
+				},
+				dropShadow: {
+					enabled: false
+				}
+			},
+			xaxis: {
+				position: 'bottom',
+				labels: {
+					style: {
+						colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+						fontSize: '14px',
+						fontWeight: 'bold'
+					},
+				},
+				axisBorder: {
+					show: false,
+				},
+				axisTicks: {
+					show: false,
+				},
+				crosshairs: {
+					show: false
+				},
+			},
+			yaxis: {
+				tickAmount: 4,
+				min: 0,
+				max: 100,
+				labels: {
+					style: {
+						colors: ['#7c7c7c'],
+						fontSize: '12px',
+						fontWeight: 'bold'
+					},
+					maxWidth: 100,
+					formatter: (val: any) => {
+						if (val === 0) {
+							return val;
+						} else {
+							return (val + "%");
+						}
+					}
+				}
+			},
+			tooltip: {
+				theme: 'dark',
+			},
+			grid: {
+				xaxis: {
+					lines: {
+						show: false
+					}
+				},
+				yaxis: {
+					lines: {
+						show: true
+					}
+				},
+			},
+			legend: {
+				position: 'bottom',
+				horizontalAlign: 'center',
+				offsetY: 10,
+				fontSize: '12px',
+				labels: {
+					useSeriesColors: true,
+				},
+				markers: {
+					width: 10,
+					height: 10,
+					radius: 10,
+				},
+				itemMargin: {
+					horizontal: 20,
+					vertical: 7
+				},
+			},
+			responsive: [
+				{
+					breakpoint: 1301,
+					options: {
+						chart: {
+							height: '410px',
+							width: '100%',
+							offsetY: 0,
+							parentHeightOffset: 0
+						},
+						plotOptions: {
+							bar: {
+								horizontal: false,
+								columnWidth: '35px',
+								borderRadius: 15,
+							}
+						},
+						dataLabels: {
+							offsetX: 0,
+							offsetY: 15,
+							formatter: (val: any) => {
+								return val + "%";
+							},
+							dropShadow: {
+								enabled: false
+							}
+						},
+						xaxis: {
+							position: 'bottom',
+							min: undefined,
+							max: undefined,
+							tickAmount: undefined,
+							lebels: {
+								style: {
+									colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+									fontSize: '14px',
+									fontWeight: 'bold'
+								},
+								maxWidth: undefined,
+								formatter: (val: any) => {
+									return val;
+								}
+							},
+							axisBorder: {
+								show: false,
+							},
+							axisTicks: {
+								show: false,
+							},
+							crosshairs: {
+								show: false
+							},
+							labels: {
+
+							}
+						},
+						yaxis: {
+							tickAmount: 4,
+							min: 0,
+							max: 100,
+							labels: {
+								style: {
+									colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
+									fontSize: '12px',
+									fontWeight: 'bold'
+								},
+								maxWidth: 100,
+								formatter: (val: any) => {
+									if (val === 0) {
+										return val;
+									} else {
+										return (val + "%");
+									}
+								}
+							}
+						},
+						grid: {
+							xaxis: {
+								lines: {
+									show: false
+								}
+							},
+							yaxis: {
+								lines: {
+									show: true
+								}
+							},
+						},
+						legend: {
+							position: 'bottom',
+							horizontalAlign: 'center',
+							offsetY: 0,
+							fontSize: '12px',
+							labels: {
+								useSeriesColors: true,
+							},
+							markers: {
+								width: 10,
+								height: 10,
+								radius: 10,
+							},
+							itemMargin: {
+								horizontal: 10,
+								vertical: 7
+							},
+						},
+					}
+				},
+				{
+					breakpoint: 1025,
+					options: {
+						height: '410px',
+						width: '100%',
+						offsetY: 0,
+						parentHeightOffset: 10,
+						plotOptions: {
+							bar: {
+								horizontal: true,
+								columnWidth: '40px',
+								borderRadius: 10,
+								distributed: true,
+								borderRadiusApplication: 'around',
+								dataLabels: {
+									position: 'top'
+								}
+							}
+						},
+						xaxis: {
+							min: 0,
+							max: 100,
+							tickAmount: 4,
+							labels: {
+								// width: '10px',
+								style: {
+									colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
+									fontSize: '12px',
+									fontWeight: 'bold'
+								},
+								maxWidth: 100,
+								// formatter: (val: any) => {
+								// 	if (val === 0) {
+								// 		return val;
+								// 	} else {
+								// 		return (val + "%");
+								// 	}
+								// }
+							},
+							position: 'top',
+							axisBorder: {
+								show: false,
+							},
+						},
+						yaxis: {
+							labels: {
+								style: {
+									colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+									fontSize: '14px',
+									fontWeight: 'bold'
+								},
+							},
+						},
+						legend: {
+							position: 'top',
+							horizontalAlign: 'right',
+							offsetY: 0,
+							itemMargin: {
+								horizontal: 10,
+								vertical: 7
+							},
+						},
+						dataLabels: {
+							textAnchor: 'middle',
+							offsetX: -20,
+							offsetY: 0,
+							formatter: (val: any) => {
+								return val + "%";
+							},
+							dropShadow: {
+								enabled: false
+							}
+						},
+						grid: {
+							xaxis: {
+								lines: {
+									show: true
+								}
+							},
+							yaxis: {
+								lines: {
+									show: false
+								}
+							},
+						},
+						title: {
+							style: {
+								fontSize: '18px',
+							},
+						},
+					}
+				},
+				{
+					breakpoint: 651,
+					options: {
+						plotOptions: {
+							bar: {
+								horizontal: true,
+							}
+						},
+						xaxis: {
+							labels: {
+								style: {
+									colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
+									fontSize: '12px',
+									fontWeight: 'bold'
+								},
+							}
+						},
+						yaxis: {
+							labels: {
+								style: {
+									colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+									fontSize: '14px',
+									fontWeight: 'bold'
+								},
+							},
+						},
+						legend: {
+							offsetY: 0,
+							horizontalAlign: 'center',
+							itemMargin: {
+								horizontal: 7,
+								vertical: 3
+							},
+						},
+						dataLabels: {
+							textAnchor: 'middle',
+							offsetX: -20,
+							offsetY: 0,
+							formatter: (val: any) => {
+								return val + "%";
+							},
+							dropShadow: {
+								enabled: false
+							}
+						},
+					}
+				}
+			],
+			noData: {
+				text: '데이터가 없습니다.',
+				align: 'center',
+				verticalAlign: 'middle',
+				offsetX: 0,
+				offsetY: 0,
+				style: {
+					color: '#fff',
+					fontSize: '16px',
+					fontFamily: 'Righteous'
+				}
+			},
+		}
+	}
+	useEffect(() => {
+		setLoading(false);
+		setState(chartOption);
+		window.addEventListener('resize', handleResize);
+		handleResize();
+		return () => {
+			// setState();
+			window.removeEventListener('resize', handleResize);
+		}
+	}, [loading]);
 	return (
 		<div className="container">
-      <Profile>
-        <ImgBox>
-          <Img src={heart} alt="프로필 이미지"/>
-        </ImgBox>
-        <div>
-          <Txt>UI/UX Developer 최진슬입니다.</Txt>
-          <ul>
-            <li>
-              <Dl>
-                <Dt>Email</Dt>
-                <Dd>web.jinseul@gmail.com</Dd>
-              </Dl>
-            </li>
-          </ul>
-        </div>
-      </Profile>
-      <Content className="inner">
-        {loading ? 
-          (<Loading name="about" />) :
-          (<>
-            <GridTop>
-              <Grids>
-                <Grid>
-                  <Chart type="bar" series={state?.series} options={state?.options} />
-                </Grid>
-                <Grid className="second"></Grid>
-              </Grids>
-            </GridTop>
-            <Grids>
-              <Grid></Grid>
-              <Grid></Grid>
-            </Grids>
-          </>) 
-        }
-      </Content>			
+			<Profile>
+				<ImgBox>
+					<Img src={heart} alt="프로필 이미지" />
+				</ImgBox>
+				<div>
+					<Txt>UI/UX Developer 최진슬입니다.</Txt>
+					<ul>
+						<li>
+							<Dl>
+								<Dt>Email</Dt>
+								<Dd>web.jinseul@gmail.com</Dd>
+							</Dl>
+						</li>
+					</ul>
+				</div>
+			</Profile>
+			<Content className="inner">
+				{loading ?
+					(<Loading name="about" />) :
+					(<>
+						<GridTop>
+							<Grids>
+								<Grid className="chart-area">
+									<Title>Tech Stack</Title>
+									<Chart style={{ minHeight: '100%', height: '300px' }} type="bar" series={state?.series} options={state?.options} />
+								</Grid>
+								<Grid className="second">
+									<Title>Used Plugins</Title>
+									<Plugins variants={pluginsVariants} initial="hidden" animate="visible">
+										<Plugin variants={pluginVariants}>
+											<PluginTitle className="first">Scroll</PluginTitle>
+											<UnLists className="first" variants={unListsVariants}>
+												<List variants={listVariants}>AOS(Animate On Scroll Library)</List>
+												<List variants={listVariants}>ScrollMagic</List>
+												<List variants={listVariants}>GSAP</List>
+											</UnLists>
+										</Plugin>
+										<Plugin variants={pluginVariants}>
+											<PluginTitle className="second">Slider</PluginTitle>
+											<UnLists className="second" variants={unListsVariants}>
+												<List variants={listVariants}>bxSlider.js</List>
+												<List variants={listVariants}>Swiper.js</List>
+												<List variants={listVariants}>Slick.js</List>
+											</UnLists>
+										</Plugin>
+										<Plugin variants={pluginVariants}>
+											<PluginTitle className="third">Chart</PluginTitle>
+											<UnLists className="third" variants={unListsVariants}>
+												<List variants={listVariants}>Chart.js</List>
+												<List variants={listVariants}>Apexcharts.js</List>
+												<List variants={listVariants}>GSAP</List>
+											</UnLists>
+										</Plugin>
+										<Plugin variants={pluginVariants}>
+											<PluginTitle className="fourth">Calendar</PluginTitle>
+											<UnLists className="fourth" variants={unListsVariants}>
+												<List variants={listVariants}>FullCalendar.js</List>
+											</UnLists>
+										</Plugin>
+									</Plugins>
+								</Grid>
+							</Grids>
+						</GridTop>
+						<Grids>
+							<Grid className="cowork">
+								<Title className="cowork">Cowork Tools</Title>
+								<CoWorkTools>
+									<Items>
+										<Item>
+											<img src={intellij} alt="intellij 로고" />
+											<ToolTxt>IntelliJ</ToolTxt>
+										</Item>
+										<Item>
+											<img src={vscode} alt="vscode 로고" />
+											<ToolTxt>VSCode</ToolTxt>
+										</Item>
+										<Item>
+											<img src={github} alt="github 로고" />
+											<ToolTxt>GitHub</ToolTxt>
+										</Item>
+									</Items>
+									<Items>
+										<Item>
+											<img src={photoshop} alt="photoshop 로고" />
+											<ToolTxt>Adobe PhotoShop</ToolTxt>
+										</Item>
+										<Item>
+											<img src={zeplin} alt="zeplin 로고" />
+											<ToolTxt>Zeplin</ToolTxt>
+										</Item>
+									</Items>
+									<Items>
+										<Item>
+											<img src={slack} alt="slack 로고" />
+											<ToolTxt>Slack</ToolTxt>
+										</Item>
+										<Item>
+											<img src={notion} alt="notion 로고" />
+											<ToolTxt>Notion</ToolTxt>
+										</Item>
+										<Item>
+											<img src={asana} alt="asana 로고" />
+											<ToolTxt>Asana</ToolTxt>
+										</Item>
+										<Item>
+											<img src={jira} alt="jira 로고" />
+											<ToolTxt>Jira</ToolTxt>
+										</Item>
+									</Items>
+								</CoWorkTools>
+							</Grid>
+							<Grid></Grid>
+						</Grids>
+					</>)
+				}
+			</Content>
 		</div>
 	);
 }

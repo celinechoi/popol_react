@@ -206,16 +206,48 @@ const Info = styled.li`
 `;
 
 const Button = styled.button`
-	display: block;
+	/* display: block;
 	width: 50%;
 	margin: 28px auto 0;
 	padding: 18px 32px;
 	border-radius: 12px;
 	background-color: ${(props) => props.theme.point.blue[0]};
 	color: #fff;
-	font-size: 20px;
+	font-size: 20px; */
+	display: block;
+	position: relative;
+  background-color: ${(props) => props.theme.point.blue[0]};
+  border-radius: 5px;
+  box-shadow: rgb(18, 37, 121) 0px 8px 0px 0px;
+  padding: 15px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  width: 50%;
+  padding: 18px 32px;
+	margin: 28px auto 0;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  transition: all .3s ease-in-out;
+  z-index: 1;
+  overflow: hidden;
+	&::before {
+		content: "";
+		background-color: rgb(48, 73, 184);
+		width: 0;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		transition: width 700ms ease-in-out;
+		display: inline-block;
+	}
 	&:hover {
 		box-shadow: ${(props) => props.theme.shadow.button};
+		&::before {
+			width: 100%;
+		}
 	}
 	${media.medium`
 		padding: 16px 32px;
