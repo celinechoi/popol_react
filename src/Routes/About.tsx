@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import heart from "img/emoji/heart.png";
 import Chart from "react-apexcharts";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loading from "components/Loading";
 import { media } from "style/media_query";
 import { motion } from "framer-motion";
@@ -86,7 +86,7 @@ const GridTop = styled.div`
   border: 1px solid ${props => props.theme.borColor.gray.first};
 `;
 
-const Grids = styled.ul`
+const Grids = styled.div`
   display: flex;
   gap: 24px 32px;
 	${media.medium`
@@ -95,7 +95,7 @@ const Grids = styled.ul`
 	`};
 `;
 
-const Grid = styled.li`
+const Grid = styled(motion.div)`
   flex: 1 1 calc(100%/2 - 32px/2*1);
   /* height: 428px; */
 	height: auto;
@@ -113,6 +113,7 @@ const Grid = styled.li`
 		position: relative;
 		z-index: 0;
 		overflow: hidden;
+    height: 460px;
 		&::after {
 			content: '';
 			position: absolute;
@@ -248,6 +249,8 @@ const CoWorkTools = styled(motion.div)`
 	gap: 32px;
 	align-items: center;
 	justify-content: center;
+  width: 100%;
+  height: 352px;
 `;
 
 const Items = styled(motion.div)`
@@ -260,21 +263,20 @@ const Items = styled(motion.div)`
 
 const Item = styled(motion.div)`
 	flex: 1 1 calc(100%/3 - 8px/3*2);
-	>img {
-		display: block;
-		width: 80px;
-		margin: 0 auto;
-    /* background-color: #fff; */
-    border-radius: 50%;
-    height: 80px;
-    padding: 10px;
-		/* background: linear-gradient(145deg, #e6d3bf, #fffae3);
-		box-shadow:  20px 20px 60px #d9c7b4; */
-		background: #ad5389;
-  	background: linear-gradient(0deg, rgba(77,54,208,1) 0%, rgba(132,116,254,1) 100%);
-		box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
-		opacity: 0.8;
-	}
+`;
+
+const CoImg = styled(motion.img)`
+  display: block;
+  width: 70px;
+  margin: 0 auto;
+  border-radius: 50%;
+  height: 70px;
+  padding: 12px;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(77,54,208,1) 0%, rgba(132,116,254,1) 100%);
+  box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
+  opacity: 0.9;
+  cursor: grab;
 `;
 
 const ToolTxt = styled.p`
@@ -299,6 +301,7 @@ const pluginsVariants = {
 	hidden: {},
 	visible: {
 		transition: {
+      delay: .5,
 			type: "spring",
 			duration: .2,
 			delayChildren: 0.5,
@@ -348,21 +351,11 @@ const listVariants = {
 }
 
 function About() {
+  // chart data
 	const [loading, setLoading] = useState(true);
 	const [state, setState] = useState<chartInterface>();
-	// resize
-	const [windowSize, setWindowSize] = useState({
-		width: window.innerWidth,
-		height: window.innerHeight,
-		flag: "off"
-	})
-	const handleResize = () => {
-		setWindowSize({
-			width: window.innerWidth,
-			height: window.innerHeight,
-			flag: "on"
-		})
-	}
+  // drag
+  const CoWorkToolsRef = useRef<HTMLDivElement>(null);
 	const chartOption = {
 		series: [
 			{
@@ -758,11 +751,8 @@ function About() {
 	useEffect(() => {
 		setLoading(false);
 		setState(chartOption);
-		window.addEventListener('resize', handleResize);
-		handleResize();
 		return () => {
 			// setState();
-			window.removeEventListener('resize', handleResize);
 		}
 	}, [loading]);
 	return (
@@ -794,91 +784,93 @@ function About() {
 									<Chart style={{ minHeight: '100%', height: '300px' }} type="bar" series={state?.series} options={state?.options} />
 								</Grid>
 								<Grid className="second">
-									<Title>Used Plugins</Title>
-									<Plugins variants={pluginsVariants} initial="hidden" animate="visible">
-										<Plugin variants={pluginVariants}>
-											<PluginTitle className="first">Scroll</PluginTitle>
-											<UnLists className="first" variants={unListsVariants}>
-												<List variants={listVariants}>AOS(Animate On Scroll Library)</List>
-												<List variants={listVariants}>ScrollMagic</List>
-												<List variants={listVariants}>GSAP</List>
-											</UnLists>
-										</Plugin>
-										<Plugin variants={pluginVariants}>
-											<PluginTitle className="second">Slider</PluginTitle>
-											<UnLists className="second" variants={unListsVariants}>
-												<List variants={listVariants}>bxSlider.js</List>
-												<List variants={listVariants}>Swiper.js</List>
-												<List variants={listVariants}>Slick.js</List>
-											</UnLists>
-										</Plugin>
-										<Plugin variants={pluginVariants}>
-											<PluginTitle className="third">Chart</PluginTitle>
-											<UnLists className="third" variants={unListsVariants}>
-												<List variants={listVariants}>Chart.js</List>
-												<List variants={listVariants}>Apexcharts.js</List>
-												<List variants={listVariants}>GSAP</List>
-											</UnLists>
-										</Plugin>
-										<Plugin variants={pluginVariants}>
-											<PluginTitle className="fourth">Calendar</PluginTitle>
-											<UnLists className="fourth" variants={unListsVariants}>
-												<List variants={listVariants}>FullCalendar.js</List>
-											</UnLists>
-										</Plugin>
-									</Plugins>
+                  <Title>Used Plugins</Title>
+                  <Plugins variants={pluginsVariants} initial="hidden" animate="visible">
+                    <Plugin variants={pluginVariants}>
+                      <PluginTitle className="first">Scroll</PluginTitle>
+                      <UnLists className="first" variants={unListsVariants}>
+                        <List variants={listVariants}>AOS(Animate On Scroll Library)</List>
+                        <List variants={listVariants}>ScrollMagic</List>
+                        <List variants={listVariants}>GSAP</List>
+                      </UnLists>
+                    </Plugin>
+                    <Plugin variants={pluginVariants}>
+                      <PluginTitle className="second">Slider</PluginTitle>
+                      <UnLists className="second" variants={unListsVariants}>
+                        <List variants={listVariants}>bxSlider.js</List>
+                        <List variants={listVariants}>Swiper.js</List>
+                        <List variants={listVariants}>Slick.js</List>
+                      </UnLists>
+                    </Plugin>
+                    <Plugin variants={pluginVariants}>
+                      <PluginTitle className="third">Chart</PluginTitle>
+                      <UnLists className="third" variants={unListsVariants}>
+                        <List variants={listVariants}>Chart.js</List>
+                        <List variants={listVariants}>Apexcharts.js</List>
+                        <List variants={listVariants}>GSAP</List>
+                      </UnLists>
+                    </Plugin>
+                    <Plugin variants={pluginVariants}>
+                      <PluginTitle className="fourth">Calendar</PluginTitle>
+                      <UnLists className="fourth" variants={unListsVariants}>
+                        <List variants={listVariants}>FullCalendar.js</List>
+                      </UnLists>
+                    </Plugin>
+                  </Plugins>
 								</Grid>
 							</Grids>
 						</GridTop>
 						<Grids>
-							<Grid className="cowork">
+              <Grid className="cowork" ref={CoWorkToolsRef}>
 								<Title className="cowork">Cowork Tools</Title>
-								<CoWorkTools>
+                <CoWorkTools>
 									<Items>
 										<Item>
-											<img src={intellij} alt="intellij 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={intellij} alt="intellij 로고" />
 											<ToolTxt>IntelliJ</ToolTxt>
 										</Item>
 										<Item>
-											<img src={vscode} alt="vscode 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={vscode} alt="vscode 로고" />
 											<ToolTxt>VSCode</ToolTxt>
 										</Item>
 										<Item>
-											<img src={github} alt="github 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={github} alt="github 로고" />
 											<ToolTxt>GitHub</ToolTxt>
 										</Item>
 									</Items>
 									<Items>
 										<Item>
-											<img src={photoshop} alt="photoshop 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={photoshop} alt="photoshop 로고" />
 											<ToolTxt>Adobe PhotoShop</ToolTxt>
 										</Item>
 										<Item>
-											<img src={zeplin} alt="zeplin 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={zeplin} alt="zeplin 로고" />
 											<ToolTxt>Zeplin</ToolTxt>
 										</Item>
 									</Items>
 									<Items>
 										<Item>
-											<img src={slack} alt="slack 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={slack} alt="slack 로고" />
 											<ToolTxt>Slack</ToolTxt>
 										</Item>
 										<Item>
-											<img src={notion} alt="notion 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={notion} alt="notion 로고" />
 											<ToolTxt>Notion</ToolTxt>
 										</Item>
 										<Item>
-											<img src={asana} alt="asana 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={asana} alt="asana 로고" />
 											<ToolTxt>Asana</ToolTxt>
 										</Item>
 										<Item>
-											<img src={jira} alt="jira 로고" />
+											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={jira} alt="jira 로고" />
 											<ToolTxt>Jira</ToolTxt>
 										</Item>
 									</Items>
 								</CoWorkTools>
 							</Grid>
-							<Grid></Grid>
+							<Grid>
+                <Title>Career Statement</Title>
+              </Grid>
 						</Grids>
 					</>)
 				}
