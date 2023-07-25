@@ -1,4 +1,5 @@
-import { dbService } from "fbase";
+import { authService, dbService } from "fbase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -7,6 +8,8 @@ import { media } from "style/media_query";
 import Loading from "components/Loading";
 import { motion } from "framer-motion";
 import ImgsLoading from "components/ImgsLoading";
+import Initializing from "components/Initializing";
+import Auth from "./Auth";
 
 const Title = styled.div`
   height: 200px;
@@ -179,6 +182,9 @@ const boxVariants = {
 }
 
 function List() {
+	const [init, setInit] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	// const [userObj, setUserObj] = useState({});
 	const { typeId } = useParams<TypesParams>();
 	// state
 	const [loading, setLoading] = useState(true);
@@ -187,35 +193,45 @@ function List() {
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
-			const collection = dbService.collection(`${typeId}`);
-			collection
-				.orderBy("code", "desc") // desc
-				// .orderBy("endMonth", "desc")
-				.onSnapshot((snapshot: any) => {
-					const itemArr = snapshot.docs.map((doc: any) => ({
-						id: doc.id,
-						projectName: doc.data().projectName,
-						customer: doc.data().customer,
-						fileUrl: doc.data().fileUrl,
-						pageImgs: doc.data().pageImgs,
-						pagesMap: doc.data().pagesMap,
-						description: doc.data().description,
-						did: doc.data().did,
-						keyWords: doc.data().keywords,
-						startYear: doc.data().startYear,
-						startMonth: doc.data().startMonth,
-						endYear: doc.data().endYear,
-						endMonth: doc.data().endMonth,
-						code: doc.data().code,
-						...doc.data(),
-					}));
-					setList(itemArr);
-					setLoading(false);
-					timeReturn();
-					// return () => {
-					// 	setLoading(false)
-					// };
-				})
+			authService.onAuthStateChanged((user: any) => {
+				if (user) {
+					setIsLoggedIn(true);
+					console.log(user);
+					// setUserObj(user);
+					const collection = dbService.collection(`${typeId}`);
+					collection
+						.orderBy("code", "desc") // desc
+						// .orderBy("endMonth", "desc")
+						.onSnapshot((snapshot: any) => {
+							const itemArr = snapshot.docs.map((doc: any) => ({
+								id: doc.id,
+								projectName: doc.data().projectName,
+								customer: doc.data().customer,
+								fileUrl: doc.data().fileUrl,
+								pageImgs: doc.data().pageImgs,
+								pagesMap: doc.data().pagesMap,
+								description: doc.data().description,
+								did: doc.data().did,
+								keyWords: doc.data().keywords,
+								startYear: doc.data().startYear,
+								startMonth: doc.data().startMonth,
+								endYear: doc.data().endYear,
+								endMonth: doc.data().endMonth,
+								code: doc.data().code,
+								...doc.data(),
+							}));
+							setList(itemArr);
+							setLoading(false);
+							timeReturn();
+							// return () => {
+							// 	setLoading(false)
+							// };
+						})
+				} else {
+					setIsLoggedIn(false);
+				}
+				setInit(true);
+			});
 		}
 		return () => {
 			setList([]);
@@ -231,67 +247,78 @@ function List() {
 	}
 	return (
 		<>
-			<div className="container">
-				<Title>
-					<div className="inner">
-						<h2 className="page-h1">Works</h2>
-						<Tabs typePath={typeId} />
-					</div>
-				</Title>
-				<Container>
-					<div className="inner">
-						{loading ? (
-							<Loading />
-						) : (
-							<>
-								<Boxes variants={boxesVariants} initial="start" animate="end">
-									{
-										list.map((val) => (
-											<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover" whileTap="click">
-												<Link to={{
-													pathname: `/works/${typeId}/${val.id}`,
-													state: {
-														parentPath: typeId,
-														id: val.id,
-														customer: val.customer,
-														projectName: val.projectName,
-														description: val.description,
-														did: val.did,
-														keyWords: val.keyWords,
-														fileUrl: val.fileUrl,
-														pageImgs: val.pageImgs,
-														pagesMap: val.pagesMap,
-														startYear: val.startYear,
-														startMonth: val.startMonth,
-														endYear: val.endYear,
-														endMonth: val.endMonth,
-													}
-												}}>
-													<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
-														{
-															ImgLoading ?
-																(
-																	<ImgsLoading />
+			{
+				init ?
+					(
+						isLoggedIn ? (
+							<div className="container">
+								<Title>
+									<div className="inner">
+										<h2 className="page-h1">Works</h2>
+										<Tabs typePath={typeId} />
+									</div>
+								</Title>
+								<Container>
+									<div className="inner">
+										{loading ? (
+											<Loading />
+										) : (
+											<>
+												<Boxes variants={boxesVariants} initial="start" animate="end">
+													{
+														list.map((val) => (
+															<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover" whileTap="click">
+																<Link to={{
+																	pathname: `/works/${typeId}/${val.id}`,
+																	state: {
+																		parentPath: typeId,
+																		id: val.id,
+																		customer: val.customer,
+																		projectName: val.projectName,
+																		description: val.description,
+																		did: val.did,
+																		keyWords: val.keyWords,
+																		fileUrl: val.fileUrl,
+																		pageImgs: val.pageImgs,
+																		pagesMap: val.pagesMap,
+																		startYear: val.startYear,
+																		startMonth: val.startMonth,
+																		endYear: val.endYear,
+																		endMonth: val.endMonth,
+																	}
+																}}>
+																	<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
+																		{
+																			ImgLoading ?
+																				(
+																					<ImgsLoading />
 
-																) : (
-																	<img src={val.fileUrl} alt={val.projectName} />
-																)
-														}
-													</ImgBox>
-													<BoxCon>
-														<p>{val.customer}</p>
-														<h4>{val.projectName} 홈페이지</h4>
-													</BoxCon>
-												</Link>
-											</Box>
-										))
-									}
-								</Boxes>
-							</>
-						)}
-					</div>
-				</Container >
-			</div >
+																				) : (
+																					<img src={val.fileUrl} alt={val.projectName} />
+																				)
+																		}
+																	</ImgBox>
+																	<BoxCon>
+																		<p>{val.customer}</p>
+																		<h4>{val.projectName} 홈페이지</h4>
+																	</BoxCon>
+																</Link>
+															</Box>
+														))
+													}
+												</Boxes>
+											</>
+										)}
+									</div>
+								</Container >
+							</div >
+						) : (
+							<Auth />
+						)
+					) : (
+						<Initializing />
+					)
+			}
 		</>
 	)
 }

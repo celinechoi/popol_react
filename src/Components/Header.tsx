@@ -71,7 +71,7 @@ const Em = styled.span`
 	`};
 `;
 
-const LogOut = styled.button`
+const Log = styled.button`
   height: 37px;
 	margin-left: auto;
   padding: 7px 20px;
@@ -227,10 +227,10 @@ function Header() {
 							</Link>
 						</Menu>
 					</Menus>
-					<LogOut onClick={onLogOutClick}>
+					<Log onClick={onLogOutClick}>
 						<span>로그아웃</span>
 						<FontAwesomeIcon icon={faArrowRightFromBracket} className="icon-out" />
-					</LogOut>
+					</Log>
 				</Row>
 			</div>
 		</HeaderBox>

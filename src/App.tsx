@@ -1,16 +1,14 @@
-import * as firebase from 'firebase/compat/app';
+
 import 'firebase/firestore';
-import { ReactQueryFirestoreProvider } from 'react-query-firestore';
-import { authService, dbService } from "fbase";
 import { booleanState } from "./atoms";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { darkTheme, lightTheme } from "./theme";
 import AppRouter from "Router";
-import { useEffect, useState } from "react";
+
 import { media } from "style/media_query";
 import Footer from "components/Footer";
-import Initializing from 'components/Initializing';
+
 import Top from 'components/Top';
 
 const GlobalStyle = createGlobalStyle`
@@ -316,26 +314,11 @@ const reactQueryConfig = {
 }
 
 function App() {
-	const [init, setInit] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [userObj, setUserObj] = useState({});
-	useEffect(() => {
-		authService.onAuthStateChanged((user: any) => {
-			if (user) {
-				setIsLoggedIn(true);
-				console.log(user);
-				setUserObj(user);
-			} else {
-				setIsLoggedIn(false);
-			}
-			setInit(true);
-		});
-	}, []);
 	const themeSate = useRecoilValue(booleanState);
 	return (
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 			<GlobalStyle />
-			{init ? <Initializing /> : <AppRouter isLoggedIn={isLoggedIn} />}
+			<AppRouter />
 			<Top />
 			<Footer />
 		</ThemeProvider>
