@@ -1,35 +1,122 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons"
-import styled from "styled-components";
+import { media } from "style/media_query";
+import styled, { keyframes } from "styled-components";
 
-const LoadingBox = styled.div`
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	font-family: 'Righteous';
-	font-weight: 500;
-	text-align: center;
-	>svg {
-		margin-bottom: 7px;
-		color: ${(props) => props.theme.bgColor.gray.fifth};
-		font-size: 28px;
+// keyframes
+const anim = keyframes`
+	0%, 100% {
+		text-shadow: 2px 0px 2px rgba(179, 158, 158, .5);
+	}
+	50% {
+		background-size: 0%;
+		background-position-x: left;
+		text-shadow: 2px 10px 6px rgba(179, 158, 158, 1);
 	}
 `;
 
-const Txt = styled.p`
-	color: ${(props) => props.theme.bgColor.gray.fifth};
-	font-size: 20px;
-	text-align: center;
+const move = keyframes`
+	50% {
+		translate: 0px 0px;
+		rotate: x 60deg;
+		transform: skew(-5deg, 5deg);
+	}
 `;
 
-function Loading({ name }: { name: string }) {
+const dotMove = keyframes`
+	0%, 100% {
+		translate: -60px 300px;
+	}
+	50% {
+		translate: 160px -250px;
+		scale: .5;
+		opacity: .85;
+	}
+`;
 
+const Loader = styled.div`
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 5;
+	transform: translate(-50%, -50%);
+	--col1: rgba(228, 19, 141, 0.925);
+  --col2: rgb(255, 179, 80);
+  font-size: 88px;
+	line-height: 1;
+  font-weight: 600;
+  perspective: 800px;
+	&::before,
+	&::after {
+		perspective: 800px;
+		animation: ${anim} 1s ease-in-out infinite, ${dotMove} 3s ease-out alternate infinite, ${move} 3s linear infinite 1s;
+		;
+		content: '●';
+		color: var(--col1);
+		position: absolute;
+		translate: -60px 200px;
+		width: 5px;
+		height: 5px;
+		font-size: 28px;
+		opacity: 0.5;
+		${media.small`
+			font-size: 18px;
+		`};
+	}
+	&::before {
+		animation-delay: 1s;
+  	color: var(--col1);
+	}
+	&::after {
+		color: var(--col2);
+		animation-delay: .5s;
+	}
+	${media.small`
+		font-size: 44px;
+	`};
+`;
+
+const Txt = styled.p`
+	animation: ${anim} 5s linear infinite, ${move} 3s linear infinite 1s;
+	color: transparent;
+	background-image: linear-gradient(90deg, var(--col1) 0%, var(--col2) 100%);
+	background-clip: text;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	transform: skew(5deg, -5deg);
+	-webkit-background-clip: text;
+	position: relative;
+	&::before,
+	&::after {
+		perspective: 800px;
+		animation: ${anim} 1s ease-in-out infinite, ${dotMove} 3s ease-out alternate infinite, ${move} 3s linear infinite 1s;
+		;
+		content: '●';
+		color: var(--col1);
+		position: absolute;
+		translate: -60px 200px;
+		width: 5px;
+		height: 5px;
+		font-size: 28px;
+		opacity: 0.1;
+		${media.small`
+			font-size: 18px;
+		`};
+	}
+	&::before {
+		color: var(--col2);
+  	animation-delay: .5s;
+	}
+	&::after {
+		color: var(--col2);
+	}
+`;
+
+function Loading() {
 	return (
-		<LoadingBox>
-			<FontAwesomeIcon icon={faSpinner} spin />
-			<Txt>{name} Loading ...</Txt>
-		</LoadingBox>
+		<div className="dim">
+			<Loader>
+				<Txt>Loading ...</Txt>
+			</Loader>
+		</div>
 	);
 }
 export default Loading;

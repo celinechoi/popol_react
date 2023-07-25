@@ -66,6 +66,7 @@ body {
 	font: 14px 'Noto Sans KR', 'Righteous';
   font-weight: 300;
   line-height: 1.5;
+	cursor: default;
 	&.no {
 		&-scroll {
 			overflow: hidden!important;
@@ -97,6 +98,27 @@ select {
 button {
 	cursor: pointer;
 	font-weight: 700;
+}
+.dim {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	font-family: 'Righteous';
+	font-weight: 500;
+	text-align: center;
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.4);
+	}
 }
 .inner {
 	max-width: 1400px;
@@ -313,7 +335,7 @@ function App() {
 	return (
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 			<GlobalStyle />
-			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : <Initializing />}
+			{init ? <Initializing /> : <AppRouter isLoggedIn={isLoggedIn} />}
 			<Top />
 			<Footer />
 		</ThemeProvider>

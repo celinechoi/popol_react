@@ -6,6 +6,7 @@ import Tabs from "routes/Tabs";
 import { media } from "style/media_query";
 import Loading from "components/Loading";
 import { motion } from "framer-motion";
+import ImgsLoading from "components/ImgsLoading";
 
 const Title = styled.div`
   height: 200px;
@@ -78,7 +79,7 @@ const BoxCon = styled.div`
 	}
 `;
 
-const ImgBox = styled.div`
+const ImgBox = styled(motion.div)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -87,6 +88,7 @@ const ImgBox = styled.div`
 	padding: 28px;
 	background-color: #ededed;
 	border-radius: 20px;
+	border: 3px solid transparent;
 	${media.large`
 		height: 145px;
 	`};
@@ -152,7 +154,9 @@ const boxesVariants = {
 			delayChildren: 0.5,
 			staggerChildren: 0.2,
 		}
-	}
+	},
+	hover: {},
+	click: {},
 }
 
 const boxVariants = {
@@ -160,15 +164,18 @@ const boxVariants = {
 		borderRadius: 0,
 		opacity: 0,
 		y: 10,
+		border: "3px solid transparent"
 	},
 	end: {
 		borderRadius: 20,
 		opacity: 1,
 		y: 0,
 		transition: {
-			duration: .5,
+			duration: 1,
 		}
-	}
+	},
+	hover: { scale: 1.05, y: -20, borderColor: "#0179c3" },
+	click: { borderRadius: "100px" },
 }
 
 function List() {
@@ -211,12 +218,12 @@ function List() {
 				})
 		}
 		return () => {
-      setList([]);
+			setList([]);
 			isMount = false;
-			
+
 		};
 	}, [typeId]);
-	let timer = setTimeout(() => { setImgLoading(false) }, 700);
+	let timer = setTimeout(() => { setImgLoading(false) }, 1000);
 	let timeReturn = () => {
 		return () => {
 			clearTimeout(timer);
@@ -234,13 +241,13 @@ function List() {
 				<Container>
 					<div className="inner">
 						{loading ? (
-							<Loading name="List" />
+							<Loading />
 						) : (
 							<>
 								<Boxes variants={boxesVariants} initial="start" animate="end">
 									{
 										list.map((val) => (
-											<Box key={val.customer} variants={boxVariants}>
+											<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover" whileTap="click">
 												<Link to={{
 													pathname: `/works/${typeId}/${val.id}`,
 													state: {
@@ -260,11 +267,12 @@ function List() {
 														endMonth: val.endMonth,
 													}
 												}}>
-													<ImgBox>
+													<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
 														{
 															ImgLoading ?
 																(
-																	<Loading name="Image" />
+																	<ImgsLoading />
+
 																) : (
 																	<img src={val.fileUrl} alt={val.projectName} />
 																)

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import heart from "img/emoji/heart.png";
 import Chart from "react-apexcharts";
 import { useEffect, useRef, useState } from "react";
@@ -15,6 +15,21 @@ import slack from "img/logo/slack_logo.svg";
 import notion from "img/logo/notion_logo.png";
 import asana from "img/logo/asana_logo.svg";
 import jira from "img/logo/jira_logo.svg";
+import { faStarOfLife } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// keyframes
+const borderKey = keyframes`
+	0% {
+		background-position: 0 0;
+	}
+	50% {
+		background-position: 400% 0;
+	}
+	100% {
+		background-position: 0 0;
+	}
+`;
 
 const Content = styled.div`
   padding-top: 40px;
@@ -28,17 +43,36 @@ const Profile = styled.div`
   gap: 12px;
 `;
 
-const ImgBox = styled.div`
-  overflow: hidden;
+const ImgBox = styled(motion.div)`
+  /* overflow: hidden; */
+	position: relative;
   border-radius: 50%;
-  border: 2px solid ${props => props.theme.point.lavender};
+  /* border: 2px solid ${props => props.theme.point.lavender}; */
   width: 146px;
   height: 146px;
   padding: 12px;
-  background-color: ${props => props.theme.point.lavender};
+  background: linear-gradient(0deg, #000, #272727);
+	&::before,
+	&::after {
+	content: '';
+	position: absolute;
+	left: -4px;
+	top: -4px;
+	border-radius: 50%;
+	background: linear-gradient(90deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+		#0000ff, #00ff00,#ffff00, #ff0000);
+	background-size: 400%;
+	width: calc(100% + 8px);
+	height: calc(100% + 8px);
+	z-index: -1;
+	animation: ${borderKey} 20s linear infinite;
+}
+	&::after {
+		filter: blur(50px);
+	}
 `;
 
-const Img = styled.img`
+const Img = styled(motion.img)`
   width: 100%;
 `;
 
@@ -99,6 +133,7 @@ const Grid = styled(motion.div)`
   flex: 1 1 calc(100%/2 - 32px/2*1);
   /* height: 428px; */
 	height: auto;
+	min-height: 400px;
 	padding: 20px;
   border-radius: 20px;
 	&.chart {
@@ -114,6 +149,9 @@ const Grid = styled(motion.div)`
 		z-index: 0;
 		overflow: hidden;
     height: 460px;
+		${media.large`
+			height: 400px;
+		`};
 		&::after {
 			content: '';
 			position: absolute;
@@ -123,26 +161,36 @@ const Grid = styled(motion.div)`
 			width: 100%;
 			height: 100%;
 			background: url(${coworkBg}) no-repeat center top / cover;
-			opacity: 0.7;
+			opacity: 0.6;
+			${media.medium`
+				background-position: center center;
+			`};
 		}
+	}
+	&.interest {
+		background-color: ${props => props.theme.bgColor.gray.first};
+		height: 460px;
+		${media.large`
+			height: 400px;
+		`};
 	}
 	${media.medium`
 		flex-basis: 100%;
-	`};
-	${media.small`
-		min-height: 300px;
 	`};
 `;
 
 const Title = styled.p`
 	margin-bottom: 32px;
-	color: #5c5c5c;
+	color: ${props => props.theme.textColor.gray.first};
 	font-size: 24px;
 	font-weight: 700;
 	text-align: left;
-	&.cowork {
-		color: #fff;
-	}
+	${media.large`
+		margin-bottom: 24px;
+	`};
+	${media.medium`
+		font-size: 20px;
+	`};
 `;
 
 const Plugins = styled(motion.ul)`
@@ -206,14 +254,16 @@ const UnLists = styled(motion.ul)`
 	border-bottom-left-radius: 40px;
 	${media.small`
 		flex-wrap: wrap;
-		gap: 8px;
+		gap: 0 8px;
 		min-height: 80px;
-		height: auto;
 		padding: 10px 10px 10px 80px;
 	`};
 	${media.micro`
 		flex-direction: column;
 		align-items: flex-start;
+		justify-content: center;
+		gap: 8px;
+		height: auto;
 	`};
 	&.second {
 		background-color: #F5FBF1;
@@ -250,7 +300,12 @@ const CoWorkTools = styled(motion.div)`
 	align-items: center;
 	justify-content: center;
   width: 100%;
-  height: 352px;
+	${media.large`
+		gap: 8px;
+	`};
+	${media.smallToo`
+		gap: 20px;
+	`};
 `;
 
 const Items = styled(motion.div)`
@@ -272,11 +327,14 @@ const CoImg = styled(motion.img)`
   border-radius: 50%;
   height: 70px;
   padding: 12px;
-  background: #ad5389;
   background: linear-gradient(0deg, rgba(77,54,208,1) 0%, rgba(132,116,254,1) 100%);
   box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
   opacity: 0.9;
-  cursor: grab;
+	${media.micro`
+		width: 50px;
+		height: 50px;
+		padding: 8px;
+	`};
 `;
 
 const ToolTxt = styled.p`
@@ -290,18 +348,37 @@ export interface chartInterface {
 		name: string,
 		data: number[],
 	}[],
+	options: {}
+}
+
+export interface chartInterface2 {
+	series: number[],
 	options: {
-		colors: string[],
-		labels: string[],
+		chart: {
+			height: number
+		}
 	}
 }
 
 // motion
+// const imgBoxVariants = {
+// 	hidden: {
+// 		border: 0
+// 	},
+// 	visible: {
+// 		border: "3px solid red",
+// 		transition: {
+// 			delay: 1,
+// 			duration: 2,
+// 		}
+// 	}
+// }
+
 const pluginsVariants = {
 	hidden: {},
 	visible: {
 		transition: {
-      delay: .5,
+			delay: .5,
 			type: "spring",
 			duration: .2,
 			delayChildren: 0.5,
@@ -350,12 +427,42 @@ const listVariants = {
 	}
 }
 
+const itemsVariants = {
+	hidden: {
+	},
+	visible: {
+		transition: {
+			delay: 3,
+			type: "spring",
+			duration: .2,
+			delayChildren: 0.5,
+			staggerChildren: 0.2,
+		}
+	},
+}
+
+const itemVariants = {
+	hidden: {
+		opacity: 0,
+		y: 10,
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 1,
+		}
+	},
+}
+
 function About() {
-  // chart data
 	const [loading, setLoading] = useState(true);
+	// data: Tech Stack
 	const [state, setState] = useState<chartInterface>();
-  // drag
-  const CoWorkToolsRef = useRef<HTMLDivElement>(null);
+	// data: Language Of Interest
+	const [state2, setState2] = useState<chartInterface2>();
+	// drag
+	const CoWorkToolsRef = useRef<HTMLDivElement>(null);
 	const chartOption = {
 		series: [
 			{
@@ -364,7 +471,7 @@ function About() {
 			}
 		],
 		options: {
-			colors: ['#14e090', '#f8d622', '#fbeaad', '#d7b81e', '#d32f2f', '#ff543a'],
+			colors: ['#14e090', '#f8d622', '#fdfa29', '#fbeaad', '#b8005c', '#C66394'],
 			labels: ['HTML', 'Javascript', 'React.js', 'JQuery', 'CSS', 'SCSS'],
 			chart: {
 				toolbar: {
@@ -390,20 +497,6 @@ function About() {
 					}
 				}
 			},
-			// title: {
-			// 	text: 'Tech Stack',
-			// 	align: 'left',
-			// 	margin: 0,
-			// 	offsetX: 0,
-			// 	offsetY: 0,
-			// 	floating: false,
-			// 	style: {
-			// 		fontSize: '24px',
-			// 		fontWeight: 'bold',
-			// 		fontFamily: 'Noto Sans KR',
-			// 		color: '#5c5c5c'
-			// 	},
-			// },
 			dataLabels: {
 				offsetX: 0,
 				offsetY: 15,
@@ -748,134 +841,217 @@ function About() {
 			},
 		}
 	}
+	const chartOption2 = {
+		series: [60, 40],
+		options: {
+			chart: {
+				height: 340
+			},
+			colors: ['#61dafb', '#C66394'],
+			labels: ['React', 'SCSS'],
+			yaxis: {
+				tickAmount: 4,
+				min: 0,
+				max: 100,
+				labels: {
+					style: {
+						colors: ['#7c7c7c'],
+						fontSize: '12px',
+						fontWeight: 'bold'
+					},
+					maxWidth: 100,
+					formatter: (val: any) => {
+						if (val === 0) {
+							return val;
+						} else {
+							return (val + "%");
+						}
+					}
+				}
+			},
+			plotOptions: {
+				pie: {
+					donut: {
+						size: '30%'
+					}
+				}
+			},
+			dataLabels: {
+				style: {
+					fontSize: '16px',
+				},
+				formatter: function (val: any) {
+					return val + "%"
+				},
+				dropShadow: {
+					enabled: false
+				}
+			},
+			legend: {
+				fontSize: '14px',
+				labels: {
+					useSeriesColors: true
+				},
+				position: 'top',
+				horizontalAlign: 'right',
+				markers: {
+					offsetX: -10,
+					offsetY: 1,
+					width: 12,
+					height: 12,
+					radius: 12,
+				},
+				itemMargin: {
+					horizontal: 30,
+					vertical: 8
+				},
+			},
+			noData: {
+				text: '데이터가 없습니다.',
+				align: 'center',
+				verticalAlign: 'middle',
+				offsetX: 0,
+				offsetY: 0,
+				style: {
+					color: '#fff',
+					fontSize: '16px',
+					fontFamily: 'Righteous'
+				}
+			},
+		},
+	}
 	useEffect(() => {
 		setLoading(false);
 		setState(chartOption);
+		setState2(chartOption2);
 		return () => {
 			// setState();
 		}
 	}, [loading]);
 	return (
-		<div className="container">
-			<Profile>
-				<ImgBox>
-					<Img src={heart} alt="프로필 이미지" />
-				</ImgBox>
-				<div>
-					<Txt>UI/UX Developer 최진슬입니다.</Txt>
-					<ul>
-						<li>
-							<Dl>
-								<Dt>Email</Dt>
-								<Dd>web.jinseul@gmail.com</Dd>
-							</Dl>
-						</li>
-					</ul>
-				</div>
-			</Profile>
-			<Content className="inner">
-				{loading ?
-					(<Loading name="about" />) :
-					(<>
-						<GridTop>
+		<>
+			{loading ?
+				(<Loading />) :
+				(<>
+					<div className="container">
+						<Profile>
+							<ImgBox>
+								<Img src={heart} alt="프로필 이미지" />
+							</ImgBox>
+							<div>
+								<Txt>UI/UX Developer 최진슬입니다.</Txt>
+								<ul>
+									<li>
+										<Dl>
+											<Dt>Email</Dt>
+											<Dd>web.jinseul@gmail.com</Dd>
+										</Dl>
+									</li>
+								</ul>
+							</div>
+						</Profile>
+						<Content className="inner">
+							<GridTop>
+								<Grids>
+									<Grid className="chart-area">
+										<Title>Tech Stack</Title>
+										<Chart style={{ minHeight: '100%', height: '300px' }} type="bar" series={state?.series} options={state?.options} />
+									</Grid>
+									<Grid className="second">
+										<Title>Used Plugins</Title>
+										<Plugins variants={pluginsVariants} initial="hidden" animate="visible">
+											<Plugin variants={pluginVariants}>
+												<PluginTitle className="first">Scroll</PluginTitle>
+												<UnLists className="first" variants={unListsVariants}>
+													<List variants={listVariants}>AOS(Animate On Scroll Library)</List>
+													<List variants={listVariants}>ScrollMagic</List>
+													<List variants={listVariants}>GSAP</List>
+												</UnLists>
+											</Plugin>
+											<Plugin variants={pluginVariants}>
+												<PluginTitle className="second">Slider</PluginTitle>
+												<UnLists className="second" variants={unListsVariants}>
+													<List variants={listVariants}>bxSlider.js</List>
+													<List variants={listVariants}>Swiper.js</List>
+													<List variants={listVariants}>Slick.js</List>
+												</UnLists>
+											</Plugin>
+											<Plugin variants={pluginVariants}>
+												<PluginTitle className="third">Chart</PluginTitle>
+												<UnLists className="third" variants={unListsVariants}>
+													<List variants={listVariants}>Chart.js</List>
+													<List variants={listVariants}>Apexcharts.js</List>
+													<List variants={listVariants}>GSAP</List>
+												</UnLists>
+											</Plugin>
+											<Plugin variants={pluginVariants}>
+												<PluginTitle className="fourth">Calendar</PluginTitle>
+												<UnLists className="fourth" variants={unListsVariants}>
+													<List variants={listVariants}>FullCalendar.js</List>
+												</UnLists>
+											</Plugin>
+										</Plugins>
+									</Grid>
+								</Grids>
+							</GridTop>
 							<Grids>
-								<Grid className="chart-area">
-									<Title>Tech Stack</Title>
-									<Chart style={{ minHeight: '100%', height: '300px' }} type="bar" series={state?.series} options={state?.options} />
+								<Grid className="cowork" ref={CoWorkToolsRef}>
+									<Title className="cowork">Cowork Tools</Title>
+									<CoWorkTools>
+										<Items variants={itemsVariants} initial="hidden" animate="visible">
+											<Item variants={itemVariants}>
+												<CoImg src={intellij} alt="intellij 로고" />
+												<ToolTxt>IntelliJ</ToolTxt>
+											</Item>
+											<Item variants={itemVariants}>
+												<CoImg src={vscode} alt="vscode 로고" />
+												<ToolTxt>VSCode</ToolTxt>
+											</Item>
+											<Item variants={itemVariants}>
+												<CoImg src={github} alt="github 로고" />
+												<ToolTxt>GitHub</ToolTxt>
+											</Item>
+										</Items>
+										<Items variants={itemsVariants} initial="hidden" animate="visible">
+											<Item variants={itemVariants}>
+												<CoImg src={photoshop} alt="photoshop 로고" />
+												<ToolTxt>Adobe PhotoShop</ToolTxt>
+											</Item>
+											<Item variants={itemVariants}>
+												<CoImg src={zeplin} alt="zeplin 로고" />
+												<ToolTxt>Zeplin</ToolTxt>
+											</Item>
+										</Items>
+										<Items variants={itemsVariants} initial="hidden" animate="visible">
+											<Item variants={itemVariants}>
+												<CoImg src={slack} alt="slack 로고" />
+												<ToolTxt>Slack</ToolTxt>
+											</Item>
+											<Item variants={itemVariants}>
+												<CoImg src={notion} alt="notion 로고" />
+												<ToolTxt>Notion</ToolTxt>
+											</Item>
+											<Item variants={itemVariants}>
+												<CoImg src={asana} alt="asana 로고" />
+												<ToolTxt>Asana</ToolTxt>
+											</Item>
+											<Item variants={itemVariants}>
+												<CoImg src={jira} alt="jira 로고" />
+												<ToolTxt>Jira</ToolTxt>
+											</Item>
+										</Items>
+									</CoWorkTools>
 								</Grid>
-								<Grid className="second">
-                  <Title>Used Plugins</Title>
-                  <Plugins variants={pluginsVariants} initial="hidden" animate="visible">
-                    <Plugin variants={pluginVariants}>
-                      <PluginTitle className="first">Scroll</PluginTitle>
-                      <UnLists className="first" variants={unListsVariants}>
-                        <List variants={listVariants}>AOS(Animate On Scroll Library)</List>
-                        <List variants={listVariants}>ScrollMagic</List>
-                        <List variants={listVariants}>GSAP</List>
-                      </UnLists>
-                    </Plugin>
-                    <Plugin variants={pluginVariants}>
-                      <PluginTitle className="second">Slider</PluginTitle>
-                      <UnLists className="second" variants={unListsVariants}>
-                        <List variants={listVariants}>bxSlider.js</List>
-                        <List variants={listVariants}>Swiper.js</List>
-                        <List variants={listVariants}>Slick.js</List>
-                      </UnLists>
-                    </Plugin>
-                    <Plugin variants={pluginVariants}>
-                      <PluginTitle className="third">Chart</PluginTitle>
-                      <UnLists className="third" variants={unListsVariants}>
-                        <List variants={listVariants}>Chart.js</List>
-                        <List variants={listVariants}>Apexcharts.js</List>
-                        <List variants={listVariants}>GSAP</List>
-                      </UnLists>
-                    </Plugin>
-                    <Plugin variants={pluginVariants}>
-                      <PluginTitle className="fourth">Calendar</PluginTitle>
-                      <UnLists className="fourth" variants={unListsVariants}>
-                        <List variants={listVariants}>FullCalendar.js</List>
-                      </UnLists>
-                    </Plugin>
-                  </Plugins>
+								<Grid className="interest">
+									<Title>Language Of Interest</Title>
+									<Chart type="donut" height={state2?.options.chart.height} series={state2?.series} options={state2?.options} />
 								</Grid>
 							</Grids>
-						</GridTop>
-						<Grids>
-              <Grid className="cowork" ref={CoWorkToolsRef}>
-								<Title className="cowork">Cowork Tools</Title>
-                <CoWorkTools>
-									<Items>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={intellij} alt="intellij 로고" />
-											<ToolTxt>IntelliJ</ToolTxt>
-										</Item>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={vscode} alt="vscode 로고" />
-											<ToolTxt>VSCode</ToolTxt>
-										</Item>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={github} alt="github 로고" />
-											<ToolTxt>GitHub</ToolTxt>
-										</Item>
-									</Items>
-									<Items>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={photoshop} alt="photoshop 로고" />
-											<ToolTxt>Adobe PhotoShop</ToolTxt>
-										</Item>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={zeplin} alt="zeplin 로고" />
-											<ToolTxt>Zeplin</ToolTxt>
-										</Item>
-									</Items>
-									<Items>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={slack} alt="slack 로고" />
-											<ToolTxt>Slack</ToolTxt>
-										</Item>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={notion} alt="notion 로고" />
-											<ToolTxt>Notion</ToolTxt>
-										</Item>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={asana} alt="asana 로고" />
-											<ToolTxt>Asana</ToolTxt>
-										</Item>
-										<Item>
-											<CoImg drag dragConstraints={CoWorkToolsRef} dragElastic={1} dragSnapToOrigin src={jira} alt="jira 로고" />
-											<ToolTxt>Jira</ToolTxt>
-										</Item>
-									</Items>
-								</CoWorkTools>
-							</Grid>
-							<Grid>
-                <Title>Career Statement</Title>
-              </Grid>
-						</Grids>
-					</>)
-				}
-			</Content>
-		</div>
+						</Content>
+					</div>
+				</>)
+			}
+		</>
 	);
 }
 export default About;
