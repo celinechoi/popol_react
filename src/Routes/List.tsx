@@ -181,9 +181,7 @@ const boxVariants = {
 	click: { borderRadius: "100px" },
 }
 
-function List() {
-	const [init, setInit] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+function List({ init, isLoggedIn }: { init: boolean, isLoggedIn: boolean }) {
 	// const [userObj, setUserObj] = useState({});
 	const { typeId } = useParams<TypesParams>();
 	// state
@@ -195,9 +193,7 @@ function List() {
 		if (isMount) {
 			authService.onAuthStateChanged((user: any) => {
 				if (user) {
-					setIsLoggedIn(true);
-					console.log(user);
-					// setUserObj(user);
+					console.log(user)
 					const collection = dbService.collection(`${typeId}`);
 					collection
 						.orderBy("code", "desc") // desc
@@ -227,10 +223,7 @@ function List() {
 							// 	setLoading(false)
 							// };
 						})
-				} else {
-					setIsLoggedIn(false);
 				}
-				setInit(true);
 			});
 		}
 		return () => {

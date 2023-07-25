@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -182,7 +182,7 @@ const pointVariantes = {
 	}
 }
 
-function Header() {
+function Header({ init, isLoggedIn }: { init: boolean, isLoggedIn: boolean }) {
 	// Link
 	const homeMatch = useRouteMatch("/");
 	const worksMatch = useRouteMatch("/works");
@@ -191,12 +191,36 @@ function Header() {
 	// Log Out
 	const history = useHistory();
 	const onLogOutClick = () => {
-		authService.signOut();
-		history.push("/");
+		if (state) {
+			// 로그인 상태에서 클릭한 경우
+			authService.signOut();
+			history.push("/");
+		} else {
+			// 로그아웃 상태에서 클릭한 경우
+			history.push("/auth");
+		}
 	}
 	// state
+	const [state, setState] = useState(false);
 	const [clicked, setClicked] = useState(false);
 	const toggleClicked = () => setClicked((prev) => !prev);
+	useEffect(() => {
+		let isMount = true;
+		if (isMount) {
+			authService.onAuthStateChanged((user: any) => {
+				if (user) {
+					console.log(user, "user");
+					setState(true);
+				} else {
+					console.log("logout");
+				}
+			})
+		}
+		return () => {
+			isMount = false;
+			// setState(false);
+		};
+	}, []);
 	return (
 		<HeaderBox>
 			<div className="inner">
@@ -228,7 +252,7 @@ function Header() {
 						</Menu>
 					</Menus>
 					<Log onClick={onLogOutClick}>
-						<span>로그아웃</span>
+						<span>{state ? "로그아웃" : "로그인"}</span>
 						<FontAwesomeIcon icon={faArrowRightFromBracket} className="icon-out" />
 					</Log>
 				</Row>
