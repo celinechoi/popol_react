@@ -8,7 +8,6 @@ import { media } from "style/media_query";
 import Loading from "components/Loading";
 import { motion } from "framer-motion";
 import ImgsLoading from "components/ImgsLoading";
-import Initializing from "components/Initializing";
 import Auth from "./Auth";
 
 const Title = styled.div`
@@ -254,7 +253,7 @@ function List({ init, isLoggedIn }: { init: boolean, isLoggedIn: boolean }) {
 								<Container>
 									<div className="inner">
 										{loading ? (
-											<Loading />
+											<Loading prop="Loading" />
 										) : (
 											<>
 												<Boxes variants={boxesVariants} initial="start" animate="end">
@@ -309,7 +308,7 @@ function List({ init, isLoggedIn }: { init: boolean, isLoggedIn: boolean }) {
 							<Auth />
 						)
 					) : (
-						<Initializing />
+						<Loading prop="Initializing" />
 					)
 			}
 		</>

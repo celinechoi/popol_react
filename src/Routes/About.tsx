@@ -931,7 +931,7 @@ function About() {
 	return (
 		<>
 			{loading ?
-				(<Loading />) :
+				(<Loading prop="Loading" />) :
 				(<>
 					<div className="container">
 						<Profile>

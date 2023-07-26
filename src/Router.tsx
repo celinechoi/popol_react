@@ -10,7 +10,6 @@ import Header from "components/Header";
 import Home from "routes/Home";
 import List from "routes/List";
 import Sub from "routes/Sub";
-import Initializing from 'components/Initializing';
 
 function AppRouter() {
 	const [init, setInit] = useState(false);
