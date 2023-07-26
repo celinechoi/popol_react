@@ -2,10 +2,179 @@ import { authService } from "fbase";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { media } from "style/media_query";
 import styled from "styled-components";
 
 const AuthPage = styled.div`
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 460px;
+	margin: 0 auto;
+	background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+	border-radius: 22px;
+	transition: all .3s;
+	&:hover {
+		box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+	}
+	${media.smallToo`
+		width: 90%;
+	`};
+`;
+
+const Inner = styled.div`
+	width: 100%;
+	height: 100%;
+	border-radius: 0;
+	transition: all .2s;
+	border-radius: 20px;
+	overflow: hidden;
+	&:hover {
+		transform: scale(0.98);
+	}
+`;
+
+const FormFrame = styled.div`
+	padding: 32px 24px;
+	height: 100%;
+	background-color: ${props => props.theme.bgColor.gray.first};
+	${media.small`
+		padding: 24px 20px;
+	`};
+`;
+
+const Lists = styled.ul`
+	display: flex;
+	align-items: center;
+	gap: 32px;
+	width: 100%;
+	margin-bottom: 32px;
+	${media.small`
+		gap: 28px;
+    margin-bottom: 20px;
+	`};
+`;
+
+const List = styled.li`
+	flex: 0 0 calc(100%/2 - 32px/2*1);
+	padding: 12px 12px 16px;
+	border-radius: 12px;
+	color: ${props => props.theme.textColor.gray.third};
+	font-size: 16px;
+	font-weight: 700;
 	text-align: center;
+	cursor: pointer;
+	&:first-child {
+		position: relative;
+		&::after {
+			content: '';
+			position: absolute;
+			right: -13px;
+			top: 9px;
+			width: 3px;
+			height: 60%;
+			border-radius: 3px;
+			background-color: ${props => props.theme.bgColor.gray.third};
+			${media.small`
+				right: -16px;
+			`};
+		}
+	}
+	&:hover {
+		background-color: ${props => props.theme.bgColor.gray.second};
+	}
+	&.on {
+		color: rgb(0, 255, 200);
+		background-color: ${props => props.theme.bgColor.gray.second};
+	}
+	${media.small`
+		padding: 9px 8px 11px;
+    border-radius: 10px;
+    color: #f5f5f5;
+    font-size: 15px;
+	`};
+`;
+
+const Form = styled.form`
+width: 100%;
+margin: 0 auto;
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		>li {
+			div {
+				border-radius: 20px;
+				padding: 8px;
+				border: none;
+				outline: none;
+				color: white;
+				background-color: ${props => props.theme.bgColor.gray.second};
+				box-shadow: inset 2px 5px 10px ${props => props.theme.shadow.under2};
+			}
+		}
+	}
+	input[type="text"],
+	input[type="password"] {
+		background: none;
+		border: none;
+		outline: none;
+		width: 100%;
+		color: rgb(0, 255, 200);
+		${media.small`
+			padding: 8px 12px;
+		`};
+	}
+`;
+
+const Submit = styled.input`
+	display: block;
+	margin-top: 10px;
+	width: 100%;
+	border-radius: 12px;
+	padding: 16px 24px;
+	border: none;
+	outline: none;
+	transition: .4s ease-in-out;
+	background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+	color: #fff;
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	&:hover {
+		background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+		color: rgb(0, 255, 200);
+	}
+	${media.small`
+		padding: 12px 20px;
+		font-size: 15px;
+	`};
+`;
+
+const LoginHow = styled.ul`
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+	margin-top: 28px;
+	padding-top: 20px;
+	border-top: 1px solid ${props => props.theme.borColor.gray.first};
+	${media.small`
+		flex-direction: column;
+	`};
+	>li {
+		flex: 0 0 calc(100%/2 - 12px/2*1);
+		${media.small`
+			flex-basis: 100%;
+			width: 100%;
+		`};
+	}
+	button {
+		display: block;
+		width: 100%;
+		padding: 12px 20px;
+	}
 `;
 
 function Auth() {
@@ -56,21 +225,30 @@ function Auth() {
 	};
 	return (
 		<>
-			<AuthPage>
-				<div className="container">
-					<form onSubmit={onSubmit}>
-						<input name="email" type="text" placeholder="Email" required value={email} onChange={onChange} />
-						<input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} />
-						<input type="submit" value={newAccount ? "Create Account" : "Sign In"} />
-						{error}
-					</form>
-					<span onClick={toggleAccount}>{newAccount ? "Sign in" : "Create Account"}</span>
-					<div>
-						<button name="google" onClick={onSocialClick}>Continue with Google</button>
-						<button name="github" onClick={onSocialClick}>Continue with Github</button>
-					</div>
-				</div>
-			</AuthPage>
+			<div className="container" style={{ minHeight: "590px" }}>
+				<AuthPage>
+					<Inner>
+						<FormFrame>
+							<Lists>
+								<List onClick={toggleAccount} className={newAccount ? "" : "on"}>로그인</List>
+								<List onClick={toggleAccount} className={newAccount ? "on" : ""}>계정 생성</List>
+							</Lists>
+							<Form onSubmit={onSubmit}>
+								<ul>
+									<li><div><input name="email" type="text" placeholder="Email" required value={email} onChange={onChange} /></div></li>
+									<li><div><input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} /></div></li>
+									<li><Submit type="submit" value={newAccount ? "Create Account" : "Sign In"} /></li>
+								</ul>
+							</Form>
+							<LoginHow>
+								<li><button name="google" onClick={onSocialClick}>Google로 로그인</button></li>
+								<li><button name="github" onClick={onSocialClick}>Github로 로그인</button></li>
+							</LoginHow>
+							<p>{error}</p>
+						</FormFrame>
+					</Inner>
+				</AuthPage>
+			</div>
 		</>
 	);
 }

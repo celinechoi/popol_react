@@ -40,6 +40,7 @@ declare module "styled-components" {
 		},
 		shadow: {
 			under: string,
+			under2: string,
 			box: string,
 			button: string
 		},

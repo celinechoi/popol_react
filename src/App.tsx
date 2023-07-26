@@ -99,8 +99,14 @@ select {
 	border: ${(props) => props.theme.bgColor.gray.fifth};
 }
 button {
+	background-color: ${props => props.theme.bgColor.gray.second};
+	color: ${props => props.theme.textColor.gray.fourth};
 	cursor: pointer;
 	font-weight: 700;
+	&:hover {
+		background-color: ${props => props.theme.textColor.gray.second};
+		color: ${props => props.theme.bgColor.gray.fourth};
+	}
 }
 .dim {
 	position: fixed;
@@ -134,10 +140,11 @@ button {
 	`};
 }
 .container {
+	position: relative;
   min-height: 1080px;
-	padding: 140px 0 80px;
+	margin: 140px 0 80px;
 	${media.small`
-		padding-top: 167px;
+		margin-top: 167px;
 	`};
 }
 .page {

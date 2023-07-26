@@ -41,7 +41,7 @@ const Row = styled.div`
 	gap: 38px;
 	position: relative;
 	width: 100%;
-	${media.small`
+	${media.smallToo`
 		flex-direction: column;
     gap: 12px;
 	`};
@@ -136,7 +136,7 @@ const ThemeSwitch = styled(motion.input)`
 	background-color: rgba(0,0,0,0.7);
   border-radius: 0.75em;
   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
-  color: #fdea7b;
+  color: ${(props) => props.theme.point.beige};
   display: inline-flex;
   align-items: center;
   margin: auto;
@@ -191,6 +191,11 @@ const ThemeSwitch = styled(motion.input)`
 	&:focus {
 		outline: 0;
 	}
+	${media.smallToo`
+		position: absolute;
+		left: 0px;
+    top: 4px;
+	`};
 `;
 const Log = styled.button`
   height: 37px;
@@ -208,7 +213,7 @@ const Log = styled.button`
 			display: none;
 		}
 	}
-	${media.small`
+	${media.smallToo`
 		position: absolute;
     right: 0;
     top: 0;
