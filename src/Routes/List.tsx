@@ -180,7 +180,7 @@ const boxVariants = {
 	click: { borderRadius: "100px" },
 }
 
-function List({ init, isLoggedIn }: { init: boolean, isLoggedIn: boolean }) {
+function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 	// const [userObj, setUserObj] = useState({});
 	const { typeId } = useParams<TypesParams>();
 	// state
@@ -240,76 +240,71 @@ function List({ init, isLoggedIn }: { init: boolean, isLoggedIn: boolean }) {
 	return (
 		<>
 			{
-				init ?
-					(
-						isLoggedIn ? (
-							<div className="container">
-								<Title>
-									<div className="inner">
-										<h2 className="page-h1">Works</h2>
-										<Tabs typePath={typeId} />
-									</div>
-								</Title>
-								<Container>
-									<div className="inner">
-										{loading ? (
-											<Loading prop="Loading" />
-										) : (
-											<>
-												<Boxes variants={boxesVariants} initial="start" animate="end">
-													{
-														list.map((val) => (
-															<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover" whileTap="click">
-																<Link to={{
-																	pathname: `/works/${typeId}/${val.id}`,
-																	state: {
-																		parentPath: typeId,
-																		id: val.id,
-																		customer: val.customer,
-																		projectName: val.projectName,
-																		description: val.description,
-																		did: val.did,
-																		keyWords: val.keyWords,
-																		fileUrl: val.fileUrl,
-																		pageImgs: val.pageImgs,
-																		pagesMap: val.pagesMap,
-																		startYear: val.startYear,
-																		startMonth: val.startMonth,
-																		endYear: val.endYear,
-																		endMonth: val.endMonth,
-																	}
-																}}>
-																	<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
-																		{
-																			ImgLoading ?
-																				(
-																					<ImgsLoading />
+				isLoggedIn ? (
+					<div className="container">
+						<Title>
+							<div className="inner">
+								<h2 className="page-h1">Works</h2>
+								<Tabs typePath={typeId} />
+							</div>
+						</Title>
+						<Container>
+							<div className="inner">
+								{loading ? (
+									<Loading prop="Loading" />
+								) : (
+									<>
+										<Boxes variants={boxesVariants} initial="start" animate="end">
+											{
+												list.map((val) => (
+													<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover" whileTap="click">
+														<Link to={{
+															pathname: `/works/${typeId}/${val.id}`,
+															state: {
+																parentPath: typeId,
+																id: val.id,
+																customer: val.customer,
+																projectName: val.projectName,
+																description: val.description,
+																did: val.did,
+																keyWords: val.keyWords,
+																fileUrl: val.fileUrl,
+																pageImgs: val.pageImgs,
+																pagesMap: val.pagesMap,
+																startYear: val.startYear,
+																startMonth: val.startMonth,
+																endYear: val.endYear,
+																endMonth: val.endMonth,
+															}
+														}}>
+															<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
+																{
+																	ImgLoading ?
+																		(
+																			<ImgsLoading />
 
-																				) : (
-																					<img src={val.fileUrl} alt={val.projectName} />
-																				)
-																		}
-																	</ImgBox>
-																	<BoxCon>
-																		<p>{val.customer}</p>
-																		<h4>{val.projectName} 홈페이지</h4>
-																	</BoxCon>
-																</Link>
-															</Box>
-														))
-													}
-												</Boxes>
-											</>
-										)}
-									</div>
-								</Container >
-							</div >
-						) : (
-							<Auth />
-						)
-					) : (
-						<Loading prop="Initializing" />
-					)
+																		) : (
+																			<img src={val.fileUrl} alt={val.projectName} />
+																		)
+																}
+															</ImgBox>
+															<BoxCon>
+																<p>{val.customer}</p>
+																<h4>{val.projectName} 홈페이지</h4>
+															</BoxCon>
+														</Link>
+													</Box>
+												))
+											}
+										</Boxes>
+									</>
+								)}
+							</div>
+						</Container >
+					</div >
+				) : (
+					<Auth />
+				)
 			}
 		</>
 	)

@@ -9,6 +9,9 @@ declare module "styled-components" {
 			lavender: string,
 			beige: string,
 			purple: string,
+			hotPink: string,
+			pink: string,
+			skyblue: string,
 			blue: [string, string],
 			green: string
 		},
@@ -39,6 +42,13 @@ declare module "styled-components" {
 			under: string,
 			box: string,
 			button: string
+		},
+		gradient: {
+			first: string,
+			second: string
+		},
+		opacity: {
+			first: string
 		}
   }
 }

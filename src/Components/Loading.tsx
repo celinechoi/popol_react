@@ -21,18 +21,18 @@ const IntialBoxes = styled.div`
 `;
 
 const LoadingBox = styled.div`
-	background-image: linear-gradient(rgb(186, 66, 255) 35%,rgb(0, 225, 255));
+	background-image: ${props => props.theme.gradient.second};
   width: 250px;
   height: 250px;
   animation: ${spinnerKey} 1.7s linear infinite;
   text-align: center;
   border-radius: 50%;
   filter: blur(1px);
-  box-shadow: 0px -5px 20px 0px rgb(186, 66, 255), 0px 5px 20px 0px rgb(0, 225, 255);
+  box-shadow: 0px -5px 20px 0px rgba(228, 19, 141, 0.925), 0px 5px 20px 0px rgb(255, 179, 80);
 `;
 
 const Spinner = styled.div`
-	background-color: rgb(36, 36, 36);
+	background-color: ${(props) => props.theme.bgColor.gray.second};
   width: 250px;
   height: 250px;
   border-radius: 50%;

@@ -10,32 +10,19 @@ import Header from "components/Header";
 import Home from "routes/Home";
 import List from "routes/List";
 import Sub from "routes/Sub";
+import Loading from "components/Loading";
 
-function AppRouter() {
-	const [init, setInit] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	useEffect(() => {
-		authService.onAuthStateChanged((user) => {
-			if (user) {
-				setIsLoggedIn(true);
-			} else {
-				setIsLoggedIn(false);
-			}
-			setInit(true);
-		});
-	}, []);
+function AppRouter({ isLoggedIn }: { isLoggedIn: boolean }) {
+
 	return (
 		<Router>
-			<Header init={init} isLoggedIn={isLoggedIn} />
+			<Header isLoggedIn={isLoggedIn} />
 			<Switch>
-				{/* <Route exact path="/works/solution">
-					<Works />
-				</Route> */}
 				<Route exact path="/works/:typeId/:itemId">
 					<Sub />
 				</Route>
 				<Route exact path="/works/:typeId">
-					<List init={init} isLoggedIn={isLoggedIn} />
+					{isLoggedIn ? <List isLoggedIn={isLoggedIn} /> : <Auth />}
 				</Route>
 				<Route path="/about">
 					<About />
@@ -46,7 +33,6 @@ function AppRouter() {
 				<Route exact path="/">
 					<Home />
 				</Route>
-
 			</Switch>
 		</Router>
 	);

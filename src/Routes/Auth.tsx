@@ -1,6 +1,7 @@
 import { authService } from "fbase";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const AuthPage = styled.div`
@@ -37,7 +38,11 @@ function Auth() {
 			setError(error.message);
 		}
 	}
-	const toggleAccount = () => setNewAccount(prev => !prev);
+	const history = useHistory();
+	const toggleAccount = () => {
+		setNewAccount(prev => !prev);
+		history.push("/works/solution");
+	}
 	const onSocialClick = async (event: any) => {
 		const { target: { name } } = event;
 		let provider: any;
