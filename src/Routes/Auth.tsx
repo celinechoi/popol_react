@@ -4,14 +4,25 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { media } from "style/media_query";
 import styled from "styled-components";
+import good_emoji from "img/emoji/good.png";
 
-const AuthPage = styled.div`
+const PageFrame = styled.div`
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	width: 460px;
 	margin: 0 auto;
+`;
+
+const Info = styled.p`
+	color: ${props => props.theme.textColor.gray.first};
+	font-size: 28px;
+	font-weight: 900;
+	text-align: center;
+`;
+
+const AuthPage = styled.div`
 	background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
 	border-radius: 22px;
 	transition: all .3s;
@@ -226,28 +237,32 @@ function Auth() {
 	return (
 		<>
 			<div className="container" style={{ minHeight: "590px" }}>
-				<AuthPage>
-					<Inner>
-						<FormFrame>
-							<Lists>
-								<List onClick={toggleAccount} className={newAccount ? "" : "on"}>로그인</List>
-								<List onClick={toggleAccount} className={newAccount ? "on" : ""}>계정 생성</List>
-							</Lists>
-							<Form onSubmit={onSubmit}>
-								<ul>
-									<li><div><input name="email" type="text" placeholder="Email" required value={email} onChange={onChange} /></div></li>
-									<li><div><input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} /></div></li>
-									<li><Submit type="submit" value={newAccount ? "Create Account" : "Sign In"} /></li>
-								</ul>
-							</Form>
-							<LoginHow>
-								<li><button name="google" onClick={onSocialClick}>Google로 로그인</button></li>
-								<li><button name="github" onClick={onSocialClick}>Github로 로그인</button></li>
-							</LoginHow>
-							<p>{error}</p>
-						</FormFrame>
-					</Inner>
-				</AuthPage>
+				<PageFrame>
+					<img src={good_emoji} alt="" />
+					<Info>원할한 포트폴리오사이트 이용을 위해 로그인을 해주세요.</Info>
+					<AuthPage>
+						<Inner>
+							<FormFrame>
+								<Lists>
+									<List onClick={toggleAccount} className={newAccount ? "" : "on"}>로그인</List>
+									<List onClick={toggleAccount} className={newAccount ? "on" : ""}>계정 생성</List>
+								</Lists>
+								<Form onSubmit={onSubmit}>
+									<ul>
+										<li><div><input name="email" type="text" placeholder="Email" required value={email} onChange={onChange} /></div></li>
+										<li><div><input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} /></div></li>
+										<li><Submit type="submit" value={newAccount ? "Create Account" : "Sign In"} /></li>
+									</ul>
+								</Form>
+								<LoginHow>
+									<li><button name="google" onClick={onSocialClick}>Google로 로그인</button></li>
+									<li><button name="github" onClick={onSocialClick}>Github로 로그인</button></li>
+								</LoginHow>
+								<p>{error}</p>
+							</FormFrame>
+						</Inner>
+					</AuthPage>
+				</PageFrame>
 			</div>
 		</>
 	);
