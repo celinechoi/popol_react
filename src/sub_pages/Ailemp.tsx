@@ -559,9 +559,8 @@ const Text = styled(motion.div)`
 				width: 100%;
 			`};			
 			span {
-				float: right;
     		margin-top: 9px;
-				color: #003b71;
+				color: #fff;
 				font-size: 14px;
 			}
 		}

@@ -278,10 +278,34 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 	const toggleClicked = () => setClicked((prev) => !prev);
 	// Log Out
 	const history = useHistory();
-	const onLogOutClick = () => {
+	const useConfirm = (message = "", onConfirm: any, onCancel: any) => {
+		if (!onConfirm || typeof onConfirm !== "function") {
+			return;
+		}
+		if (onCancel && typeof onCancel !== "function") {
+			return;
+		}
+		const confirmAction = () => {
+			if (window.confirm(message)) {
+				onConfirm();
+			} else {
+				onCancel();
+			}
+		};
+		return confirmAction;
+	};
+	const logoutConfirm = () => {
 		authService.signOut();
 		history.push("/");
 	}
+	const cancelConfirm = () => {
+		return;
+	}
+	const onLogOutClick = useConfirm(
+		"로그아웃 하시겠습니까?",
+		logoutConfirm,
+		cancelConfirm
+	);
 	const onLogInClick = () => {
 		history.push("/auth");
 	};
@@ -339,10 +363,11 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 								<span>로그아웃</span>
 								<FontAwesomeIcon icon={faArrowRightFromBracket} className="icon-log" />
 							</Log>) :
-							(<Log onClick={onLogInClick}>
-								<span>로그인</span>
-								<FontAwesomeIcon icon={faArrowRightToBracket} className="icon-log" />
-							</Log>)
+							""
+							// (<Log onClick={onLogInClick}>
+							// 	<span>로그인</span>
+							// 	<FontAwesomeIcon icon={faArrowRightToBracket} className="icon-log" />
+							// </Log>)
 						}
 					</HeaderRight>
 				</Row>

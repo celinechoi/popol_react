@@ -4,33 +4,44 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { media } from "style/media_query";
 import styled from "styled-components";
-import good_emoji from "img/emoji/good.png";
 
 const PageFrame = styled.div`
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 460px;
+	width: 100%;
 	margin: 0 auto;
+	${media.smallToo`
+		width: calc(100% - 40px);
+	`};
 `;
 
 const Info = styled.p`
+	padding-bottom: 24px;
 	color: ${props => props.theme.textColor.gray.first};
-	font-size: 28px;
+	font-size: 19px;
 	font-weight: 900;
 	text-align: center;
+	${media.smallToo`
+		font-size: 18px;
+	`};
+	${media.micro`
+		font-size: 16px;
+	`};
 `;
 
 const AuthPage = styled.div`
 	background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
 	border-radius: 22px;
 	transition: all .3s;
+	width: 460px;
+	margin: 0 auto;
 	&:hover {
 		box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
 	}
 	${media.smallToo`
-		width: 90%;
+		width: 100%;
 	`};
 `;
 
@@ -238,8 +249,7 @@ function Auth() {
 		<>
 			<div className="container" style={{ minHeight: "590px" }}>
 				<PageFrame>
-					<img src={good_emoji} alt="" />
-					<Info>원할한 포트폴리오사이트 이용을 위해 로그인을 해주세요.</Info>
+					<Info>원할한 사이트 이용을 위해 로그인을 해주세요.</Info>
 					<AuthPage>
 						<Inner>
 							<FormFrame>
@@ -258,7 +268,7 @@ function Auth() {
 									<li><button name="google" onClick={onSocialClick}>Google로 로그인</button></li>
 									<li><button name="github" onClick={onSocialClick}>Github로 로그인</button></li>
 								</LoginHow>
-								<p>{error}</p>
+								<p style={{ paddingTop: "24px" }}>{error}</p>
 							</FormFrame>
 						</Inner>
 					</AuthPage>

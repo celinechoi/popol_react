@@ -16,6 +16,7 @@ import Hrdi from "sub_pages/Hrdi";
 import Hsjob from "sub_pages/Hsjob";
 import Itle from "sub_pages/Itle";
 import AiLemp from "sub_pages/AiLemp";
+import Vsquare from "sub_pages/Vsquare";
 
 const SubPage = styled.div`
 	position: relative;
@@ -536,7 +537,7 @@ function Sub() {
 				<section>
 					{
 						{
-							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "ailemp": <AiLemp />, "hrdi": <Hrdi />, "hsjob": <Hsjob />, "itle": <Itle />
+							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "ailemp": <AiLemp />, "hrdi": <Hrdi />, "hsjob": <Hsjob />, "itle": <Itle />, "vsquare_demo": <Vsquare />
 						}[state.id]
 					}
 				</section>

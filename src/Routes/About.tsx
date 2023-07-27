@@ -150,7 +150,7 @@ const Grid = styled(motion.div)`
 		overflow: hidden;
     height: 460px;
 		${media.large`
-			height: 400px;
+			height: 420px;
 		`};
 		&::after {
 			content: '';
@@ -171,7 +171,7 @@ const Grid = styled(motion.div)`
 		background-color: ${props => props.theme.bgColor.gray.first};
 		height: 460px;
 		${media.large`
-			height: 400px;
+			height: 420px;
 		`};
 	}
 	${media.medium`
