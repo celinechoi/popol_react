@@ -847,7 +847,7 @@ function Vsquare() {
 					<div className="section sub">
 						<Title>
 							<TitleH1 style={{ opacity }} className="right"># DEMO Pages</TitleH1>
-							<Text>기본 게시판, 갤러리, 상세페이지 부터 회원페이지까지 <span className="point">VSQUARE의 솔루션이 녹아있는 기본 템플릿을 VSQUARE Systems Guide Kit V2.2 바탕으로 작업</span>하였습니다. </Text>
+							<Text>게시판, 갤러리, 상세페이지 부터 회원페이지까지 <span className="point">VSQUARE의 솔루션이 녹아있는 기본 템플릿을 VSQUARE Systems Guide Kit V2.2 바탕으로 작업</span>하였습니다. </Text>
 						</Title>
 						<Spacing>
 							<SubPagesDiv>
