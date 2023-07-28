@@ -26,6 +26,14 @@ const PageFrame = styled(motion.div)`
   margin-top: 48px;
   border-radius: 20px;
 	background: linear-gradient(90deg, #00495a, #5eebb5, #00c3ed);
+	${media.medium`
+		margin-top: 32px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		margin-top: 24px;
+		border-radius: 12px;
+	`};
 	.txt {
 		&-normal {
 			color: #333;
@@ -827,6 +835,7 @@ const SubItem = styled.div`
 				border-radius: 16px;
 			`};
 			${media.small`
+				height: 330px;
 				border-radius: 12px;
 			`};
 			${media.smallToo`
@@ -850,6 +859,7 @@ const SubItem = styled.div`
 			`};
 			${media.small`
 				width: 100%;
+				height: 350px;
 				margin: 20px auto 0;
 				border-radius: 12px;
 			`};

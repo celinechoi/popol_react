@@ -31,10 +31,10 @@ export const darkTheme: DefaultTheme = {
 	textColor: {
 		gray: {
 			first: "#fff",
-			second: "#fafafa",
-			third: "#f5f5f5",
-			fourth: "#eee",
-			fifth: "#e0e0e0"
+			second: "#f5f5f5",
+			third: "#e0e0e0",
+			fourth: "#bdbdbd",
+			fifth: "#9e9e9e"
 		}
 	},
 	shadow: {

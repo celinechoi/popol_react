@@ -44,7 +44,7 @@ const Boxes = styled(motion.ul)`
 
 const Box = styled(motion.li)`
 	flex: 0 0 calc(100%/3 - 32px/3*2);
-	padding: 24px;
+	padding: 24px 24px 12px;
   box-shadow: ${(props) => props.theme.shadow.box};
   border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
   background-color: ${(props) => props.theme.bgColor.gray.first};
@@ -70,6 +70,16 @@ const BoxCon = styled.div`
 		color: ${(props) => props.theme.textColor.gray.fourth};
 		${media.small`
 			padding-bottom: 0;
+		`};
+	}
+	.last {
+		width: 100%;
+		padding-top: 8px;
+		color: ${(props) => props.theme.textColor.gray.fifth};
+		font-size: 13px;
+		text-align: right;
+		${media.small`
+			font-size: 12px;
 		`};
 	}
 	h4 {
@@ -152,20 +162,19 @@ const boxesVariants = {
 	end: {
 		transition: {
 			type: "spring",
-			duration: .2,
-			delayChildren: 0.5,
+			duration: 0.2,
+			delayChildren: 0.3,
 			staggerChildren: 0.2,
 		}
 	},
-	hover: {},
-	click: {},
+	hover: {}
 }
 
 const boxVariants = {
 	start: {
 		borderRadius: 0,
 		opacity: 0,
-		y: 10,
+		y: 20,
 		border: "3px solid transparent"
 	},
 	end: {
@@ -176,8 +185,7 @@ const boxVariants = {
 			duration: 1,
 		}
 	},
-	hover: { scale: 1.05, y: -20, borderColor: "#0179c3" },
-	click: { borderRadius: "100px" },
+	hover: { scale: 1.05, y: -20, borderColor: "#0179c3" }
 }
 
 function List({ isLoggedIn }: { isLoggedIn: boolean }) {
@@ -257,7 +265,7 @@ function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 										<Boxes variants={boxesVariants} initial="start" animate="end">
 											{
 												list.map((val) => (
-													<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover" whileTap="click">
+													<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
 														<Link to={{
 															pathname: `/works/${typeId}/${val.id}`,
 															state: {
@@ -290,7 +298,8 @@ function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 															</ImgBox>
 															<BoxCon>
 																<p>{val.customer}</p>
-																<h4>{val.projectName} 홈페이지</h4>
+																<h4>{val.projectName}</h4>
+																<p className="last">퍼블리싱 기여도: 100%</p>
 															</BoxCon>
 														</Link>
 													</Box>

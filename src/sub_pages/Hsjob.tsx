@@ -20,6 +20,14 @@ const PageFrame = styled(motion.div)`
 	padding: 0 0 100px;
   border-radius: 20px;
 	background: linear-gradient(260deg, #3b1e87, #ffb72e);
+	${media.medium`
+		margin-top: 32px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		margin-top: 24px;
+		border-radius: 12px;
+	`};
 `;
 
 const Page = styled.div`

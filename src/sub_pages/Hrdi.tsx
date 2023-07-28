@@ -22,6 +22,14 @@ const PageFrame = styled(motion.div)`
   margin-top: 48px;
   border-radius: 20px;
 	background: linear-gradient(262deg, #1f5afc, #ffc500);
+	${media.medium`
+		margin-top: 32px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		margin-top: 24px;
+		border-radius: 12px;
+	`};
 	${media.small`
 		margin-top: 0;
 	`};
@@ -663,8 +671,7 @@ function Hrdi() {
 							<TitleH1 style={{ fontSize: size }} className="right"># Main</TitleH1>
 							<Text className="main-txt">
 								다양한 연령층이 사용하는 서비스를 보다 쉽고 직관적으로 이해할 수 있도록 사용성을 높이는데 중점을 두었습니다. <br className="tm-show" />
-								사용자가 많이 찾는 로그인, 자주찾는 서비스 퀵메뉴, 교육장소 찾기를 메인에 노출해 자연스럽게 정보에 <br className="tm-hide" />
-								접근할 수 있도록 유도하는 구조로 개선하여 사용성을 높였습니다.
+								사용자가 많이 찾는 로그인, 자주찾는 서비스 퀵메뉴, 교육장소 찾기를 메인에 노출해 자연스럽게 정보에 접근할 수 있도록 유도하는 구조로 개선하여 사용성을 높였습니다.
 							</Text>
 						</Title>
 						<ScrollWindow ref={ScrollWindowInnerRef}>

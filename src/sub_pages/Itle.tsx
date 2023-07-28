@@ -24,6 +24,14 @@ const PageFrame = styled(motion.div)`
 	${media.small`
 		margin-top: 0;
 	`};
+	${media.medium`
+		margin-top: 32px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		margin-top: 24px;
+		border-radius: 12px;
+	`};
 `;
 
 const Page = styled.div`

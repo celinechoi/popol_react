@@ -4,7 +4,7 @@ import Chart from "react-apexcharts";
 import { useEffect, useRef, useState } from "react";
 import Loading from "components/Loading";
 import { media } from "style/media_query";
-import { motion } from "framer-motion";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
 import coworkBg from "img/cowork_bg.png";
 import intellij from "img/logo/intellij_logo.png";
 import vscode from "img/logo/vscode_logo.png";
@@ -35,7 +35,7 @@ const Content = styled.div`
   padding-top: 40px;
 `;
 
-const Profile = styled.div`
+const Profile = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -378,7 +378,6 @@ const pluginsVariants = {
 	hidden: {},
 	visible: {
 		transition: {
-			delay: .5,
 			type: "spring",
 			duration: .2,
 			delayChildren: 0.5,
@@ -920,6 +919,9 @@ function About() {
 			},
 		},
 	}
+	// scroll
+	const { scrollYProgress } = useViewportScroll();
+	const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.2]);
 	useEffect(() => {
 		setLoading(false);
 		setState(chartOption);
@@ -934,7 +936,7 @@ function About() {
 				(<Loading prop="Loading" />) :
 				(<>
 					<div className="container">
-						<Profile>
+						<Profile style={{ scale }}>
 							<ImgBox>
 								<Img src={heart} alt="프로필 이미지" />
 							</ImgBox>

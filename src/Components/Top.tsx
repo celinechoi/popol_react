@@ -26,6 +26,7 @@ const TopBox = styled.div`
 	}
 	${media.medium`
 		right: 24px;
+		bottom: 40px;
 	`};
 	${media.small`
 		right: 20px;

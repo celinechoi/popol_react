@@ -12,19 +12,27 @@ import primaryCode from "img/sub_pages/vsquare/primary_code.png";
 import styleCode from "img/sub_pages/vsquare/style_code.png";
 import input from "img/sub_pages/vsquare/input.png";
 import typo from "img/sub_pages/vsquare/typo.png";
-import masterDashboardBg from "img/sub_pages/ailemp/dashboard_bg.png";
-import learnerUntactTa from "img/sub_pages/ailemp/learner_untact_ta.png";
-import application from "img/sub_pages/ailemp/application.png";
-import profile from "img/sub_pages/ailemp/profile.png";
-import learnerResult from "img/sub_pages/ailemp/learner_result.png";
-import join2 from "img/sub_pages/ailemp/join2.png";
-import map from "img/sub_pages/ailemp/map.png";
+import gallery from "img/sub_pages/vsquare/gallery.png";
+import notice from "img/sub_pages/vsquare/notice.png";
+import detail from "img/sub_pages/vsquare/detail.png";
+import mailing from "img/sub_pages/vsquare/mailing.png";
+import join1 from "img/sub_pages/vsquare/join1.png";
+import join2 from "img/sub_pages/vsquare/join2.png";
+import error from "img/sub_pages/vsquare/error.png";
 
 const PageFrame = styled(motion.div)`
   margin-top: 48px;
   border-radius: 20px;
 	background: #000;
 	color: #fff;
+	${media.medium`
+		margin-top: 32px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		margin-top: 24px;
+		border-radius: 12px;
+	`};
 	.txt {
 		&-normal {
 			color: #ddd;
@@ -69,11 +77,10 @@ const Page = styled.div`
 		&.sub {
 			padding-top: 110px;
 			${media.large`
-				padding-top: 200px;
+				padding-top: 80px;
 			`};
-			${media.medium`
-				margin-top: 0;
-				padding-top: 160px;
+			${media.small`
+				padding-top: 60px;
 			`};
 		}
 	}
@@ -112,12 +119,13 @@ const Spacing = styled.div`
 			padding: 32px 0;
 			${media.large`
 				gap: 24px;
-				padding: 0 24px;
 			`};
-			${media.small`
+			${media.medium`
+				padding: 22px 0;
+			`};
+			${media.smallToo`
 				flex-direction: column;
 				gap: 20px;
-				padding: 0 20px;
 			`};
 			&.reverse {
 				${media.small`
@@ -127,7 +135,7 @@ const Spacing = styled.div`
 			.area {
 				position: relative;
 				width: calc(60% - 24px/2*1);
-				${media.small`
+				${media.smallToo`
 					width: 100%;
 				`};
 				&-right {
@@ -135,14 +143,20 @@ const Spacing = styled.div`
 					${media.medium`
 						width: 48%;
 					`};
-					${media.small`
+					${media.smallToo`
 						width: 100%;
 					`};
 				}
 				&-v2 {
 					width: calc(54% - 24px/2*1);
-					&-right {
-						width: calc(46% - 24px/2*1);
+					${media.smallToo`
+						width: 100%;
+					`};
+						&-right {
+							width: calc(46% - 24px/2*1);
+						${media.smallToo`
+							width: 100%;
+						`};
 					}
 				}
 			};
@@ -247,15 +261,14 @@ const ClipFrame = styled(motion.div)`
 			background: #000 url(${sass}) no-repeat center / contain;;
 			background-size: auto 37px;
 			top: -9px;
+			${media.small`
+				width: 45px;
+				height: 5px;
+				background-size: 48%;
+				top: -9px;
+				border-radius: 12px;
+			`};
 		}
-		${media.large`
-			right: 24px;
-			top: 110px;
-			width: 100%;
-		`};
-		${media.small`
-			right: 0;
-		`};
 	}
 `;
 
@@ -284,6 +297,17 @@ const ClipInner = styled(motion.div)`
 		background-image: url(${color});
 		background-position: left -180px top -175px;
 		background-size: 150%;
+		${media.large`
+			background-position: center bottom;
+			background-size: cover;
+			height: 270px;
+		`};
+		${media.small`
+			height: 243px;
+		`};
+		${media.micro`
+			height: 193px;
+		`};
 		&-1 {
 			background-image: url(${colorCode});
 			background-position: left bottom 10px;
@@ -298,12 +322,30 @@ const ClipInner = styled(motion.div)`
     background-size: 150%;
     background-position: center top -150px;
 		background-image: url(${input});
+		${media.large`
+			height: 540px;
+		`};
+		${media.medium`
+			height: 350px;
+		`};
+		${media.small`
+			height: 280px;
+		`};
+		${media.micro`
+			height: 200px;
+		`};
 	}
 	&.part5 {
 		height: 260px;
 		background-image: url(${typo});
 		background-size: 150%;
     background-position: center top -48px;
+		${media.large`
+			height: 160px;
+		`};
+		${media.micro`
+			height: 80px;
+		`};
 	}
 `;
 
@@ -316,6 +358,10 @@ const Gallerys = styled.ul`
 	align-items: flex-start;
 	justify-content: center;
 	gap: 0 32px;
+	${media.smallToo`
+		flex-direction: column;
+		gap: 32px;
+	`};
 `;
 
 const Gallery = styled.li`
@@ -353,13 +399,18 @@ const TitleH1 = styled(motion.div)`
 	font-size: 104px;
   font-weight: 700;
 	line-height: 1.3;
-	&.color {
-		&-titleh1 {
-		${media.medium`
-			top: 40px;
-		`};
-	}
-	}
+	${media.large`
+		font-size: 84px;
+	`};
+	${media.medium`
+		font-size: 70px;
+	`};
+	${media.small`
+		font-size: 61px;
+	`};
+	${media.micro`
+		font-size: 37px;
+	`};
 	&.right {
 		float: right;
 	}
@@ -388,12 +439,27 @@ const Text = styled(motion.div)`
 	background-color: rgba(255,255,255,0.7);
 	padding: 24px;
 	border-radius: 20px;
+	${media.medium`
+		padding: 18px;
+    border-radius: 16px;
+		font-size: 15px;
+	`};
 `;
 
-const ContentTitle = styled.div`
+const ContentTitle = styled.p`
 	padding-bottom: 12px;
+	color: #fff;
 	font-size: 78px;
 	font-weight: 700;
+	${media.medium`
+		font-size: 58px;
+	`};
+	${media.small`
+		font-size: 35px;
+	`};
+	${media.micro`
+		font-size: 28px;
+	`};
 `;
 
 const Boxes = styled(motion.ul)`
@@ -498,10 +564,24 @@ const Info = styled(motion.div)`
 `;
 
 const SubPagesDiv = styled(motion.div)`
+	position: relative;
 	width: 100%;
 	margin-top: 80px;
-	padding: 0 0 90px;
+	padding: 0 0 230px;
 	background-color: rgba(255, 255, 255, 0.9);
+	${media.large`
+		margin-top: 60px;
+		padding: 0 0 120px;
+	`};
+	${media.medium`
+		padding: 28px 0 350px;
+	`};
+	${media.small`
+		padding: 0 0 120px;
+	`};
+	${media.micro`
+		padding: 0 0 60px;
+	`};
 `;
 
 const SubItem = styled.div`
@@ -531,8 +611,8 @@ const SubItem = styled.div`
 		>div {
 			width: 820px;
 			height: 360px;
-			background-image: url(${application});
-			background-position: center bottom -634px;
+			background-image: url(${gallery});
+			background-position: center top;
 			border-bottom-right-radius: 20px;
 			border-bottom-left-radius: 20px;
 			${media.large`
@@ -548,6 +628,9 @@ const SubItem = styled.div`
 			${media.smallToo`
 				height: 180px;
 			`};
+			${media.micro`
+				height: 140px;
+			`};
 		}
 	}
 	&.item2 {
@@ -561,7 +644,7 @@ const SubItem = styled.div`
 		>div {
 			width: 380px;
 			height: 410px;
-			background-image: url(${join2});
+			background-image: url(${notice});
 			background-position: center top;
 			border-bottom-right-radius: 20px;
 			border-bottom-left-radius: 20px;
@@ -572,18 +655,30 @@ const SubItem = styled.div`
 				border-radius: 16px;
 			`};
 			${media.small`
-				height: 360px;
+				height: 300px;
 				border-radius: 12px;
 			`};
 			${media.smallToo`
 				height: 130px;
+			`};
+			${media.micro`
+				height: 110px;
 			`};
 		}
 		.icon {
 			&-shortcuts {
 				right: 74px;
 				${media.large`
-					right: 13%;
+					right: 54px;
+				`};
+				${media.medium`
+					right: 44px;
+				`};
+				${media.small`
+					right: 24px;
+				`};
+				${media.smallToo`
+					right: 12px;
 				`};
 			}
 		}
@@ -601,7 +696,7 @@ const SubItem = styled.div`
 			width: 480px;
 			height: 700px;
 			border-radius: 20px;
-			background-image: url(${profile});
+			background-image: url(${join2});
 			background-position: center top;
 			background-size: cover;
 			${media.large`
@@ -613,7 +708,7 @@ const SubItem = styled.div`
 				border-radius: 16px;
 			`};
 			${media.small`
-				height: 320px;
+				height: 370px;
 				border-radius: 12px;
 			`};
 			${media.smallToo`
@@ -635,54 +730,165 @@ const SubItem = styled.div`
 			width: 785px;
 			height: 490px;
 			margin-left: auto;
-			background-image: url(${learnerResult});
+			background-image: url(${detail});
 			border-radius: 20px;
 			${media.large`
 				width: 100%;
 			`};
 			${media.medium`
-				height: 460px;
+				height: 350px;
 				border-radius: 16px;
 			`};
 			${media.small`
+				height: 330px;
 				border-radius: 12px;
 			`};
 			${media.smallToo`
 				height: 150px;
 			`};
+			${media.micro`
+				height: 130px;
+			`};
 		}
 	}
 	&.item5 {
+		top: -110px;
+    right: 140px;
+		min-width: 40%;
+    width: 49%;
+		${media.large`
+			right: 2%;
+		`};
+		${media.medium`
+			top: 0;
+			right: 2%;
+			margin-top: 2%;
+		`};
+		${media.small`
+			margin-top: -2%;
+		`};
+		>div {
+			width: 100%;
+			height: 800px;
+			background-image: url(${mailing});
+			background-position: center top -10px;
+			background-size: 270% auto;
+			border-radius: 20px;
+			${media.large`
+				width: 100%;
+				height: 530px;
+				margin-right: 2%;
+			`};
+			${media.medium`
+				height: 450px;
+				border-radius: 16px;
+			`};
+			${media.small`
+				height: 350px;
+				border-radius: 12px;
+			`};
+			${media.smallToo`
+				height: 170px;
+			`};
+			${media.micro`
+				height: 130px;
+			`};
+		}
+	}
+	&.item6 {
+		min-width: 31.4%;
+    width: 31.4%;
+		margin: 3% 0 0 7%;
+		${media.large`
+			margin: 3% 0 0 16%;
+		`};
+		${media.medium`
+			margin: 7% 0 0 15.5%;
+		`};
+		${media.small`
+			margin: 0 0 0 15.5%;
+		`};
+		>div {
+			width: 100%;
+			height: 1100px;
+			background-image: url(${join1});
+			background-position: center top;
+			border-radius: 20px;
+			${media.large`
+				width: 100%;
+			`};
+			${media.medium`
+				height: 500px;
+				border-radius: 16px;
+			`};
+			${media.small`
+				border-radius: 12px;
+			`};
+			${media.smallToo`
+				height: 310px;
+			`};
+			${media.micro`
+				height: 270px;
+			`};
+		}
+	}
+	&.item7 {
 		${media.smallToo`
 			padding: 0 20px;	
 		`};
 		>div {
-			width: 90%;
-			margin: 40px auto 0;
-			background-image: url(${map});
-			background-position: center top -310px;
+			position: absolute;
+			left: 47%;
+			bottom: -120px;
+			width: 36%;
+			height: 540px;
+			background-image: url(${error});
+			background-position: center center;
 			border-radius: 20px;
+			${media.large`
+				left: 49%;
+				bottom: 240px;
+				width: 35%;
+				height: 450px;
+			`};
 			${media.medium`
-				height: 430px;
+				height: 320px;
 				border-radius: 16px;
+				bottom: -250px;
 			`};
 			${media.small`
-				width: 100%;
-				margin: 20px auto 0;
+				bottom: -104px;
 				border-radius: 12px;
+				height: 250px;
 			`};
 			${media.smallToo`
-				height: 250px;
-				background-position: center top;
+				bottom: -24px;
+				height: 150px;
+				left: 52%;
+			`};
+			${media.micro`
+				bottom: -4px;
+				height: 130px;
 			`};
 		}
 		.icon {
 			&-shortcuts {
-				right: 88px;
-    		top: 64px;
+				right: 20%;
+				bottom: 340px;
+				top: auto;
 				${media.large`
-					right: 8%;
-    			top: 14%;
+					right: 19%;
+					bottom: 610px;
+				`};
+				${media.medium`
+					bottom: 0;
+				`};
+				${media.small`
+					bottom: 87px;
+				`};
+				${media.smallToo`
+					right: 17%;
+					bottom: 77px;
 				`};
 			}
 		}
@@ -703,21 +909,21 @@ const SubFlex = styled.div`
 function Vsquare() {
 	// drag control
 	const { scrollYProgress } = useViewportScroll();
-	const opacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 1, 1]);
+	const opacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]);
 	return (
 		<div className="sub">
 			<PageFrame>
 				<Page>
 					<div className="section">
 						<Title>
-							<TitleH1 style={{ opacity }} >VSQUARE Systems <br />Guide Kit V2.2</TitleH1>
+							<TitleH1 style={{ opacity }} ># VSQUARE Systems <br />Guide Kit V2.2</TitleH1>
 							<Text>
 								디자이너, 개발자와 의논아래 VSQUARE만의 스타일 규칙을 담은 <span className="point">VSQUARE Systems Guide Kit(V.2.2)를 만들어 프로젝트 구축 및 운영 작업을 간소화 및 획일화</span> 하였습니다.
 							</Text>
 						</Title>
 						<Part>
 							<ContentTitle>var_function.scss</ContentTitle>
-							<p className="txt-normal">자주 사용하는 <span className="point">그레이 스케일, 시스템 컬러, 미디어 쿼리, 프로젝트별 Primary와 Secondary, 폰트 패밀리, 자주 사용하는 스타일 등을 변수로 설정</span> 하였습니다.</p>
+							<p className="txt-normal">자주 사용하는 그레이 스케일, 시스템 컬러, 미디어 쿼리, 프로젝트별 Primary와 Secondary, 폰트 패밀리, 자주 사용하는 스타일 등을 <span className="point">변수로 설정</span> 하였습니다.</p>
 							<Spacing>
 								<div className="spacing-explain">
 									<div className="area">
@@ -824,10 +1030,8 @@ function Vsquare() {
 							</Gallerys>
 						</Part>
 						<Part>
-							<Title>
-								<TitleH1 style={{ opacity }}>systems.scss</TitleH1>
-								<p className="txt-normal">타이틀 폰트, input 등 정형화된 스타일을 systems.scss안에 반영하여 해당 <span className="point">스타일이 필요할때 정의해놓은 클래스를 사용하여 작업 시간을 단축하는데 기여</span>하였습니다.</p>
-							</Title>
+							<ContentTitle>systems.scss</ContentTitle>
+							<p className="txt-normal">타이틀 폰트, input 등 정형화된 스타일을 systems.scss안에 반영하여 해당 <span className="point">스타일이 필요할때 정의해놓은 클래스를 사용하여 작업 시간을 단축하는데 기여</span>하였습니다.</p>
 							<Spacing>
 								<div className="spacing-explain">
 									<div className="area-v2">
@@ -871,7 +1075,17 @@ function Vsquare() {
 										<div></div>
 									</SubItem>
 								</SubFlex>
-								<SubItem className="item5">
+								<SubFlex>
+									<SubItem className="item6">
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/contact.html") }} />
+										<div></div>
+									</SubItem>
+									<SubItem className="item5">
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/contact.html") }} />
+										<div></div>
+									</SubItem>
+								</SubFlex>
+								<SubItem className="item7">
 									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/contact.html") }} />
 									<div></div>
 								</SubItem>
