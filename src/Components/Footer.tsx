@@ -2,12 +2,16 @@ import styled from "styled-components";
 import github from "img/sns/github.svg";
 import tistory from "img/sns/tistory.svg";
 import { media } from "style/media_query";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 
 const FooterBox = styled.div<{ theme: boolean }>`
 	padding: 24px 20px;
 	border-top: 1px solid ${(props) => props.theme.borColor.gray.first};
 	color: ${(props) => props.theme.bgColor.gray.fifth};
 	text-align: center;
+	&.home {
+		background-color: ${(props) => props.theme.bgColor.gray.first};
+	}
 	p {
 		color: ${(props) => props.theme.textColor.gray.fifth};
 		font-size: 13px;
@@ -41,6 +45,9 @@ const Sns = styled.li`
 `;
 
 function Footer() {
+	// Link
+	// const homeLocation = useLocation();
+	// console.log(homeLocation);
 	return (
 		<FooterBox>
 			<div className="inner">

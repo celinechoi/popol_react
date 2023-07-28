@@ -20,6 +20,9 @@ const HeaderBox = styled.div`
 	height: 86px;
 	background-color: ${(props) => props.theme.bgColor.gray.second};
 	box-shadow: ${(props) => props.theme.shadow.under};
+	&.home {
+		background-color: ${(props) => props.theme.bgColor.gray.first};
+	}
 	${media.small`
 		height: auto;
 	`};
@@ -51,7 +54,7 @@ const Logo = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		color: ${(props) => props.theme.textColor.gray.third};
+		color: ${(props) => props.theme.textColor.gray.first};
 		font: 20px 'Righteous';
 		text-align: center;
 		${media.small`
@@ -95,7 +98,7 @@ const Menu = styled.li`
 	`};
 	&:hover {
 		a {
-			
+			color: ${(props) => props.theme.point.purple};
 		}
 	}
 	a {
@@ -133,7 +136,7 @@ const ThemeSwitch = styled(motion.input)`
 	display: block;
   margin-bottom: 1.5em;
   font-size: 1em;
-	background-color: rgba(0,0,0,0.7);
+	background-color: ${props => props.theme.bgColor.gray.third};
   border-radius: 0.75em;
   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
   color: ${(props) => props.theme.point.beige};
@@ -177,7 +180,7 @@ const ThemeSwitch = styled(motion.input)`
 		box-sizing: border-box;
 	}
 	&:checked {
-		background-color: rgba(0,0,0,0.45);
+		background-color: ${props => props.theme.bgColor.gray.third};
   	box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.1) inset;
 		&::before {
 			background-color: currentColor;
@@ -327,7 +330,7 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 		};
 	}, []);
 	return (
-		<HeaderBox>
+		<HeaderBox className={homeMatch?.isExact ? "home" : ""}>
 			<div className="inner">
 				<Row>
 					<Logo>
