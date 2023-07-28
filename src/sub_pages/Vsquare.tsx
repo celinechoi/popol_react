@@ -1057,36 +1057,36 @@ function Vsquare() {
 							<SubPagesDiv>
 								<SubFlex>
 									<SubItem className="item1">
-										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/learner-application.html") }} />
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/board_gallery.html") }} />
 										<div></div>
 									</SubItem>
 									<SubItem className="item2">
-										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/join2.html") }} />
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/board_list.html") }} />
 										<div></div>
 									</SubItem>
 								</SubFlex>
 								<SubFlex>
 									<SubItem className="item3">
-										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/profile-select.html") }} />
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/member_sign_up2.html") }} />
 										<div></div>
 									</SubItem>
 									<SubItem className="item4">
-										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/learner-result.html") }} />
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/process_detail.html") }} />
 										<div></div>
 									</SubItem>
 								</SubFlex>
 								<SubFlex>
 									<SubItem className="item6">
-										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/contact.html") }} />
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/member_sign_up.html") }} />
 										<div></div>
 									</SubItem>
 									<SubItem className="item5">
-										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/contact.html") }} />
+										<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/mailing.html") }} />
 										<div></div>
 									</SubItem>
 								</SubFlex>
 								<SubItem className="item7">
-									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/ailemp/contact.html") }} />
+									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/info.html") }} />
 									<div></div>
 								</SubItem>
 							</SubPagesDiv>
