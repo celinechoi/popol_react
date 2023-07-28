@@ -83,6 +83,10 @@ const BoxCon = styled.div`
 		`};
 	}
 	h4 {
+		min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 		font-size: 20px;
 		text-align: center;
 		${media.small`
