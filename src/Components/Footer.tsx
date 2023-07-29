@@ -2,7 +2,8 @@ import styled from "styled-components";
 import github from "img/sns/github.svg";
 import tistory from "img/sns/tistory.svg";
 import { media } from "style/media_query";
-import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
+import { useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const FooterBox = styled.div<{ theme: boolean }>`
 	padding: 24px 20px;
@@ -10,7 +11,12 @@ const FooterBox = styled.div<{ theme: boolean }>`
 	color: ${(props) => props.theme.bgColor.gray.fifth};
 	text-align: center;
 	&.home {
-		background-color: ${(props) => props.theme.bgColor.gray.first};
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+		background-color: transparent;
+    border-color: transparent;
 	}
 	p {
 		color: ${(props) => props.theme.textColor.gray.fifth};
@@ -43,13 +49,17 @@ const Sns = styled.li`
 		background-color: #FF5A4A;
 	}
 `;
+interface RouteState {
+  state: {
+    name: string;
+  };
+}
 
 function Footer() {
-	// Link
-	// const homeLocation = useLocation();
-	// console.log(homeLocation);
+  // Link
+	const homeMatch = useRouteMatch("/");
 	return (
-		<FooterBox>
+    <FooterBox className={homeMatch?.isExact ? "home" : ""}>
 			<div className="inner">
 				<SnsList>
 					<Sns onClick={() => { window.open("https://github.com/celinechoi") }}>

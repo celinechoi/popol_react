@@ -21,7 +21,8 @@ const HeaderBox = styled.div`
 	background-color: ${(props) => props.theme.bgColor.gray.second};
 	box-shadow: ${(props) => props.theme.shadow.under};
 	&.home {
-		background-color: ${(props) => props.theme.bgColor.gray.first};
+		background-color: transparent;
+    box-shadow: none;
 	}
 	${media.small`
 		height: auto;
@@ -334,7 +335,7 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 			<div className="inner">
 				<Row>
 					<Logo>
-						<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
+						<Link to="/">
 							<p>UI/UX Developer</p>
 							<Em>Jinseul</Em>
 						</Link>

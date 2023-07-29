@@ -347,8 +347,6 @@ function App() {
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>
 			<GlobalStyle />
 			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : <Loading prop="Initializing" />}
-			<Top />
-			<Footer />
 		</ThemeProvider>
 	);
 }

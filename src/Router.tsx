@@ -11,6 +11,8 @@ import Home from "routes/Home";
 import List from "routes/List";
 import Sub from "routes/Sub";
 import Loading from "components/Loading";
+import Footer from "components/Footer";
+import Top from "components/Top";
 
 function AppRouter({ isLoggedIn }: { isLoggedIn: boolean }) {
 
@@ -34,6 +36,8 @@ function AppRouter({ isLoggedIn }: { isLoggedIn: boolean }) {
 					<Home />
 				</Route>
 			</Switch>
+      <Top />
+      <Footer />
 		</Router>
 	);
 }
