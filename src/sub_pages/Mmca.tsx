@@ -107,9 +107,9 @@ function Mmca() {
 	const [data, setData] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
-	const cmsArr = [login, main, sub1, sub2, sub3, sub4, sub5, sub6];
 	useEffect(() => {
+		// data
+		const cmsArr = [login, main, sub1, sub2, sub3, sub4, sub5, sub6];
 		let isMount = true;
 		if (isMount) {
 			setData(cmsArr);

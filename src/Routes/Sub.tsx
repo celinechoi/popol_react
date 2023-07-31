@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -398,8 +397,6 @@ interface RouteState {
 	endYear: number | undefined,
 }
 
-const offset = 6;
-
 function Sub() {
 	// 현재 페이지 파악
 	const { state } = useLocation<RouteState>();
@@ -414,55 +411,6 @@ function Sub() {
 	// 배열 타입 빈 변수에 저장
 	const keyWordsList: any = state?.keyWords;
 	const didList: any = state?.did;
-	const pageImgs: any = state?.pageImgs;
-	const pagesMap: any = state?.pagesMap;
-	// const pagesMapEn = Object.entries(pagesMap);
-
-	// const pageFor = () => {
-	// 	for (const [key, value] of Object.entries(pagesMap)) {
-	// 		console.log(`${key}: ${value}`);
-	// 	}
-	// }
-
-	const rowVariants = {
-		hidden: {
-			x: window.outerWidth + 10,
-		},
-		visible: {
-			x: 0,
-		},
-		exit: {
-			x: -window.outerWidth - 10,
-		}
-	}
-
-	// Slider index
-	// const [index, setIndex] = useState(0);
-	// const [leaving, setLeaving] = useState(false);
-	// const increaseIndex = () => {
-	// 	if (leaving) return;
-	// 	setLeaving(true);
-	// 	setIndex((prev) => prev + 1);
-	// }
-	// const toggleLeaving = () => setLeaving((prev) => !prev)
-
-	// motion
-	// const arrowVariants = {
-	// 	start: {
-	// 		opacity: 0.5,
-	// 		top: 10
-	// 	},
-	// 	end: {
-	// 		opacity: 1,
-	// 		top: 0,
-	// 		transition: {
-	// 			type: "tween",
-	// 			// stiffness: 100,
-	// 			duration: 3,
-	// 			repeat: 5,
-	// 		}
-	// 	}
-	// }
 
 	return (
 		<SubPage>

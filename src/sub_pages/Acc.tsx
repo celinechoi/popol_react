@@ -108,10 +108,10 @@ function Acc() {
 	const [data2, setData2] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
-	const accArr = [main, sub1, sub2, sub3, sub4, sub5, sub6];
-	const ticketArr = [ticket, ticketArabic];
 	useEffect(() => {
+		// data
+		const accArr = [main, sub1, sub2, sub3, sub4, sub5, sub6];
+		const ticketArr = [ticket, ticketArabic];
 		let isMount = true;
 		if (isMount) {
 			setData(accArr);

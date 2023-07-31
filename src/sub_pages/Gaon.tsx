@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { media } from "style/media_query";
 import styled from "styled-components";
@@ -104,9 +104,9 @@ function Gaon() {
 	const [data, setData] = useState<any[]>([]);
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
-	const imgArr = [login, main, sub1, sub2, sub3, sub4];
 	useEffect(() => {
+		// data
+		const imgArr = [login, main, sub1, sub2, sub3, sub4];
 		let isMount = true;
 		if (isMount) {
 			setData(imgArr);

@@ -1,16 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useEffect, useState } from "react";
-import * as firebase from 'firebase/compat/app';
-import { ReactQueryFirestoreProvider } from 'react-query-firestore';
-import { authService, dbService } from "fbase";
-import Works from "routes/Works";
 import About from "routes/About";
 import Auth from "routes/Auth";
 import Header from "components/Header";
 import Home from "routes/Home";
 import List from "routes/List";
 import Sub from "routes/Sub";
-import Loading from "components/Loading";
 import Footer from "components/Footer";
 import Top from "components/Top";
 
@@ -36,8 +30,8 @@ function AppRouter({ isLoggedIn }: { isLoggedIn: boolean }) {
 					<Home />
 				</Route>
 			</Switch>
-      <Top />
-      <Footer />
+			<Top />
+			<Footer />
 		</Router>
 	);
 }

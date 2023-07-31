@@ -219,10 +219,10 @@ function Auth() {
 			let data;
 			if (newAccount) {
 				// create account
-				data = await createUserWithEmailAndPassword(authService, email, password);
+				// data = await createUserWithEmailAndPassword(authService, email, password);
 			} else {
 				// login
-				data = await signInWithEmailAndPassword(authService, email, password);
+				// data = await signInWithEmailAndPassword(authService, email, password);
 			}
 			// console.log(data);
 		} catch (error: any) {

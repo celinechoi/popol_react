@@ -15,8 +15,6 @@ import slack from "img/logo/slack_logo.svg";
 import notion from "img/logo/notion_logo.png";
 import asana from "img/logo/asana_logo.svg";
 import jira from "img/logo/jira_logo.svg";
-import { faStarOfLife } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // keyframes
 const borderKey = keyframes`
@@ -465,472 +463,474 @@ function About() {
 	const [state2, setState2] = useState<chartInterface2>();
 	// drag
 	const CoWorkToolsRef = useRef<HTMLDivElement>(null);
-	const chartOption = {
-		series: [
-			{
-				name: "Tech Stack",
-				data: [100, 70, 50, 90, 95, 60]
-			}
-		],
-		options: {
-			colors: ['#14e090', '#f8d622', '#fdfa29', '#fbeaad', '#b8005c', '#C66394'],
-			labels: ['HTML', 'Javascript', 'React.js', 'JQuery', 'CSS', 'SCSS'],
-			chart: {
-				toolbar: {
-					tools: {
-						download: false
-					}
-				},
-				stacked: false,
-				height: '410px',
-				width: '100%',
-				offsetY: 0,
-				parentHeightOffset: 0
-			},
-			plotOptions: {
-				bar: {
-					distributed: true,
-					horizontal: false,
-					columnWidth: '40px',
-					borderRadius: 20,
-					borderRadiusApplication: 'around',
-					dataLabels: {
-						position: 'top'
-					}
-				}
-			},
-			dataLabels: {
-				offsetX: 0,
-				offsetY: 15,
-				formatter: (val: any) => {
-					return val + "%";
-				},
-				dropShadow: {
-					enabled: false
-				}
-			},
-			xaxis: {
-				position: 'bottom',
-				labels: {
-					style: {
-						colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
-						fontSize: '14px',
-						fontWeight: 'bold'
-					},
-				},
-				axisBorder: {
-					show: false,
-				},
-				axisTicks: {
-					show: false,
-				},
-				crosshairs: {
-					show: false
-				},
-			},
-			yaxis: {
-				tickAmount: 4,
-				min: 0,
-				max: 100,
-				labels: {
-					style: {
-						colors: ['#7c7c7c'],
-						fontSize: '12px',
-						fontWeight: 'bold'
-					},
-					maxWidth: 100,
-					formatter: (val: any) => {
-						if (val === 0) {
-							return val;
-						} else {
-							return (val + "%");
-						}
-					}
-				}
-			},
-			tooltip: {
-				theme: 'dark',
-			},
-			grid: {
-				xaxis: {
-					lines: {
-						show: false
-					}
-				},
-				yaxis: {
-					lines: {
-						show: true
-					}
-				},
-			},
-			legend: {
-				position: 'bottom',
-				horizontalAlign: 'center',
-				offsetY: 10,
-				fontSize: '12px',
-				labels: {
-					useSeriesColors: true,
-				},
-				markers: {
-					width: 10,
-					height: 10,
-					radius: 10,
-				},
-				itemMargin: {
-					horizontal: 20,
-					vertical: 7
-				},
-			},
-			responsive: [
-				{
-					breakpoint: 1301,
-					options: {
-						chart: {
-							height: '410px',
-							width: '100%',
-							offsetY: 0,
-							parentHeightOffset: 0
-						},
-						plotOptions: {
-							bar: {
-								horizontal: false,
-								columnWidth: '35px',
-								borderRadius: 15,
-							}
-						},
-						dataLabels: {
-							offsetX: 0,
-							offsetY: 15,
-							formatter: (val: any) => {
-								return val + "%";
-							},
-							dropShadow: {
-								enabled: false
-							}
-						},
-						xaxis: {
-							position: 'bottom',
-							min: undefined,
-							max: undefined,
-							tickAmount: undefined,
-							lebels: {
-								style: {
-									colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
-									fontSize: '14px',
-									fontWeight: 'bold'
-								},
-								maxWidth: undefined,
-								formatter: (val: any) => {
-									return val;
-								}
-							},
-							axisBorder: {
-								show: false,
-							},
-							axisTicks: {
-								show: false,
-							},
-							crosshairs: {
-								show: false
-							},
-							labels: {
 
-							}
-						},
-						yaxis: {
-							tickAmount: 4,
-							min: 0,
-							max: 100,
-							labels: {
-								style: {
-									colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
-									fontSize: '12px',
-									fontWeight: 'bold'
-								},
-								maxWidth: 100,
-								formatter: (val: any) => {
-									if (val === 0) {
-										return val;
-									} else {
-										return (val + "%");
-									}
-								}
-							}
-						},
-						grid: {
-							xaxis: {
-								lines: {
-									show: false
-								}
-							},
-							yaxis: {
-								lines: {
-									show: true
-								}
-							},
-						},
-						legend: {
-							position: 'bottom',
-							horizontalAlign: 'center',
-							offsetY: 0,
-							fontSize: '12px',
-							labels: {
-								useSeriesColors: true,
-							},
-							markers: {
-								width: 10,
-								height: 10,
-								radius: 10,
-							},
-							itemMargin: {
-								horizontal: 10,
-								vertical: 7
-							},
-						},
-					}
-				},
-				{
-					breakpoint: 1025,
-					options: {
-						height: '410px',
-						width: '100%',
-						offsetY: 0,
-						parentHeightOffset: 10,
-						plotOptions: {
-							bar: {
-								horizontal: true,
-								columnWidth: '40px',
-								borderRadius: 10,
-								distributed: true,
-								borderRadiusApplication: 'around',
-								dataLabels: {
-									position: 'top'
-								}
-							}
-						},
-						xaxis: {
-							min: 0,
-							max: 100,
-							tickAmount: 4,
-							labels: {
-								// width: '10px',
-								style: {
-									colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
-									fontSize: '12px',
-									fontWeight: 'bold'
-								},
-								maxWidth: 100,
-								// formatter: (val: any) => {
-								// 	if (val === 0) {
-								// 		return val;
-								// 	} else {
-								// 		return (val + "%");
-								// 	}
-								// }
-							},
-							position: 'top',
-							axisBorder: {
-								show: false,
-							},
-						},
-						yaxis: {
-							labels: {
-								style: {
-									colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
-									fontSize: '14px',
-									fontWeight: 'bold'
-								},
-							},
-						},
-						legend: {
-							position: 'top',
-							horizontalAlign: 'right',
-							offsetY: 0,
-							itemMargin: {
-								horizontal: 10,
-								vertical: 7
-							},
-						},
-						dataLabels: {
-							textAnchor: 'middle',
-							offsetX: -20,
-							offsetY: 0,
-							formatter: (val: any) => {
-								return val + "%";
-							},
-							dropShadow: {
-								enabled: false
-							}
-						},
-						grid: {
-							xaxis: {
-								lines: {
-									show: true
-								}
-							},
-							yaxis: {
-								lines: {
-									show: false
-								}
-							},
-						},
-						title: {
-							style: {
-								fontSize: '18px',
-							},
-						},
-					}
-				},
-				{
-					breakpoint: 651,
-					options: {
-						plotOptions: {
-							bar: {
-								horizontal: true,
-							}
-						},
-						xaxis: {
-							labels: {
-								style: {
-									colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
-									fontSize: '12px',
-									fontWeight: 'bold'
-								},
-							}
-						},
-						yaxis: {
-							labels: {
-								style: {
-									colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
-									fontSize: '14px',
-									fontWeight: 'bold'
-								},
-							},
-						},
-						legend: {
-							offsetY: 0,
-							horizontalAlign: 'center',
-							itemMargin: {
-								horizontal: 7,
-								vertical: 3
-							},
-						},
-						dataLabels: {
-							textAnchor: 'middle',
-							offsetX: -20,
-							offsetY: 0,
-							formatter: (val: any) => {
-								return val + "%";
-							},
-							dropShadow: {
-								enabled: false
-							}
-						},
-					}
-				}
-			],
-			noData: {
-				text: '데이터가 없습니다.',
-				align: 'center',
-				verticalAlign: 'middle',
-				offsetX: 0,
-				offsetY: 0,
-				style: {
-					color: '#fff',
-					fontSize: '16px',
-					fontFamily: 'Righteous'
-				}
-			},
-		}
-	}
-	const chartOption2 = {
-		series: [60, 40],
-		options: {
-			chart: {
-				height: 340
-			},
-			colors: ['#61dafb', '#C66394'],
-			labels: ['React', 'SCSS'],
-			yaxis: {
-				tickAmount: 4,
-				min: 0,
-				max: 100,
-				labels: {
-					style: {
-						colors: ['#7c7c7c'],
-						fontSize: '12px',
-						fontWeight: 'bold'
-					},
-					maxWidth: 100,
-					formatter: (val: any) => {
-						if (val === 0) {
-							return val;
-						} else {
-							return (val + "%");
-						}
-					}
-				}
-			},
-			plotOptions: {
-				pie: {
-					donut: {
-						size: '30%'
-					}
-				}
-			},
-			dataLabels: {
-				style: {
-					fontSize: '16px',
-				},
-				formatter: function (val: any) {
-					return val + "%"
-				},
-				dropShadow: {
-					enabled: false
-				}
-			},
-			legend: {
-				fontSize: '14px',
-				labels: {
-					useSeriesColors: true
-				},
-				position: 'top',
-				horizontalAlign: 'right',
-				markers: {
-					offsetX: -10,
-					offsetY: 1,
-					width: 12,
-					height: 12,
-					radius: 12,
-				},
-				itemMargin: {
-					horizontal: 30,
-					vertical: 8
-				},
-			},
-			noData: {
-				text: '데이터가 없습니다.',
-				align: 'center',
-				verticalAlign: 'middle',
-				offsetX: 0,
-				offsetY: 0,
-				style: {
-					color: '#fff',
-					fontSize: '16px',
-					fontFamily: 'Righteous'
-				}
-			},
-		},
-	}
 	// scroll
 	const { scrollYProgress } = useViewportScroll();
 	const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.5]);
 	useEffect(() => {
 		setLoading(false);
+		const chartOption = {
+			series: [
+				{
+					name: "Tech Stack",
+					data: [100, 70, 50, 90, 95, 60]
+				}
+			],
+			options: {
+				colors: ['#14e090', '#f8d622', '#fdfa29', '#fbeaad', '#b8005c', '#C66394'],
+				labels: ['HTML', 'Javascript', 'React.js', 'JQuery', 'CSS', 'SCSS'],
+				chart: {
+					toolbar: {
+						tools: {
+							download: false
+						}
+					},
+					stacked: false,
+					height: '410px',
+					width: '100%',
+					offsetY: 0,
+					parentHeightOffset: 0
+				},
+				plotOptions: {
+					bar: {
+						distributed: true,
+						horizontal: false,
+						columnWidth: '40px',
+						borderRadius: 20,
+						borderRadiusApplication: 'around',
+						dataLabels: {
+							position: 'top'
+						}
+					}
+				},
+				dataLabels: {
+					offsetX: 0,
+					offsetY: 15,
+					formatter: (val: any) => {
+						return val + "%";
+					},
+					dropShadow: {
+						enabled: false
+					}
+				},
+				xaxis: {
+					position: 'bottom',
+					labels: {
+						style: {
+							colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+							fontSize: '14px',
+							fontWeight: 'bold'
+						},
+					},
+					axisBorder: {
+						show: false,
+					},
+					axisTicks: {
+						show: false,
+					},
+					crosshairs: {
+						show: false
+					},
+				},
+				yaxis: {
+					tickAmount: 4,
+					min: 0,
+					max: 100,
+					labels: {
+						style: {
+							colors: ['#7c7c7c'],
+							fontSize: '12px',
+							fontWeight: 'bold'
+						},
+						maxWidth: 100,
+						formatter: (val: any) => {
+							if (val === 0) {
+								return val;
+							} else {
+								return (val + "%");
+							}
+						}
+					}
+				},
+				tooltip: {
+					theme: 'dark',
+				},
+				grid: {
+					xaxis: {
+						lines: {
+							show: false
+						}
+					},
+					yaxis: {
+						lines: {
+							show: true
+						}
+					},
+				},
+				legend: {
+					position: 'bottom',
+					horizontalAlign: 'center',
+					offsetY: 10,
+					fontSize: '12px',
+					labels: {
+						useSeriesColors: true,
+					},
+					markers: {
+						width: 10,
+						height: 10,
+						radius: 10,
+					},
+					itemMargin: {
+						horizontal: 20,
+						vertical: 7
+					},
+				},
+				responsive: [
+					{
+						breakpoint: 1301,
+						options: {
+							chart: {
+								height: '410px',
+								width: '100%',
+								offsetY: 0,
+								parentHeightOffset: 0
+							},
+							plotOptions: {
+								bar: {
+									horizontal: false,
+									columnWidth: '35px',
+									borderRadius: 15,
+								}
+							},
+							dataLabels: {
+								offsetX: 0,
+								offsetY: 15,
+								formatter: (val: any) => {
+									return val + "%";
+								},
+								dropShadow: {
+									enabled: false
+								}
+							},
+							xaxis: {
+								position: 'bottom',
+								min: undefined,
+								max: undefined,
+								tickAmount: undefined,
+								lebels: {
+									style: {
+										colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+										fontSize: '14px',
+										fontWeight: 'bold'
+									},
+									maxWidth: undefined,
+									formatter: (val: any) => {
+										return val;
+									}
+								},
+								axisBorder: {
+									show: false,
+								},
+								axisTicks: {
+									show: false,
+								},
+								crosshairs: {
+									show: false
+								},
+								labels: {
+
+								}
+							},
+							yaxis: {
+								tickAmount: 4,
+								min: 0,
+								max: 100,
+								labels: {
+									style: {
+										colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
+										fontSize: '12px',
+										fontWeight: 'bold'
+									},
+									maxWidth: 100,
+									formatter: (val: any) => {
+										if (val === 0) {
+											return val;
+										} else {
+											return (val + "%");
+										}
+									}
+								}
+							},
+							grid: {
+								xaxis: {
+									lines: {
+										show: false
+									}
+								},
+								yaxis: {
+									lines: {
+										show: true
+									}
+								},
+							},
+							legend: {
+								position: 'bottom',
+								horizontalAlign: 'center',
+								offsetY: 0,
+								fontSize: '12px',
+								labels: {
+									useSeriesColors: true,
+								},
+								markers: {
+									width: 10,
+									height: 10,
+									radius: 10,
+								},
+								itemMargin: {
+									horizontal: 10,
+									vertical: 7
+								},
+							},
+						}
+					},
+					{
+						breakpoint: 1025,
+						options: {
+							height: '410px',
+							width: '100%',
+							offsetY: 0,
+							parentHeightOffset: 10,
+							plotOptions: {
+								bar: {
+									horizontal: true,
+									columnWidth: '40px',
+									borderRadius: 10,
+									distributed: true,
+									borderRadiusApplication: 'around',
+									dataLabels: {
+										position: 'top'
+									}
+								}
+							},
+							xaxis: {
+								min: 0,
+								max: 100,
+								tickAmount: 4,
+								labels: {
+									// width: '10px',
+									style: {
+										colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
+										fontSize: '12px',
+										fontWeight: 'bold'
+									},
+									maxWidth: 100,
+									// formatter: (val: any) => {
+									// 	if (val === 0) {
+									// 		return val;
+									// 	} else {
+									// 		return (val + "%");
+									// 	}
+									// }
+								},
+								position: 'top',
+								axisBorder: {
+									show: false,
+								},
+							},
+							yaxis: {
+								labels: {
+									style: {
+										colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+										fontSize: '14px',
+										fontWeight: 'bold'
+									},
+								},
+							},
+							legend: {
+								position: 'top',
+								horizontalAlign: 'right',
+								offsetY: 0,
+								itemMargin: {
+									horizontal: 10,
+									vertical: 7
+								},
+							},
+							dataLabels: {
+								textAnchor: 'middle',
+								offsetX: -20,
+								offsetY: 0,
+								formatter: (val: any) => {
+									return val + "%";
+								},
+								dropShadow: {
+									enabled: false
+								}
+							},
+							grid: {
+								xaxis: {
+									lines: {
+										show: true
+									}
+								},
+								yaxis: {
+									lines: {
+										show: false
+									}
+								},
+							},
+							title: {
+								style: {
+									fontSize: '18px',
+								},
+							},
+						}
+					},
+					{
+						breakpoint: 651,
+						options: {
+							plotOptions: {
+								bar: {
+									horizontal: true,
+								}
+							},
+							xaxis: {
+								labels: {
+									style: {
+										colors: ['#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c', '#7c7c7c'],
+										fontSize: '12px',
+										fontWeight: 'bold'
+									},
+								}
+							},
+							yaxis: {
+								labels: {
+									style: {
+										colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
+										fontSize: '14px',
+										fontWeight: 'bold'
+									},
+								},
+							},
+							legend: {
+								offsetY: 0,
+								horizontalAlign: 'center',
+								itemMargin: {
+									horizontal: 7,
+									vertical: 3
+								},
+							},
+							dataLabels: {
+								textAnchor: 'middle',
+								offsetX: -20,
+								offsetY: 0,
+								formatter: (val: any) => {
+									return val + "%";
+								},
+								dropShadow: {
+									enabled: false
+								}
+							},
+						}
+					}
+				],
+				noData: {
+					text: '데이터가 없습니다.',
+					align: 'center',
+					verticalAlign: 'middle',
+					offsetX: 0,
+					offsetY: 0,
+					style: {
+						color: '#fff',
+						fontSize: '16px',
+						fontFamily: 'Righteous'
+					}
+				},
+			}
+		}
+		const chartOption2 = {
+			series: [60, 40],
+			options: {
+				chart: {
+					height: 340
+				},
+				colors: ['#61dafb', '#C66394'],
+				labels: ['React', 'SCSS'],
+				yaxis: {
+					tickAmount: 4,
+					min: 0,
+					max: 100,
+					labels: {
+						style: {
+							colors: ['#7c7c7c'],
+							fontSize: '12px',
+							fontWeight: 'bold'
+						},
+						maxWidth: 100,
+						formatter: (val: any) => {
+							if (val === 0) {
+								return val;
+							} else {
+								return (val + "%");
+							}
+						}
+					}
+				},
+				plotOptions: {
+					pie: {
+						donut: {
+							size: '30%'
+						}
+					}
+				},
+				dataLabels: {
+					style: {
+						fontSize: '16px',
+					},
+					formatter: function (val: any) {
+						return val + "%"
+					},
+					dropShadow: {
+						enabled: false
+					}
+				},
+				legend: {
+					fontSize: '14px',
+					labels: {
+						useSeriesColors: true
+					},
+					position: 'top',
+					horizontalAlign: 'right',
+					markers: {
+						offsetX: -10,
+						offsetY: 1,
+						width: 12,
+						height: 12,
+						radius: 12,
+					},
+					itemMargin: {
+						horizontal: 30,
+						vertical: 8
+					},
+				},
+				noData: {
+					text: '데이터가 없습니다.',
+					align: 'center',
+					verticalAlign: 'middle',
+					offsetX: 0,
+					offsetY: 0,
+					style: {
+						color: '#fff',
+						fontSize: '16px',
+						fontFamily: 'Righteous'
+					}
+				},
+			},
+		}
 		setState(chartOption);
 		setState2(chartOption2);
 		return () => {
-			// setState();
+			setState(undefined);
+			setState2(undefined);
 		}
 	}, [loading]);
 	return (

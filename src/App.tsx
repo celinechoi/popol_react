@@ -1,19 +1,13 @@
 
 import 'firebase/firestore';
 import { useEffect, useState } from "react";
-import * as firebase from 'firebase/compat/app';
-import { ReactQueryFirestoreProvider } from 'react-query-firestore';
-import { authService, dbService } from "fbase";
+import { authService } from "fbase";
 import { booleanState } from "./atoms";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { darkTheme, lightTheme } from "./theme";
 import AppRouter from "Router";
-
 import { media } from "style/media_query";
-import Footer from "components/Footer";
-
-import Top from 'components/Top';
 import Loading from 'components/Loading';
 
 const GlobalStyle = createGlobalStyle`
@@ -321,13 +315,6 @@ button {
 	}
 }
 `;
-
-// react-query-firestore
-const reactQueryConfig = {
-	queries: {
-		retry: false
-	}
-}
 
 function App() {
 	const [init, setInit] = useState(false);

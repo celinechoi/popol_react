@@ -2,8 +2,7 @@ import styled from "styled-components";
 import github from "img/sns/github.svg";
 import tistory from "img/sns/tistory.svg";
 import { media } from "style/media_query";
-import { useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router-dom";
 
 const FooterBox = styled.div<{ theme: boolean }>`
 	padding: 24px 20px;
@@ -56,11 +55,6 @@ const Sns = styled.li`
 		width: 100%;
 	}
 `;
-interface RouteState {
-	state: {
-		name: string;
-	};
-}
 
 function Footer() {
 	// Link

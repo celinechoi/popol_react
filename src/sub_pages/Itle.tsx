@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
 import { media } from "style/media_query";
@@ -597,19 +597,14 @@ function Itle() {
 			setItemH({ ScrollerMainImgH: ScrollerMainImgH, ScrollWindowH: ScrollWindowH })
 		)
 	}
-	const handleResize = () => {
-		setIsImageLoad(true);
-		if (isImageLoad) {
-			imageHeight();
-		}
-	}
 	useEffect(() => {
-		// scrollYProgress.onChange(() => {
-		// 	console.log(scrollYProgress.get());
-		// })
+		const handleResize = () => {
+			setIsImageLoad(true);
+			if (isImageLoad) {
+				imageHeight();
+			}
+		}
 		if (isImageLoad) {
-			// console.log("load?", ScrollerMainRef.current?.offsetHeight);
-			// imageHeight();
 			window.addEventListener('resize', handleResize);
 			handleResize();
 		}

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { media } from "style/media_query";
 import styled from "styled-components";
-import { focusHandler, resetHandler } from "function/ModalScroll";
 import main from "img/sub_pages/cobe/main.png";
 
 const Grid = styled(motion.div)`
@@ -25,31 +24,20 @@ const Grid = styled(motion.div)`
 		width: 100%;
 	}
 `;
-// grid motion
-const overlay = {
-	hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
-	visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
-	exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
-};
-
 
 function Cobe() {
 	// state
 	const [data, setData] = useState<any[]>();
-	const [id, setId] = useState<null | string>(null);
-	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
-	const imgArr = [main];
 	useEffect(() => {
+		// data
+		const imgArr = [main];
 		let isMount = true;
 		if (isMount) {
 			setData(imgArr);
-			setFunc({ on: focusHandler, off: resetHandler });
 		}
 		return () => {
 			isMount = false;
 			setData([]);
-			setFunc({});
 		};
 	}, []);
 	return (

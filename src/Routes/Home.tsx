@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import useCountUp from "function/CountUp"
 import { media } from 'style/media_query';
 import good_emoji from "img/emoji/good.png";
 import { motion } from "framer-motion";
@@ -288,8 +287,6 @@ function Home() {
 			</Draw>
 			<Visual variants={visualVariants} initial="hidden" animate="visible">
 				<img src={good_emoji} alt="good_emoji" />
-				{/* <p><span>{useCountUp(17)}</span>개의 프로젝트</p>
-				<p><span>{useCountUp(7)}</span>년차</p> */}
 				<Txt variants={txtVariants} initial="hidden" animate="visible">안녕하세요. <br /><span className="point">UI/UX Developer 최진슬 포트폴리오</span> <br />방문을 환영합니다.</Txt>
 			</Visual>
 		</HomeFrame>

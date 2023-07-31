@@ -114,11 +114,11 @@ function Radiation() {
 	const [data, setData] = useState<any[]>();
 	const [data2, setData2] = useState<any[]>();
 	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
 	const [id, setId] = useState<null | string>(null);
-	const cmsArr = [cms_main, cms_sub1, cms_sub2, cms_sub3, cms_sub4, cms_sub5, cms_sub6];
-	const pmsArr = [pms_login, pms_main, pms_sub1, pms_sub2, pms_sub3, pms_sub4, pms_sub5, pms_sub6];
 	useEffect(() => {
+		// data 
+		const cmsArr = [cms_main, cms_sub1, cms_sub2, cms_sub3, cms_sub4, cms_sub5, cms_sub6];
+		const pmsArr = [pms_login, pms_main, pms_sub1, pms_sub2, pms_sub3, pms_sub4, pms_sub5, pms_sub6];
 		let isMount = true;
 		if (isMount) {
 			setData(cmsArr);

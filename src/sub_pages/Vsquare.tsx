@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare, faArrowsUpDown, faStarOfLife } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { media } from "style/media_query";
-import symbol from "img/sub_pages/vsquare/symbol.svg";
 import sass from "img/logo/sass_logo.svg";
 import color from "img/sub_pages/vsquare/color.png";
 import colorCode from "img/sub_pages/vsquare/color_code.png";
@@ -499,68 +497,6 @@ const Box = styled(motion.li)`
 			font-size: 14px;
 		}
 	}
-`;
-
-const ScrollWindow = styled.div`
-  overflow: hidden;
-  position: relative;
-	z-index: 1;
-  width: calc(100% - 200px);
-  height: calc(56.25vw - 26px);
-  margin: 60px auto 0;
-  border: 2px solid ${(props) => props.theme.bgColor.gray.first};
-  border-radius: 18px;
-	background-color: ${(props) => props.theme.textColor.gray.fifth};
-	cursor: grab;
-	${media.medium`
-		width: 95%;
-	`};
-`;
-
-const ScrollerMain = styled(motion.div)`
-  display: block;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.5);
-`;
-
-const ScrollerImg = styled(motion.img)`
-  display: block;
-  width: 100%;
-  position: relative;
-`;
-
-const Info = styled(motion.div)`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 12px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  ${media.small`
-		padding: 9px;
-		border-radius: 5px;
-		font-size: 0;
-	`};
-  >svg {
-    width: 32px;
-    height: 32px;
-    margin: 0 auto 8px;
-		${media.small`
-			width: 18px;
-			height: 18px;
-			margin: 0 auto;
-		`};
-  }
 `;
 
 const SubPagesDiv = styled(motion.div)`

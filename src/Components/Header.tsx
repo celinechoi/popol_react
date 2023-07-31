@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -7,7 +7,7 @@ import { booleanState } from "../atoms";
 import { authService } from "fbase";
 import { media } from "style/media_query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket, faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderBox = styled.div`
 	position: fixed;
@@ -276,10 +276,6 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 	const worksMatch = useRouteMatch("/works");
 	const subMatch = useRouteMatch("/sub");
 	const aboutMatch = useRouteMatch("/about");
-	// state
-	const [state, setState] = useState(false);
-	const [clicked, setClicked] = useState(false);
-	const toggleClicked = () => setClicked((prev) => !prev);
 	// Log Out
 	const history = useHistory();
 	const useConfirm = (message = "", onConfirm: any, onCancel: any) => {
@@ -310,16 +306,12 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 		logoutConfirm,
 		cancelConfirm
 	);
-	const onLogInClick = () => {
-		history.push("/auth");
-	};
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
 			authService.onAuthStateChanged((user: any) => {
 				if (user) {
 					console.log(user, "user");
-					setState(true);
 				} else {
 					console.log("logout");
 				}
@@ -327,7 +319,6 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 		}
 		return () => {
 			isMount = false;
-			// setState(false);
 		};
 	}, []);
 	return (

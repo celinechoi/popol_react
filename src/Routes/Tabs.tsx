@@ -60,8 +60,8 @@ const Tab = styled.li<{ isActive: boolean }>`
 `;
 function Tabs({ typePath }: { typePath: string | object }) {
 	const [data, setData] = useState<any[]>();
-	const workType = [{ id: "si" }, { id: "solution" }, { id: "sm" }];
 	useEffect(() => {
+		const workType = [{ id: "si" }, { id: "solution" }, { id: "sm" }];
 		let isMount = true;
 		if (isMount) {
 			setData(workType);

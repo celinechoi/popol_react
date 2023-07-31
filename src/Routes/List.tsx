@@ -1,5 +1,4 @@
 import { authService, dbService } from "fbase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -202,6 +201,12 @@ function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 	useEffect(() => {
 		let isMount = true;
 		if (isMount) {
+			let timer = setTimeout(() => { setImgLoading(false) }, 1000);
+			let timeReturn = () => {
+				return () => {
+					clearTimeout(timer);
+				};
+			}
 			authService.onAuthStateChanged((user: any) => {
 				if (user) {
 					console.log(user)
@@ -243,12 +248,6 @@ function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 
 		};
 	}, [typeId]);
-	let timer = setTimeout(() => { setImgLoading(false) }, 1000);
-	let timeReturn = () => {
-		return () => {
-			clearTimeout(timer);
-		};
-	}
 	return (
 		<>
 			{

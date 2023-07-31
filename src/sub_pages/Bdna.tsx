@@ -111,10 +111,10 @@ function Bdna() {
 	const [data2, setData2] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
-	const imgArr = [login, main, dashboard, noticeEnrollment, noticeList, noticeView, enrollment2, outsourcingList, outsourcingList2, operationModified];
-	const imgGis = [map];
 	useEffect(() => {
+		// data
+		const imgArr = [login, main, dashboard, noticeEnrollment, noticeList, noticeView, enrollment2, outsourcingList, outsourcingList2, operationModified];
+		const imgGis = [map];
 		let isMount = true;
 		if (isMount) {
 			setData(imgArr);

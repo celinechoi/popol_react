@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { media } from "style/media_query";
 import styled from "styled-components";
@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { focusHandler, resetHandler } from "function/ModalScroll";
 import tvcfInfo from "img/sub_pages/iedu/tvcf_info.png";
-import tvcfInfoTa from "img/sub_pages/iedu/tvcf_info_ta.png";
-import tvcfInfoMo from "img/sub_pages/iedu/tvcf_info_mo.png";
 import tvcfInfo2 from "img/sub_pages/iedu/tvcf_info_v2.png";
 import chance from "img/sub_pages/iedu/chance.png";
 import testStart from "img/sub_pages/iedu/test_start.png";
@@ -23,7 +21,6 @@ import viralResult1 from "img/sub_pages/iedu/viral_result1.png";
 import viralResult2 from "img/sub_pages/iedu/viral_result2.png";
 import viralResult3 from "img/sub_pages/iedu/viral_result3.png";
 import viralResult4 from "img/sub_pages/iedu/viral_result4.png";
-
 import renewalMain from "img/sub_pages/iedu/renewal_main.png";
 import learnerInfo from "img/sub_pages/iedu/renewal_learner_info.png";
 
@@ -182,12 +179,12 @@ function Iedu() {
 	const [data2, setData2] = useState<any[]>([]);
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
-	const imgArr = [tvcfInfo, tvcfInfo2, chance];
-	const imgArr2 = [testStart, testStep1, testStep2, testStep3, testResult];
-	const imgArr3 = [viralStart, viralLoading, viralStep1, viralStep5, viralResult1, viralResult2, viralResult3, viralResult4];
-	const renewalArr = [renewalMain, learnerInfo];
 	useEffect(() => {
+		// data
+		const imgArr = [tvcfInfo, tvcfInfo2, chance];
+		const imgArr2 = [testStart, testStep1, testStep2, testStep3, testResult];
+		const imgArr3 = [viralStart, viralLoading, viralStep1, viralStep5, viralResult1, viralResult2, viralResult3, viralResult4];
+		const renewalArr = [renewalMain, learnerInfo];
 		let isMount = true;
 		if (isMount) {
 			setData(imgArr);

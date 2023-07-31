@@ -106,9 +106,9 @@ function Lxproperty() {
 	const [data, setData] = useState<any[]>();
 	const [id, setId] = useState<null | string>(null);
 	const [func, setFunc] = useState<any>({ on: null, off: null });
-	// data
-	const imgArr = [login, index, enrollment, modified, view, gis, open];
 	useEffect(() => {
+		// data
+		const imgArr = [login, index, enrollment, modified, view, gis, open];
 		let isMount = true;
 		if (isMount) {
 			setData(imgArr);

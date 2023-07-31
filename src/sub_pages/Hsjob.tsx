@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, useViewportScroll } from "framer-motion";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-solid-svg-icons";
 import main from "img/sub_pages/hsjob/index.png";
@@ -351,13 +351,6 @@ const ImgBoxSpacingR = styled.div`
 	}
 `;
 
-const Circle = styled(motion.div)`
-	width: 300px;
-	height: 300px;
-	border-radius: 50%;
-	background-color: ${props => props.theme.bgColor.gray.fifth};
-`;
-
 const Boxes = styled(motion.ul)`
 	display: flex;
 	flex-wrap: wrap;
@@ -426,19 +419,14 @@ function Hsjob() {
 			setItemH({ ScrollerMainImgH: ScrollerMainImgH, ScrollWindowH: ScrollWindowH })
 		)
 	}
-	const handleResize = () => {
-		setIsImageLoad(true);
-		if (isImageLoad) {
-			imageHeight();
-		}
-	}
 	useEffect(() => {
-		// scrollYProgress.onChange(() => {
-		// 	console.log(scrollYProgress.get());
-		// })
+		const handleResize = () => {
+			setIsImageLoad(true);
+			if (isImageLoad) {
+				imageHeight();
+			}
+		}
 		if (isImageLoad) {
-			// console.log("load?", ScrollerMainRef.current?.offsetHeight);
-			// imageHeight();
 			window.addEventListener('resize', handleResize);
 			handleResize();
 		}
