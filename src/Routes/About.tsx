@@ -56,6 +56,7 @@ const ImgBox = styled(motion.div)`
 	position: absolute;
 	left: -4px;
 	top: -4px;
+  overflow: hidden;
 	border-radius: 50%;
 	background: linear-gradient(90deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
 		#0000ff, #00ff00,#ffff00, #ff0000);
