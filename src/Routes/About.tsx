@@ -41,31 +41,39 @@ const Profile = styled(motion.div)`
   gap: 12px;
 `;
 
+const ImgFrame = styled.div`
+  overflow: hidden;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const ImgBox = styled(motion.div)`
-  /* overflow: hidden; */
 	position: relative;
   border-radius: 50%;
-  /* border: 2px solid ${props => props.theme.point.lavender}; */
   width: 146px;
   height: 146px;
   padding: 12px;
   background: linear-gradient(0deg, #000, #272727);
 	&::before,
 	&::after {
-	content: '';
-	position: absolute;
-	left: -4px;
-	top: -4px;
-  overflow: hidden;
-	border-radius: 50%;
-	background: linear-gradient(90deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
-		#0000ff, #00ff00,#ffff00, #ff0000);
-	background-size: 400%;
-	width: calc(100% + 8px);
-	height: calc(100% + 8px);
-	z-index: -1;
-	animation: ${borderKey} 20s linear infinite;
-}
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+      #0000ff, #00ff00,#ffff00, #ff0000);
+    background-size: 400%;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    z-index: -1;
+    animation: ${borderKey} 20s linear infinite;
+  }
 	&::after {
 		filter: blur(50px);
 	}
@@ -362,20 +370,6 @@ export interface chartInterface2 {
 	}
 }
 
-// motion
-// const imgBoxVariants = {
-// 	hidden: {
-// 		border: 0
-// 	},
-// 	visible: {
-// 		border: "3px solid red",
-// 		transition: {
-// 			delay: 1,
-// 			duration: 2,
-// 		}
-// 	}
-// }
-
 const pluginsVariants = {
 	hidden: {},
 	visible: {
@@ -474,7 +468,7 @@ function About() {
 			series: [
 				{
 					name: "Tech Stack",
-					data: [100, 70, 50, 90, 95, 60]
+					data: [90, 70, 30, 90, 95, 60]
 				}
 			],
 			options: {
@@ -941,9 +935,11 @@ function About() {
 				(<>
 					<div className="container">
 						<Profile style={{ scale }}>
-							<ImgBox>
-								<Img src={heart} alt="프로필 이미지" />
-							</ImgBox>
+              <ImgFrame>
+                <ImgBox>
+                  <Img src={heart} alt="프로필 이미지" />
+                </ImgBox>
+              </ImgFrame>
 							<div>
 								<Txt>UI/UX Developer 최진슬입니다.</Txt>
 								<ul>

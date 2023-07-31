@@ -1,3 +1,4 @@
+import { media } from "style/media_query";
 import styled, { keyframes } from "styled-components";
 
 // keyframes
@@ -29,6 +30,14 @@ const LoadingBox = styled.div`
   border-radius: 50%;
   filter: blur(1px);
   box-shadow: 0px -5px 20px 0px rgba(228, 19, 141, 0.925), 0px 5px 20px 0px rgb(255, 179, 80);
+  ${media.large`
+    width: 190px;
+    height: 190px;
+  `};
+  ${media.small`
+    width: 150px;
+    height: 150px;
+  `};
 `;
 
 const Spinner = styled.div`
@@ -37,6 +46,14 @@ const Spinner = styled.div`
   height: 250px;
   border-radius: 50%;
   filter: blur(10px);
+  ${media.large`
+    width: 190px;
+    height: 190px;
+  `};
+  ${media.small`
+    width: 150px;
+    height: 150px;
+  `};
 `;
 
 const Txt = styled.p`
@@ -49,6 +66,12 @@ const Txt = styled.p`
 	color: ${(props) => props.theme.textColor.gray.fourth};
 	font-size: 28px;
 	text-align: center;
+  ${media.large`
+    font-size: 24px;
+  `};
+  ${media.small`
+    font-size: 18px;
+  `};
 `;
 
 function Loading({ prop }: { prop: string | undefined }) {
