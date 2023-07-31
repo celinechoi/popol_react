@@ -41,6 +41,7 @@ const BubbleBg = styled.div`
   position: absolute;
   right: 10%;
   top: 30%;
+  z-index: -1;
   width: 180px;
   height: 180px;
   border-radius: 50%;
@@ -141,7 +142,6 @@ const BubbleBg = styled.div`
 		right: auto;
     left: 29%;
     top: 49%;
-		z-index: -1;
     animation-delay: -12s;
   }
   >span {

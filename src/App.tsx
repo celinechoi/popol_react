@@ -62,6 +62,7 @@ table {
 	transition: all .1s ease;
 }
 body {
+  overflow-x: hidden;
 	background-color: ${(props) => props.theme.bgColor.gray.second};
 	color:${(props) => props.theme.textColor.gray.second};
 	font: 14px 'Noto Sans KR', 'Righteous';

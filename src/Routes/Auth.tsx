@@ -150,7 +150,6 @@ const List = styled.li`
 	${media.small`
 		padding: 9px 8px 11px;
     border-radius: 10px;
-    color: #f5f5f5;
     font-size: 15px;
 	`};
 `;
@@ -264,6 +263,7 @@ function Auth() {
 			// console.log(data);
 		} catch (error: any) {
 			setError(error.message);
+      alert("이메일은 @형식으로, 비밀번호는 6자리 이상으로 해주세요. ("+error+")");
 		}
 	}
 	const history = useHistory();
@@ -287,7 +287,7 @@ function Auth() {
 			<AuthFrame className="container">
 				<PageFrame>
 					<Info>
-						원활한 사이트 이용을 위해 로그인을 해주세요.
+						원활한 사이트 이용을 위해 <br className="mo-show" />로그인을 해주세요.
             <InfoSub>임시 <span className="point">계정 생성</span>을 해도 이용 가능합니다. <br />
             <span className="point">(이메일: @형식으로 | 비밀번호: 6자리 이상으로)</span></InfoSub>
 					</Info>

@@ -7,7 +7,7 @@ import { booleanState } from "../atoms";
 import { authService } from "fbase";
 import { media } from "style/media_query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderBox = styled.div`
 	position: fixed;
@@ -133,10 +133,28 @@ const HeaderRight = styled.div`
 	justify-content: center;
 	gap: 18px;
 `;
+const SwitchFrame = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  ${media.smallToo`
+		position: absolute;
+		left: 0px;
+    top: 4px;
+	`};
+  .dark {
+    &-icon {
+      color: ${props => props.theme.point.blue[0]};
+    }
+  }
+  .light {
+    &-icon {
+      color: ${props => props.theme.point.yellow};
+    }
+  }
+`;
 const ThemeSwitch = styled(motion.input)`
-	display: block;
-  margin-bottom: 1.5em;
-  font-size: 1em;
 	background-color: ${props => props.theme.bgColor.gray.third};
   border-radius: 0.75em;
   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
@@ -195,11 +213,6 @@ const ThemeSwitch = styled(motion.input)`
 	&:focus {
 		outline: 0;
 	}
-	${media.smallToo`
-		position: absolute;
-		left: 0px;
-    top: 4px;
-	`};
 `;
 const Log = styled.button`
   height: 37px;
@@ -352,7 +365,11 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 						</Menu>
 					</Menus>
 					<HeaderRight>
-						<ThemeSwitch type="checkbox" className="theme-switch" onClick={toggleTheme} title={theme ? "밝게 보기" : "어둡게 보기"} />
+            <SwitchFrame>
+              {theme && <FontAwesomeIcon icon={faMoon} className="dark-icon" />}    
+						  <ThemeSwitch type="checkbox" className="theme-switch" onClick={toggleTheme} title={theme ? "밝게 보기" : "어둡게 보기"} />
+              {theme ? (""): (<FontAwesomeIcon icon = {faSun} className = "light-icon" />)}
+            </SwitchFrame>
 						{isLoggedIn ?
 							(<Log onClick={onLogOutClick}>
 								<span>로그아웃</span>
