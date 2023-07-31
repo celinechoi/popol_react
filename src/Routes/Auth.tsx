@@ -18,6 +18,14 @@ const blinkKey = keyframes`
 	}
 `;
 
+const AuthFrame = styled.div`
+  &.container {
+  ${media.large`
+    min-height: 560px;
+  `};
+  }
+`;
+
 const PageFrame = styled.div`
 	position: absolute;
 	left: 50%;
@@ -30,7 +38,7 @@ const PageFrame = styled.div`
 	`};
 `;
 
-const Info = styled.p`
+const Info = styled.div`
 	padding-bottom: 24px;
 	color: ${props => props.theme.point.green};
 	font-size: 19px;
@@ -42,14 +50,14 @@ const Info = styled.p`
 	${media.micro`
 		font-size: 16px;
 	`};
-	>span {
-		color: ${props => props.theme.textColor.gray.first};
-		font-size: 16px;
-		.point {
-			color: ${props => props.theme.point.green};
-		}
-	}
 `;
+
+const InfoSub = styled.p`
+  color: ${props => props.theme.textColor.gray.first};
+  font-size: 16px;
+  .point {
+    color: ${props => props.theme.point.green};
+  }`;
 
 const AuthPage = styled.div`
 	background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
@@ -276,24 +284,25 @@ function Auth() {
 	};
 	return (
 		<>
-			<div className="container" style={{ minHeight: "590px" }}>
+			<AuthFrame className="container">
 				<PageFrame>
 					<Info>
-						원활한 사이트 이용을 위해 로그인을 해주세요.<br />
-						<span>임시 <span className="point">계정 생성</span>을 해도 이용 가능합니다.</span>
+						원활한 사이트 이용을 위해 로그인을 해주세요.
+            <InfoSub>임시 <span className="point">계정 생성</span>을 해도 이용 가능합니다. <br />
+            <span className="point">(이메일: @형식으로 | 비밀번호: 6자리 이상으로)</span></InfoSub>
 					</Info>
 					<AuthPage>
 						<Inner>
 							<FormFrame>
-								<p className="error-txt">{error}</p>
+                {error ? (<p className="error-txt">{error}</p>) : ("")}
 								<Lists>
 									<List onClick={toggleAccount} className={newAccount ? "" : "on"}>로그인</List>
 									<List onClick={toggleAccount} className={newAccount ? "on" : ""}>계정 생성</List>
 								</Lists>
 								<Form onSubmit={onSubmit}>
 									<ul>
-										<li><div><input name="email" type="text" placeholder="Email" required value={email} onChange={onChange} /></div></li>
-										<li><div><input name="password" type="password" placeholder="Password" required value={password} onChange={onChange} /></div></li>
+										<li><div><input name="email" type="text" placeholder="sample@test.com" required value={email} onChange={onChange} /></div></li>
+										<li><div><input name="password" type="password" placeholder="6자리 이상의 비밀번호" required value={password} onChange={onChange} /></div></li>
 										<li><Submit type="submit" value={newAccount ? "Create Account" : "Sign In"} /></li>
 									</ul>
 								</Form>
@@ -305,7 +314,7 @@ function Auth() {
 						</Inner>
 					</AuthPage>
 				</PageFrame>
-			</div>
+			</AuthFrame>
 		</>
 	);
 }
