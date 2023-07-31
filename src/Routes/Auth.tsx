@@ -3,7 +3,20 @@ import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword,
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { media } from "style/media_query";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+// keyframes
+const blinkKey = keyframes`
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0;
+	}
+`;
 
 const PageFrame = styled.div`
 	position: absolute;
@@ -19,7 +32,7 @@ const PageFrame = styled.div`
 
 const Info = styled.p`
 	padding-bottom: 24px;
-	color: ${props => props.theme.textColor.gray.first};
+	color: ${props => props.theme.point.green};
 	font-size: 19px;
 	font-weight: 900;
 	text-align: center;
@@ -29,6 +42,13 @@ const Info = styled.p`
 	${media.micro`
 		font-size: 16px;
 	`};
+	>span {
+		color: ${props => props.theme.textColor.gray.first};
+		font-size: 16px;
+		.point {
+			color: ${props => props.theme.point.green};
+		}
+	}
 `;
 
 const AuthPage = styled.div`
@@ -64,6 +84,15 @@ const FormFrame = styled.div`
 	${media.small`
 		padding: 24px 20px;
 	`};
+	.error {
+		&-txt {
+			padding-bottom: 24px;
+			color: ${props => props.theme.point.red};
+			text-align: center;
+			font-weight: 900;
+			animation: ${blinkKey} 3s step-end infinite;
+		}
+	}
 `;
 
 const Lists = styled.ul`
@@ -174,30 +203,30 @@ const Submit = styled.input`
 	`};
 `;
 
-// const LoginHow = styled.ul`
-// 	display: flex;
-// 	align-items: center;
-// 	gap: 12px;
-// 	width: 100%;
-// 	margin-top: 28px;
-// 	padding-top: 20px;
-// 	border-top: 1px solid ${props => props.theme.borColor.gray.first};
-// 	${media.small`
-// 		flex-direction: column;
-// 	`};
-// 	>li {
-// 		flex: 0 0 calc(100%/2 - 12px/2*1);
-// 		${media.small`
-// 			flex-basis: 100%;
-// 			width: 100%;
-// 		`};
-// 	}
-// 	button {
-// 		display: block;
-// 		width: 100%;
-// 		padding: 12px 20px;
-// 	}
-// `;
+const LoginHow = styled.ul`
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+	margin-top: 28px;
+	padding-top: 20px;
+	border-top: 1px solid ${props => props.theme.borColor.gray.first};
+	${media.small`
+		flex-direction: column;
+	`};
+	>li {
+		flex: 0 0 calc(100%/2 - 12px/2*1);
+		${media.small`
+			flex-basis: 100%;
+			width: 100%;
+		`};
+	}
+	button {
+		display: block;
+		width: 100%;
+		padding: 12px 20px;
+	}
+`;
 
 function Auth() {
 	const [email, setEmail] = useState("");
@@ -234,25 +263,29 @@ function Auth() {
 		setNewAccount(prev => !prev);
 		history.push("/popol_react/works/solution");
 	}
-	// const onSocialClick = async (event: any) => {
-	// 	const { target: { name } } = event;
-	// 	let provider: any;
-	// 	if (name === "google") {
-	// 		provider = new GoogleAuthProvider();
-	// 	} else if (name === "github") {
-	// 		provider = new GithubAuthProvider();
-	// 	}
-	// 	const data = await signInWithPopup(authService, provider);
-	// 	// console.log(data);
-	// };
+	const onSocialClick = async (event: any) => {
+		const { target: { name } } = event;
+		let provider: any;
+		if (name === "google") {
+			provider = new GoogleAuthProvider();
+		} else if (name === "github") {
+			provider = new GithubAuthProvider();
+		}
+		const data = await signInWithPopup(authService, provider);
+		// console.log(data);
+	};
 	return (
 		<>
 			<div className="container" style={{ minHeight: "590px" }}>
 				<PageFrame>
-					<Info>원할한 사이트 이용을 위해 로그인을 해주세요.</Info>
+					<Info>
+						원활한 사이트 이용을 위해 로그인을 해주세요.<br />
+						<span>임시 <span className="point">계정 생성</span>을 해도 이용 가능합니다.</span>
+					</Info>
 					<AuthPage>
 						<Inner>
 							<FormFrame>
+								<p className="error-txt">{error}</p>
 								<Lists>
 									<List onClick={toggleAccount} className={newAccount ? "" : "on"}>로그인</List>
 									<List onClick={toggleAccount} className={newAccount ? "on" : ""}>계정 생성</List>
@@ -264,11 +297,10 @@ function Auth() {
 										<li><Submit type="submit" value={newAccount ? "Create Account" : "Sign In"} /></li>
 									</ul>
 								</Form>
-								{/* <LoginHow>
+								<LoginHow>
 									<li><button name="google" onClick={onSocialClick}>Google로 로그인</button></li>
 									<li><button name="github" onClick={onSocialClick}>Github로 로그인</button></li>
-								</LoginHow> */}
-								<p style={{ paddingTop: "24px" }}>{error}</p>
+								</LoginHow>
 							</FormFrame>
 						</Inner>
 					</AuthPage>
