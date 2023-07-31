@@ -77,7 +77,7 @@ function Tabs({ typePath }: { typePath: string | object }) {
 					data?.map((val: any) => (
 						<Tab key={val.id} isActive={typePath === val.id ? true : false}>
 							<Link to={{
-								pathname: `/works/${val.id}`,
+								pathname: `/popol_react/works/${val.id}`,
 								state: { name: val.id }
 							}}>{val.id}</Link>
 						</Tab>

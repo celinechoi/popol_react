@@ -174,30 +174,30 @@ const Submit = styled.input`
 	`};
 `;
 
-const LoginHow = styled.ul`
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	width: 100%;
-	margin-top: 28px;
-	padding-top: 20px;
-	border-top: 1px solid ${props => props.theme.borColor.gray.first};
-	${media.small`
-		flex-direction: column;
-	`};
-	>li {
-		flex: 0 0 calc(100%/2 - 12px/2*1);
-		${media.small`
-			flex-basis: 100%;
-			width: 100%;
-		`};
-	}
-	button {
-		display: block;
-		width: 100%;
-		padding: 12px 20px;
-	}
-`;
+// const LoginHow = styled.ul`
+// 	display: flex;
+// 	align-items: center;
+// 	gap: 12px;
+// 	width: 100%;
+// 	margin-top: 28px;
+// 	padding-top: 20px;
+// 	border-top: 1px solid ${props => props.theme.borColor.gray.first};
+// 	${media.small`
+// 		flex-direction: column;
+// 	`};
+// 	>li {
+// 		flex: 0 0 calc(100%/2 - 12px/2*1);
+// 		${media.small`
+// 			flex-basis: 100%;
+// 			width: 100%;
+// 		`};
+// 	}
+// 	button {
+// 		display: block;
+// 		width: 100%;
+// 		padding: 12px 20px;
+// 	}
+// `;
 
 function Auth() {
 	const [email, setEmail] = useState("");
@@ -219,10 +219,10 @@ function Auth() {
 			let data;
 			if (newAccount) {
 				// create account
-				// data = await createUserWithEmailAndPassword(authService, email, password);
+				data = await createUserWithEmailAndPassword(authService, email, password);
 			} else {
 				// login
-				// data = await signInWithEmailAndPassword(authService, email, password);
+				data = await signInWithEmailAndPassword(authService, email, password);
 			}
 			// console.log(data);
 		} catch (error: any) {
@@ -232,19 +232,19 @@ function Auth() {
 	const history = useHistory();
 	const toggleAccount = () => {
 		setNewAccount(prev => !prev);
-		history.push("/works/solution");
+		history.push("/popol_react/works/solution");
 	}
-	const onSocialClick = async (event: any) => {
-		const { target: { name } } = event;
-		let provider: any;
-		if (name === "google") {
-			provider = new GoogleAuthProvider();
-		} else if (name === "github") {
-			provider = new GithubAuthProvider();
-		}
-		const data = await signInWithPopup(authService, provider);
-		// console.log(data);
-	};
+	// const onSocialClick = async (event: any) => {
+	// 	const { target: { name } } = event;
+	// 	let provider: any;
+	// 	if (name === "google") {
+	// 		provider = new GoogleAuthProvider();
+	// 	} else if (name === "github") {
+	// 		provider = new GithubAuthProvider();
+	// 	}
+	// 	const data = await signInWithPopup(authService, provider);
+	// 	// console.log(data);
+	// };
 	return (
 		<>
 			<div className="container" style={{ minHeight: "590px" }}>
@@ -264,10 +264,10 @@ function Auth() {
 										<li><Submit type="submit" value={newAccount ? "Create Account" : "Sign In"} /></li>
 									</ul>
 								</Form>
-								<LoginHow>
+								{/* <LoginHow>
 									<li><button name="google" onClick={onSocialClick}>Google로 로그인</button></li>
 									<li><button name="github" onClick={onSocialClick}>Github로 로그인</button></li>
-								</LoginHow>
+								</LoginHow> */}
 								<p style={{ paddingTop: "24px" }}>{error}</p>
 							</FormFrame>
 						</Inner>

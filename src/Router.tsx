@@ -7,6 +7,7 @@ import List from "routes/List";
 import Sub from "routes/Sub";
 import Footer from "components/Footer";
 import Top from "components/Top";
+import ErrorPage from "components/ErrorPage";
 
 function AppRouter({ isLoggedIn }: { isLoggedIn: boolean }) {
 
@@ -14,20 +15,23 @@ function AppRouter({ isLoggedIn }: { isLoggedIn: boolean }) {
 		<Router>
 			<Header isLoggedIn={isLoggedIn} />
 			<Switch>
-				<Route exact path="/works/:typeId/:itemId">
-					<Sub />
+				<Route exact path="/popol_react/works/:typeId/:itemId">
+					{isLoggedIn ? <Sub isLoggedIn={isLoggedIn} /> : <Auth />}
 				</Route>
-				<Route exact path="/works/:typeId">
+				<Route exact path="/popol_react/works/:typeId">
 					{isLoggedIn ? <List isLoggedIn={isLoggedIn} /> : <Auth />}
 				</Route>
-				<Route path="/about">
+				<Route exact path="/popol_react/about">
 					<About />
 				</Route>
-				<Route exact path="/auth">
+				<Route exact path="/popol_react/auth">
 					<Auth />
 				</Route>
-				<Route exact path="/">
+				<Route exact path="/popol_react">
 					<Home />
+				</Route>
+				<Route path={"*"}>
+					<ErrorPage />
 				</Route>
 			</Switch>
 			<Top />

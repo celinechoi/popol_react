@@ -8,6 +8,7 @@ import Loading from "components/Loading";
 import { motion } from "framer-motion";
 import ImgsLoading from "components/ImgsLoading";
 import Auth from "./Auth";
+import ErrorPage from "components/ErrorPage";
 
 const Title = styled.div`
   height: 200px;
@@ -209,7 +210,6 @@ function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 			}
 			authService.onAuthStateChanged((user: any) => {
 				if (user) {
-					console.log(user)
 					const collection = dbService.collection(`${typeId}`);
 					collection
 						.orderBy("code", "desc") // desc
@@ -252,68 +252,70 @@ function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 		<>
 			{
 				isLoggedIn ? (
-					<div className="container">
-						<Title>
-							<div className="inner">
-								<h2 className="page-h1">Works</h2>
-								<Tabs typePath={typeId} />
-							</div>
-						</Title>
-						<Container>
-							<div className="inner">
-								{loading ? (
-									<Loading prop="Loading" />
-								) : (
-									<>
-										<Boxes variants={boxesVariants} initial="start" animate="end">
-											{
-												list.map((val) => (
-													<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
-														<Link to={{
-															pathname: `/works/${typeId}/${val.id}`,
-															state: {
-																parentPath: typeId,
-																id: val.id,
-																customer: val.customer,
-																projectName: val.projectName,
-																description: val.description,
-																did: val.did,
-																keyWords: val.keyWords,
-																fileUrl: val.fileUrl,
-																pageImgs: val.pageImgs,
-																pagesMap: val.pagesMap,
-																startYear: val.startYear,
-																startMonth: val.startMonth,
-																endYear: val.endYear,
-																endMonth: val.endMonth,
-															}
-														}}>
-															<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
-																{
-																	ImgLoading ?
-																		(
-																			<ImgsLoading />
-
-																		) : (
-																			<img src={val.fileUrl} alt={val.projectName} />
-																		)
+					typeId ? (
+						<div className="container">
+							<Title>
+								<div className="inner">
+									<h2 className="page-h1">Works</h2>
+									<Tabs typePath={typeId} />
+								</div>
+							</Title>
+							<Container>
+								<div className="inner">
+									{loading ? (
+										<Loading prop="Loading" />
+									) : (
+										<>
+											<Boxes variants={boxesVariants} initial="start" animate="end">
+												{
+													list.map((val) => (
+														<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
+															<Link to={{
+																pathname: `/popol_react/works/${typeId}/${val.id}`,
+																state: {
+																	parentPath: typeId,
+																	id: val.id,
+																	customer: val.customer,
+																	projectName: val.projectName,
+																	description: val.description,
+																	did: val.did,
+																	keyWords: val.keyWords,
+																	fileUrl: val.fileUrl,
+																	pageImgs: val.pageImgs,
+																	pagesMap: val.pagesMap,
+																	startYear: val.startYear,
+																	startMonth: val.startMonth,
+																	endYear: val.endYear,
+																	endMonth: val.endMonth,
 																}
-															</ImgBox>
-															<BoxCon>
-																<p>{val.customer}</p>
-																<h4>{val.projectName}</h4>
-																<p className="last">퍼블리싱 기여도: 100%</p>
-															</BoxCon>
-														</Link>
-													</Box>
-												))
-											}
-										</Boxes>
-									</>
-								)}
-							</div>
-						</Container >
-					</div >
+															}}>
+																<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
+																	{
+																		ImgLoading ?
+																			(
+																				<ImgsLoading />
+
+																			) : (
+																				<img src={val.fileUrl} alt={val.projectName} />
+																			)
+																	}
+																</ImgBox>
+																<BoxCon>
+																	<p>{val.customer}</p>
+																	<h4>{val.projectName}</h4>
+																	<p className="last">퍼블리싱 기여도: 100%</p>
+																</BoxCon>
+															</Link>
+														</Box>
+													))
+												}
+											</Boxes>
+										</>
+									)}
+								</div>
+							</Container >
+						</div >
+					) : (<ErrorPage />)
 				) : (
 					<Auth />
 				)

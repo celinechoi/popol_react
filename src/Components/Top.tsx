@@ -45,19 +45,6 @@ const TopBox = styled.div`
 function Top() {
 	const [ScrollY, setScrollY] = useState(0); // scrollY 값
 	const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
-
-	const handleFollow = () => {
-		setScrollY(window.scrollY);
-		// console.log(ScrollY);
-		if (ScrollY > 100) {
-			// 버튼 보임
-			setBtnStatus(true);
-		} else {
-			// 버튼 사라짐
-			setBtnStatus(false);
-		}
-	}
-
 	const handleTop = () => {  // 클릭하면 스크롤이 위로 올라가는 함수
 		window.scrollTo({
 			top: 0,
@@ -68,6 +55,17 @@ function Top() {
 	}
 
 	useEffect(() => {
+		const handleFollow = () => {
+			setScrollY(window.scrollY);
+			// console.log(ScrollY);
+			if (ScrollY > 100) {
+				// 버튼 보임
+				setBtnStatus(true);
+			} else {
+				// 버튼 사라짐
+				setBtnStatus(false);
+			}
+		}
 		const watch = () => {
 			window.addEventListener('scroll', handleFollow)
 		}

@@ -16,6 +16,9 @@ import Hsjob from "sub_pages/Hsjob";
 import Itle from "sub_pages/Itle";
 import AiLemp from "sub_pages/AiLemp";
 import Vsquare from "sub_pages/Vsquare";
+import ErrorPage from "components/ErrorPage";
+import { useEffect } from "react";
+import Auth from "./Auth";
 
 const SubPage = styled.div`
 	position: relative;
@@ -381,7 +384,7 @@ const WorkPages = styled.div`
 
 
 interface RouteState {
-	parentPath: string;
+	parentPath: string | undefined;
 	id: string;
 	projectName: string;
 	customer: string,
@@ -397,13 +400,11 @@ interface RouteState {
 	endYear: number | undefined,
 }
 
-function Sub() {
+function Sub({ isLoggedIn }: { isLoggedIn: boolean }) {
 	// 현재 페이지 파악
 	const { state } = useLocation<RouteState>();
-	// console.log(state);
-
 	// 뒤로가기 구현
-	let history = useHistory();
+	const history = useHistory();
 	const backFunc = () => {
 		history.goBack();
 	}
@@ -411,86 +412,96 @@ function Sub() {
 	// 배열 타입 빈 변수에 저장
 	const keyWordsList: any = state?.keyWords;
 	const didList: any = state?.did;
+	useEffect(() => {
 
+	}, []);
 	return (
-		<SubPage>
-			<div className="inner">
-				<BackBox>
-					<div className="inner-flex" onClick={backFunc}>
-						<FontAwesomeIcon icon={faChevronLeft} size="lg" />
-						<p className="page-h2">Works</p>
-					</div>
-					<Indexs>
-						<Index onClick={backFunc}>Works</Index>
-						<FontAwesomeIcon icon={faChevronRight} />
-						<Index onClick={backFunc}>{state.parentPath}</Index>
-					</Indexs>
-				</BackBox>
-				<FrontInfo>
-					<Flexbox>
-						<Img src={state.fileUrl} alt={state.projectName} />
-						<Tags>
-							{
-								keyWordsList.map((val: any) => (
-									<Tag key={val} className={val === "SCSS" ? "scss" : ""}>
-										{val}
-									</Tag>
-								))
-							}
-						</Tags>
-					</Flexbox>
-					<Title>
-						<div className="page-h1">{state.projectName} 홈페이지</div>
-					</Title>
-					<Description>{state.description}</Description>
-					<Infos>
-						<Info>
-							<dl>
-								<dt>고객사</dt>
-								<dd>{state.customer}</dd>
-							</dl>
-						</Info>
-						<Info>
-							<dl>
-								<dt>기간</dt>
-								<dd>{state.startYear}.{state.startMonth} ~ {state.endYear}.{state.endMonth}</dd>
-							</dl>
-						</Info>
-					</Infos>
-					{state.id === "cobe" ? <Button onClick={() => { window.open("https://cobemall.com/") }}>사이트 바로가기</Button> : ""}
-					{state.id === "ailemp" ? <Button onClick={() => { window.open("https://iscreamedu.vsquare.cc/page/home") }}>사이트 바로가기</Button> : ""}
-					{state.id === "hrdi" ? <Button onClick={() => { window.open("https://hrdi.koreatech.ac.kr/") }}>사이트 바로가기</Button> : ""}
-					{state.id === "hsjob" ? <Button onClick={() => { window.open("https://job.hs.ac.kr/") }}>사이트 바로가기</Button> : ""}
-					{state.id === "itle" ? <Button onClick={() => { window.open("https://lms-itle.or.kr/") }}>사이트 바로가기</Button> : ""}
-					{state.id === "nsu_beauty" ? <Button onClick={() => { window.open("https://gr.nsu.ac.kr/kor/84/dept/0226") }}>사이트 바로가기</Button> : ""}
-					{state.id === "nsu_inno" ? <Button onClick={() => { window.open("https://inno.nsu.ac.kr") }}>사이트 바로가기</Button> : ""}
-				</FrontInfo>
-				<section className="section">
-					<h2 className="section-title">역할</h2>
-					<Effects>
-						{
-							didList.map((val: any) => (
-								<Effect key={val}>
-									{val}
-								</Effect>
-							))
-						}
-					</Effects>
-					<FocusArrow />
-					<WorkPages>
-						<p>Preview</p>
-						<h3 className="page-h2">Work Pages</h3>
-					</WorkPages>
-				</section>
-				<section>
-					{
-						{
-							"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "ailemp": <AiLemp />, "hrdi": <Hrdi />, "hsjob": <Hsjob />, "itle": <Itle />, "vsquare_demo": <Vsquare />
-						}[state.id]
-					}
-				</section>
-			</div>
-		</SubPage>
+		<>
+			{isLoggedIn ? (
+				state?.parentPath ? (
+					<SubPage>
+						<div className="inner">
+							<BackBox>
+								<div className="inner-flex" onClick={backFunc}>
+									<FontAwesomeIcon icon={faChevronLeft} size="lg" />
+									<p className="page-h2">Works</p>
+								</div>
+								<Indexs>
+									<Index onClick={backFunc}>Works</Index>
+									<FontAwesomeIcon icon={faChevronRight} />
+									<Index onClick={backFunc}>{state.parentPath}</Index>
+								</Indexs>
+							</BackBox>
+							<FrontInfo>
+								<Flexbox>
+									<Img src={state.fileUrl} alt={state.projectName} />
+									<Tags>
+										{
+											keyWordsList.map((val: any) => (
+												<Tag key={val} className={val === "SCSS" ? "scss" : ""}>
+													{val}
+												</Tag>
+											))
+										}
+									</Tags>
+								</Flexbox>
+								<Title>
+									<div className="page-h1">{state.projectName} 홈페이지</div>
+								</Title>
+								<Description>{state.description}</Description>
+								<Infos>
+									<Info>
+										<dl>
+											<dt>고객사</dt>
+											<dd>{state.customer}</dd>
+										</dl>
+									</Info>
+									<Info>
+										<dl>
+											<dt>기간</dt>
+											<dd>{state.startYear}.{state.startMonth} ~ {state.endYear}.{state.endMonth}</dd>
+										</dl>
+									</Info>
+								</Infos>
+								{state.id === "cobe" ? <Button onClick={() => { window.open("https://cobemall.com/") }}>사이트 바로가기</Button> : ""}
+								{state.id === "ailemp" ? <Button onClick={() => { window.open("https://iscreamedu.vsquare.cc/page/home") }}>사이트 바로가기</Button> : ""}
+								{state.id === "hrdi" ? <Button onClick={() => { window.open("https://hrdi.koreatech.ac.kr/") }}>사이트 바로가기</Button> : ""}
+								{state.id === "hsjob" ? <Button onClick={() => { window.open("https://job.hs.ac.kr/") }}>사이트 바로가기</Button> : ""}
+								{state.id === "itle" ? <Button onClick={() => { window.open("https://lms-itle.or.kr/") }}>사이트 바로가기</Button> : ""}
+								{state.id === "nsu_beauty" ? <Button onClick={() => { window.open("https://gr.nsu.ac.kr/kor/84/dept/0226") }}>사이트 바로가기</Button> : ""}
+								{state.id === "nsu_inno" ? <Button onClick={() => { window.open("https://inno.nsu.ac.kr") }}>사이트 바로가기</Button> : ""}
+							</FrontInfo>
+							<section className="section">
+								<h2 className="section-title">역할</h2>
+								<Effects>
+									{
+										didList.map((val: any) => (
+											<Effect key={val}>
+												{val}
+											</Effect>
+										))
+									}
+								</Effects>
+								<FocusArrow />
+								<WorkPages>
+									<p>Preview</p>
+									<h3 className="page-h2">Work Pages</h3>
+								</WorkPages>
+							</section>
+							<section>
+								{
+									{
+										"radiation": <Radiation />, "acc": <Acc />, "mmca": <Mmca />, "bdna": <Bdna />, "lxproperty": <Lxproperty />, "gaon": <Gaon />, "cobe": <Cobe />, "iedu": <Iedu />, "ailemp": <AiLemp />, "hrdi": <Hrdi />, "hsjob": <Hsjob />, "itle": <Itle />, "vsquare_demo": <Vsquare />
+									}[state.id]
+								}
+							</section>
+						</div>
+					</SubPage>
+				) : (<ErrorPage />)
+			) : (
+				<Auth />
+			)}
+		</>
 	);
 }
 export default Sub;

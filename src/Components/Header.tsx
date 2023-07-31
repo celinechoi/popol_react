@@ -272,10 +272,10 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 		);
 	}
 	// Link
-	const homeMatch = useRouteMatch("/");
-	const worksMatch = useRouteMatch("/works");
-	const subMatch = useRouteMatch("/sub");
-	const aboutMatch = useRouteMatch("/about");
+	const homeMatch = useRouteMatch("/popol_react");
+	const worksMatch = useRouteMatch("/popol_react/works");
+	const subMatch = useRouteMatch("/popol_react/sub");
+	const aboutMatch = useRouteMatch("/popol_react/about");
 	// Log Out
 	const history = useHistory();
 	const useConfirm = (message = "", onConfirm: any, onCancel: any) => {
@@ -296,7 +296,7 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 	};
 	const logoutConfirm = () => {
 		authService.signOut();
-		history.push("/");
+		history.push("/popol_react");
 	}
 	const cancelConfirm = () => {
 		return;
@@ -311,9 +311,9 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 		if (isMount) {
 			authService.onAuthStateChanged((user: any) => {
 				if (user) {
-					console.log(user, "user");
+					// console.log(user, "user");
 				} else {
-					console.log("logout");
+					// console.log("logout");
 				}
 			})
 		}
@@ -326,26 +326,26 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 			<div className="inner">
 				<Row>
 					<Logo>
-						<Link to="/">
+						<Link to="/popol_react">
 							<p>UI/UX Developer</p>
 							<Em>Jinseul</Em>
 						</Link>
 					</Logo>
 					<Menus>
 						<Menu>
-							<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
+							<Link to="/popol_react/" className={homeMatch?.isExact ? "on" : ""}>
 								Home
 								{homeMatch?.isExact === true && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" />}
 							</Link>
 						</Menu>
 						<Menu>
-							<Link to="/works/solution" className={worksMatch || subMatch ? "on" : ""}>
+							<Link to="/popol_react/works/solution" className={worksMatch || subMatch ? "on" : ""}>
 								Works
 								{worksMatch || subMatch ? <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" /> : ""}
 							</Link>
 						</Menu>
 						<Menu>
-							<Link to="/about" className={aboutMatch ? "on" : ""}>
+							<Link to="/popol_react/about" className={aboutMatch ? "on" : ""}>
 								About
 								{aboutMatch && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" />}
 							</Link>
@@ -359,10 +359,6 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 								<FontAwesomeIcon icon={faArrowRightFromBracket} className="icon-log" />
 							</Log>) :
 							""
-							// (<Log onClick={onLogInClick}>
-							// 	<span>로그인</span>
-							// 	<FontAwesomeIcon icon={faArrowRightToBracket} className="icon-log" />
-							// </Log>)
 						}
 					</HeaderRight>
 				</Row>
