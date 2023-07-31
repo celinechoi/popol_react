@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/popol_react/static/js/main.7dcadee3.js",
+    "main.js": "/popol_react/static/js/main.47e08cba.js",
     "static/media/index.png": "/popol_react/static/media/index.44bf50dbfefabfe9f565.png",
     "static/media/content_bg.png": "/popol_react/static/media/content_bg.b2c212bf2318d3246b0f.png",
     "static/media/tvcf_info_v2.png": "/popol_react/static/media/tvcf_info_v2.899b2407dd66352a66ac.png",
@@ -125,9 +125,9 @@
     "static/media/tistory.svg": "/popol_react/static/media/tistory.b7c88f59f4c22ef595d697df9d4c200f.svg",
     "index.html": "/popol_react/index.html",
     "static/media/asana_logo.svg": "/popol_react/static/media/asana_logo.20b84f300e230264f756d2a7476a95c1.svg",
-    "main.7dcadee3.js.map": "/popol_react/static/js/main.7dcadee3.js.map"
+    "main.47e08cba.js.map": "/popol_react/static/js/main.47e08cba.js.map"
   },
   "entrypoints": [
-    "static/js/main.7dcadee3.js"
+    "static/js/main.47e08cba.js"
   ]
 }
