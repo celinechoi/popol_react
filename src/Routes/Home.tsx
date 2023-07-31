@@ -227,7 +227,7 @@ const Txt = styled(motion.div)`
   ${media.medium`
     font-size: 24px;
   `};
-	${media.small`
+	${media.smallToo`
     font-size: 18px;
   `};
   .point {
