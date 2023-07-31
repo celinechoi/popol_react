@@ -17,26 +17,25 @@ const dash1Key = keyframes`
 `;
 
 // bubble
-const animate_4010 = keyframes`
+const bubbleKey = keyframes`
   0%,100% {
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
 
   50% {
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
 `;
 
 const HomeFrame = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	position: relative;
 	z-index: 0;
   /* min-height: 580px; */
   height: calc(var(--vh, 1vh)*100);
-	padding: 160px 0 80px;
 	background-color: ${(props) => props.theme.bgColor.gray.first};
-	${media.small`
-		padding-top: 167px;
-	`};
 `;
 
 const BubbleBg = styled.div`
@@ -47,7 +46,16 @@ const BubbleBg = styled.div`
   height: 180px;
   border-radius: 50%;
   box-shadow: inset 0 0 25px rgba (255, 255, 255, 0.25);
-  animation: ${animate_4010} 8s ease-in-out infinite;
+  animation: ${bubbleKey} 8s ease-in-out infinite;
+	${media.medium`
+		top: 40%;
+    width: 150px;
+    height: 150px;
+	`};
+	${media.smallToo`
+		width: 110px;
+    height: 110px;
+	`};
   &::before {
     content: '';
     position: absolute;
@@ -59,6 +67,12 @@ const BubbleBg = styled.div`
     background: #fff;
     z-index: 10;
     filter: blur(2px);
+		${media.smallToo`
+			top: 35px;
+			left: 30px;
+			width: 18px;
+			height: 18px;
+		`};
   }
   ::after {
     content: '';
@@ -71,6 +85,12 @@ const BubbleBg = styled.div`
     background: #fff;
     z-index: 10;
     filter: blur(2px);
+		${media.smallToo`
+			top: 60px;
+			left: 60px;
+			width: 8px;
+			height: 8px;
+		`};
   }
   &:nth-child(2) {
     zoom: 0.45;
@@ -78,26 +98,30 @@ const BubbleBg = styled.div`
     left: 13%;
     top: 5%;
     animation-delay: -4s;
+		opacity: 0.9;
   }
   &:nth-child(3) {
-    zoom: 0.45;
+    zoom: 0.3;
     right: auto;
     left: 29%;
     top: 20%;
     animation-delay: -6s;
+		opacity: 0.7;
   }
   &:nth-child(4) {
     zoom: 0.15;
     right: 30%;
     top: 31%;
-    animation-delay: -3s;
+    animation-delay: -4s;
+		opacity: 0.6;
   }
   &:nth-child(5) {
-    zoom: 0.5;
-    left: 15%;
+    zoom: 1.1;
+		left: 6%;
     top: auto;
     bottom: 7%;
     animation-delay: -5s;
+		opacity: 0.6;
   }
   &:nth-child(6) {
     zoom: 0.35;
@@ -112,6 +136,14 @@ const BubbleBg = styled.div`
     top: auto;
     bottom: 23%;
     animation-delay: -6s;
+  }
+	&:nth-child(8) {
+    zoom: 0.6;
+		right: auto;
+    left: 29%;
+    top: 49%;
+		z-index: -1;
+    animation-delay: -12s;
   }
   >span {
     position: absolute;
@@ -176,11 +208,14 @@ const Visual = styled(motion.div)`
 	flex-direction: column;
 	justify-content: center;
   padding: 32px;
+	${media.small`
+		padding: 12px;
+	`};
 	>img {
 		display: block;
 		width: 190px;
-		${media.medium`
-			width: 23%;
+		${media.small`
+			width: 40%;
 		`};
 	}
 `;
@@ -192,6 +227,9 @@ const Txt = styled(motion.div)`
   ${media.medium`
     font-size: 24px;
   `};
+	${media.small`
+    font-size: 18px;
+  `};
   .point {
     background-image: ${props => props.theme.gradient.second};
     background-clip: text;
@@ -199,58 +237,60 @@ const Txt = styled(motion.div)`
     background-repeat: no-repeat;
     -webkit-background-clip: text;
     color: transparent;
+		font-weight: 900;
   }
 `;
 
 
 // motion
 const visualVariants = {
-  hidden :{
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      delay: 1.2,
-    }
-  }
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			delay: 1.2,
+		}
+	}
 }
 
 const txtVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 1.4,
-    }
-  }
+	hidden: {
+		opacity: 0,
+		y: 20
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			delay: 1.4,
+		}
+	}
 }
 
 function Home() {
 	return (
 		<HomeFrame>
-      <BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
-      <BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
-      <BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
-      <BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
-      <BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
-      <BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
-      <BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
+			<BubbleBg><span></span><span></span><span></span><span></span><span></span></BubbleBg>
 			<Draw width="1122" height="951" viewBox="0 0 1122 951" xmlns="http://www.w3.org/2000/svg">
-        <g transform="translate(.366 .828)" stroke="rgba(228, 19, 141, 0.67)" fill="none" fillRule="evenodd">
+				<g transform="translate(.366 .828)" stroke="rgba(228, 19, 141, 0.67)" fill="none" fillRule="evenodd">
 					<ellipse className="draw-1" transform="rotate(-20 560.634 578.172)" cx="560.634" cy="578.172" rx="521.5" ry="204.5"></ellipse>
 					<ellipse className="draw-2" transform="rotate(-20 560.634 371.172)" cx="560.634" cy="371.172" rx="521.5" ry="204.5"></ellipse>
 				</g>
 			</Draw>
-      <Visual variants={visualVariants} initial="hidden" animate="visible">
+			<Visual variants={visualVariants} initial="hidden" animate="visible">
 				<img src={good_emoji} alt="good_emoji" />
 				{/* <p><span>{useCountUp(17)}</span>개의 프로젝트</p>
 				<p><span>{useCountUp(7)}</span>년차</p> */}
-        <Txt variants={txtVariants} initial="hidden" animate="visible">안녕하세요. <br /><span className="point">UI/UX Developer 최진슬의 포트폴리오</span> 방문을 환영합니다.</Txt>
+				<Txt variants={txtVariants} initial="hidden" animate="visible">안녕하세요. <br /><span className="point">UI/UX Developer 최진슬 포트폴리오</span> <br />방문을 환영합니다.</Txt>
 			</Visual>
 		</HomeFrame>
 	);

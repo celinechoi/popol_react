@@ -15,7 +15,6 @@ const Grid = styled(motion.div)`
   background-color: rgba(251, 234, 173, 0.7);
   border-radius: 20px;
   box-shadow: ${(props) => props.theme.shadow.box};
-	cursor: pointer;
 	${media.large`
 		flex-basis: calc(100%/2 - 12px/2*1);
 	`};

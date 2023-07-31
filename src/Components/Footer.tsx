@@ -21,6 +21,9 @@ const FooterBox = styled.div<{ theme: boolean }>`
 	p {
 		color: ${(props) => props.theme.textColor.gray.fifth};
 		font-size: 13px;
+		${media.smallToo`
+			font-size: 12px;
+		`};
 	}
 `;
 
@@ -30,9 +33,6 @@ const SnsList = styled.ul`
 	justify-content: center;
 	gap: 12px;
 	margin-bottom: 12px;
-	${media.micro`
-		flex-direction: column;
-	`};
 `;
 
 const Sns = styled.li`
@@ -42,24 +42,31 @@ const Sns = styled.li`
 	font-size: 13px;
 	text-transform: uppercase;
 	cursor: pointer;
+	${media.smallToo`
+		width: 85px;
+	`};
 	&:first-child {
 		background-color: #000;
 	}
 	&:nth-child(2) {
 		background-color: #FF5A4A;
 	}
+	>img {
+		display: block;
+		width: 100%;
+	}
 `;
 interface RouteState {
-  state: {
-    name: string;
-  };
+	state: {
+		name: string;
+	};
 }
 
 function Footer() {
-  // Link
+	// Link
 	const homeMatch = useRouteMatch("/");
 	return (
-    <FooterBox className={homeMatch?.isExact ? "home" : ""}>
+		<FooterBox className={homeMatch?.isExact ? "home" : ""}>
 			<div className="inner">
 				<SnsList>
 					<Sns onClick={() => { window.open("https://github.com/celinechoi") }}>

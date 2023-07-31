@@ -1088,7 +1088,7 @@ function AiLemp() {
 							<TitleH1 style={{ fontSize: size2, opacity }} className="right"># Dashboard</TitleH1>
 							<Text>
 								<span className="point">ApexCharts.js 오픈소스 플러그인</span>을 사용하여 <span className="point">디바이스별로 다른 그래프 형태를 옵션을 활용하여 완벽하게 구현</span>하였습니다. <br />
-								로딩후 화면 진입시, 그래프의 각 아이템에 에니메이션 효과가 보입니다. <br />
+								로딩후 화면 진입시, 그래프의 각 아이템에 에니메이션 효과가 보입니다. 또한 디바이스별 그래프 모양을 최적화하였습니다. <br />
 								나의 학습 리포트, 학습 달성현황, 학습자 종합 리포트에 보이는 Bad, Good, Nice, Exellent, Perfect는 별도 evaluation라는 객체에 담아 활용하였습니다. <br />또한 임시데이터를 객체에 담아 작업하여 개발자의 작업 속도 향상에 기여하였습니다.
 							</Text>
 						</Title>

@@ -291,6 +291,9 @@ const List = styled(motion.li)`
 		font-size: 12px;
 		text-align: left;
 	`};
+	${media.smallToo`
+		flex-basis: 100%;
+	`};
 `;
 
 const CoWorkTools = styled(motion.div)`
@@ -921,7 +924,7 @@ function About() {
 	}
 	// scroll
 	const { scrollYProgress } = useViewportScroll();
-	const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.2]);
+	const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.5]);
 	useEffect(() => {
 		setLoading(false);
 		setState(chartOption);
