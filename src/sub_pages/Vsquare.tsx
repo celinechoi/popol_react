@@ -6,6 +6,7 @@ import { media } from "style/media_query";
 import sass from "img/logo/sass_logo.svg";
 import color from "img/sub_pages/vsquare/color.png";
 import colorCode from "img/sub_pages/vsquare/color_code.png";
+import iconFont from "img/sub_pages/vsquare/icon.png";
 import primaryCode from "img/sub_pages/vsquare/primary_code.png";
 import styleCode from "img/sub_pages/vsquare/style_code.png";
 import input from "img/sub_pages/vsquare/input.png";
@@ -314,6 +315,18 @@ const ClipInner = styled(motion.div)`
 	&.part2,
 	&.part3 {
 		height: auto;
+	}
+	&.part {
+		&-icon {
+			background-image: url(${iconFont});
+			background-position: center bottom;
+			${media.medium`
+				height: 300px;
+			`};
+			${media.small`
+				height: 210px;
+			`};
+		}
 	}
 	&.part4 {
 		height: 610px;
@@ -964,6 +977,19 @@ function Vsquare() {
 									</Clip>
 								</Gallery>
 							</Gallerys>
+						</Part>
+						<Part>
+							<ContentTitle>icon_fonts (with IcoMoon App)</ContentTitle>
+							<p className="txt-normal">icomoon 원리를 기반으로 브이스퀘어 만의 웹 아이콘 폰트 규칙 선언하여 기본 아이콘은 해당 프로젝트에 맞게 색상 및 크기 변경을 자유롭게 할 수 있습니다.</p>
+							<Spacing>
+								<div className="spacing-explain">
+									<div style={{ width: "100%" }}>
+										<Clip>
+											<ClipFrame><ClipInner className="part-icon"></ClipInner></ClipFrame>
+										</Clip>
+									</div>
+								</div>
+							</Spacing>
 						</Part>
 						<Part>
 							<ContentTitle>systems.scss</ContentTitle>
