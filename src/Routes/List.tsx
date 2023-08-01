@@ -192,7 +192,7 @@ const boxVariants = {
 	hover: { scale: 1.05, y: -20, borderColor: "#0179c3" }
 }
 
-function List({ isLoggedIn }: { isLoggedIn: boolean }) {
+function List() {
 	// const [userObj, setUserObj] = useState({});
 	const { typeId } = useParams<TypesParams>();
 	// state
@@ -200,125 +200,110 @@ function List({ isLoggedIn }: { isLoggedIn: boolean }) {
 	const [ImgLoading, setImgLoading] = useState(true);
 	const [list, setList] = useState<WorkInterface[]>([]);
 	useEffect(() => {
-		let isMount = true;
-		if (isMount) {
-			let timer = setTimeout(() => { setImgLoading(false) }, 1000);
-			let timeReturn = () => {
-				return () => {
-					clearTimeout(timer);
-				};
-			}
-			authService.onAuthStateChanged((user: any) => {
-				if (user) {
-					const collection = dbService.collection(`${typeId}`);
-					collection
-						.orderBy("code", "desc") // desc
-						// .orderBy("endMonth", "desc")
-						.onSnapshot((snapshot: any) => {
-							const itemArr = snapshot.docs.map((doc: any) => ({
-								id: doc.id,
-								projectName: doc.data().projectName,
-								customer: doc.data().customer,
-								fileUrl: doc.data().fileUrl,
-								pageImgs: doc.data().pageImgs,
-								pagesMap: doc.data().pagesMap,
-								description: doc.data().description,
-								did: doc.data().did,
-								keyWords: doc.data().keywords,
-								startYear: doc.data().startYear,
-								startMonth: doc.data().startMonth,
-								endYear: doc.data().endYear,
-								endMonth: doc.data().endMonth,
-								code: doc.data().code,
-								...doc.data(),
-							}));
-							setList(itemArr);
-							setLoading(false);
-							timeReturn();
-							// return () => {
-							// 	setLoading(false)
-							// };
-						})
-				}
-			});
+		let timer = setTimeout(() => { setImgLoading(false) }, 1000);
+		let timeReturn = () => {
+			return () => {
+				clearTimeout(timer);
+			};
 		}
+
+		const collection = dbService.collection(`${typeId}`);
+		collection
+			.orderBy("code", "desc") // desc
+			// .orderBy("endMonth", "desc")
+			.onSnapshot((snapshot: any) => {
+				const itemArr = snapshot.docs.map((doc: any) => ({
+					id: doc.id,
+					projectName: doc.data().projectName,
+					customer: doc.data().customer,
+					fileUrl: doc.data().fileUrl,
+					pageImgs: doc.data().pageImgs,
+					pagesMap: doc.data().pagesMap,
+					description: doc.data().description,
+					did: doc.data().did,
+					keyWords: doc.data().keywords,
+					startYear: doc.data().startYear,
+					startMonth: doc.data().startMonth,
+					endYear: doc.data().endYear,
+					endMonth: doc.data().endMonth,
+					code: doc.data().code,
+					...doc.data(),
+				}));
+				setList(itemArr);
+				setLoading(false);
+				timeReturn();
+			})
 		return () => {
 			setList([]);
-			isMount = false;
-
 		};
 	}, [typeId]);
 	return (
 		<>
 			{
-				isLoggedIn ? (
-					typeId ? (
-						<div className="container">
-							<Title>
-								<div className="inner">
-									<h2 className="page-h1">Works</h2>
-									<Tabs typePath={typeId} />
-								</div>
-							</Title>
-							<Container>
-								<div className="inner">
-									{loading ? (
-										<Loading prop="Loading" />
-									) : (
-										<>
-											<Boxes variants={boxesVariants} initial="start" animate="end">
-												{
-													list.map((val) => (
-														<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
-															<Link to={{
-																pathname: `/popol_react/works/${typeId}/${val.id}`,
-																state: {
-																	parentPath: typeId,
-																	id: val.id,
-																	customer: val.customer,
-																	projectName: val.projectName,
-																	description: val.description,
-																	did: val.did,
-																	keyWords: val.keyWords,
-																	fileUrl: val.fileUrl,
-																	pageImgs: val.pageImgs,
-																	pagesMap: val.pagesMap,
-																	startYear: val.startYear,
-																	startMonth: val.startMonth,
-																	endYear: val.endYear,
-																	endMonth: val.endMonth,
-																}
-															}}>
-																<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
-																	{
-																		ImgLoading ?
-																			(
-																				<ImgsLoading />
+				typeId ? (
+					<div className="container">
+						<Title>
+							<div className="inner">
+								<h2 className="page-h1">Works</h2>
+								<Tabs typePath={typeId} />
+							</div>
+						</Title>
+						<Container>
+							<div className="inner">
+								{loading ? (
+									<Loading prop="Loading" />
+								) : (
+									<>
+										<Boxes variants={boxesVariants} initial="start" animate="end">
+											{
+												list.map((val) => (
+													<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
+														<Link to={{
+															pathname: `/popol_react/works/${typeId}/${val.id}`,
+															state: {
+																parentPath: typeId,
+																id: val.id,
+																customer: val.customer,
+																projectName: val.projectName,
+																description: val.description,
+																did: val.did,
+																keyWords: val.keyWords,
+																fileUrl: val.fileUrl,
+																pageImgs: val.pageImgs,
+																pagesMap: val.pagesMap,
+																startYear: val.startYear,
+																startMonth: val.startMonth,
+																endYear: val.endYear,
+																endMonth: val.endMonth,
+															}
+														}}>
+															<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
+																{
+																	ImgLoading ?
+																		(
+																			<ImgsLoading />
 
-																			) : (
-																				<img src={val.fileUrl} alt={val.projectName} />
-																			)
-																	}
-																</ImgBox>
-																<BoxCon>
-																	<p>{val.customer}</p>
-																	<h4>{val.projectName}</h4>
-																	<p className="last">퍼블리싱 기여도: 100%</p>
-																</BoxCon>
-															</Link>
-														</Box>
-													))
-												}
-											</Boxes>
-										</>
-									)}
-								</div>
-							</Container >
-						</div >
-					) : (<ErrorPage />)
-				) : (
-					<Auth />
-				)
+																		) : (
+																			<img src={val.fileUrl} alt={val.projectName} />
+																		)
+																}
+															</ImgBox>
+															<BoxCon>
+																<p>{val.customer}</p>
+																<h4>{val.projectName}</h4>
+																<p className="last">퍼블리싱 기여도: 100%</p>
+															</BoxCon>
+														</Link>
+													</Box>
+												))
+											}
+										</Boxes>
+									</>
+								)}
+							</div>
+						</Container >
+					</div >
+				) : (<ErrorPage />)
 			}
 		</>
 	)

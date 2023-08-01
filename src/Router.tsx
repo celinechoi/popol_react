@@ -9,17 +9,17 @@ import Footer from "components/Footer";
 import Top from "components/Top";
 import ErrorPage from "components/ErrorPage";
 
-function AppRouter({ isLoggedIn }: { isLoggedIn: boolean }) {
+function AppRouter() {
 
 	return (
 		<Router>
-			<Header isLoggedIn={isLoggedIn} />
+			<Header />
 			<Switch>
 				<Route exact path="/popol_react/works/:typeId/:itemId">
-					{isLoggedIn ? <Sub isLoggedIn={isLoggedIn} /> : <Auth />}
+					<Sub />
 				</Route>
 				<Route exact path="/popol_react/works/:typeId">
-					{isLoggedIn ? <List isLoggedIn={isLoggedIn} /> : <Auth />}
+					<List />
 				</Route>
 				<Route exact path="/popol_react/about">
 					<About />

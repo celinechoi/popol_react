@@ -277,7 +277,7 @@ const pointVariantes = {
 	}
 }
 
-function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
+function Header() {
 	// Theme 변경
 	const [theme, setTheme] = useRecoilState(booleanState);
 	const toggleTheme = () => {
@@ -371,13 +371,6 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 							<ThemeSwitch type="checkbox" className="theme-switch" onClick={toggleTheme} title={theme ? "밝게 보기" : "어둡게 보기"} />
 							{theme ? ("") : (<FontAwesomeIcon icon={faSun} className="light-icon" />)}
 						</SwitchFrame>
-						{isLoggedIn ?
-							(<Log onClick={onLogOutClick}>
-								<span>로그아웃</span>
-								<FontAwesomeIcon icon={faArrowRightFromBracket} className="icon-log" />
-							</Log>) :
-							""
-						}
 					</HeaderRight>
 				</Row>
 			</div>

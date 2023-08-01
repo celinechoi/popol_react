@@ -400,7 +400,7 @@ interface RouteState {
 	endYear: number | undefined,
 }
 
-function Sub({ isLoggedIn }: { isLoggedIn: boolean }) {
+function Sub() {
 	// 현재 페이지 파악
 	const { state } = useLocation<RouteState>();
 	// 뒤로가기 구현
@@ -417,7 +417,7 @@ function Sub({ isLoggedIn }: { isLoggedIn: boolean }) {
 	}, []);
 	return (
 		<>
-			{isLoggedIn ? (
+			{
 				state?.parentPath ? (
 					<SubPage>
 						<div className="inner">
@@ -498,9 +498,7 @@ function Sub({ isLoggedIn }: { isLoggedIn: boolean }) {
 						</div>
 					</SubPage>
 				) : (<ErrorPage />)
-			) : (
-				<Auth />
-			)}
+			}
 		</>
 	);
 }
