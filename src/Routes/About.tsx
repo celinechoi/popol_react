@@ -850,7 +850,7 @@ function About() {
 					height: 340
 				},
 				colors: ['#61dafb', '#C66394'],
-				labels: ['React', 'SCSS'],
+				labels: ['React (with Typescript)', 'SCSS'],
 				yaxis: {
 					tickAmount: 4,
 					min: 0,
