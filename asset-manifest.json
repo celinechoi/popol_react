@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/popol_react/static/js/main.e8f6f1e6.js",
+    "main.js": "/popol_react/static/js/main.a0483431.js",
     "static/media/index.png": "/popol_react/static/media/index.44bf50dbfefabfe9f565.png",
     "static/media/content_bg.png": "/popol_react/static/media/content_bg.b2c212bf2318d3246b0f.png",
     "static/media/tvcf_info_v2.png": "/popol_react/static/media/tvcf_info_v2.899b2407dd66352a66ac.png",
@@ -84,6 +84,7 @@
     "static/media/jrounge_v2.png": "/popol_react/static/media/jrounge_v2.ea9eb6a85f662d76239b.png",
     "static/media/ticketing_main.jpg": "/popol_react/static/media/ticketing_main.111350fa534ca0cbbc44.jpg",
     "static/media/learner_smart_mo.png": "/popol_react/static/media/learner_smart_mo.8b28495f2b5bb9688e8a.png",
+    "static/media/icon.png": "/popol_react/static/media/icon.41a724083bc0bcda6b33.png",
     "static/media/sub3.jpg": "/popol_react/static/media/sub3.d8193e3dd3876bbf4db8.jpg",
     "static/media/primary_code.png": "/popol_react/static/media/primary_code.1ed42dd6727ac6a913a5.png",
     "static/media/index_bg.png": "/popol_react/static/media/index_bg.2d706810bede179915ce.png",
@@ -125,9 +126,9 @@
     "static/media/tistory.svg": "/popol_react/static/media/tistory.b7c88f59f4c22ef595d697df9d4c200f.svg",
     "index.html": "/popol_react/index.html",
     "static/media/asana_logo.svg": "/popol_react/static/media/asana_logo.20b84f300e230264f756d2a7476a95c1.svg",
-    "main.e8f6f1e6.js.map": "/popol_react/static/js/main.e8f6f1e6.js.map"
+    "main.a0483431.js.map": "/popol_react/static/js/main.a0483431.js.map"
   },
   "entrypoints": [
-    "static/js/main.e8f6f1e6.js"
+    "static/js/main.a0483431.js"
   ]
 }
