@@ -18,7 +18,6 @@ import AiLemp from "sub_pages/AiLemp";
 import Vsquare from "sub_pages/Vsquare";
 import ErrorPage from "components/ErrorPage";
 import { useEffect } from "react";
-import Auth from "./Auth";
 
 const SubPage = styled.div`
 	position: relative;

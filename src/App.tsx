@@ -1,14 +1,9 @@
-
-import 'firebase/firestore';
-import { useEffect, useState } from "react";
-import { authService } from "fbase";
 import { booleanState } from "./atoms";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { darkTheme, lightTheme } from "./theme";
 import AppRouter from "Router";
 import { media } from "style/media_query";
-import Loading from 'components/Loading';
 
 const GlobalStyle = createGlobalStyle`
 ::selection {
@@ -318,18 +313,6 @@ button {
 `;
 
 function App() {
-	const [init, setInit] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	useEffect(() => {
-		authService.onAuthStateChanged((user) => {
-			if (user) {
-				setIsLoggedIn(true);
-			} else {
-				setIsLoggedIn(false);
-			}
-			setInit(true);
-		});
-	}, []);
 	const themeSate = useRecoilValue(booleanState);
 	return (
 		<ThemeProvider theme={themeSate ? darkTheme : lightTheme}>

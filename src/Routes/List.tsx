@@ -1,4 +1,4 @@
-import { authService, dbService } from "fbase";
+import { dbService } from "fbase";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -7,7 +7,6 @@ import { media } from "style/media_query";
 import Loading from "components/Loading";
 import { motion } from "framer-motion";
 import ImgsLoading from "components/ImgsLoading";
-import Auth from "./Auth";
 import ErrorPage from "components/ErrorPage";
 
 const Title = styled.div`

@@ -1,13 +1,11 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link, useHistory, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { booleanState } from "../atoms";
-import { authService } from "fbase";
 import { media } from "style/media_query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderBox = styled.div`
 	position: fixed;
@@ -215,45 +213,6 @@ const ThemeSwitch = styled(motion.input)`
 		outline: 0;
 	}
 `;
-const Log = styled.button`
-  height: 37px;
-  padding: 7px 20px;
-  border-radius: 22px;
-	border: 1px solid ${(props) => props.theme.bgColor.gray.fifth};
-  background-color: ${(props) => props.theme.bgColor.gray.third};
-	color: ${(props) => props.theme.textColor.gray.fifth};
-	font-size: 13px;
-	&:hover {
-		background-color: ${(props) => props.theme.bgColor.gray.fifth};
-	}
-	.icon {
-		&-log {
-			display: none;
-		}
-	}
-	${media.smallToo`
-		position: absolute;
-    right: 0;
-    top: 0;
-		height: 30px;
-		padding: 0;
-		border-radius: 0;
-		border: 0;
-		background-color: transparent;
-		&:hover {
-			background-color: transparent;
-		}
-		span {
-			display: none;
-		}
-		.icon {
-			&-log {
-				display: block;
-				font-size: 20px;
-			}
-		}
-	`};
-`;
 // motion
 const pointVariantes = {
 	start: {
@@ -290,51 +249,6 @@ function Header() {
 	const worksMatch = useRouteMatch("/popol_react/works");
 	const subMatch = useRouteMatch("/popol_react/sub");
 	const aboutMatch = useRouteMatch("/popol_react/about");
-	// Log Out
-	const history = useHistory();
-	const useConfirm = (message = "", onConfirm: any, onCancel: any) => {
-		if (!onConfirm || typeof onConfirm !== "function") {
-			return;
-		}
-		if (onCancel && typeof onCancel !== "function") {
-			return;
-		}
-		const confirmAction = () => {
-			if (window.confirm(message)) {
-				onConfirm();
-			} else {
-				onCancel();
-			}
-		};
-		return confirmAction;
-	};
-	const logoutConfirm = () => {
-		authService.signOut();
-		history.push("/popol_react");
-	}
-	const cancelConfirm = () => {
-		return;
-	}
-	const onLogOutClick = useConfirm(
-		"로그아웃 하시겠습니까?",
-		logoutConfirm,
-		cancelConfirm
-	);
-	useEffect(() => {
-		let isMount = true;
-		if (isMount) {
-			authService.onAuthStateChanged((user: any) => {
-				if (user) {
-					// console.log(user, "user");
-				} else {
-					// console.log("logout");
-				}
-			})
-		}
-		return () => {
-			isMount = false;
-		};
-	}, []);
 	return (
 		<HeaderBox className={homeMatch?.isExact ? "home" : ""}>
 			<div className="inner">
