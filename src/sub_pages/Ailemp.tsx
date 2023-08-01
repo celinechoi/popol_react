@@ -1105,7 +1105,7 @@ function AiLemp() {
 										<FontAwesomeIcon icon={faArrowsUpDown} />
 										Drag
 									</Info>
-									<LearnerSmartImg src={learnerSmartTa} drag="y" dragConstraints={LearnerSmartDivRef} />
+									<LearnerSmartImg src={learnerSmartTa} drag="y" dragConstraints={LearnerSmartDivTaRef} />
 								</LearnerSmartDiv>
 							</Device>
 							<Device className="mo">
@@ -1115,7 +1115,7 @@ function AiLemp() {
 										<FontAwesomeIcon icon={faArrowsUpDown} />
 										Drag
 									</Info>
-									<LearnerSmartImg src={learnerSmartMo} drag="y" dragConstraints={LearnerSmartDivRef} />
+									<LearnerSmartImg src={learnerSmartMo} drag="y" dragConstraints={LearnerSmartDivMoRef} />
 								</LearnerSmartDiv>
 							</Device>
 						</Spacing>

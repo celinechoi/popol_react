@@ -8,6 +8,8 @@ import main from "img/sub_pages/hrdi/index.png";
 import headIcon from "img/sub_pages/hrdi/head_icon.svg";
 import headIconTa from "img/sub_pages/hrdi/head_icon_ta.svg";
 import headIconMo from "img/sub_pages/hrdi/head_icon_mo.svg";
+import dashboardImg from "img/sub_pages/hrdi/dashboard.png";
+import subjectImg from "img/sub_pages/hrdi/dashboard_subject.png";
 import koreatechBg from "img/sub_pages/hrdi/koreatech_bg.svg";
 import koreatechBgTa from "img/sub_pages/hrdi/koreatech_bg_ta.svg";
 import koreatechBgMo from "img/sub_pages/hrdi/koreatech_bg_mo.svg";
@@ -175,6 +177,80 @@ const Page = styled.div`
 	}
 `;
 
+const Spacing = styled.div`
+	padding: 60px 0;
+	${media.medium`
+		padding: 40px 0;
+	`};
+	&.learner {
+		&-area {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 24px;
+			padding: 32px 32px 80px;
+			${media.large`
+				padding-top: 70px;
+			`};
+			${media.medium`
+				flex-direction: column;
+				gap: 12px;
+				padding: 0 24px 60px;
+			`};
+			${media.small`
+				padding: 40px 20px 60px;
+			`};
+		}
+	}
+`;
+
+const Device = styled.div`
+	flex: 0 0 calc(100%/2 - 24px/2*1);
+	${media.medium`
+		flex-basis: 100%;
+	`};
+	p {
+		color: #000;
+		font-size: 16px;
+    font-weight: 700;
+    text-align: right;
+    width: 100%;
+    padding: 0 12px 8px 0;
+    opacity: 0.7;
+	}
+`;
+
+const LearnerSmartDiv = styled(motion.div)`
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 332px;
+	border: 2px solid #000;
+	border-radius: 20px;
+	cursor: grab;
+	${media.large`
+		height: 210px;
+	`};
+	${media.medium`
+		height: 332px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		height: 350px;
+		border-radius: 12px;
+	`};
+	${media.smallToo`
+		height: 170px;
+	`};
+	${media.micro`
+		height: 130px;
+	`};
+`;
+
+const LearnerSmartImg = styled(motion.img)`
+	width: 100%;
+`;
+
 const MainSection = styled.div`
 	position: relative;
 	z-index: 1;
@@ -266,12 +342,31 @@ const Text = styled(motion.div)`
   font-size: 18px;
   font-weight: 500;
 	${media.medium`
-		margin-top: 220px;
+		margin-top: 120px;
 	`};
 	${media.small`
 		margin-top: 60px;
 		font-size: 16px;
 	`};
+	.point {
+		display: inline-block;
+		position: relative;
+		color: #fff;
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 84, 58, 0.8);
+			transform: skewX(-22deg);
+			${media.smallToo`
+				transform: skewX(0);
+			`};
+		}
+	}
 	&.mainsection {
 		&-txt {
 			position: absolute;
@@ -517,8 +612,12 @@ function Hrdi() {
 	const ScrollWindowInnerRef = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useViewportScroll();
 	const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "144px", "155px", "160px"]);
+	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "120px", "130px", "140px"]);
 
+	// sub drag
+	const LearnerSmartDivRef = useRef<HTMLDivElement>(null);
+	const LearnerSmartDivTaRef = useRef<HTMLDivElement>(null);
+	const LearnerSmartDivMoRef = useRef<HTMLDivElement>(null);
 	// 이미지 높이 담기
 	const ScrollerMainRef = useRef<HTMLDivElement>(null);
 	const ScrollerMainImgRef = useRef<HTMLImageElement>(null);
@@ -686,6 +785,38 @@ function Hrdi() {
 								</Text>
 							</ImgBox>
 						</MainSection>
+					</div>
+					<div className="section">
+						<Title>
+							<TitleH1 style={{ fontSize: size }} className="right"># Dashboard</TitleH1>
+							<Text className="main-txt">
+								학습자 대시보드를 어느 디바이스에서든 최적화된 UI로 볼 수 있게 퍼블리싱 하였습니다. <br />또한 <span className="point">Chart.js 플러그인을 활용</span>하여 반응형 페이지를 만들었습니다.
+							</Text>
+						</Title>
+						<Spacing className="learner-area">
+							<Device>
+								<p>패키지(과정) 홈</p>
+								<LearnerSmartDiv ref={LearnerSmartDivRef}>
+									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/lms/dashboard.html") }} />
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={dashboardImg} drag="y" dragConstraints={LearnerSmartDivRef} />
+								</LearnerSmartDiv>
+							</Device>
+							<Device className="ta">
+								<p>과목 홈</p>
+								<LearnerSmartDiv ref={LearnerSmartDivTaRef}>
+									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/hrdi/lms/dashboard_subject.html") }} />
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={subjectImg} drag="y" dragConstraints={LearnerSmartDivTaRef} />
+								</LearnerSmartDiv>
+							</Device>
+						</Spacing>
 					</div>
 					<div className="section sub-bg">
 						<Title>

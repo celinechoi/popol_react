@@ -6,6 +6,9 @@ import { faArrowUpRightFromSquare, faArrowsUpDown } from "@fortawesome/free-soli
 import { media } from "style/media_query";
 import main from "img/sub_pages/itle/index.png";
 import mainTm from "img/sub_pages/itle/index_tm.png";
+import chartImg from "img/sub_pages/itle/chart.png";
+import chartImgTa from "img/sub_pages/itle/chart_ta.png";
+import chartImgMo from "img/sub_pages/itle/chart_mo.png";
 import sub from "img/sub_pages/itle/sub.png";
 import subTm from "img/sub_pages/itle/sub_tm.png";
 import subTmTa from "img/sub_pages/itle/sub_tm_ta.png";
@@ -54,22 +57,6 @@ const Page = styled.div`
 				${media.small`
 					top: 80px;
 				`};
-			}
-			.main {
-				&-txt {
-					background-color: rgba(255,255,255,0.6);
-					padding: 32px;
-					border-radius: 20px;
-					${media.medium`
-						margin-top: 80px;
-						padding: 28px;
-						border-radius: 16px;
-					`};
-					${media.small`
-						margin-top: 70px;
-						border-radius: 12px;
-					`};
-				}
 			}
 		}
 		&.sub {
@@ -183,6 +170,85 @@ const Spacing = styled.div`
 	${media.medium`
 		padding-top: 40px;
 	`};
+	&.learner {
+		&-area {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 32px 32px 0;
+			${media.large`
+				padding-top: 70px;
+			`};
+			${media.medium`
+				gap: 24px 0;
+				padding: 70px 24px 0;
+			`};
+			${media.small`
+				gap: 20px 0;
+				padding: 40px 20px 0;
+			`};
+		}
+	}
+`;
+
+const Device = styled.div`
+	width: 45%;
+	${media.medium`
+		width: 100%;
+	`};
+	&.ta {
+		width: 30%;
+		${media.medium`
+			width: 60%;
+		`};
+	}
+	&.mo {
+		width: 20%;
+		${media.medium`
+			width: 30%;
+		`};
+		${media.small`
+			width: 35%;
+		`};
+	}
+	p {
+		color: #000;
+		font-size: 16px;
+    font-weight: 700;
+    text-align: right;
+    width: 100%;
+    padding: 0 12px 8px 0;
+    opacity: 0.7;
+	}
+`;
+
+const LearnerSmartDiv = styled(motion.div)`
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 592px;
+	border: 2px solid #000;
+	border-radius: 20px;
+	cursor: grab;
+	${media.large`
+		height: 600px;
+	`};
+	${media.medium`
+		height: 450px;
+		border-radius: 16px;
+	`};
+	${media.small`
+		height: 350px;
+		border-radius: 12px;
+	`};
+	${media.smallToo`
+		height: 170px;
+	`};
+`;
+
+const LearnerSmartImg = styled(motion.img)`
+	width: 100%;
 `;
 
 const Title = styled.div`
@@ -248,6 +314,41 @@ const Text = styled(motion.div)`
 		margin-top: 60px;
 		font-size: 16px;
 	`};
+	.point {
+		display: inline-block;
+		position: relative;
+		color: #fff;
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 84, 58, 0.8);
+			transform: skewX(-22deg);
+			${media.smallToo`
+				transform: skewX(0);
+			`};
+		}
+	}
+	&.main {
+		&-txt {
+			background-color: rgba(255,255,255,0.6);
+			padding: 32px;
+			border-radius: 20px;
+			${media.medium`
+				margin-top: 80px;
+				padding: 28px;
+				border-radius: 16px;
+			`};
+			${media.small`
+				margin-top: 70px;
+				border-radius: 12px;
+			`};
+		}
+	}
 	&.color {
 		&-txt {
 			${media.medium`
@@ -572,6 +673,10 @@ function Itle() {
 	const size = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], ["48px", "144px", "155px", "160px"]);
 	const size2 = useTransform(scrollYProgress, [0, 0.5, 0.8, 1], ["48px", "80px", "100px", "140px"]);
 
+	// sub drag
+	const LearnerSmartDivRef = useRef<HTMLDivElement>(null);
+	const LearnerSmartDivTaRef = useRef<HTMLDivElement>(null);
+	const LearnerSmartDivMoRef = useRef<HTMLDivElement>(null);
 	// 이미지 높이 담기
 	const ScrollerMainRef = useRef<HTMLDivElement>(null);
 	const ScrollerMainImgRef = useRef<HTMLImageElement>(null);
@@ -727,6 +832,47 @@ function Itle() {
 								<ScrollerImg src={main} ref={ScrollerMainImgRef} alt="작업 페이지 미리보기" style={{ y: 0 }} drag="y" dragConstraints={ScrollWindowInnerRef} onLoad={() => { setIsImageLoad(true) }} initial={windowSize.flag === "on" && { y: 0 }} animate={windowSize.flag === "on" && { y: -`${Number((itemH.ScrollerMainImgH - itemH.ScrollWindowH))}` }} transition={{ type: "tween", ease: [1, 1, 0.6, 1], delay: 1.5, repeat: Infinity, duration: 7 }} exit={{ y: 0 }} />
 							</ScrollerMain>
 						</ScrollWindow>
+					</div>
+					<div className="section">
+						<Title>
+							<TitleH1 style={{ fontSize: size }} className="right"># Dashboard</TitleH1>
+							<Text className="main-txt">
+								학위현황의 그래프 UI를 <span className="point">Chart.js 플러그인을 활용하여 반응형에 최적화된 페이지</span>를 만들었습니다.
+							</Text>
+						</Title>
+						<Spacing className="learner-area">
+							<Device>
+								<p>PC</p>
+								<LearnerSmartDiv ref={LearnerSmartDivRef}>
+									<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-shortcuts" title="퍼블 작업물 바로가기" onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/itle/myclass_degree_status.html") }} />
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={chartImg} drag="y" dragConstraints={LearnerSmartDivRef} />
+								</LearnerSmartDiv>
+							</Device>
+							<Device className="ta">
+								<p>Tablet</p>
+								<LearnerSmartDiv ref={LearnerSmartDivTaRef}>
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={chartImgTa} drag="y" dragConstraints={LearnerSmartDivTaRef} />
+								</LearnerSmartDiv>
+							</Device>
+							<Device className="mo">
+								<p>Mobile</p>
+								<LearnerSmartDiv ref={LearnerSmartDivMoRef}>
+									<Info>
+										<FontAwesomeIcon icon={faArrowsUpDown} />
+										Drag
+									</Info>
+									<LearnerSmartImg src={chartImgMo} drag="y" dragConstraints={LearnerSmartDivMoRef} />
+								</LearnerSmartDiv>
+							</Device>
+						</Spacing>
 					</div>
 					<div className="section sub-bg">
 						<Title>

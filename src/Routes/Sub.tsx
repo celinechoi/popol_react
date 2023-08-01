@@ -470,7 +470,7 @@ function Sub() {
 								{state.id === "nsu_inno" ? <Button onClick={() => { window.open("https://inno.nsu.ac.kr") }}>사이트 바로가기</Button> : ""}
 							</FrontInfo>
 							<section className="section">
-								<h2 className="section-title">역할</h2>
+								<h2 className="section-title">특징</h2>
 								<Effects>
 									{
 										didList.map((val: any) => (
