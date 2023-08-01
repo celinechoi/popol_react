@@ -208,19 +208,10 @@ const Info = styled.li`
 `;
 
 const Button = styled.button`
-	/* display: block;
-	width: 50%;
-	margin: 28px auto 0;
-	padding: 18px 32px;
-	border-radius: 12px;
-	background-color: ${(props) => props.theme.point.blue[0]};
-	color: #fff;
-	font-size: 20px; */
 	display: block;
 	position: relative;
-  background-color: ${(props) => props.theme.point.blue[0]};
+  background-color: ${props => props.theme.point.purple};
   border-radius: 5px;
-  box-shadow: rgb(18, 37, 121) 0px 8px 0px 0px;
   padding: 15px;
   background-repeat: no-repeat;
   box-sizing: border-box;
@@ -235,20 +226,26 @@ const Button = styled.button`
   overflow: hidden;
 	&::before {
 		content: "";
-		background-color: rgb(48, 73, 184);
+		background-color: #d6c5f0;
 		width: 0;
 		height: 100%;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
 		position: absolute;
-		top: 0;
+		bottom: -1px;
 		left: 0;
+		width: 100%;
+		height: 5px;
 		z-index: -1;
-		transition: width 700ms ease-in-out;
+		transition: height 700ms ease-in-out;
 		display: inline-block;
 	}
 	&:hover {
-		box-shadow: ${(props) => props.theme.shadow.button};
+		color: ${props => props.theme.point.purple};
 		&::before {
-			width: 100%;
+			bottom: 0;
+			height: 100%;
+			border-radius: 6px;
 		}
 	}
 	${media.medium`
@@ -257,6 +254,8 @@ const Button = styled.button`
 	`};
 	${media.small`
 		width: 100%;
+		padding: 12px 28px 14px;
+    font-size: 16px;
 	`};
 `;
 

@@ -24,8 +24,8 @@ const TabMenu = styled.ul`
 `;
 
 const Tab = styled.li<{ isActive: boolean }>`
-	background-color: ${(props) =>
-		props.isActive ? props.theme.point.blue[0] : "transparent"};
+	background: ${(props) =>
+		props.isActive ? props.theme.gradient.first : "transparent"};
 	border-radius: 26px;
 	color: ${(props) =>
 		props.isActive ? props.theme.textColor.gray.first : props.theme.textColor.gray.fifth};
@@ -35,8 +35,11 @@ const Tab = styled.li<{ isActive: boolean }>`
 	text-transform: uppercase;
 	cursor: pointer;
 	&:hover {
-		background-color: ${(props) => props.theme.point.blue[0]};
+		background: ${(props) => props.theme.gradient.first};
 		color: ${(props) => props.theme.textColor.gray.first};
+	}
+	&:active {
+		transform: scale(0.97);
 	}
 	&:first-child {
 		margin-left: 0;

@@ -212,7 +212,7 @@ const Visual = styled(motion.div)`
 	`};
 	>img {
 		display: block;
-		width: 190px;
+		width: 230px;
 		${media.small`
 			width: 40%;
 		`};

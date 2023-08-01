@@ -32,13 +32,16 @@ const Boxes = styled(motion.ul)`
 	display: flex;
 	flex-wrap: wrap;
   gap: 32px;
-	${media.medium`
-		gap: 32px 20px;
+	${media.large`
+		gap: 20px;
 	`};
 	${media.small`
+		gap: 16px;
+	`};
+	${media.smallToo`
 		flex-direction: column;
-		gap: 24px;
-	`}
+		gap: 12px;
+	`};
 `;
 
 const Box = styled(motion.li)`
@@ -46,8 +49,18 @@ const Box = styled(motion.li)`
 	padding: 24px 24px 12px;
   box-shadow: ${(props) => props.theme.shadow.box};
   border: 1px solid ${(props) => props.theme.bgColor.gray.fourth};
-  background-color: ${(props) => props.theme.bgColor.gray.first};
 	background-color: ${(props) => props.theme.bgColor.gray.third};
+	&:hover {
+		border: 1px solid ${(props) => props.theme.point.blue[0]};
+	}
+	&:active {
+		transform: scale(0.97);
+		border-color: ${(props) => props.theme.neon.yellow};
+		background: ${(props) => props.theme.gradient.second};
+	}
+	${media.large`
+		flex-basis: calc(100%/3 - 20px/3*2);
+	`};
 	${media.medium`
 		flex-basis: calc(100%/2 - 20px/2*1);
 		padding: 20px;
@@ -58,6 +71,9 @@ const Box = styled(motion.li)`
 			padding: 16px;
 			border-radius: 12px;
 	`}
+	${media.smallToo`
+			padding: 12px;
+	`};
 `;
 
 const BoxCon = styled.div`
@@ -70,6 +86,9 @@ const BoxCon = styled.div`
 		${media.small`
 			padding-bottom: 0;
 		`};
+		${media.smallToo`
+			font-size: 13px;
+		`};
 	}
 	.last {
 		width: 100%;
@@ -78,6 +97,7 @@ const BoxCon = styled.div`
 		font-size: 13px;
 		text-align: right;
 		${media.small`
+			padding-top: 3px;
 			font-size: 12px;
 		`};
 	}
@@ -88,8 +108,12 @@ const BoxCon = styled.div`
     justify-content: center;
 		font-size: 20px;
 		text-align: center;
-		${media.small`
+		${media.medium`
+			min-height: 40px;
 			font-size: 18px;
+		`};
+		${media.small`
+			font-size: 16px;
 		`};
 	}
 `;
@@ -113,10 +137,10 @@ const ImgBox = styled(motion.div)`
 		border-radius: 16px;
 	`};
 	${media.small`
-		height: 130px;
-		padding: 16px;
-		border-radius: 12px;
-	`}
+		height: 100px;
+    padding: 12px;
+    border-radius: 12px;
+	`};
 	>img {
 		display: block;
 		position: relative;
@@ -132,7 +156,7 @@ const ImgBox = styled(motion.div)`
 			width: 35%;
 		`}
 		${media.smallToo`
-			width: 55%;
+			width: 45%;
 		`};
 	}
 `;
@@ -178,7 +202,6 @@ const boxVariants = {
 		borderRadius: 0,
 		opacity: 0,
 		y: 20,
-		border: "3px solid transparent"
 	},
 	end: {
 		borderRadius: 20,
@@ -188,7 +211,7 @@ const boxVariants = {
 			duration: 1,
 		}
 	},
-	hover: { scale: 1.05, y: -20, borderColor: "#0179c3" }
+	hover: { scale: 1.05, y: -20 }
 }
 
 function List() {
@@ -256,7 +279,7 @@ function List() {
 										<Boxes variants={boxesVariants} initial="start" animate="end">
 											{
 												list.map((val) => (
-													<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
+													<Box key={val.customer} variants={boxVariants} initial="start" animate="end">
 														<Link to={{
 															pathname: `/popol_react/works/${typeId}/${val.id}`,
 															state: {

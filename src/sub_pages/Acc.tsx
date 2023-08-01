@@ -95,12 +95,23 @@ const GridWhole = styled(motion.div)`
 		`};
 	}
 `;
-// grid motion
+// motion
 const overlay = {
 	hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
 	visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
 	exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
 };
+
+const girdVariants = {
+	start: {
+		border: "3px solid transparent"
+	},
+	hover: {
+		borderColor: "#ffcc42",
+		y: -20,
+		scale: 1.05,
+	}
+}
 
 function Acc() {
 	// state
@@ -136,7 +147,7 @@ function Acc() {
 				<div className="grids">
 					{
 						data?.map((val: any, i: any) => (
-							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }} variants={girdVariants} initial="start" whileHover="hover">
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))
@@ -163,7 +174,7 @@ function Acc() {
 				<div className="grids">
 					{
 						data2?.map((val: any, i: any) => (
-							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }}>
+							<Grid key={i} layoutId={i} onClick={() => { setId(val); func.on(); }} variants={girdVariants} initial="start" whileHover="hover">
 								<img src={val} alt="작업물 이미지" />
 							</Grid>
 						))

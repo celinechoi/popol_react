@@ -350,6 +350,7 @@ const CoImg = styled(motion.img)`
 const ToolTxt = styled.p`
 	padding-top: 8px;
 	font-size: 12px;
+	font-weight: 900;
 	text-align: center;
 `;
 
@@ -935,11 +936,11 @@ function About() {
 				(<>
 					<div className="container">
 						<Profile style={{ scale }}>
-              <ImgFrame>
-                <ImgBox>
-                  <Img src={heart} alt="프로필 이미지" />
-                </ImgBox>
-              </ImgFrame>
+							<ImgFrame>
+								<ImgBox>
+									<Img src={heart} alt="프로필 이미지" />
+								</ImgBox>
+							</ImgFrame>
 							<div>
 								<Txt>UI/UX Developer 최진슬입니다.</Txt>
 								<ul>

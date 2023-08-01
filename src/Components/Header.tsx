@@ -105,6 +105,9 @@ const Menu = styled.li`
 		&.on {
 			color: ${(props) => props.theme.point.skyblue};
 		}
+		&:active {
+			transform: scale(0.97);
+		}
 	}
 `;
 const Point = styled(motion.span)`
