@@ -15,6 +15,10 @@ declare module "styled-components" {
 			blue: [string, string],
 			green: string
 		},
+		neon: {
+			mint: string,
+			yellow: string
+		},
 		bgColor: {
 			gray: {
 				first: string,

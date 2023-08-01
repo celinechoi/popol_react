@@ -14,6 +14,10 @@ export const darkTheme: DefaultTheme = {
 		blue: ["#0179c3", "rgba(1, 121, 195, 0.2)"],
 		green: "#14e090"
 	},
+	neon: {
+		mint: "rgb(0, 255, 200)",
+		yellow: "rgb(255, 242, 66)"
+	},
 	bgColor: {
 		gray: {
 			first: "#000",
@@ -65,6 +69,10 @@ export const lightTheme: DefaultTheme = {
 		skyblue: "#00b5ff",
 		blue: ["#13b9dc", "rgba(19, 185, 220, 0.2)"],
 		green: "#14e090"
+	},
+	neon: {
+		mint: "#02ecb9",
+		yellow: "#ffcc42"
 	},
 	bgColor: {
 		gray: {

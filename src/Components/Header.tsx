@@ -150,15 +150,15 @@ const SwitchFrame = styled.div`
   }
   .light {
     &-icon {
-      color: ${props => props.theme.point.yellow};
+      color: ${props => props.theme.point.orange};
     }
   }
 `;
 const ThemeSwitch = styled(motion.input)`
 	background-color: ${props => props.theme.bgColor.gray.third};
   border-radius: 0.75em;
-  box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
-  color: ${(props) => props.theme.point.beige};
+  box-shadow: 0.125em 0.125em 0 0.125em rgba(146, 146, 146, 0.3) inset;
+  color: ${(props) => props.theme.point.orange};
   display: inline-flex;
   align-items: center;
   margin: auto;
@@ -176,7 +176,8 @@ const ThemeSwitch = styled(motion.input)`
   	display: block;
 	}
 	&::before {
-		background-color: #d7d7d7;
+		background-color: ${props => props.theme.point.blue[0]};
+		box-shadow: 0.125em 0.125em 0 0.125em rgba(182, 182, 182, 0.3) inset;
 		border-radius: 50%;
 		width: 1.2em;
 		height: 1.2em;
@@ -184,7 +185,7 @@ const ThemeSwitch = styled(motion.input)`
 		z-index: 1;
 	}
 	&::after {
-		background: linear-gradient(transparent 50%, rgba(0,0,0,0.15) 0) 0 50% / 50% 100%,
+		background: linear-gradient(transparent 50%, rgba(78, 78, 78, 0.15) 0) 0 50% / 50% 100%,
 		repeating-linear-gradient(90deg,#bbb 0,#bbb,#bbb 20%,#999 20%,#999 40%) 0 50% / 50% 100%,
 		radial-gradient(circle at 50% 50%,#888 25%, transparent 26%);
 		background-repeat: no-repeat;
@@ -365,11 +366,11 @@ function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 						</Menu>
 					</Menus>
 					<HeaderRight>
-            <SwitchFrame>
-              {theme && <FontAwesomeIcon icon={faMoon} className="dark-icon" />}    
-						  <ThemeSwitch type="checkbox" className="theme-switch" onClick={toggleTheme} title={theme ? "밝게 보기" : "어둡게 보기"} />
-              {theme ? (""): (<FontAwesomeIcon icon = {faSun} className = "light-icon" />)}
-            </SwitchFrame>
+						<SwitchFrame>
+							{theme && <FontAwesomeIcon icon={faMoon} className="dark-icon" />}
+							<ThemeSwitch type="checkbox" className="theme-switch" onClick={toggleTheme} title={theme ? "밝게 보기" : "어둡게 보기"} />
+							{theme ? ("") : (<FontAwesomeIcon icon={faSun} className="light-icon" />)}
+						</SwitchFrame>
 						{isLoggedIn ?
 							(<Log onClick={onLogOutClick}>
 								<span>로그아웃</span>
