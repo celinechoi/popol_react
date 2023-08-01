@@ -444,7 +444,7 @@ function Sub() {
 									</Tags>
 								</Flexbox>
 								<Title>
-									<div className="page-h1">{state.projectName} 홈페이지</div>
+									<div className="page-h1">{state.projectName}</div>
 								</Title>
 								<Description>{state.description}</Description>
 								<Infos>
