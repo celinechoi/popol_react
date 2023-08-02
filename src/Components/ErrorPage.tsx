@@ -104,7 +104,7 @@ function ErrorPage() {
 				<p className="page-h2">잘못된 경로입니다.</p>
 				<p className="txt-default">하단의 버튼을 눌러 홈으로 이동하시거나 <br />상단 Home를 눌러 이동해주세요.</p>
 				<Button>
-					<Link to="/popol_react/">홈으로</Link>
+					<Link to="/">홈으로</Link>
 				</Button>
 			</ErrorFrame >
 		</>

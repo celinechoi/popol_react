@@ -248,35 +248,35 @@ function Header() {
 		);
 	}
 	// Link
-	const homeMatch = useRouteMatch("/popol_react");
-	const worksMatch = useRouteMatch("/popol_react/works");
-	const subMatch = useRouteMatch("/popol_react/sub");
-	const aboutMatch = useRouteMatch("/popol_react/about");
+	const homeMatch = useRouteMatch("/");
+	const worksMatch = useRouteMatch("/works");
+	const subMatch = useRouteMatch("/sub");
+	const aboutMatch = useRouteMatch("/about");
 	return (
 		<HeaderBox className={homeMatch?.isExact ? "home" : ""}>
 			<div className="inner">
 				<Row>
 					<Logo>
-						<Link to="/popol_react">
+						<Link to="/">
 							<p>UI/UX Developer</p>
 							<Em>Jinseul</Em>
 						</Link>
 					</Logo>
 					<Menus>
 						<Menu>
-							<Link to="/popol_react/" className={homeMatch?.isExact ? "on" : ""}>
+							<Link to="/" className={homeMatch?.isExact ? "on" : ""}>
 								Home
 								{homeMatch?.isExact === true && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" />}
 							</Link>
 						</Menu>
 						<Menu>
-							<Link to="/popol_react/works/solution" className={worksMatch || subMatch ? "on" : ""}>
+							<Link to="/works/solution" className={worksMatch || subMatch ? "on" : ""}>
 								Works
 								{worksMatch || subMatch ? <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" /> : ""}
 							</Link>
 						</Menu>
 						<Menu>
-							<Link to="/popol_react/about" className={aboutMatch ? "on" : ""}>
+							<Link to="/about" className={aboutMatch ? "on" : ""}>
 								About
 								{aboutMatch && <Point layoutId="point" variants={pointVariantes} initial="start" animate="end" exit="exit" />}
 							</Link>

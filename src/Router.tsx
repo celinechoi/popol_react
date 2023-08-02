@@ -12,22 +12,22 @@ import ErrorPage from "components/ErrorPage";
 function AppRouter() {
 
 	return (
-		<Router>
+		<Router basename={process.env.PUBLIC_URL}>
 			<Header />
 			<Switch>
-				<Route exact path="/popol_react/works/:typeId/:itemId">
+				<Route exact path="/works/:typeId/:itemId">
 					<Sub />
 				</Route>
-				<Route exact path="/popol_react/works/:typeId">
+				<Route exact path="/works/:typeId">
 					<List />
 				</Route>
-				<Route exact path="/popol_react/about">
+				<Route exact path="/about">
 					<About />
 				</Route>
-				<Route exact path="/popol_react/auth">
+				<Route exact path="/auth">
 					<Auth />
 				</Route>
-				<Route exact path="/popol_react">
+				<Route exact path="/">
 					<Home />
 				</Route>
 				<Route path={"*"}>

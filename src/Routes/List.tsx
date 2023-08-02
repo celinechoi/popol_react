@@ -281,7 +281,7 @@ function List() {
 												list.map((val) => (
 													<Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
 														<Link to={{
-															pathname: `/popol_react/works/${typeId}/${val.id}`,
+															pathname: `/works/${typeId}/${val.id}`,
 															state: {
 																parentPath: typeId,
 																id: val.id,

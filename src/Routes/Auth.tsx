@@ -369,7 +369,7 @@ function Auth() {
 	const history = useHistory();
 	const toggleAccount = () => {
 		setNewAccount(prev => !prev);
-		history.push("/popol_react/works/solution");
+		history.push("/works/solution");
 	}
 	const onSocialClick = async (event: any) => {
 		const { target: { name } } = event;

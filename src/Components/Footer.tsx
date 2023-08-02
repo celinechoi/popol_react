@@ -58,7 +58,7 @@ const Sns = styled.li`
 
 function Footer() {
 	// Link
-	const homeMatch = useRouteMatch("/popol_react");
+	const homeMatch = useRouteMatch("/");
 	return (
 		<FooterBox className={homeMatch?.isExact ? "home" : ""}>
 			<div className="inner">
