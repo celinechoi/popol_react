@@ -40,6 +40,7 @@ const HomeFrame = styled.div`
 		margin-top: 145px;
 	`};
 	@media (orientation: landscape) {
+		overflow-x: hidden;
 		overflow-y: auto;
 	}
 `;
@@ -190,6 +191,9 @@ const Draw = styled.svg`
 	z-index: -1;
   width: 100%;
   height: 100%;
+	@media (orientation: landscape) {
+		scale: 2;
+	}
 	g {
 		ellipse {
 			stroke-dasharray: 2570;
@@ -220,12 +224,14 @@ const Visual = styled(motion.div)`
 		padding: 12px;
 	`};
 	@media (orientation: landscape) {
+		display: block;
 		height: auto;
 		margin-top: 145px;
 	}
 	>img {
 		display: block;
 		width: 230px;
+		margin: 0 auto;
 		${media.medium`
 			width: 30%;
 		`};
