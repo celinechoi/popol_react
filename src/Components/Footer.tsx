@@ -14,14 +14,14 @@ const FooterBox = styled.div<{ theme: boolean }>`
     left: 0;
     bottom: 0;
     width: 100%;
-		background-color: transparent;
-    border-color: transparent;
+		background-color: ${(props) => props.theme.bgColor.gray.first};
+    border-color: ${(props) => props.theme.bgColor.gray.first};
 	}
 	p {
 		color: ${(props) => props.theme.textColor.gray.fifth};
-		font-size: 13px;
+		font-size: 12px;
 		${media.smallToo`
-			font-size: 12px;
+			font-size: 11px;
 		`};
 	}
 `;

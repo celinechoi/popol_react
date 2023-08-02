@@ -32,9 +32,16 @@ const HomeFrame = styled.div`
 	justify-content: center;
 	position: relative;
 	z-index: 0;
-  /* min-height: 580px; */
-  height: calc(var(--vh, 1vh)*100);
+	height: calc(var(--vh,1vh)*100 - 107px - 72px);
+	margin-top: 72px;
 	background-color: ${(props) => props.theme.bgColor.gray.first};
+	${media.smallToo`
+		height: calc(var(--vh,1vh)*100 - 102px - 145px);
+		margin-top: 145px;
+	`};
+	@media (orientation: landscape) {
+		overflow-y: auto;
+	}
 `;
 
 const BubbleBg = styled.div`
@@ -206,13 +213,22 @@ const Visual = styled(motion.div)`
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-  padding: 32px;
+	width: 100%;
+	height: 100%;
+  padding: 32px 20px;
 	${media.small`
 		padding: 12px;
 	`};
+	@media (orientation: landscape) {
+		height: auto;
+		margin-top: 145px;
+	}
 	>img {
 		display: block;
 		width: 230px;
+		${media.medium`
+			width: 30%;
+		`};
 		${media.small`
 			width: 40%;
 		`};
@@ -224,7 +240,7 @@ const Txt = styled(motion.div)`
   font-weight: 900;
   text-align: center;
   ${media.medium`
-    font-size: 24px;
+    font-size: 22px;
   `};
 	${media.smallToo`
     font-size: 18px;
