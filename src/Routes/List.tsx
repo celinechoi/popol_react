@@ -299,7 +299,7 @@ function List() {
 																endMonth: val.endMonth,
 															}
 														}}>
-															<ImgBox whileHover={{ borderColor: "rgba(1, 121, 195, 0.2)" }}>
+															<ImgBox>
 																{
 																	ImgLoading ?
 																		(

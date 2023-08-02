@@ -28,7 +28,7 @@ const Tab = styled.li<{ isActive: boolean }>`
 		props.isActive ? props.theme.gradient.first : "transparent"};
 	border-radius: 26px;
 	color: ${(props) =>
-		props.isActive ? props.theme.textColor.gray.first : props.theme.textColor.gray.fifth};
+		props.isActive ? "#fff" : props.theme.textColor.gray.fifth};
 	font-size: 18px;
 	font-weight: 900;
 	text-align: center;
@@ -36,7 +36,7 @@ const Tab = styled.li<{ isActive: boolean }>`
 	cursor: pointer;
 	&:hover {
 		background: ${(props) => props.theme.gradient.first};
-		color: ${(props) => props.theme.textColor.gray.first};
+		color: #fff;
 	}
 	&:active {
 		transform: scale(0.97);
