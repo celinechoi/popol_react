@@ -10,9 +10,9 @@ const FooterBox = styled.div<{ theme: boolean }>`
 	color: ${(props) => props.theme.bgColor.gray.fifth};
 	text-align: center;
 	&.home {
-    position: fixed;
+    /* position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 0; */
     width: 100%;
 		background-color: ${(props) => props.theme.bgColor.gray.first};
     border-color: ${(props) => props.theme.bgColor.gray.first};

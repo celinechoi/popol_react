@@ -28,21 +28,20 @@ const bubbleKey = keyframes`
 
 const HomeFrame = styled.div`
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	z-index: 0;
-	height: calc(var(--vh,1vh)*100 - 107px - 72px);
-	margin-top: 72px;
+	height: calc(var(--vh,1vh)*100 - 86px - 107px);
 	background-color: ${(props) => props.theme.bgColor.gray.first};
-	${media.smallToo`
-		height: calc(var(--vh,1vh)*100 - 102px - 145px);
-		margin-top: 145px;
+	${media.small`
+		height: calc(var(--vh,1vh)*100 - 90px - 107px);
 	`};
-	@media (orientation: landscape) {
-		overflow-x: hidden;
-		overflow-y: auto;
-	}
+	${media.horizontal`
+		height: auto;
+    min-height: calc(var(--vh,1vh)*100 - 145px - 102px);
+	`};
 `;
 
 const BubbleBg = styled.div`
@@ -191,9 +190,9 @@ const Draw = styled.svg`
 	z-index: -1;
   width: 100%;
   height: 100%;
-	@media (orientation: landscape) {
+	/* @media (orientation: landscape) {
 		scale: 2;
-	}
+	} */
 	g {
 		ellipse {
 			stroke-dasharray: 2570;
@@ -223,20 +222,20 @@ const Visual = styled(motion.div)`
 	${media.small`
 		padding: 12px;
 	`};
-	@media (orientation: landscape) {
+	/* @media (orientation: landscape) {
 		display: block;
 		height: auto;
 		margin-top: 145px;
-	}
+	} */
 	>img {
 		display: block;
 		width: 230px;
 		margin: 0 auto;
 		${media.medium`
-			width: 30%;
+			width: 25%;
 		`};
 		${media.small`
-			width: 40%;
+			width: 27%;
 		`};
 	}
 `;
@@ -251,6 +250,9 @@ const Txt = styled(motion.div)`
 	${media.smallToo`
     font-size: 18px;
   `};
+	${media.micro`
+		font-size: 16px;
+	`};
   .point {
     background-image: ${props => props.theme.gradient.second};
     background-clip: text;

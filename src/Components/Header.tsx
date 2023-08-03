@@ -19,6 +19,10 @@ const HeaderBox = styled.div`
 	background-color: ${(props) => props.theme.bgColor.gray.second};
 	box-shadow: ${(props) => props.theme.shadow.under};
 	&.home {
+		position: initial;
+		left: auto;
+		right: auto;
+		top: auto;
 		background-color: ${(props) => props.theme.bgColor.gray.first};
     box-shadow: none;
 	}
