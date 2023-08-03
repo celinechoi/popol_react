@@ -193,6 +193,7 @@ const Spacing = styled.div`
 `;
 
 const Device = styled.div`
+	overflow: hidden;
 	width: 45%;
 	${media.medium`
 		width: 100%;

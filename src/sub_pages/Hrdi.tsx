@@ -205,6 +205,7 @@ const Spacing = styled.div`
 `;
 
 const Device = styled.div`
+	overflow: hidden;
 	flex: 0 0 calc(100%/2 - 24px/2*1);
 	${media.medium`
 		flex-basis: 100%;

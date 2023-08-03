@@ -235,7 +235,10 @@ const Visual = styled(motion.div)`
 			width: 25%;
 		`};
 		${media.small`
-			width: 27%;
+			width: 29%;
+		`};
+		${media.micro`
+			width: 30%;
 		`};
 	}
 `;

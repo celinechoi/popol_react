@@ -58,7 +58,7 @@ table {
 }
 body {
   overflow-x: hidden;
-	background-color: ${(props) => props.theme.bgColor.gray.second};
+	background-color: ${(props) => props.theme.bgColor.gray.first};
 	color:${(props) => props.theme.textColor.gray.second};
 	font: 14px 'Noto Sans KR', 'Righteous';
   font-weight: 300;
