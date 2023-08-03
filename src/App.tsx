@@ -136,7 +136,9 @@ button {
 .container {
 	position: relative;
   min-height: 1080px;
-	margin: 140px 0 80px;
+	margin: 80px 0 0;
+	padding: 54px;
+	background-color: ${props => props.theme.bgColor.gray.second};
 	${media.small`
 		margin-top: 167px;
 	`};

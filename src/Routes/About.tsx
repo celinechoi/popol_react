@@ -39,6 +39,8 @@ const Profile = styled(motion.div)`
   align-items: center;
   justify-content: center;
   gap: 12px;
+	position: relative;
+	z-index: 0;
 `;
 
 const ImgFrame = styled.div`
@@ -57,7 +59,7 @@ const ImgBox = styled(motion.div)`
   width: 146px;
   height: 146px;
   padding: 12px;
-  background: linear-gradient(0deg, #000, #272727);
+  background: ${props => props.theme.bgColor.gray.first};
 	&::before,
 	&::after {
     content: '';

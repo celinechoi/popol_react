@@ -6,13 +6,11 @@ import { useRouteMatch } from "react-router-dom";
 
 const FooterBox = styled.div<{ theme: boolean }>`
 	padding: 24px 20px;
+	background-color: ${(props) => props.theme.bgColor.gray.second};
 	border-top: 1px solid ${(props) => props.theme.borColor.gray.first};
 	color: ${(props) => props.theme.bgColor.gray.fifth};
 	text-align: center;
 	&.home {
-    /* position: fixed;
-    left: 0;
-    bottom: 0; */
     width: 100%;
 		background-color: ${(props) => props.theme.bgColor.gray.first};
     border-color: ${(props) => props.theme.bgColor.gray.first};

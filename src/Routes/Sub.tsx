@@ -22,6 +22,7 @@ import { useEffect } from "react";
 const SubPage = styled.div`
 	position: relative;
   padding: 125px 0 80px;
+	background-color: ${props => props.theme.bgColor.gray.second};
 	${media.small`
 		padding-top: 155px;
 	`};
@@ -211,7 +212,7 @@ const Button = styled.button`
 	display: block;
 	position: relative;
   background-color: ${props => props.theme.point.purple};
-  border-radius: 5px;
+  border-radius: 6px;
   padding: 15px;
   background-repeat: no-repeat;
   box-sizing: border-box;
@@ -468,6 +469,7 @@ function Sub() {
 								{state.id === "itle" ? <Button onClick={() => { window.open("https://lms-itle.or.kr/") }}>사이트 바로가기</Button> : ""}
 								{state.id === "nsu_beauty" ? <Button onClick={() => { window.open("https://gr.nsu.ac.kr/kor/84/dept/0226") }}>사이트 바로가기</Button> : ""}
 								{state.id === "nsu_inno" ? <Button onClick={() => { window.open("https://inno.nsu.ac.kr") }}>사이트 바로가기</Button> : ""}
+								{state.id === "vsquare_demo" ? <Button onClick={() => { window.open("https://celinechoi.github.io/Publish-vsquare/demo/systems_guide.html") }}>System Kit Guide 바로가기</Button> : ""}
 							</FrontInfo>
 							<section className="section">
 								<h2 className="section-title">특징</h2>
