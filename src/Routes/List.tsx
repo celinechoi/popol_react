@@ -11,6 +11,9 @@ import ErrorPage from "components/ErrorPage";
 
 const Title = styled.div`
   height: 200px;
+	${media.medium`
+		height: 160px;
+	`};
 	${media.small`
 		height: auto;
 	`};
@@ -264,14 +267,14 @@ function List() {
 			{
 				typeId ? (
 					<div className="container">
-						<Title>
-							<div className="inner">
-								<h2 className="page-h1">Works</h2>
-								<Tabs typePath={typeId} />
-							</div>
-						</Title>
-						<Container>
-							<div className="inner">
+						<div className="inner">
+							<Title>
+								<div className="inner">
+									<h2 className="page-h1">Works</h2>
+									<Tabs typePath={typeId} />
+								</div>
+							</Title>
+							<Container>
 								{loading ? (
 									<Loading prop="Loading" />
 								) : (
@@ -322,8 +325,8 @@ function List() {
 										</Boxes>
 									</>
 								)}
-							</div>
-						</Container >
+							</Container >
+						</div>
 					</div >
 				) : (<ErrorPage />)
 			}

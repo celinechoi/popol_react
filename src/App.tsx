@@ -137,10 +137,10 @@ button {
 	position: relative;
   min-height: 1080px;
 	margin: 80px 0 0;
-	padding: 54px;
+	padding-top: 54px;
 	background-color: ${props => props.theme.bgColor.gray.second};
-	${media.small`
-		margin-top: 167px;
+	${media.smallToo`
+		padding-top: 107px;
 	`};
 }
 .page {
