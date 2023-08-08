@@ -21,9 +21,14 @@ const TabMenu = styled.ul`
 		top: 32px;
 		border-radius: 24px;
 	`};
+  ${media.micro`
+    gap: 3px;
+    width: auto;
+  `};
 `;
 
 const Tab = styled.li<{ isActive: boolean }>`
+  padding: 10px 28px;
 	background: ${(props) =>
 		props.isActive ? props.theme.gradient.first : "transparent"};
 	border-radius: 26px;
@@ -45,20 +50,15 @@ const Tab = styled.li<{ isActive: boolean }>`
 		margin-left: 0;
 	}
 	${media.medium`
+    padding: 8px 28px;
 		border-radius: 20px;
 	`};
 	${media.small`
+    padding: 8px 16px;
     font-size: 16px;
 	`};
 	>a {
 		display: block;
-		padding: 10px 28px;
-		${media.medium`
-			padding: 8px 28px;
-		`};
-		${media.small`
-			padding: 8px 16px;
-		`};
 	}
 `;
 function Tabs({ typePath }: { typePath: string | object }) {
