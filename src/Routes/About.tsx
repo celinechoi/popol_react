@@ -339,7 +339,7 @@ const CoImg = styled(motion.img)`
   border-radius: 50%;
   height: 70px;
   padding: 12px;
-  background: linear-gradient(0deg, rgba(77,54,208,1) 0%, rgba(132,116,254,1) 100%);
+  background: linear-gradient(0deg, #ebebfa 0%, #ebebeb 100%);
   box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
   opacity: 0.9;
 	${media.micro`
@@ -471,7 +471,7 @@ function About() {
 			series: [
 				{
 					name: "Tech Stack",
-					data: [90, 70, 30, 90, 95, 60]
+					data: [90, 70, 50, 90, 95, 90]
 				}
 			],
 			options: {
@@ -515,8 +515,8 @@ function About() {
 					position: 'bottom',
 					labels: {
 						style: {
-							colors: ['#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e', '#9e9e9e'],
-							fontSize: '14px',
+              colors: ['#14e090', '#f8d622', '#fdfa29', '#fbeaad', '#b8005c', '#C66394'],
+							fontSize: '13px',
 							fontWeight: 'bold'
 						},
 					},
@@ -846,13 +846,13 @@ function About() {
 			}
 		}
 		const chartOption2 = {
-			series: [60, 40],
+			series: [40, 20, 20, 20],
 			options: {
 				chart: {
 					height: 340
 				},
-				colors: ['#61dafb', '#C66394'],
-				labels: ['React (with Typescript)', 'SCSS'],
+        colors: ['#C66394', '#f8d622', '#fdfa29','#0f69ef'],
+        labels: ['SCSS(SASS)', 'Javascript', 'React.js (with Typescript)','Next.js'],
 				yaxis: {
 					tickAmount: 4,
 					min: 0,
