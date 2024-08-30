@@ -15,6 +15,7 @@ import slack from 'img/logo/slack_logo.svg';
 import notion from 'img/logo/notion_logo.png';
 import asana from 'img/logo/asana_logo.svg';
 import jira from 'img/logo/jira_logo.svg';
+import dooray from 'img/logo/dooray_logo.svg';
 
 // keyframes
 const borderKey = keyframes`
@@ -1040,6 +1041,10 @@ function About() {
                       <Item variants={itemVariants}>
                         <CoImg src={jira} alt="jira 로고" />
                         <ToolTxt>Jira</ToolTxt>
+                      </Item>
+                      <Item variants={itemVariants}>
+                        <CoImg src={dooray} alt="dooray 로고" />
+                        <ToolTxt>Dooray</ToolTxt>
                       </Item>
                     </Items>
                   </CoWorkTools>
