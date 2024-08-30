@@ -125,6 +125,7 @@ const ImgBox = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   position: relative;
   height: 165px;
   padding: 28px;
