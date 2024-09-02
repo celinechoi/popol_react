@@ -2,12 +2,12 @@ import { dbService } from 'fbase';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Tabs from 'Routes/Tabs';
+import Tabs from 'routes/Tabs';
 import { media } from 'style/media_query';
-import Loading from 'Components/Loading';
+import Loading from 'components/Loading';
 import { motion } from 'framer-motion';
-import ImgsLoading from 'Components/ImgsLoading';
-import ErrorPage from 'Components/ErrorPage';
+import ImgsLoading from 'components/ImgsLoading';
+import ErrorPage from 'components/ErrorPage';
 
 const Title = styled.div`
   height: 200px;
@@ -327,3 +327,4 @@ function List() {
 }
 
 export default List;
+
