@@ -843,13 +843,13 @@ function About() {
       },
     };
     const chartOption2 = {
-      series: [40, 20, 20],
+      series: [40, 20, 25, 15],
       options: {
         chart: {
           height: 340,
         },
-        colors: ['#C66394', '#f8d622', '#fdfa29'],
-        labels: ['SCSS(SASS)', 'Javascript', 'React.js (with Typescript)'],
+        colors: ['#C66394', '#f8d622', '#ffb400', '#015ff2'],
+        labels: ['SCSS(SASS)', 'Javascript', 'React.js (with Typescript)', 'Next.js (with Typescript)'],
         yaxis: {
           tickAmount: 4,
           min: 0,
@@ -1043,7 +1043,7 @@ function About() {
                         <ToolTxt>Jira</ToolTxt>
                       </Item>
                       <Item variants={itemVariants}>
-                        <CoImg src={dooray} alt="dooray 로고" />
+                        <CoImg src={dooray} alt="dooray 로고" style={{ background: 'rgb(31, 74, 148)' }} />
                         <ToolTxt>Dooray</ToolTxt>
                       </Item>
                     </Items>
@@ -1062,4 +1062,3 @@ function About() {
   );
 }
 export default About;
-

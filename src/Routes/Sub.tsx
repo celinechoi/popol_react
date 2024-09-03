@@ -16,6 +16,8 @@ import Hsjob from 'sub_pages/Hsjob';
 import Itle from 'sub_pages/Itle';
 import AiLemp from 'sub_pages/Ailemp';
 import Vsquare from 'sub_pages/Vsquare';
+// gravity
+import Gstar from 'sub_pages/Gstar';
 import ErrorPage from 'components/ErrorPage';
 import { useEffect } from 'react';
 
@@ -575,6 +577,7 @@ function Sub() {
                   hsjob: <Hsjob />,
                   itle: <Itle />,
                   vsquare_demo: <Vsquare />,
+                  gstar: <Gstar />,
                 }[state.id]
               }
             </section>
