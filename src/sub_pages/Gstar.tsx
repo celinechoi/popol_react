@@ -96,26 +96,44 @@ const Device = styled.div`
   }
 `;
 const LearnerSmartDiv = styled(motion.div)`
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   width: 100%;
-  height: 812px;
+  min-height: 800px;
+  max-height: 812px;
   border: 2px solid #000;
   border-radius: 20px;
-  cursor: grab;
+  // cursor: grab;
+  &::-webkit-scrollbar {
+    width: 10px; /* 스크롤바의 너비 */
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #feae6a; /* 스크롤바의 색상 */
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgb(255, 220, 163, 0.9); /*스크롤바 뒷 배경 색상*/
+  }
+  &:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
   ${media.large`
-		height: 600px;
+		min-height: 600px;
 	`};
   ${media.medium`
-		height: 450px;
+		min-height: 450px;
 		border-radius: 16px;
 	`};
   ${media.small`
-		height: 350px;
+		min-height: 350px;
 		border-radius: 12px;
 	`};
   ${media.smallToo`
-		height: 170px;
+		min-height: 170px;
 	`};
 `;
 const LearnerSmartImg = styled(motion.img)`
@@ -129,6 +147,7 @@ function Gstar() {
   const LearnerSmartDivMoRef = useRef<HTMLDivElement>(null);
   return (
     <div className="sub">
+      <Spacing></Spacing>
       <Spacing>
         <Device>
           <p>PC</p>
@@ -141,31 +160,19 @@ function Gstar() {
                 window.open('https://celinechoi.github.io/Publish-vsquare/ailemp/learner-report-smart.html');
               }}
             />
-            <Info>
-              <FontAwesomeIcon icon={faArrowsUpDown} />
-              Drag
-            </Info>
-            <LearnerSmartImg src={mainKo} drag="y" dragConstraints={LearnerSmartDivRef} />
+            <LearnerSmartImg src={mainKo} />
           </LearnerSmartDiv>
         </Device>
         <Device className="ta">
           <p>Tablet</p>
           <LearnerSmartDiv ref={LearnerSmartDivTaRef}>
-            <Info>
-              <FontAwesomeIcon icon={faArrowsUpDown} />
-              Drag
-            </Info>
-            <LearnerSmartImg src={mainEn} drag="y" dragConstraints={LearnerSmartDivTaRef} />
+            <LearnerSmartImg src={mainEn} />
           </LearnerSmartDiv>
         </Device>
         <Device className="mo">
           <p>Mobile</p>
           <LearnerSmartDiv ref={LearnerSmartDivMoRef}>
-            <Info>
-              <FontAwesomeIcon icon={faArrowsUpDown} />
-              Drag
-            </Info>
-            <LearnerSmartImg src={mainKoMo} drag="y" dragConstraints={LearnerSmartDivMoRef} />
+            <LearnerSmartImg src={mainKoMo} />
           </LearnerSmartDiv>
         </Device>
       </Spacing>
