@@ -14,7 +14,7 @@ import Iedu from 'sub_pages/Iedu';
 import Hrdi from 'sub_pages/Hrdi';
 import Hsjob from 'sub_pages/Hsjob';
 import Itle from 'sub_pages/Itle';
-import AiLemp from 'sub_pages/AiLemp';
+import AiLemp from 'sub_pages/Ailemp';
 import Vsquare from 'sub_pages/Vsquare';
 import ErrorPage from 'components/ErrorPage';
 import { useEffect } from 'react';
@@ -587,4 +587,3 @@ function Sub() {
   );
 }
 export default Sub;
-
