@@ -151,7 +151,6 @@ const ImgBox = styled(motion.div)`
     z-index: 1;
     width: 70%;
     height: auto;
-    padding: 20px;
     background-color: #ededed;
     ${media.large`
 			padding: 0;
@@ -327,4 +326,3 @@ function List() {
 }
 
 export default List;
-
