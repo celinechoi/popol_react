@@ -14,7 +14,7 @@ import Iedu from 'sub_pages/Iedu';
 import Hrdi from 'sub_pages/Hrdi';
 import Hsjob from 'sub_pages/Hsjob';
 import Itle from 'sub_pages/Itle';
-import AiLemp from 'sub_pages/Ailemp';
+import AiLemp from 'sub_pages/AiLemp';
 import Vsquare from 'sub_pages/Vsquare';
 // gravity
 import Gstar from 'sub_pages/Gstar';
@@ -590,3 +590,4 @@ function Sub() {
   );
 }
 export default Sub;
+

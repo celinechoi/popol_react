@@ -128,7 +128,6 @@ const ImgBox = styled(motion.div)`
   overflow: hidden;
   position: relative;
   height: 165px;
-  padding: 28px;
   background-color: #ededed;
   border-radius: 20px;
   border: 3px solid transparent;
@@ -137,12 +136,10 @@ const ImgBox = styled(motion.div)`
 	`};
   ${media.medium`
 		height: 150px;
-		padding: 20px;
 		border-radius: 16px;
 	`};
   ${media.small`
 		height: 100px;
-    padding: 12px;
     border-radius: 12px;
 	`};
   > img {
@@ -326,3 +323,4 @@ function List() {
 }
 
 export default List;
+

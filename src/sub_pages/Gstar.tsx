@@ -43,7 +43,7 @@ const Device = styled.div`
 		`}; */
   }
   p {
-    color: #fdfdfd;
+    color: #a09d9d;
     font-size: 16px;
     font-weight: 700;
     text-align: right;
@@ -130,3 +130,4 @@ function Gstar() {
 }
 
 export default Gstar;
+
