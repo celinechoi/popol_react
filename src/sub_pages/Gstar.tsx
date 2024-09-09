@@ -17,6 +17,7 @@ const Spacing = styled.div`
     padding-top: 70px;
   `};
   ${media.medium`
+  flex-direction: column;
     gap: 24px 0;
     padding: 70px 24px 0;
   `};
@@ -51,45 +52,6 @@ const Device = styled.div`
     padding: 0 12px 8px 0;
     opacity: 0.7;
   }
-`;
-const LearnerSmartDiv = styled.div`
-  overflow-y: auto;
-  position: relative;
-  width: 100%;
-  min-height: 750px;
-  max-height: 750px;
-  border: 2px solid #000;
-  background-color: #000;
-  // cursor: grab;
-  &::-webkit-scrollbar {
-    width: 7px; /* 스크롤바의 너비 */
-    border-radius: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #3f3f3f; /* 스크롤바의 색상 */
-    border-radius: 10px;
-  }
-  &::-webkit-scrollbar-track {
-    background: #1d1d1d; /*스크롤바 뒷 배경 색상*/
-  }
-  &:after {
-    clear: both;
-    display: block;
-    content: '';
-  }
-  ${media.large`
-		min-height: 600px;
-	`};
-  ${media.medium`
-		min-height: 450px;
-	`};
-  ${media.small`
-		min-height: 350px;
-	`};
-  ${media.smallToo`
-		min-height: 170px;
-	`};
 `;
 const LearnerSmartImg = styled.img`
   width: 100%;

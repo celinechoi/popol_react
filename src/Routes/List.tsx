@@ -278,7 +278,7 @@ function List() {
                 <>
                   <Boxes variants={boxesVariants} initial="start" animate="end">
                     {list.map((val) => (
-                      <Box key={val.customer} variants={boxVariants} initial="start" animate="end" whileHover="hover">
+                      <Box key={val.id} variants={boxVariants} initial="start" animate="end" whileHover="hover">
                         <Link
                           to={{
                             pathname: `/works/${typeId}/${val.id}`,

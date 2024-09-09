@@ -47,11 +47,9 @@ const Tab = styled.li<{ isActive: boolean }>`
     margin-left: 0;
   }
   ${media.medium`
-    padding: 8px 28px;
 		border-radius: 20px;
 	`};
   ${media.small`
-    padding: 8px 16px;
     font-size: 16px;
 	`};
   > a {
@@ -91,3 +89,4 @@ function Tabs({ typePath }: { typePath: string | object }) {
   );
 }
 export default Tabs;
+
