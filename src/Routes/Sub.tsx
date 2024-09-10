@@ -547,6 +547,17 @@ function Sub() {
               ) : (
                 ''
               )}
+              {state.id === 'gstar' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-vsquare/demo/systems_guide.html');
+                  }}
+                >
+                  System Kit Guide 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
             </FrontInfo>
             <section className="section">
               <h2 className="section-title">특징</h2>
@@ -590,4 +601,3 @@ function Sub() {
   );
 }
 export default Sub;
-
