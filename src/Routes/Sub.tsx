@@ -473,7 +473,7 @@ function Sub() {
               {state.id === 'ailemp' ? (
                 <Button
                   onClick={() => {
-                    window.open('https://iscreamedu.vsquare.cc/page/home');
+                    window.open('https://ailemp.vsquare.cc/');
                   }}
                 >
                   사이트 바로가기
@@ -547,13 +547,47 @@ function Sub() {
               ) : (
                 ''
               )}
-              {state.id === 'gstar' ? (
+              {/* start gravity */}
+              {state.id === 'thero' ? (
                 <Button
                   onClick={() => {
-                    window.open('https://celinechoi.github.io/Publish-vsquare/demo/systems_guide.html');
+                    window.open('https://theragnarok.gnjoy.com/');
                   }}
                 >
-                  System Kit Guide 바로가기
+                  사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'ros' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://ro.gnjoy.com/match/2024/');
+                  }}
+                >
+                  사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'poringrush' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://poringrush.gnjoy.com/');
+                  }}
+                >
+                  사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'gravity_official' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://www.gravity.co.kr/');
+                  }}
+                >
+                  사이트 바로가기
                 </Button>
               ) : (
                 ''
