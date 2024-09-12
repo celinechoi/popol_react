@@ -18,6 +18,7 @@ import AiLemp from 'sub_pages/AiLemp';
 import Vsquare from 'sub_pages/Vsquare';
 // gravity
 import Gstar from 'sub_pages/Gstar';
+import Thero from 'sub_pages/Thero';
 import ErrorPage from 'components/ErrorPage';
 import { useEffect } from 'react';
 
@@ -592,6 +593,7 @@ function Sub() {
               ) : (
                 ''
               )}
+              {/* end gravity */}
             </FrontInfo>
             <section className="section">
               <h2 className="section-title">특징</h2>
@@ -623,6 +625,7 @@ function Sub() {
                   itle: <Itle />,
                   vsquare_demo: <Vsquare />,
                   gstar: <Gstar />,
+                  thero: <Thero />,
                 }[state.id]
               }
             </section>

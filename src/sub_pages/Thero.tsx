@@ -3,10 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import fullMp4 from 'img/sub_pages/gravity/gstar/2023/full.mp4';
-import mainKo from 'img/sub_pages/gravity/gstar/2023/ko_main.webp';
-import mainEn from 'img/sub_pages/gravity/gstar/2023/en_main.webp';
-import mainKoMo from 'img/sub_pages/gravity/gstar/2023/ko_main_mo.webp';
+import fullMp4 from 'img/sub_pages/gravity/the_ro/full.mp4';
+import mainKo from 'img/sub_pages/gravity/the_ro/page.webp';
+import mainMo from 'img/sub_pages/gravity/the_ro/page_mo.webp';
 import { useEffect, useState } from 'react';
 import { focusHandler, resetHandler } from 'function/ModalScroll';
 
@@ -184,13 +183,13 @@ const girdVariants = {
   },
 };
 
-function Gstar() {
+function Thero() {
   const [data, setData] = useState<any[]>();
   const [id, setId] = useState<null | string>(null);
   const [func, setFunc] = useState<any>({ on: null, off: null });
   useEffect(() => {
     // data
-    const imgArr = [mainKo, mainEn, mainKoMo];
+    const imgArr = [mainKo, mainMo];
     let isMount = true;
     if (isMount) {
       setData(imgArr);
@@ -225,9 +224,8 @@ function Gstar() {
             initial="start"
             whileHover="hover"
           >
-            {i == 0 ? <DeviceName>국문 페이지 PC</DeviceName> : ''}
-            {i == 1 ? <DeviceName>영문 페이지 PC</DeviceName> : ''}
-            {i == 2 ? <DeviceName>국문 페이지 모바일</DeviceName> : ''}
+            {i == 0 ? <DeviceName>PC</DeviceName> : ''}
+            {i == 1 ? <DeviceName>모바일</DeviceName> : ''}
             <Grid>
               <img src={val} alt="작업물 이미지" />
             </Grid>
@@ -266,4 +264,4 @@ function Gstar() {
   );
 }
 
-export default Gstar;
+export default Thero;
