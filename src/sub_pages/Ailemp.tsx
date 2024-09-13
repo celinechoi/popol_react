@@ -372,7 +372,6 @@ const LearnerSmartDiv = styled(motion.div)`
   width: 100%;
   border: 2px solid #000;
   border-radius: 20px;
-  cursor: grab;
   ${media.medium`
 		border-radius: 16px;
 	`};
@@ -1288,4 +1287,3 @@ function AiLemp() {
 }
 
 export default AiLemp;
-

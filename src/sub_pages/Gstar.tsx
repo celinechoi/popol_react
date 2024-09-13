@@ -13,23 +13,24 @@ import { focusHandler, resetHandler } from 'function/ModalScroll';
 const Spacing = styled.div`
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 110px 32px 0;
-  ${media.large`
-    padding-top: 70px;
-  `};
+  padding-top: 60px;
   ${media.medium`
-  flex-direction: column;
-    gap: 24px 0;
-    padding: 70px 24px 0;
-  `};
-  ${media.small`
-    gap: 20px 0;
-    padding: 40px 20px 0;
-  `};
+		padding-top: 40px;
+	`};
+  &.learner {
+    &-area {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      ${media.medium`
+				gap: 24px 0;
+			`};
+      ${media.small`
+				gap: 20px 0;
+			`};
+    }
+  }
 `;
 const CaptureMove = styled.div`
   overflow: hidden;
@@ -61,27 +62,43 @@ const DeviceName = styled.p`
 const LearnerSmartImg = styled.img`
   width: 100%;
 `;
-const GridFrame = styled(motion.div)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+const GridFrame = styled.div`
   flex: 0 0 calc(100% / 3 - 12px / 3 * 2);
-  min-height: 100px;
+  ${media.large`
+		flex-basis: calc(100%/2 - 12px/2*1);
+	`};
+  p {
+    color: #a09d9d;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: right;
+    width: 100%;
+    padding: 0 12px 8px 0;
+    opacity: 0.7;
+  }
 `;
 const Grid = styled(motion.div)`
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: rgba(251, 234, 173, 0.7);
   border-radius: 20px;
   box-shadow: ${(props) => props.theme.shadow.box};
   cursor: pointer;
-  ${media.large`
-		flex-basis: calc(100%/2 - 12px/2*1);
-	`};
-  ${media.small`
-		flex-basis: 100%;
-	`};
+  max-height: 600px;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #807d7d;
+    border-radius: 6px;
+    border: 6px solid #fbeaad;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgb(128, 125, 125, 0.9);
+    border-radius: 6px;
+  }
   > img {
+    display: block;
     width: 100%;
   }
 `;
@@ -150,6 +167,7 @@ const GridBody = styled.div`
   }
   &::-webkit-scrollbar-track {
     background-color: rgb(128, 125, 125, 0.9);
+    border-radius: 6px;
   }
   > img {
     display: block;
@@ -204,31 +222,33 @@ function Gstar() {
   }, []);
   return (
     <div className="sub">
-      <div>
-        <DeviceName>미리보기</DeviceName>
+      <Spacing>
+        <DeviceName>인터렉션 영상</DeviceName>
         <CaptureMove>
           <video muted autoPlay loop>
             <source type="video/mp4" src={fullMp4} />
           </video>
         </CaptureMove>
-      </div>
-      <Spacing>
+      </Spacing>
+      <Spacing className="learner-area">
         {data?.map((val: any, i: any) => (
-          <GridFrame
-            key={i}
-            layoutId={i}
-            onClick={() => {
-              setId(val);
-              func.on();
-            }}
-            variants={girdVariants}
-            initial="start"
-            whileHover="hover"
-          >
-            {i == 0 ? <DeviceName>국문 페이지 PC</DeviceName> : ''}
-            {i == 1 ? <DeviceName>영문 페이지 PC</DeviceName> : ''}
-            {i == 2 ? <DeviceName>국문 페이지 모바일</DeviceName> : ''}
-            <Grid>
+          <GridFrame>
+            <p>
+              {i == 0 ? '국문 페이지 PC' : ''}
+              {i == 1 ? '영문 페이지 PC' : ''}
+              {i == 2 ? '국문 페이지 Mobile' : ''}
+            </p>
+            <Grid
+              key={i}
+              onClick={() => {
+                setId(val);
+                func.on();
+              }}
+              layoutId={i}
+              variants={girdVariants}
+              initial="start"
+              whileHover="hover"
+            >
               <img src={val} alt="작업물 이미지" />
             </Grid>
           </GridFrame>

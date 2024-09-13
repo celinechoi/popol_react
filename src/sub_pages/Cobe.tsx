@@ -94,6 +94,7 @@ const GridBody = styled.div`
   }
   &::-webkit-scrollbar-track {
     background-color: rgb(128, 125, 125, 0.9);
+    border-radius: 6px;
   }
   > img {
     display: block;
@@ -203,4 +204,3 @@ function Cobe() {
 }
 
 export default Cobe;
-
