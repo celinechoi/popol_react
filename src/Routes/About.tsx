@@ -843,13 +843,13 @@ function About() {
       },
     };
     const chartOption2 = {
-      series: [40, 20, 25, 15],
+      series: [45, 25, 30],
       options: {
         chart: {
           height: 340,
         },
-        colors: ['#C66394', '#f8d622', '#ffb400', '#ddd'],
-        labels: ['SCSS(SASS)', 'Javascript', 'React.js (with Typescript)', 'Next.js (with Typescript)'],
+        colors: ['#C66394', '#f8d622', '#ffb400'],
+        labels: ['SCSS(SASS)', 'Javascript', 'React.js (with Typescript)'],
         yaxis: {
           tickAmount: 4,
           min: 0,

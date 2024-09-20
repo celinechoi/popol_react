@@ -21,6 +21,7 @@ import Gstar from 'sub_pages/Gstar';
 import Thero from 'sub_pages/Thero';
 import ErrorPage from 'components/ErrorPage';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const SubPage = styled.div`
   position: relative;
@@ -284,14 +285,15 @@ const Effects = styled.ul`
 	`};
 `;
 
-const Effect = styled.li`
+const Effect = styled(motion.li)`
   flex: 1 1 calc(100% / 2 - 32px / 2 * 1);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   min-height: 80px;
   border-radius: 20px;
-  padding: 16px 22px;
+  padding: 16px 22px 16px 30px;
   background-color: rgba(250, 250, 250, 0.6);
   color: #000;
   font-size: 18px;
@@ -309,6 +311,24 @@ const Effect = styled.li`
 		border-radius: 12px;
 		flex-basis: 100%;
 	`};
+  &::before {
+    content: '✅';
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    font-size: 17px;
+  }
+`;
+
+const EffectItem = styled.span`
+  display: inline-block;
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: ${(props) => props.theme.point.green};
+  }
 `;
 
 const FocusArrow = styled.div`
@@ -399,6 +419,21 @@ interface RouteState {
   endMonth: number | undefined;
   endYear: number | undefined;
 }
+
+// motion
+const lineVariants = {
+  start: { opacity: 0, scale: 0.5 },
+  end: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      delay: 0.5,
+      ease: [0, 0.71, 0.2, 1.01],
+    },
+  },
+  hover: {},
+};
 
 function Sub() {
   // 현재 페이지 파악
@@ -599,7 +634,9 @@ function Sub() {
               <h2 className="section-title">특징</h2>
               <Effects>
                 {didList.map((val: any) => (
-                  <Effect key={val}>{val}</Effect>
+                  <Effect key={val} variants={lineVariants} initial="start" animate="end">
+                    <EffectItem>{val}</EffectItem>
+                  </Effect>
                 ))}
               </Effects>
               <FocusArrow />

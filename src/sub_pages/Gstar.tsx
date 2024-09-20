@@ -21,14 +21,14 @@ const Spacing = styled.div`
     &-area {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      ${media.medium`
+      justify-content: center;
+      gap: 1%;
+      /* ${media.medium`
 				gap: 24px 0;
 			`};
       ${media.small`
 				gap: 20px 0;
-			`};
+			`}; */
     }
   }
 `;
@@ -51,7 +51,7 @@ const Device = styled.div`
   }
 `;
 const DeviceName = styled.p`
-  color: #a09d9d;
+  color: ${(props) => props.theme.textColor.gray.first};
   font-size: 16px;
   font-weight: 700;
   text-align: right;
@@ -59,23 +59,8 @@ const DeviceName = styled.p`
   padding: 0 12px 8px 0;
   opacity: 0.7;
 `;
-const LearnerSmartImg = styled.img`
-  width: 100%;
-`;
 const GridFrame = styled.div`
-  flex: 0 0 calc(100% / 3 - 12px / 3 * 2);
-  ${media.large`
-		flex-basis: calc(100%/2 - 12px/2*1);
-	`};
-  p {
-    color: #a09d9d;
-    font-size: 16px;
-    font-weight: 700;
-    text-align: right;
-    width: 100%;
-    padding: 0 12px 8px 0;
-    opacity: 0.7;
-  }
+  flex: 0 0 auto;
 `;
 const Grid = styled(motion.div)`
   overflow-x: hidden;
@@ -187,7 +172,7 @@ const GridBody = styled.div`
 // motion
 const overlay = {
   hidden: { backgroundColor: 'rgba(0, 0, 0, 0)' },
-  visible: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+  visible: { backgroundColor: 'rgba(0, 0, 0, 1)' },
   exit: { backgroundColor: 'rgba(0, 0, 0, 0)' },
 };
 
@@ -205,6 +190,7 @@ const girdVariants = {
 function Gstar() {
   const [data, setData] = useState<any[]>();
   const [id, setId] = useState<null | string>(null);
+  const [device, setDevice] = useState<null | number>(null);
   const [func, setFunc] = useState<any>({ on: null, off: null });
   useEffect(() => {
     // data
@@ -232,16 +218,12 @@ function Gstar() {
       </Spacing>
       <Spacing className="learner-area">
         {data?.map((val: any, i: any) => (
-          <GridFrame>
-            <p>
-              {i == 0 ? '국문 페이지 PC' : ''}
-              {i == 1 ? '영문 페이지 PC' : ''}
-              {i == 2 ? '국문 페이지 Mobile' : ''}
-            </p>
+          <GridFrame key={i} style={{ width: i == 0 ? '35%' : i == 1 ? '30%' : '22%' }}>
+            <DeviceName>{i == 0 ? '국문 페이지 PC' : i == 1 ? '영문 페이지 PC' : '국문 페이지 Mobile'}</DeviceName>
             <Grid
-              key={i}
               onClick={() => {
                 setId(val);
+                setDevice(i);
                 func.on();
               }}
               layoutId={i}
@@ -267,7 +249,7 @@ function Gstar() {
               animate="visible"
               exit="exit"
             />
-            <GridWhole layoutId={id}>
+            <GridWhole layoutId={id} style={{ width: device == 2 ? '35%' : '' }}>
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => {

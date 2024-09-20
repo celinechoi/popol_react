@@ -55,7 +55,7 @@ const Overlay = styled(motion.div)`
 `;
 
 const GridWhole = styled(motion.div)`
-  width: 55%;
+  width: 35%;
   border-radius: 20px;
   position: relative;
   overflow: hidden;
