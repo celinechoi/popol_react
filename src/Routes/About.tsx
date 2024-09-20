@@ -848,7 +848,7 @@ function About() {
         chart: {
           height: 340,
         },
-        colors: ['#C66394', '#f8d622', '#ffb400', '#015ff2'],
+        colors: ['#C66394', '#f8d622', '#ffb400', '#ddd'],
         labels: ['SCSS(SASS)', 'Javascript', 'React.js (with Typescript)', 'Next.js (with Typescript)'],
         yaxis: {
           tickAmount: 4,
@@ -1062,4 +1062,3 @@ function About() {
   );
 }
 export default About;
-
