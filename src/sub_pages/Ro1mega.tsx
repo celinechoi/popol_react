@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import fullMp4 from 'img/sub_pages/gravity/the_ro/full.mp4';
-import mainKo from 'img/sub_pages/gravity/the_ro/page.webp';
-import mainMo from 'img/sub_pages/gravity/the_ro/page_mo.webp';
+import fullMp4 from 'img/sub_pages/gravity/event/ro1_mega/full.mp4';
+import mainKo from 'img/sub_pages/gravity/event/ro1_mega/page.webp';
+import mainPromotion from 'img/sub_pages/gravity/event/ro1_mega/page_promotion.webp';
 import { useEffect, useState } from 'react';
 import { focusHandler, resetHandler } from 'function/ModalScroll';
 
@@ -59,6 +59,7 @@ const DeviceName = styled.p`
 `;
 const GridFrame = styled.div`
   flex: 0 0 auto;
+  width: calc(100% / 2 - 1% / 2 * 1);
 `;
 const Grid = styled(motion.div)`
   overflow-x: hidden;
@@ -185,14 +186,14 @@ const girdVariants = {
   },
 };
 
-function Thero() {
+function Ro1mega() {
   const [data, setData] = useState<any[]>();
   const [id, setId] = useState<null | string>(null);
   const [device, setDevice] = useState<null | number>(null);
   const [func, setFunc] = useState<any>({ on: null, off: null });
   useEffect(() => {
     // data
-    const imgArr = [mainKo, mainMo];
+    const imgArr = [mainKo, mainPromotion];
     let isMount = true;
     if (isMount) {
       setData(imgArr);
@@ -216,8 +217,8 @@ function Thero() {
       </div>
       <Spacing>
         {data?.map((val: any, i: any) => (
-          <GridFrame key={i} style={{ width: i == 0 ? '49%' : '30%' }}>
-            <DeviceName>{i == 0 ? 'PC' : 'Mobile'}</DeviceName>
+          <GridFrame key={i}>
+            <DeviceName>{i == 0 ? '사전예약' : '프로모션'}</DeviceName>
             <Grid
               layoutId={i}
               onClick={() => {
@@ -247,7 +248,7 @@ function Thero() {
               animate="visible"
               exit="exit"
             />
-            <GridWhole layoutId={id} style={{ width: device == 1 ? '35%' : '' }}>
+            <GridWhole layoutId={id}>
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => {
@@ -266,4 +267,4 @@ function Thero() {
   );
 }
 
-export default Thero;
+export default Ro1mega;

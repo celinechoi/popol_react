@@ -19,6 +19,19 @@ import Vsquare from 'sub_pages/Vsquare';
 // gravity
 import Gstar from 'sub_pages/Gstar';
 import Thero from 'sub_pages/Thero';
+import Ros from 'sub_pages/Ros';
+import Poringrush from 'sub_pages/Poringrush';
+import Gravityofficial from 'sub_pages/Gravityofficial';
+import Cho from 'sub_pages/Cho';
+import Ro1mega from 'sub_pages/Ro1mega';
+import Ro1vip from 'sub_pages/Ro1vip';
+import Ro1winter from 'sub_pages/Ro1winter';
+import Roball from 'sub_pages/Roball';
+import Romtears from 'sub_pages/Romtears';
+import Roosura from 'sub_pages/Roosura';
+import Rooupdate from 'sub_pages/Rooupdate';
+import Roz6th from 'sub_pages/Roz6th';
+
 import ErrorPage from 'components/ErrorPage';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -288,7 +301,7 @@ const Effects = styled.ul`
 const Effect = styled(motion.li)`
   flex: 1 1 calc(100% / 2 - 32px / 2 * 1);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
   min-height: 80px;
@@ -314,21 +327,17 @@ const Effect = styled(motion.li)`
   &::before {
     content: '✅';
     display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
+    vertical-align: top;
+    min-width: 22px;
     font-size: 17px;
   }
 `;
 
 const EffectItem = styled.span`
   display: inline-block;
-  &::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: ${(props) => props.theme.point.green};
-  }
+  text-decoration: underline;
+  text-decoration-color: ${(props) => props.theme.point.green};
+  text-decoration-thickness: 3px;
 `;
 
 const FocusArrow = styled.div`
@@ -663,6 +672,18 @@ function Sub() {
                   vsquare_demo: <Vsquare />,
                   gstar: <Gstar />,
                   thero: <Thero />,
+                  ros: <Ros />,
+                  poringrush: <Poringrush />,
+                  gravity_official: <Gravityofficial />,
+                  event_ro1_2: <Ro1vip />,
+                  event_cho: <Cho />,
+                  event_ro1: <Ro1winter />,
+                  event_rob: <Roball />,
+                  event_rom: <Romtears />,
+                  event_roo_2: <Roosura />,
+                  event_roo: <Rooupdate />,
+                  event_roz: <Roz6th />,
+                  event_ro1_3: <Ro1mega />,
                 }[state.id]
               }
             </section>

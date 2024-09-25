@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import fullMp4 from 'img/sub_pages/gravity/the_ro/full.mp4';
-import mainKo from 'img/sub_pages/gravity/the_ro/page.webp';
-import mainMo from 'img/sub_pages/gravity/the_ro/page_mo.webp';
+import fullMp4 from 'img/sub_pages/gravity/event/ro1_vip/full.mp4';
+import mainKo from 'img/sub_pages/gravity/event/ro1_vip/page.webp';
+import mainMo from 'img/sub_pages/gravity/event/ro1_vip/page_mo.webp';
 import { useEffect, useState } from 'react';
 import { focusHandler, resetHandler } from 'function/ModalScroll';
 
@@ -185,7 +185,7 @@ const girdVariants = {
   },
 };
 
-function Thero() {
+function Ro1vip() {
   const [data, setData] = useState<any[]>();
   const [id, setId] = useState<null | string>(null);
   const [device, setDevice] = useState<null | number>(null);
@@ -266,4 +266,4 @@ function Thero() {
   );
 }
 
-export default Thero;
+export default Ro1vip;

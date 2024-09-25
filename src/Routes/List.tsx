@@ -277,38 +277,43 @@ function List() {
               ) : (
                 <>
                   <Boxes variants={boxesVariants} initial="start" animate="end">
-                    {list.map((val) => (
-                      <Box key={val.id} variants={boxVariants} initial="start" animate="end" whileHover="hover">
-                        <Link
-                          to={{
-                            pathname: `/works/${typeId}/${val.id}`,
-                            state: {
-                              parentPath: typeId,
-                              id: val.id,
-                              customer: val.customer,
-                              projectName: val.projectName,
-                              description: val.description,
-                              did: val.did,
-                              keyWords: val.keyWords,
-                              fileUrl: val.fileUrl,
-                              pageImgs: val.pageImgs,
-                              pagesMap: val.pagesMap,
-                              startYear: val.startYear,
-                              startMonth: val.startMonth,
-                              endYear: val.endYear,
-                              endMonth: val.endMonth,
-                            },
-                          }}
-                        >
-                          <ImgBox>{ImgLoading ? <ImgsLoading /> : <img src={val.fileUrl} alt={val.projectName} />}</ImgBox>
-                          <BoxCon>
-                            <p>{val.customer}</p>
-                            <h4>{val.projectName}</h4>
-                            <p className="last">퍼블리싱 기여도: 100%</p>
-                          </BoxCon>
-                        </Link>
-                      </Box>
-                    ))}
+                    {list.map(
+                      (val) => (
+                        console.log(val),
+                        (
+                          <Box key={val.id} variants={boxVariants} initial="start" animate="end" whileHover="hover">
+                            <Link
+                              to={{
+                                pathname: `/works/${typeId}/${val.id}`,
+                                state: {
+                                  parentPath: typeId,
+                                  id: val.id,
+                                  customer: val.customer,
+                                  projectName: val.projectName,
+                                  description: val.description,
+                                  did: val.did,
+                                  keyWords: val.keyWords,
+                                  fileUrl: val.fileUrl,
+                                  pageImgs: val.pageImgs,
+                                  pagesMap: val.pagesMap,
+                                  startYear: val.startYear,
+                                  startMonth: val.startMonth,
+                                  endYear: val.endYear,
+                                  endMonth: val.endMonth,
+                                },
+                              }}
+                            >
+                              <ImgBox>{ImgLoading ? <ImgsLoading /> : <img src={val.fileUrl} alt={val.projectName} />}</ImgBox>
+                              <BoxCon>
+                                <p>{val.customer}</p>
+                                <h4>{val.projectName}</h4>
+                                <p className="last">퍼블리싱 기여도: 100%</p>
+                              </BoxCon>
+                            </Link>
+                          </Box>
+                        )
+                      )
+                    )}
                   </Boxes>
                 </>
               )}
@@ -323,4 +328,3 @@ function List() {
 }
 
 export default List;
-
