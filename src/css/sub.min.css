@@ -1,0 +1,1 @@
+.first{width:49%}@media all and (max-width: 767px){.first{width:100%}}.second{width:30%}@media all and (max-width: 767px){.second{width:50%;margin:0 auto}}

@@ -1,0 +1,15 @@
+﻿@import '_mixin';
+.first {
+  width: 49%;
+  @include mo {
+    width: 100%;
+  }
+}
+.second {
+  width: 30%;
+  @include mo {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+

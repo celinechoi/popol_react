@@ -1,0 +1,20 @@
+﻿// breakpoints variable (feat. media_query.ts)
+$micro: 375px; // phone
+$smallToo: 650px; // phone
+$horizontal: 820px; // phone horizontal
+$small: 767px; // phone
+$medium: 1024px; // tablet
+$large: 1440px; // desktop
+
+@mixin tm {
+  @media all and (max-width: $medium) {
+    @content;
+  }
+}
+
+@mixin mo {
+  @media all and (max-width: $small) {
+    @content;
+  }
+}
+
