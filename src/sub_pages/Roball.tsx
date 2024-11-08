@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import { Spacing, CaptureMove, DeviceName, GridFrame, Grid, Modal, Overlay, GridWhole, GridBody } from 'js/styled.js';
+import { Spacing, CaptureMove, DeviceName, GridFrame, Grid, Modal, Overlay, GridWhole, GridBody, overlay, girdVariants } from 'js/styled.js';
 import '../style/sub.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -8,24 +8,6 @@ import mainKo from 'img/sub_pages/gravity/event/rob_all/page.webp';
 import mainMo from 'img/sub_pages/gravity/event/rob_all/page_mo.webp';
 import { useEffect, useState } from 'react';
 import { focusHandler, resetHandler } from 'function/ModalScroll';
-
-// motion
-const overlay = {
-  hidden: { backgroundColor: 'rgba(0, 0, 0, 0)' },
-  visible: { backgroundColor: 'rgba(0, 0, 0, 1)' },
-  exit: { backgroundColor: 'rgba(0, 0, 0, 0)' },
-};
-
-const girdVariants = {
-  start: {
-    border: '3px solid transparent',
-  },
-  hover: {
-    borderColor: '#ffcc42',
-    y: -20,
-    scale: 1.05,
-  },
-};
 
 function Roball() {
   const [data, setData] = useState<any[]>();
@@ -109,4 +91,3 @@ function Roball() {
 }
 
 export default Roball;
-

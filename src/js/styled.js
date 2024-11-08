@@ -36,9 +36,6 @@ export const Device = styled.div`
   flex-basis: calc(40% - 10px / 3 * 2);
   &.mo {
     flex-basis: calc(20% - 10px / 3 * 2);
-    /* ${media.small`
-			width: 35%;
-		`}; */
   }
 `;
 export const DeviceName = styled.p`
@@ -109,14 +106,6 @@ export const GridWhole = styled(motion.div)`
   border-radius: 7px;
   position: relative;
   overflow: hidden;
-  /* ${media.medium`
-		border-bottom-left-radius: 16px;
-		border-bottom-right-radius: 16px;
-	`};
-  ${media.small`
-		border-bottom-left-radius: 14px;
-		border-bottom-right-radius: 14px;
-	`}; */
   > svg {
     position: absolute;
     right: 20px;
@@ -162,3 +151,20 @@ export const GridBody = styled.div`
   }
 `;
 
+// motion
+export const overlay = {
+  hidden: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+  visible: { backgroundColor: 'rgba(0, 0, 0, 1)' },
+  exit: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+};
+
+export const girdVariants = {
+  start: {
+    border: '3px solid transparent',
+  },
+  hover: {
+    borderColor: '#ffcc42',
+    y: -20,
+    scale: 1.05,
+  },
+};
