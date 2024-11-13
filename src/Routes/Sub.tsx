@@ -32,7 +32,7 @@ import Roosura from 'sub_pages/Roosura';
 import Rooupdate from 'sub_pages/Rooupdate';
 import Roz6th from 'sub_pages/Roz6th';
 
-import ErrorPage from 'components/ErrorPage';
+import ErrorPage from 'Components/ErrorPage';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
@@ -696,4 +696,3 @@ function Sub() {
   );
 }
 export default Sub;
-

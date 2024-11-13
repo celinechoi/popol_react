@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import About from 'routes/About';
-import Auth from 'routes/Auth';
-import Header from 'components/Header';
-import Home from 'routes/Home';
-import List from 'routes/List';
-import Sub from 'routes/Sub';
-import Footer from 'components/Footer';
-import Top from 'components/Top';
-import ErrorPage from 'components/ErrorPage';
+import About from 'Routes/About';
+import Auth from 'Routes/Auth';
+import Header from 'Components/Header';
+import Home from 'Routes/Home';
+import List from 'Routes/List';
+import Sub from 'Routes/Sub';
+import Footer from 'Components/Footer';
+import Top from 'Components/Top';
+import ErrorPage from 'Components/ErrorPage';
 
 function AppRouter() {
   return (
@@ -40,4 +40,3 @@ function AppRouter() {
 }
 
 export default AppRouter;
-

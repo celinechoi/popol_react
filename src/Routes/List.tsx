@@ -2,12 +2,12 @@ import { dbService } from 'fbase';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Tabs from 'routes/Tabs';
+import Tabs from 'Routes/Tabs';
 import { media } from 'style/media_query';
-import Loading from 'components/Loading';
+import Loading from 'Components/Loading';
 import { motion } from 'framer-motion';
-import ImgsLoading from 'components/ImgsLoading';
-import ErrorPage from 'components/ErrorPage';
+import ImgsLoading from 'Components/ImgsLoading';
+import ErrorPage from 'Components/ErrorPage';
 
 const Title = styled.div`
   height: 200px;
@@ -301,7 +301,7 @@ function List() {
                             },
                           }}
                         >
-                          <ImgBox>{ImgLoading ? <ImgsLoading /> : <img src={val.fileUrl} alt={val.projectName} />}</ImgBox>
+                          <ImgBox>{ImgLoading ? <ImgsLoading /> : <img src={val.fileUrl} className={val.id} alt={val.projectName} />}</ImgBox>
                           <BoxCon>
                             <p>{val.customer}</p>
                             <h4>{val.projectName}</h4>
@@ -324,4 +324,3 @@ function List() {
 }
 
 export default List;
-

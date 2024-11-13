@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import heart from 'img/emoji/heart.png';
 import Chart from 'react-apexcharts';
 import { useEffect, useRef, useState } from 'react';
-import Loading from 'components/Loading';
+import Loading from 'Components/Loading';
 import { media } from 'style/media_query';
 import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import coworkBg from 'img/cowork_bg.png';

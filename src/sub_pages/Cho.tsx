@@ -3,9 +3,9 @@ import { Spacing, CaptureMove, DeviceName, GridFrame, Grid, Modal, Overlay, Grid
 import '../style/sub.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import fullMp4 from 'img/sub_pages/gravity/event/cho/full.mp4';
-import mainKo from 'img/sub_pages/gravity/event/cho/after_pc.webp';
-import mainMo from 'img/sub_pages/gravity/event/cho/after_mo.webp';
+import fullMp4 from 'img/sub_pages/gravity/cho/full.mp4';
+import mainKo from 'img/sub_pages/gravity/cho/after_pc.webp';
+import mainMo from 'img/sub_pages/gravity/cho/after_mo.webp';
 import { useEffect, useState } from 'react';
 import { focusHandler, resetHandler } from 'function/ModalScroll';
 
