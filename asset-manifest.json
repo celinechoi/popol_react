@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/popol_react/static/css/main.65e2dcdc.css",
-    "main.js": "/popol_react/static/js/main.9a0eb9f1.js",
+    "main.js": "/popol_react/static/js/main.375340bc.js",
     "static/media/full.mp4": "/popol_react/static/media/full.554c8ab7a0cc322cfacc.mp4",
     "static/media/cbt_full.mp4": "/popol_react/static/media/cbt_full.2bf302f701b6d3301377.mp4",
     "static/media/page_mo.png": "/popol_react/static/media/page_mo.93343f3532e22700120f.png",
@@ -146,10 +146,10 @@
     "static/media/tistory.svg": "/popol_react/static/media/tistory.b7c88f59f4c22ef595d697df9d4c200f.svg",
     "static/media/asana_logo.svg": "/popol_react/static/media/asana_logo.20b84f300e230264f756d2a7476a95c1.svg",
     "main.65e2dcdc.css.map": "/popol_react/static/css/main.65e2dcdc.css.map",
-    "main.9a0eb9f1.js.map": "/popol_react/static/js/main.9a0eb9f1.js.map"
+    "main.375340bc.js.map": "/popol_react/static/js/main.375340bc.js.map"
   },
   "entrypoints": [
     "static/css/main.65e2dcdc.css",
-    "static/js/main.9a0eb9f1.js"
+    "static/js/main.375340bc.js"
   ]
 }
