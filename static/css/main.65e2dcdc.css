@@ -1,0 +1,2 @@
+@keyframes bubbleKey{0%{transform:translateY(-30px)}50%{transform:translateY(30px)}}.animateBubbleKey{animation:bubbleKey 8s ease-in-out infinite alternate}.first{width:49%}@media (max-width:767px){.first{width:100%}}.second{width:30%}@media (max-width:767px){.second{margin:0 auto;width:50%}}
+/*# sourceMappingURL=main.65e2dcdc.css.map*/
