@@ -161,8 +161,16 @@ const ImgBox = styled(motion.div)`
     &.iedu {
       width: 40%;
     }
+    &.pad,
     &.general {
       width: 45%;
+    }
+    &.iedu,
+    &.pad,
+    &.general {
+      ${media.small`
+      width: 23%;
+    `};
     }
   }
 `;

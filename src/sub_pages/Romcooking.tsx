@@ -3,9 +3,9 @@ import { Spacing, CaptureMove, DeviceName, GridFrame, Grid, Modal, Overlay, Grid
 import '../style/sub.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import fullMp4 from 'img/sub_pages/gravity/ros/full.mp4';
-import mainKo from 'img/sub_pages/gravity/ros/page.webp';
-import mainMo from 'img/sub_pages/gravity/ros/page_mo.webp';
+import fullMp4 from 'img/sub_pages/gravity/rom_cooking/full.mp4';
+import mainKo from 'img/sub_pages/gravity/rom_cooking/page.webp';
+import mainMo from 'img/sub_pages/gravity/rom_cooking/page_mo.webp';
 import { useEffect, useState } from 'react';
 import { focusHandler, resetHandler } from 'function/ModalScroll';
 
@@ -40,8 +40,8 @@ function Romcooking() {
       </div>
       <Spacing>
         {data?.map((val: any, i: any) => (
-          <GridFrame key={i} style={{ width: i == 0 ? '49%' : '30%' }}>
-            <DeviceName>{i == 0 ? 'PC' : 'Mobile'}</DeviceName>
+          <GridFrame key={i} className={i === 0 ? 'first' : 'second'}>
+            <DeviceName>{i === 0 ? 'PC' : 'Mobile'}</DeviceName>
             <Grid
               layoutId={i}
               onClick={() => {
@@ -71,7 +71,7 @@ function Romcooking() {
               animate="visible"
               exit="exit"
             />
-            <GridWhole layoutId={id} style={{ width: device == 1 ? '35%' : '' }}>
+            <GridWhole layoutId={id} style={{ width: device === 1 ? '35%' : '' }}>
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => {
@@ -91,3 +91,4 @@ function Romcooking() {
 }
 
 export default Romcooking;
+

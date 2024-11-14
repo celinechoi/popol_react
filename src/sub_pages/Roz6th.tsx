@@ -39,8 +39,8 @@ function Roo6th() {
       </div>
       <Spacing>
         {data?.map((val: any, i: any) => (
-          <GridFrame key={i} style={{ width: i == 0 ? '100%' : '' }}>
-            <DeviceName>{i == 0 ? 'PC' : 'Mobile'}</DeviceName>
+          <GridFrame key={i} style={{ width: i === 0 ? '100%' : '' }}>
+            <DeviceName>{i === 0 ? 'PC' : 'Mobile'}</DeviceName>
             <Grid
               layoutId={i}
               onClick={() => {
@@ -70,7 +70,7 @@ function Roo6th() {
               animate="visible"
               exit="exit"
             />
-            <GridWhole layoutId={id} style={{ width: device == 1 ? '35%' : '' }}>
+            <GridWhole layoutId={id} style={{ width: device === 1 ? '35%' : '' }}>
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => {
@@ -90,3 +90,4 @@ function Roo6th() {
 }
 
 export default Roo6th;
+

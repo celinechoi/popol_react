@@ -40,8 +40,8 @@ function Ro1mega() {
       </div>
       <Spacing>
         {data?.map((val: any, i: any) => (
-          <GridFrame key={i}>
-            <DeviceName>{i == 0 ? '사전예약' : '프로모션'}</DeviceName>
+          <GridFrame key={i} className="first">
+            <DeviceName>PC</DeviceName>
             <Grid
               layoutId={i}
               onClick={() => {
@@ -91,3 +91,4 @@ function Ro1mega() {
 }
 
 export default Ro1mega;
+

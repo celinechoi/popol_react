@@ -40,8 +40,8 @@ function Stove() {
       </div>
       <Spacing>
         {data?.map((val: any, i: any) => (
-          <GridFrame key={i} style={{ width: i == 0 ? '49%' : '30%' }}>
-            <DeviceName>{i == 0 ? 'PC' : 'Mobile'}</DeviceName>
+          <GridFrame key={i} className={i === 0 ? 'first' : 'second'}>
+            <DeviceName>{i === 0 ? 'PC' : 'Mobile'}</DeviceName>
             <Grid
               layoutId={i}
               onClick={() => {
@@ -71,7 +71,7 @@ function Stove() {
               animate="visible"
               exit="exit"
             />
-            <GridWhole layoutId={id} style={{ width: device == 1 ? '35%' : '' }}>
+            <GridWhole layoutId={id} style={{ width: device === 1 ? '35%' : '' }}>
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => {
@@ -91,3 +91,4 @@ function Stove() {
 }
 
 export default Stove;
+

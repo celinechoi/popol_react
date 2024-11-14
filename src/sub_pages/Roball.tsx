@@ -71,7 +71,7 @@ function Roball() {
               animate="visible"
               exit="exit"
             />
-            <GridWhole layoutId={id} style={{ width: device == 1 ? '35%' : '' }}>
+            <GridWhole layoutId={id} style={{ width: device === 1 ? '35%' : '' }}>
               <FontAwesomeIcon
                 icon={faXmark}
                 onClick={() => {
@@ -91,3 +91,4 @@ function Roball() {
 }
 
 export default Roball;
+
