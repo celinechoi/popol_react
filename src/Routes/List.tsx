@@ -158,6 +158,12 @@ const ImgBox = styled(motion.div)`
     ${media.smallToo`
 			width: 45%;
 		`};
+    &.iedu {
+      width: 40%;
+    }
+    &.general {
+      width: 45%;
+    }
   }
 `;
 
@@ -324,3 +330,4 @@ function List() {
 }
 
 export default List;
+
