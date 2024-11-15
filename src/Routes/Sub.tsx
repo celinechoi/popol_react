@@ -19,18 +19,26 @@ import Vsquare from 'sub_pages/Vsquare';
 // gravity
 import Gstar from 'sub_pages/Gstar';
 import Thero from 'sub_pages/Thero';
+import Pad from 'sub_pages/Pad';
 import Ros from 'sub_pages/Ros';
+import General from 'sub_pages/General';
 import Poringrush from 'sub_pages/Poringrush';
 import Gravityofficial from 'sub_pages/Gravityofficial';
+import Stove from 'sub_pages/Stove';
 import Cho from 'sub_pages/Cho';
 import Ro1mega from 'sub_pages/Ro1mega';
 import Ro1vip from 'sub_pages/Ro1vip';
 import Ro1winter from 'sub_pages/Ro1winter';
+import Ro1eprit from 'sub_pages/Ro1eprit';
+import Ro1autumn from 'sub_pages/Ro1autumn';
 import Roball from 'sub_pages/Roball';
 import Romtears from 'sub_pages/Romtears';
+import Romcooking from 'sub_pages/Romcooking';
 import Roosura from 'sub_pages/Roosura';
 import Rooupdate from 'sub_pages/Rooupdate';
+import Rooshadow from 'sub_pages/Rooshadow';
 import Roz6th from 'sub_pages/Roz6th';
+import Rozmay from 'sub_pages/Rozmay';
 
 import ErrorPage from 'Components/ErrorPage';
 import { useEffect } from 'react';
@@ -587,7 +595,7 @@ function Sub() {
                     window.open('https://celinechoi.github.io/Publish-vsquare/demo/systems_guide.html');
                   }}
                 >
-                  System Kit Guide 바로가기
+                  (작업한)System Kit Guide 바로가기
                 </Button>
               ) : (
                 ''
@@ -600,6 +608,17 @@ function Sub() {
                   }}
                 >
                   사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'stove' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/stove/index_u39vsa5bxz.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
                 </Button>
               ) : (
                 ''
@@ -633,6 +652,39 @@ function Sub() {
                   }}
                 >
                   사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_ro1_5' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/ro1_autumn/index_rz5vbs9gb.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_ro1_4' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/ro1_eprit/index_vav52ywtu.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_ro1_3' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/ro1_mega/index_ze2vsbi7.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
                 </Button>
               ) : (
                 ''
@@ -672,18 +724,26 @@ function Sub() {
                   vsquare_demo: <Vsquare />,
                   gstar: <Gstar />,
                   thero: <Thero />,
+                  stove: <Stove />,
+                  pad: <Pad />,
                   ros: <Ros />,
+                  general: <General />,
                   poringrush: <Poringrush />,
                   gravity_official: <Gravityofficial />,
-                  event_ro1_2: <Ro1vip />,
                   event_cho: <Cho />,
                   event_ro1: <Ro1winter />,
+                  event_ro1_2: <Ro1vip />,
+                  event_ro1_3: <Ro1mega />,
+                  event_ro1_4: <Ro1eprit />,
+                  event_ro1_5: <Ro1autumn />,
                   event_rob: <Roball />,
                   event_rom: <Romtears />,
-                  event_roo_2: <Roosura />,
+                  event_rom_2: <Romcooking />,
                   event_roo: <Rooupdate />,
+                  event_roo_2: <Roosura />,
+                  event_roo_3: <Rooshadow />,
                   event_roz: <Roz6th />,
-                  event_ro1_3: <Ro1mega />,
+                  event_roz_2: <Rozmay />,
                 }[state.id]
               }
             </section>
