@@ -673,7 +673,7 @@ function Sub() {
                     window.open('https://celinechoi.github.io/Publish-gravity/gstar/ko/index_xzviqjf.html');
                   }}
                 >
-                  (작업한) 사이트 바로가기
+                  (작업한)사이트 바로가기
                 </Button>
               ) : (
                 ''
