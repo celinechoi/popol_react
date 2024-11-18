@@ -601,6 +601,17 @@ function Sub() {
                 ''
               )}
               {/* start gravity */}
+              {state.id === 'cho' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/cho/index_avlkavjl.html');
+                  }}
+                >
+                  사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
               {state.id === 'thero' ? (
                 <Button
                   onClick={() => {
@@ -656,6 +667,17 @@ function Sub() {
               ) : (
                 ''
               )}
+              {state.id === 'gstar' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/gstar/ko/index_xzviqjf.html');
+                  }}
+                >
+                  (작업한) 사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
               {state.id === 'event_ro1_5' ? (
                 <Button
                   onClick={() => {
@@ -682,6 +704,116 @@ function Sub() {
                 <Button
                   onClick={() => {
                     window.open('https://celinechoi.github.io/Publish-gravity/ro1_mega/index_ze2vsbi7.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_ro1_2' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/ro1_vip/index_dfa45v9nval.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_ro1_1' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/ro1_winter/index_bv31zxrg5bsx.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_rob' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/rob_all/index_txfg7bva.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_rom' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/rom_tears/index_izvefe58wq.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_rom_2' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/rom_cooking/index_ydcs9978df.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_roo' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/roo_update/index_r3bvs5bn.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_roo_2' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/roo_sura/index_xevf8g9b.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_roo_3' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/roo_shadow/index_xcwe34bs.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_roz' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/roz_6th/index_xu3gus7b.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_roz_2' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/roz_may/index_fdadf492z.html');
                   }}
                 >
                   (작업한)사이트 바로가기
