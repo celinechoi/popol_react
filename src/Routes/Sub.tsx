@@ -32,6 +32,7 @@ import Ro1winter from 'sub_pages/Ro1winter';
 import Ro1eprit from 'sub_pages/Ro1eprit';
 import Ro1autumn from 'sub_pages/Ro1autumn';
 import Roball from 'sub_pages/Roball';
+import Robyear from 'sub_pages/Robyear';
 import Romtears from 'sub_pages/Romtears';
 import Romcooking from 'sub_pages/Romcooking';
 import Roosura from 'sub_pages/Roosura';
@@ -869,6 +870,7 @@ function Sub() {
                   event_ro1_4: <Ro1eprit />,
                   event_ro1_5: <Ro1autumn />,
                   event_rob: <Roball />,
+                  event_rob_2: <Robyear />,
                   event_rom: <Romtears />,
                   event_rom_2: <Romcooking />,
                   event_roo: <Rooupdate />,
