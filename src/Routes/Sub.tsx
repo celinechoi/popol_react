@@ -29,6 +29,7 @@ import Romcooking from 'sub_pages/Romcooking';
 import Rooupdate from 'sub_pages/Rooupdate';
 import Roosura from 'sub_pages/Roosura';
 import Rooshadow from 'sub_pages/Rooshadow';
+import Roodoram from 'sub_pages/Roodoram';
 import Roz6th from 'sub_pages/Roz6th';
 import Rozmay from 'sub_pages/Rozmay';
 import Gravityofficial from 'sub_pages/Gravityofficial';
@@ -40,9 +41,7 @@ import Cho from 'sub_pages/Cho';
 import Stove from 'sub_pages/Stove';
 import Pad from 'sub_pages/Pad';
 import General from 'sub_pages/General';
-//23
 /**
- * rob 1주년 기념
  * roo 도람왕국
  * Hero's Gambit 웹사이트 구축
  */
@@ -751,6 +750,17 @@ function Sub() {
               ) : (
                 ''
               )}
+              {state.id === 'event_rob_2' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/rob_year/index_yt7cas4ev.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
               {state.id === 'event_rom' ? (
                 <Button
                   onClick={() => {
@@ -799,6 +809,17 @@ function Sub() {
                 <Button
                   onClick={() => {
                     window.open('https://celinechoi.github.io/Publish-gravity/roo_shadow/index_xcwe34bs.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
+              {state.id === 'event_roo_4' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/roo_doram/index_adfa39y7adfa.html');
                   }}
                 >
                   (작업한)사이트 바로가기
@@ -882,6 +903,7 @@ function Sub() {
                   event_roo: <Rooupdate />,
                   event_roo_2: <Roosura />,
                   event_roo_3: <Rooshadow />,
+                  event_roo_4: <Roodoram />,
                   event_roz: <Roz6th />,
                   event_roz_2: <Rozmay />,
                 }[state.id]
