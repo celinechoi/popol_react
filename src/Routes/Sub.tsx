@@ -684,6 +684,17 @@ function Sub() {
               ) : (
                 ''
               )}
+              {state.id === 'event_cho' ? (
+                <Button
+                  onClick={() => {
+                    window.open('https://celinechoi.github.io/Publish-gravity/cho/index_avlkavjl.html');
+                  }}
+                >
+                  (작업한)사이트 바로가기
+                </Button>
+              ) : (
+                ''
+              )}
               {state.id === 'event_ro1_5' ? (
                 <Button
                   onClick={() => {
@@ -861,10 +872,14 @@ function Sub() {
                 ))}
               </Effects>
               <FocusArrow />
-              <WorkPages>
-                <p>Preview</p>
-                <h3 className="page-h2">Work Pages</h3>
-              </WorkPages>
+              {state.id === 'stove' ? (
+                ''
+              ) : (
+                <WorkPages>
+                  <p>Preview</p>
+                  <h3 className="page-h2">Work Pages</h3>
+                </WorkPages>
+              )}
             </section>
             <section>
               {

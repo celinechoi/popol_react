@@ -319,7 +319,7 @@ function List() {
                           <BoxCon>
                             <p>{val.customer}</p>
                             <h4>{val.projectName}</h4>
-                            <p className="last">퍼블리싱 기여도: 100%</p>
+                            {val.id === 'gravity_official' ? <p className="last">퍼블리싱 기여도: 50%</p> : <p className="last">퍼블리싱 기여도: 100%</p>}
                           </BoxCon>
                         </Link>
                       </Box>
@@ -338,4 +338,3 @@ function List() {
 }
 
 export default List;
-
