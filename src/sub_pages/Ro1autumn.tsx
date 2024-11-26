@@ -3,7 +3,7 @@ import { Spacing, DeviceName, GridFrame, Grid, Modal, Overlay, GridWhole, GridBo
 import '../style/sub.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import mainKo from 'img/sub_pages/gravity/ro1_autumn/page.webp';
+import mainKo from 'img/sub_pages/gravity/event/ro1_autumn/page.webp';
 import { useEffect, useState } from 'react';
 import { focusHandler, resetHandler } from 'function/ModalScroll';
 
