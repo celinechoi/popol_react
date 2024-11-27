@@ -739,7 +739,7 @@ function Sub() {
               ) : (
                 ''
               )}
-              {state.id === 'event_ro1_1' ? (
+              {state.id === 'event_ro1' ? (
                 <Button
                   onClick={() => {
                     window.open('https://celinechoi.github.io/Publish-gravity/ro1_winter/index_bv31zxrg5bsx.html');
