@@ -289,12 +289,12 @@ const Button = styled.button`
   }
   &.second {
     background-color: ${(props) => props.theme.textColor.gray.second};
-    color: ${(props) => props.theme.point.purple};
+    color: ${(props) => props.theme.point.lavender};
     &:hover {
-      color: ${(props) => props.theme.textColor.gray.second};
+      color: ${(props) => props.theme.textColor.gray.first};
     }
     &::before {
-      background-color: ${(props) => props.theme.bgColor.gray.third};
+      background-color: ${(props) => props.theme.bgColor.gray.fifth};
     }
   }
   ${media.medium`
