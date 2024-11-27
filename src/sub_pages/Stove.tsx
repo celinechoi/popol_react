@@ -4,8 +4,6 @@ import { focusHandler, resetHandler } from 'function/ModalScroll';
 
 function Stove() {
   const [data, setData] = useState<any[]>();
-  const [id, setId] = useState<null | string>(null);
-  const [device, setDevice] = useState<null | number>(null);
   const [func, setFunc] = useState<any>({ on: null, off: null });
   useEffect(() => {
     let isMount = true;
@@ -22,3 +20,4 @@ function Stove() {
 }
 
 export default Stove;
+

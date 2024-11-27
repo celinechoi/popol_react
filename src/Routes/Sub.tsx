@@ -239,6 +239,13 @@ const Info = styled.li`
   }
 `;
 
+const ButtonList = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+`;
+
 const Button = styled.button`
   display: block;
   position: relative;
@@ -258,7 +265,7 @@ const Button = styled.button`
   overflow: hidden;
   &::before {
     content: '';
-    background-color: #d6c5f0;
+    background-color: ${(props) => props.theme.point.lavender};
     width: 0;
     height: 100%;
     border-bottom-left-radius: 6px;
@@ -278,6 +285,16 @@ const Button = styled.button`
       bottom: 0;
       height: 100%;
       border-radius: 6px;
+    }
+  }
+  &.second {
+    background-color: ${(props) => props.theme.textColor.gray.second};
+    color: ${(props) => props.theme.point.purple};
+    &:hover {
+      color: ${(props) => props.theme.textColor.gray.second};
+    }
+    &::before {
+      background-color: ${(props) => props.theme.bgColor.gray.third};
     }
   }
   ${media.medium`
@@ -860,6 +877,48 @@ function Sub() {
               ) : (
                 ''
               )}
+              {state.id === 'general' ? (
+                <ButtonList>
+                  <Button
+                    onClick={() => {
+                      window.open('');
+                    }}
+                  >
+                    (작업한)예시 사이트 바로가기
+                  </Button>
+                  <Button
+                    className="second"
+                    onClick={() => {
+                      window.open('https://www.gnjoy.com/');
+                    }}
+                  >
+                    GNJOY 사이트 바로가기
+                  </Button>
+                </ButtonList>
+              ) : (
+                ''
+              )}
+              {state.id === 'pad' ? (
+                <ButtonList>
+                  <Button
+                    onClick={() => {
+                      window.open('');
+                    }}
+                  >
+                    (작업한)예시 사이트 바로가기
+                  </Button>
+                  <Button
+                    className="second"
+                    onClick={() => {
+                      window.open('https://pad.neocyon.com/W/');
+                    }}
+                  >
+                    퍼즐앤드래곤 사이트 바로가기
+                  </Button>
+                </ButtonList>
+              ) : (
+                ''
+              )}
               {/* end gravity */}
             </FrontInfo>
             <section className="section">
@@ -871,14 +930,16 @@ function Sub() {
                   </Effect>
                 ))}
               </Effects>
-              <FocusArrow />
-              {state.id === 'stove' ? (
+              {state.id === 'stove' || state.id === 'general' || state.id === 'pad' ? (
                 ''
               ) : (
-                <WorkPages>
-                  <p>Preview</p>
-                  <h3 className="page-h2">Work Pages</h3>
-                </WorkPages>
+                <>
+                  <FocusArrow />
+                  <WorkPages>
+                    <p>Preview</p>
+                    <h3 className="page-h2">Work Pages</h3>
+                  </WorkPages>
+                </>
               )}
             </section>
             <section>
@@ -933,3 +994,4 @@ function Sub() {
   );
 }
 export default Sub;
+
