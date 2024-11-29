@@ -881,7 +881,7 @@ function Sub() {
                 <ButtonList>
                   <Button
                     onClick={() => {
-                      window.open('');
+                      window.open('https://celinechoi.github.io/Publish-gravity/general/index_ty3c9sfald.html');
                     }}
                   >
                     (작업한)예시 사이트 바로가기
@@ -902,7 +902,7 @@ function Sub() {
                 <ButtonList>
                   <Button
                     onClick={() => {
-                      window.open('');
+                      window.open('https://celinechoi.github.io/Publish-gravity/pad/index_xzag3if7x.html');
                     }}
                   >
                     (작업한)예시 사이트 바로가기
